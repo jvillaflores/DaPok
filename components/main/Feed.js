@@ -8,8 +8,14 @@ import {
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
-  StatusBar
+  StatusBar,
+  ActivityIndicator
 } from "react-native";
+
+import { Modal, Portal, Provider } from 'react-native-paper';
+import Animated from "react-native-reanimated";
+import BottomSheet from "reanimated-bottom-sheet";
+
 import { connect } from "react-redux";
 
 
@@ -17,44 +23,39 @@ function Feed({ currentUser, navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        <View>
-          <Text style={[styles.textHead,{}]}>Hello! {currentUser.username} </Text>
-        </View>
-
-      {/* "What do you want to learn today box" */}
+      {/* Kumusta box" */}
         <View style={styles.headline_box}>
-          <Text style={styles.textHeadline}>
-            What do you want to learn today?
-          </Text>
-                <View style={styles.containerbox}>
-                  <Pressable style={styles.button}>
-                    <Text style={styles.text}>Get Started</Text>
-                  </Pressable>
-                  
-                </View>
+          <View style={{padding:5}}>
+
+            <Text style={[styles.textHead,{}]}>Kumusta {currentUser.username}! </Text>
+            <Text>Pag-abiabi sa DaPok! Ang DaPok ay isa ka aplikasyon nga kaya mu tigom 
+              ug mga datos bahin sa mga pulong ug mga tudlong-pulong nga imonga kayang ma amot. </Text>
+
+          </View>
+               
+        </View>
+          
+
+
+
+          {/* Buttons */}
+          <View>
+            <Text style={styles.titleText}>Kontribusyon </Text>
           </View>
           
-          {/* Kagan Course text */}
           <View>
-            <Text style={styles.textKagan}>Kagan Course </Text>
-          </View>
-          
-          {/* Kagan courses options. */}
-          <View>
-                 {/* Vocabulary.js */}
+            
+                 {/* Chatbot.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Vocabulary")}
+                  onPress={() => navigation.navigate("Profile")}
                 >
                   <View style={styles.contextButton}>
-                    {/* <Image
-                      style={{ width: 30, height: 40 }}
-                      source={require("../../assets/vocab.png")}
-                    /> */}
+                    
 
                     <View style={styles.text_Context}>
-                      <Text style={styles.textVocab}> Vocabulary</Text>
-                      <Text style={styles.textVocabSub}> Translate words</Text>
+                      <Text style={styles.textVocab}>Chatbot</Text>
+                      <Text style={styles.textVocabSub}>Diri maka amot ug translation para sa MinNa chatbot.</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -65,87 +66,19 @@ function Feed({ currentUser, navigation }) {
                   onPress={() => navigation.navigate("Grammar")}
                 >
                   <View style={styles.contextButton}>
-                    {/* <Image
+                     <Image
                       style={{ width: 40, height: 40 }}
                       source={require("../../assets/grammar.png")}
-                    /> */}
+                    /> 
                     <View style={styles.text_Context}>
-                      <Text style={styles.textVocab}> Phrases</Text>
+                      <Text style={styles.textVocab}>Translation</Text>
                       <Text style={styles.textVocabSub}>
-                        {" "}
-                        Select and Translate Phrases
+                        Diri maka amot ug translation.
                       </Text>
                     </View>
                   </View>
                 </TouchableOpacity>
-
-                {/* Speech.js */}
-                <TouchableOpacity
-                  style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Speech")}
-                >
-                  <View style={styles.contextButton}>
-                    {/* <Image
-                      style={{ width: 50, height: 40 }}
-                      source={require("../../assets/pronun.png")}
-                    /> */}
-                    <View style={styles.text_Context}>
-                      <Text style={styles.textVocab}> Speech</Text>
-                      <Text style={styles.textVocabSub}>
-                        {" "}
-                        Select the correct pronunciation
-                      </Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-      </View>   
-
-      {/* Images Course text */}
-      <View style={{paddingTop:10, paddingVertical:5}}>
-            <Text style={styles.textKagan}>About Kagan </Text>
-      </View>     
-
-      {/* About Kagan options. */}
-          <View style={{paddingBottom:30}}>
-                 {/* AboutCulture.js */}
-                <TouchableOpacity
-                  style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Traditions")}
-                >
-                  <View style={styles.contextButton}>
-                    {/* <Image
-                      style={{ width: 40, height: 40 }}
-                      source={require("../../assets/images.png")}
-                    /> */}
-
-                    <View style={styles.text_Context}>
-                      <Text style={styles.textVocab}>Images</Text>
-                      <Text style={styles.textVocabSub}>About the Kagan Culture</Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-
-                {/* AboutCulture.js */}
-                <TouchableOpacity
-                  style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Event")}
-                >
-                  <View style={styles.contextButton}>
-                    {/* <Image
-                      style={{ width: 40, height: 40 }}
-                      source={require("../../assets/book.png")}
-                    /> */}
-
-                    <View style={styles.text_Context}>
-                      <Text style={styles.textVocab}>More about Kagan</Text>
-                      <Text style={styles.textVocabSub}>About the Kagan Culture</Text>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-
-                
-      </View>                       
-
+          </View>  
     </ScrollView>
 
     </SafeAreaView>
@@ -177,6 +110,7 @@ const styles = StyleSheet.create({
       flexDirection: "row",
       justifyContent: "center",
     },
+    
     header: {
       
       alignContent: "flex-start",
@@ -186,9 +120,10 @@ const styles = StyleSheet.create({
     },
     headline_box: {
       backgroundColor: "#EBEBEB",
-      alignItems: "center",
+      //alignItems: "center",
       borderRadius: 15,
-      marginVertical:10
+      marginVertical:10,
+      padding:15,
     },
     contextButton: {
       //padding: 13,
@@ -238,13 +173,14 @@ const styles = StyleSheet.create({
       top: 100,
       left: 40,
     },
-    textKagan: {
+    titleText: {
       flexDirection: "row",
-      fontSize: 26,
+      fontSize: 20,
       fontWeight: "bold",
       //lineHeight: 21,
       letterSpacing: 0.5,
       color: "black",
+      alignSelf:'center'
     },
     button: {
       justifyContent: "center",
@@ -257,12 +193,8 @@ const styles = StyleSheet.create({
     },
     buttonVocab: {
       width:"100%",
-      //alignSelf: "center",
-      //alignItems: "flex-start",
-      //marginTop: 10,
       elevation: 0.7,
-      //width: 300,
-      backgroundColor: "#EBEBEB",
+      backgroundColor: "#215A88",
       borderRadius: 10,
       paddingVertical:15,
       marginVertical:5
@@ -303,26 +235,18 @@ const styles = StyleSheet.create({
       borderBottomLeftRadius: 7,
       borderColor: "black",
     },
-    Vocab: {
-      top: -20,
-      left: 40,
-    },
-    VocabSub: {
-      top: -22,
-      left: 40,
-    },
+    
     textVocab: {
       fontSize: 15,
       fontWeight: "bold",
       lineHeight: 21,
-      letterSpacing: 0.25,
-      color: "black",
+      letterSpacing: 0.55,
+      color: "white",
     },
     textVocabSub: {
       fontSize: 11,
-      lineHeight: 21,
       letterSpacing: 0.25,
-      color: "grey",
+      color: "white",
     },
     text: {
       fontSize: 15,

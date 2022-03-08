@@ -98,7 +98,7 @@ export class App extends Component {
                   },
                 }}/>
               <Stack.Screen 
-                name ="Forgot Password" 
+                name ="ForgotPassword" 
                 component = {ForgotPasswordScreen} 
                 options={{
                   headerShadowVisible: false,

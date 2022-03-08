@@ -8,6 +8,8 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  ActivityIndicator,
+  Modal
 } from "react-native";
 
 import { TextInput } from "react-native-paper";
@@ -21,6 +23,7 @@ require("firebase/auth");
 var logo = require("../../assets/dapok.png");
 
 export default class Login extends Component {
+  
   constructor(props) {
     super(props);
 
@@ -40,7 +43,10 @@ export default class Login extends Component {
         console.log(result);
       })
       .catch((error) => {
-        alert("Email or password is incorrect");
+        <Modal style={{background: 'red'}} ref={"modal1"}>
+          <Text style={{color: 'white'}}>Basic modal</Text>
+          <Button onPress={this.toggleSwipeToClose} style={styles.btn}>Disable swipeToClose({this.state.swipeToClose ? "true" : "false"})</Button>
+        </Modal>
       });
   }
   render() {
