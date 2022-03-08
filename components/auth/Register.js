@@ -14,6 +14,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 require("firebase/auth");
 
+
 import { TextInput } from "react-native-paper";
 
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -24,6 +25,7 @@ export default class Register extends ValidationComponent {
     //constructor first function to be called whenever a component is created
     constructor(props) {
         super(props);
+        
         this.state = {
           name: "",
           email: "",

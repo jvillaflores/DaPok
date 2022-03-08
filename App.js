@@ -42,6 +42,7 @@ import LandingScreen from './components/auth/Landing'
 import RegisterScreen from './components/auth/Register'
 import MainScreen, { Main } from './components/Main'
 import LoginScreen from './components/auth/Login'
+import ForgotPasswordScreen from './components/auth/ForgotPassword';
 
 
 const Stack = createStackNavigator();
@@ -88,6 +89,17 @@ export class App extends Component {
             <Stack.Screen 
                 name ="Register" 
                 component = {RegisterScreen} 
+                options={{
+                  headerShadowVisible: false,
+                  headerTintColor: "#000000",
+                  headerStyle: {
+                    backgroundColor: "#F2F2F2",
+                    borderBottomWidth: 0,
+                  },
+                }}/>
+              <Stack.Screen 
+                name ="Forgot Password" 
+                component = {ForgotPasswordScreen} 
                 options={{
                   headerShadowVisible: false,
                   headerTintColor: "#000000",

@@ -38,7 +38,11 @@ export class Main extends Component {
             <Tab.Screen 
                 name="Feed" 
                 component={FeedScreen} 
+                screenOptions={{ headerShown: false }}
                 options={{
+                  headerShown:false,
+                  headerShadowVisible: false,
+                  headerTintColor: "#fff",
                   tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons name="home" color={color} size={26} />
                   ),
