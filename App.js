@@ -88,7 +88,14 @@ export class App extends Component {
             <Stack.Screen 
                 name ="Register" 
                 component = {RegisterScreen} 
-                options={{headerShown:true}}/>
+                options={{
+                  headerShadowVisible: false,
+                  headerTintColor: "#000000",
+                  headerStyle: {
+                    backgroundColor: "#F2F2F2",
+                    borderBottomWidth: 0,
+                  },
+                }}/>
             <Stack.Screen 
                 name ="Login" 
                 component = {LoginScreen} 
@@ -103,7 +110,15 @@ export class App extends Component {
     }
     return(
       <Provider store = {store}>
-        <MainScreen/>
+          <NavigationContainer>
+              <Stack.Navigator initialRouteName="Main">
+                    <Stack.Screen 
+                        name ="Main" 
+                        component = {MainScreen} 
+                        options={{headerShown:false}}/>
+                        
+              </Stack.Navigator>
+          </NavigationContainer>
       </Provider>
     )
   }

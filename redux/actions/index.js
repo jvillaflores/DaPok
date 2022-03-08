@@ -25,3 +25,20 @@ export function fetchUser(){
         })
     })
 }
+
+//put on constanst index.js
+
+export function fetchAllUser() {
+    return (dispatch) => {
+      firebase
+        .firestore()
+        .collection("users")
+        .get()
+        .then((snapshot) => {
+          if (snapshot.exists) {
+            dispatch({ type: USER_ALL_STATE_CHANGE, usersAll: snapshot.data() });
+          } else {
+          }
+        });
+    };
+  }

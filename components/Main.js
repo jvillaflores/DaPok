@@ -4,27 +4,90 @@ import {
     View,
     Text,
   } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import { fetchUser } from '../redux/actions/index';
+import { 
+  fetchUser 
+} from '../redux/actions/index';
+
+import FeedScreen from './main/Feed';
+import ContributeScreen from './main/Contribute'
+import ProfileScreen from './main/Profile'
+
+
+const Tab = createBottomTabNavigator();
 
 export class Main extends Component {
     componentDidMount(){
         this.props.fetchUser();
     }
   render() {
+    
     return (
-      <View style={{flex:1, justifyContent:'center'}}>
-        <Text>User is Logged In</Text>
-      </View>
+      <Tab.Navigator 
+      initialRouteName="Feed"
+      screenOptions={{
+        tabBarActiveTintColor: '#215A88', tabBarStyle:{ backgroundColor: "#f2f2f2" } }}
+     >
+
+      {/* https://materialdesignicons.com/  LOOK FOR VECTOR ICONS HERE */}
+            <Tab.Screen 
+                name="Feed" 
+                component={FeedScreen} 
+                options={{
+                  tabBarIcon: ({ color, size }) => (
+                    <MaterialCommunityIcons name="home" color={color} size={26} />
+                  ),
+              }}/>
+
+            {/* 5:50:14 Listener Navigation */}
+            <Tab.Screen
+                name="Contribute"
+                // listeners={({ navigation })}
+                component={ContributeScreen}
+                //navigation = {this.props.navigation}
+                options={{
+                  tabBarIcon: ({ color, size }) => (
+                    <MaterialCommunityIcons
+                        name="book-open-page-variant"
+                        color={color}
+                        size={26}
+                          />
+                        ),
+                      }}
+              />
+
+             <Tab.Screen
+                name="Profile"
+                component={ProfileScreen}
+                //navigation = {this.props.navigation}
+                options={{
+                  tabBarIcon: ({ color, size }) => (
+                    <MaterialCommunityIcons
+                        name="account"
+                        color={color}
+                        size={26}
+                          />
+                        ),
+                      }}
+              />
+
+      </Tab.Navigator>
     )
   }
 }
+
+const mapStateToProps = (store)=>({
+  currentUser:store.userState.currentUser
+})
 
 const mapDispatchProps = (dispatch) => 
     bindActionCreators({ 
         fetchUser 
     }, dispatch);
 
-export default connect(null, mapDispatchProps)(Main);
+export default connect(mapStateToProps, mapDispatchProps)(Main);

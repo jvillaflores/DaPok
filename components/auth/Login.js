@@ -49,11 +49,14 @@ export default class Login extends Component {
     const { password } = this.state;
     return (
       <ScrollView style={styles.container}>
+         {/* LOGO */}
          <View style={styles.logoContainer}>
            <Image source={logo} style={{ width: 245, height: 62, left: 10, top: 25 }} />
-      </View>
+        </View>
+
+
         <View>
-          <View style={[styles.placeholder, { borderWidth: 3, borderColor: "#BABABA" }]}>
+          <View style={[styles.placeholder]}>
             <TextInput 
               label="Email"
               keyboardType="email-address"
@@ -61,7 +64,7 @@ export default class Login extends Component {
               onChangeText={(email) => this.setState({ email })}
             />
           </View>
-          <View style={[styles.placeholder1, { borderWidth: 3, borderColor: "#BABABA" }]}>
+          <View style={[styles.placeholder1,]}>
             {secureTextEntry == true ? (
               <TextInput
                 label="Password"
