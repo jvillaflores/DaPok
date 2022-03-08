@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from "react";
+import 'react-native-gesture-handler';
 
 import { 
   StyleSheet,
@@ -40,6 +41,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LandingScreen from './components/auth/Landing'
 import RegisterScreen from './components/auth/Register'
 import MainScreen, { Main } from './components/Main'
+import LoginScreen from './components/auth/Login'
 
 
 const Stack = createStackNavigator();
@@ -92,6 +94,10 @@ export class App extends Component {
             <Stack.Screen 
                 name ="Register" 
                 component = {RegisterScreen} />
+
+            <Stack.Screen 
+                name ="Login" 
+                component = {LoginScreen} />
         </Stack.Navigator>
   
       </NavigationContainer>
