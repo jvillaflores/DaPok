@@ -18,7 +18,7 @@ function Feed({ currentUser, navigation }) {
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         <View>
-          <Text style={[styles.textHead,{}]}>Hello! {currentUser} </Text>
+          <Text style={[styles.textHead,{}]}>Hello! {currentUser.username} </Text>
         </View>
 
       {/* "What do you want to learn today box" */}

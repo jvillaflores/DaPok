@@ -1,5 +1,11 @@
-import { USER_STATE_CHANGE } from '../constants/index'
+import { 
+  USER_STATE_CHANGE,
+  USER_ALL_STATE_CHANGE,
+ } from '../constants/index'
+ 
 import firebase from 'firebase'
+require("firebase/firestore");
+
 
 //will call to trigger database action
 
