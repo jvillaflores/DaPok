@@ -46,16 +46,13 @@ import LoginScreen from './components/auth/Login'
 
 const Stack = createStackNavigator();
 
-
 export class App extends Component {
-
   constructor(props){
     super(props);
     this.state = {
       loaded: false,
     }
   }
-
   componentDidMount(){
     firebase.auth().onAuthStateChanged((user) => {
       if(!user){
@@ -71,7 +68,6 @@ export class App extends Component {
       }
     })
   }
-
   render() {
     const { loggedIn, loaded } = this.state;
     if(!loaded){
@@ -81,7 +77,6 @@ export class App extends Component {
         </View>
       )
     }
-
     if(!loggedIn){
       return (
         <NavigationContainer>
@@ -89,34 +84,30 @@ export class App extends Component {
             <Stack.Screen 
                 name ="Landing" 
                 component = {LandingScreen} 
-                options={{headerShown:false}}/>
-                
+                options={{headerShown:false}}/>  
             <Stack.Screen 
                 name ="Register" 
-                component = {RegisterScreen} />
-
+                component = {RegisterScreen} 
+                options={{headerShown:true}}/>
             <Stack.Screen 
                 name ="Login" 
-                component = {LoginScreen} />
+                component = {LoginScreen} 
+                options={{headerShown:false}}/>
+            {/* <Stack.Screen 
+                name ="Home" 
+                component = {HomeScreen} 
+                options={{headerShown:true}}/> */}
         </Stack.Navigator>
-  
       </NavigationContainer>
       )
     }
-
     return(
       <Provider store = {store}>
         <MainScreen/>
-
-        
       </Provider>
-      
     )
-    
-    
   }
 }
-
 export default App
 
 

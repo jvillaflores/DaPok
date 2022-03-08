@@ -5,7 +5,9 @@ import {
   Button, 
   TextInput,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Image,
+  ScrollView,
 }
 from 'react-native'
 
@@ -21,20 +23,19 @@ export class Register extends Component {
     //constructor first function to be called whenever a component is created
     constructor(props) {
         super(props);
-    
         this.state = {
-          email: "",
-          password: "",
-          name: "",
-          address:"",
+          name: '',
+          email: '',
+          username: '',
+          password: '',
+          address: '',
+          language: '',
         };
         this.onSignUp = this.onSignUp.bind(this);
       }
     
       onSignUp() {
-        const { email, password, name, address } = this.state;
-    
-    
+        const { email, password, name, address, username, language } = this.state;
       firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -46,7 +47,9 @@ export class Register extends Component {
           .set({
             name,
             email,
-            address,
+            address, 
+            username,
+            language,
           });
         console.log(result);
       })
@@ -55,75 +58,78 @@ export class Register extends Component {
         console.log('hey there is an error')
       });
   }
-
-
   render() {
     return (
-        // <View>
-        //     <TextInput placeholder = "name" onChangeText = {(name) => this.setState({ name })}/>
-        //     <TextInput placeholder = "email"onChangeText = {(email) => this.setState({ email })}/>
-        //     <TextInput placeholder = "password" secureTextEntry = {true} onChangeText = {(password) => this.setState({ password })}/>
-        //     <Button onPress={() => this.onSignUp()}  title = "Sign Up" />
-        // </View>
-
+      <ScrollView style={styles.container}>
         <View style={{flex: 1, justifyContent: "center" }}>
-        <Text style={styles.regis}>Register</Text>
-        <Text style={styles.text1}>Name</Text>
-        <TextInput style={[styles.placeholder, { borderWidth: 3, borderColor: "#BABABA" }]}
-            placeholder = "name"
-            onChangeText = {(name) => this.setState({ name })}/>
-        <Text style={styles.text1}>Email</Text>
-        <TextInput style={[styles.placeholder, { borderWidth: 3, borderColor: "#BABABA" }]}
-            placeholder = "email"
-            onChangeText = {(email) => this.setState({ email })}/>
-        
-        <Text style={styles.text1}>Password</Text>
-        <TextInput style={[styles.placeholder, { borderWidth: 3, borderColor: "#BABABA" }]}
-            placeholder = "password"
-            secureTextEntry = {true}
-            onChangeText = {(password) => this.setState({ password })}/>
-        <Text style={styles.text1}>Address</Text>
-        <TextInput style={[styles.placeholder, { borderWidth: 3, borderColor: "#BABABA" }]}
-            placeholder = "address"
-            onChangeText = {(address) => this.setState({ address })}/>
-        
+          <View style={styles.logoContainer}>
+            <Image source={logo} style={{ width: 205, height: 50, left: 10, top: 40 }} />
+          </View>
+            <Text style={styles.regis}>Register</Text>
+            <TextInput style={[styles.placeholder, { borderWidth: 3, borderColor: "#BABABA" }]}
+                placeholder = "Name"
+                onChangeText = {(name) => this.setState({ name })}/>
+            <TextInput style={[styles.placeholder, { borderWidth: 3, borderColor: "#BABABA" }]}
+                placeholder = "Email"
+                onChangeText = {(email) => this.setState({ email })}/>
+            <TextInput style={[styles.placeholder, { borderWidth: 3, borderColor: "#BABABA" }]} 
+                placeholder = "Username"
+                onChangeText = {(username) => this.setState({ username })}/>
+            <TextInput style={[styles.placeholder, { borderWidth: 3, borderColor: "#BABABA"}]}
+                placeholder = "Password"
+                secureTextEntry = {true}
+                onChangeText = {(password) => this.setState({ password })}/>
+            <TextInput style={[styles.placeholder, { borderWidth: 3, borderColor: "#BABABA" }]}
+                placeholder = "Address"
+                onChangeText = {(address) => this.setState({ address })}/>
+            <TextInput style={[styles.placeholder, { borderWidth: 3, borderColor: "#BABABA" }]}
+                placeholder = "Spoken Language"
+                onChangeText = {(language) => this.setState({ language })}/>  
         <TouchableOpacity
             style={[styles.button, { backgroundColor: "#215A88" }]}
             onPress={() => this.onSignUp()}>
             <Text style={[styles.text]}>Register</Text>
         </TouchableOpacity>
+        <TouchableOpacity 
+        style={[styles.login, { alignItems: "center" }]}
+        onPress={() => navigation.navigate("Register")}>
+            <Text>
+              Already have an account? <Text style={styles.textSignUp}>Login</Text>
+            </Text>
+        </TouchableOpacity>
     </View>
+    </ScrollView>
     )
   }
 }
-
 export default Register
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal:10,
+    paddingVertical: 18,
+    alignContent: "center",
+  },
   button: {
       alignSelf: "center",
       borderRadius: 20,
       padding: 13,
-      margin: 60,
+      margin: 20,
       width: "80%",   
       },
+  login:{
+    alignSelf: "center",
+    margin: 0,
+    paddingTop: 0, 
+  },
   text: {
       alignSelf: "center",
       fontSize: 18,
-      //fontWeight: "SemiBold",
+      fontWeight: "bold",
       lineHeight: 21,
       letterSpacing: 0.25,
       color: "white",
-      },
-  text1: {
-      flex:1,
-      paddingHorizontal:20,
-      fontSize: 13,
-      //fontWeight: "SemiBold",
-      lineHeight: 15,
-      letterSpacing: 0.25,
-      color: "#4D4D4D",
-  
       },
   placeholder: {
       alignSelf: "center",
@@ -143,34 +149,19 @@ const styles = StyleSheet.create({
       alignSelf: "center",
       top: -30,
       },
-  header: {
-      alignSelf: "center",
-      },
-  subHeader: {
-      alignSelf: "center",
-      alignContent: "center",
-      justifyContent: "center",
-      bottom: -60,
-      paddingLeft: 20,
-      paddingRight: 20,
-      },
-  textSubHead: {
-      textAlign: "center",
-      fontSize: 15,
-      lineHeight: 21,
-      letterSpacing: 0.25,
-      color: "black",
-      margin: 15,
-      bottom: 10,
-      },
   regis: {
-      left: 50,
-      fontSize: 25,
+      fontSize: 22,
       lineHeight: 21,
-      //fontWeight: "Bold",
+      fontWeight: "bold",
       letterSpacing: 0.25,
       color: "#215A88",
-      margin: 15,
-      bottom: 10,
+      margin: 20,
+      bottom: -15,
       },
+  textSignUp: {
+    fontSize: 14,
+    color: "#215A88",
+    fontWeight: "bold",
+    left: 250,
+  },
   });
