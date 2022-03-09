@@ -6,6 +6,7 @@ import {
   StyleSheet,
   View,
   Text,
+  ActivityIndicator
 } from 'react-native';
 
 import { Provider } from 'react-redux';
@@ -74,7 +75,7 @@ export class App extends Component {
     if(!loaded){
       return(
         <View style={{flex:1, justifyContent:'center'}}>
-          <Text>Loading</Text>
+          <ActivityIndicator size="large" color="#215A88" />
         </View>
       )
     }
@@ -91,7 +92,7 @@ export class App extends Component {
                 component = {RegisterScreen} 
                 options={{
                   headerShadowVisible: true,
-                  headerTintColor: "#000000",
+                  headerTintColor: "#1F465B",
                   headerStyle: {
                     backgroundColor: "#F2F2F2",
                     borderBottomWidth: 0,
@@ -101,8 +102,9 @@ export class App extends Component {
                 name ="ForgotPassword" 
                 component = {ForgotPasswordScreen} 
                 options={{
+                  headerShown:false,
                   headerShadowVisible: false,
-                  headerTintColor: "#000000",
+                  headerTintColor: "#1F465B",
                   headerStyle: {
                     backgroundColor: "#F2F2F2",
                     borderBottomWidth: 0,
@@ -113,7 +115,7 @@ export class App extends Component {
                 component = {LoginScreen} 
                 options={{
                   headerShadowVisible: true,
-                  headerTintColor: "#000000",
+                  headerTintColor: "#1F465B",
                   headerStyle: {
                     backgroundColor: "#F2F2F2",
                     borderBottomWidth: 0,

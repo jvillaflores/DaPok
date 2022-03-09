@@ -7,6 +7,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  SafeAreaView,
+  StatusBar,
 }
 from 'react-native'
 
@@ -77,123 +79,114 @@ export default class Register extends ValidationComponent {
     const { password } = this.state;
 
     return (
-      <ScrollView style={styles.container}>
-        <View style={styles.logoContainer}>
-                  <Image source={logo} style={{ width: 230, height: 65 }} />
-                </View>
-          <View style={{flex: 1, justifyContent: "center" }}>
-          <Text style={styles.regis}>Register</Text>
-               {/* registration field */}
-               <View style={styles.placeholder}>
-                    <View>
-                        {this.isFieldInError("name") &&
-                          this.getErrorsInField("name").map((errorMessage) => (
-                            <Text style={{ color: "red" }}>
-                              Please enter your Full Name
-                            </Text>
-                          ))}
-                        <TextInput style={styles.placeholder}
-                          label="Name"
-                          activeUnderlineColor="#215A88"
-                          onChangeText={(name) => this.setState({ name })}
-                        />
-                    </View>
+      <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.scrollView}>
+            <View style={{alignSelf:'center' }}>
+                  <Image source={logo} style={{ width: 230, height: 65, }} />
+            </View>
+            <View style={{alignSelf:'center' }}>
+                  <Text style={styles.regis}>Register</Text>
+            </View>
 
-                    <View>
-                      <TextInput style={styles.placeholder}
-                        keyboardType="email-address"
-                        label="Email"
-                        activeUnderlineColor="#215A88"
-                        onChangeText={(email) => this.setState({ email })}
-                      />
-                    </View>
+            <View>
 
-                    <View style={styles.placeholder}>
-                        {this.isFieldInError("username") &&
-                          this.getErrorsInField("username").map((errorMessage) => (
-                            <Text style={{ color: "red" }}>
-                              Please enter your username
-                            </Text>
-                          ))}
-                        <TextInput
-                          label="Username"
-                          activeUnderlineColor="#215A88"
-                          onChangeText={(username) => this.setState({ username })}
-                        />
-                    </View>
-
-                    {/* <View style={styles.placeholder}>
-                        <TextInput
-                            placeholder = "Password"
+                <View style={{flex: 1, justifyContent: "center" }}>
+                      <View>
+                            {this.isFieldInError("name") &&
+                              this.getErrorsInField("name").map((errorMessage) => (
+                                <Text style={{ color: "red" }}>
+                                  Please enter your Full Name
+                                </Text>
+                              ))}
+                            <TextInput style={styles.placeholder}
+                              label="Name"
+                              activeUnderlineColor="#215A88"
+                              onChangeText={(name) => this.setState({ name })}
+                            />
+                      </View>
+                      <View>
+                          <TextInput style={styles.placeholder}
+                            keyboardType="email-address"
+                            label="Email"
                             activeUnderlineColor="#215A88"
-                            secureTextEntry = {true}
-                            onChangeText = {(password) => this.setState({ password })}/> 
-                    </View> */}
-
-          <View style={styles.placeholder}>
-            {this.isFieldInError("password") &&
-              this.getErrorsInField("password").map((errorMessage) => (
-                <Text style={{ color: "red" }}>
-                  Please enter your your password
-                </Text>
-              ))}
-            {secureTextEntry == true ? (
-              <TextInput
-                label="Password"
-                secureTextEntry={secureTextEntry}
-                iconSize={25}
-                iconColor={"#222222"}
-                onChangeText={(password) => this.setState({ password })}
-                value={password}
-                activeUnderlineColor="#215A88"
-                right={
-                  <TextInput.Icon
-                    name="eye"
-                    onPress={() => {
-                      this.setState({ secureTextEntry: false });
-                      return false;
-                    }}
-                  />
-                }
-              />
-            ) : null}
-            {secureTextEntry == false ? (
-              <TextInput
-                label="Password"
-                secureTextEntry={secureTextEntry}
-                iconSize={25}
-                iconColor={"#222222"}
-                onChangeText={(password) => this.setState({ password })}
-                value={password}
-                activeUnderlineColor="#8E2835"
-                right={
-                  <TextInput.Icon
-                    name="eye-off"
-                    onPress={() => {
-                      this.setState({ secureTextEntry: true });
-                      return true;
-                    }}
-                  />
-                }
-              />
-            ) : null}
-          </View>
-                    
+                            onChangeText={(email) => this.setState({ email })}
+                           />
+                    </View>
                     <View style={styles.placeholder}>
-                        {this.isFieldInError("address") &&
-                          this.getErrorsInField("address").map((errorMessage) => (
+                          {this.isFieldInError("username") &&
+                            this.getErrorsInField("username").map((errorMessage) => (
+                              <Text style={{ color: "red" }}>
+                                Please enter your username
+                              </Text>
+                            ))}
+                          <TextInput
+                            label="Username"
+                            activeUnderlineColor="#215A88"
+                            onChangeText={(username) => this.setState({ username })}
+                          />
+                    </View>
+                    <View style={styles.placeholder}>
+                          {this.isFieldInError("password") &&
+                            this.getErrorsInField("password").map((errorMessage) => (
+                              <Text style={{ color: "red" }}>
+                                Please enter your your password
+                              </Text>
+                            ))}
+                          {secureTextEntry == true ? (
+                          <TextInput
+                              label="Password"
+                              secureTextEntry={secureTextEntry}
+                              iconSize={25}
+                              iconColor={"#222222"}
+                              onChangeText={(password) => this.setState({ password })}
+                              value={password}
+                              activeUnderlineColor="#215A88"
+                              right={
+                                <TextInput.Icon
+                                  name="eye"
+                                  onPress={() => {
+                                    this.setState({ secureTextEntry: false });
+                                    return false;
+                                  }}
+                                />
+                              }
+                          />
+                          ) : null}
+                          {secureTextEntry == false ? (
+                        <TextInput
+                          label="Password"
+                          secureTextEntry={secureTextEntry}
+                          iconSize={25}
+                          iconColor={"#222222"}
+                          onChangeText={(password) => this.setState({ password })}
+                          value={password}
+                          activeUnderlineColor="#8E2835"
+                          right={
+                            <TextInput.Icon
+                              name="eye-off"
+                              onPress={() => {
+                                this.setState({ secureTextEntry: true });
+                                return true;
+                              }}
+                            />
+                          }
+                        />
+                         ) : null}
+                    </View>
+                    <View style={styles.placeholder}>
+                          {this.isFieldInError("address") &&
+                            this.getErrorsInField("address").map((errorMessage) => (
                             <Text style={{ color: "red" }}>
                               Please enter your Address
                             </Text>
                           ))}
-                        <TextInput
-                          label="Address"
-                          activeUnderlineColor="#215A88"
-                          onChangeText={(address) => this.setState({ address })}
-                        />
-                    </View>
-
-                    <View style={styles.placeholder}>
+                            <TextInput
+                              label="Address"
+                              activeUnderlineColor="#215A88"
+                              onChangeText={(address) => this.setState({ address })}
+                            />
+                    </View>   
+                     <View style={styles.placeholder}>
                         {this.isFieldInError("language") &&
                           this.getErrorsInField("language").map((errorMessage) => (
                             <Text style={{ color: "red" }}>
@@ -205,22 +198,36 @@ export default class Register extends ValidationComponent {
                           activeUnderlineColor="#215A88"
                           onChangeText={(language) => this.setState({ language })}
                         />
-                    </View>
-                </View> 
-              <TouchableOpacity
-                  style={[styles.button, { backgroundColor: "#1F465B" }]}
-                  onPress={() => this.onSignUp()}>
-                  <Text style={[styles.text]}>Register</Text>
-              </TouchableOpacity>
-              <TouchableOpacity 
-              style={[styles.login, { alignItems: "center" }]}
-              onPress={() => navigation.navigate("Login")}>
-                  <Text style={styles.alacc}>
-                    Already have an account? <Text style={styles.textSignUp}>Login</Text>
-                  </Text>
-              </TouchableOpacity>
-        </View>
-    </ScrollView>
+                    </View>       
+
+                </View>
+
+                {/* BUTTONS */}
+                
+                <View>
+                    <TouchableOpacity
+                      style={[styles.button, { backgroundColor: "#1F465B" }]}
+                      onPress={() => this.onSignUp()}>
+                      <Text style={[styles.text]}>Register</Text>
+                    </TouchableOpacity> 
+                </View>
+                <View>
+                    <TouchableOpacity 
+                        style={[styles.login, { alignItems: "center" }]}
+                        onPress={() => navigation.navigate("Login")}>
+                        <Text>
+                          Already have an account? <Text style={styles.textSignUp}>Login</Text>
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                
+                
+            </View>
+                       
+          
+                      
+      </ScrollView>
+    </SafeAreaView>
     )
   }
 }
@@ -229,15 +236,19 @@ export default class Register extends ValidationComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
-    paddingVertical: 0,
+    paddingTop: StatusBar.currentHeight,
     alignContent: "center",
+  },
+  scrollView: {
+    //paddingTop:20,  
+    marginHorizontal: 40,
+    marginVertical: 20,
   },
   button: {
       alignSelf: "center",
       borderRadius: 20,
       padding: 13,
-      margin: 20,
+      marginTop: 20,
       width: "90%",   
       },
   fieldCont:{
@@ -245,7 +256,7 @@ const styles = StyleSheet.create({
   },
   login:{
     alignSelf: "center",
-    margin: 0, 
+    marginVertical: 10, 
   },
   text: {
       alignSelf: "center",
@@ -272,11 +283,7 @@ const styles = StyleSheet.create({
       },
   regis: {
       fontSize: 22,
-      lineHeight: 21,
-      fontWeight: "bold",
-      letterSpacing: 0.25,
       color: "#1F465B",
-      paddingVertical:0,
       margin: 5,
       },
   textSignUp: {
@@ -285,8 +292,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     left: 250,
   },
-  alacc: {
-    margin: -10,
-  },
+  
   
   });

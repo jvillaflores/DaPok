@@ -43,9 +43,10 @@ export default class ForgotPassword extends Component {
     const { navigation } = this.props;
     return (
       <View style = {styles.container}>
-            <View style = {{alignItems:"right"}}>
-                <Text style = {styles.Text}>Forgot Password?</Text>
-                <Text style = {{textAlign:"left" , paddingTop:5}}>Enter your email and we'll send you a link to get back into your account.
+            <View style = {{alignItems:"center"}}>
+                <Text style = {styles.Text}>Trouble Logging In?</Text>
+                <Text style = {{textAlign:"center" , paddingTop:10}}> Enter your email and we'll send you a link
+                  to get back into your account.
                 </Text>
             </View>
             <View style = {{paddingVertical: 20}}>
@@ -62,12 +63,13 @@ export default class ForgotPassword extends Component {
                     <Text style={styles.text}>Reset Email</Text>
                   </Pressable>
             </View>
-            {/* <View style = {styles.BackButton}>
+            <View style = {styles.BackButton}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("Login")}>
+                  onPress={() => navigation.navigate("Login")}
+                >
                   <Text style = {{color:"#1F465B"}}>Back To Log In</Text>
                 </TouchableOpacity>
-          </View> */}
+          </View>
       </View>
      
     );
@@ -85,13 +87,12 @@ const styles = StyleSheet.create({
     flex:1,
     paddingHorizontal:30,
     paddingVertical:150,
-    alignContent:"right",
+    alignContent:"center",
     
   },
   Text:{
     fontSize:20,
-    fontWeight:"bold",
-    color: "#1F465B",
+    fontWeight:"bold"
   },
   input: {
     paddingVertical: 10,

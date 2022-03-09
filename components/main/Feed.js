@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useCallback, useRef } from "react";
+
 import {
   View,
   Text,
@@ -12,51 +13,67 @@ import {
   ActivityIndicator
 } from "react-native";
 
-import { Modal, Portal, Provider } from 'react-native-paper';
-import Animated from "react-native-reanimated";
-import BottomSheet from "reanimated-bottom-sheet";
+// import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+import { TextInput, Modal, Portal, Provider } from 'react-native-paper';
 
 import { connect } from "react-redux";
 
+// import BottomSheet , {BottomSheetRefProps} from '../main/BottomSheet'
+
 
 function Feed({ currentUser, navigation }) {
+
+  // const ref = useRef(BottomSheetRefProps);
+  // const onPress = useCallback(() => {
+  //   const isActive = ref?.current?.isActive()
+  //      if (isActive) {
+  //       ref?.current?.scrollTo(0)
+
+  //      }else {
+  //       ref?.current?.scrollTo(-500)
+
+  //      }  
+  // }, []);
   return (
+
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
       {/* Kumusta box" */}
-        <View style={styles.headline_box}>
-          <View style={{padding:5}}>
+        
+          
 
-            <Text style={[styles.textHead,{}]}>Kumusta {currentUser.username}! </Text>
-            <Text>Pag-abiabi sa DaPok! Ang DaPok ay isa ka aplikasyon nga kaya mu tigom 
-              ug mga datos bahin sa mga pulong ug mga tudlong-pulong nga imonga kayang ma amot.</Text>
-          </View>
-        </View>
+
+
           {/* Buttons */}
           <View>
             <Text style={styles.titleText}>Kontribusyon </Text>
           </View>
+          
           <View>
+            
                  {/* Chatbot.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Profile")}>
+                  onPress={() => navigation.navigate("Profile")}
+                >
                   <View style={styles.contextButton}>
+                    
+
                     <View style={styles.text_Context}>
                       <Text style={styles.textVocab}>Chatbot</Text>
                       <Text style={styles.textVocabSub}>Diri maka amot ug translation para sa MinNa chatbot.</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
+
                 {/* Grammar.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Grammar")}>
+                  onPress={() => navigation.navigate("Grammar")}
+                >
                   <View style={styles.contextButton}>
-                     <Image
-                      style={{ width: 40, height: 40 }}
-                      // source={require("../../assets/grammar.png")}
-                      /> 
+                     
                     <View style={styles.text_Context}>
                       <Text style={styles.textVocab}>Translation</Text>
                       <Text style={styles.textVocabSub}>
@@ -69,6 +86,66 @@ function Feed({ currentUser, navigation }) {
     </ScrollView>
 
     </SafeAreaView>
+
+    // <GestureHandlerRootView style={{flex:1, }}>
+    //     <View style={{marginTop: StatusBar.currentHeight, marginHorizontal:40}}>
+    //           <View style={[styles.headline_box,]}>
+    //               <View style={{padding:5}}>
+    //                 <Text style={[styles.textHead,{}]}>Kumusta {currentUser.username}! </Text>
+    //                 <Text>Pag-abiabi sa DaPok! Ang DaPok ay isa ka aplikasyon nga kaya mu tigom 
+    //                   ug mga datos bahin sa mga pulong ug mga tudlong-pulong nga imonga kayang ma amot. </Text>
+    //               </View>
+    //           </View>
+
+    //           <View>
+    //             <Text style={styles.titleText}>Kontribusyon </Text>
+    //           </View>
+    //     </View>
+
+    //     <View>
+    //         <View style = {{marginHorizontal:40}}>
+    //             <TouchableOpacity
+    //                 style={styles.buttonVocab}
+    //                 onPress={onPress}>
+    //                       <View style={styles.contextButton}>
+    //                         <View style={styles.text_Context}>
+    //                         <Text style={styles.textVocab}>Chatbot</Text>
+    //                           <Text style={styles.textVocabSub}>Diri maka amot ug translation para sa MinNa chatbot.</Text>
+    //                         </View>
+    //                       </View>
+    //             </TouchableOpacity>
+    //         </View>
+    //               <BottomSheet ref={ref}>
+    //                   <View style = {{flex:1, backgroundColor:'#f2f2f2'}}>
+                      
+    //                   </View>
+    //               </BottomSheet>
+    //     </View>
+
+    //     <View>
+    //         <View style = {{marginHorizontal:40}}>
+    //           <TouchableOpacity
+    //               style={styles.buttonVocab}
+    //               onPress={onPress}>
+    //                   <View style={styles.contextButton}>
+    //                     <View style={styles.text_Context}>
+    //                       <Text style={styles.textVocab}>Translation</Text>
+    //                       <Text style={styles.textVocabSub}>
+    //                       Diri maka amot ug translation.
+    //                       </Text>
+    //                     </View>
+    //                   </View>
+    //           </TouchableOpacity>
+    //         </View>
+    //           <BottomSheet ref={ref}>
+    //               <View style = {{flex:1, backgroundColor:'#f2f2f2'}}>
+                    
+    //               </View>
+    //           </BottomSheet>
+    //     </View>
+    // </GestureHandlerRootView>
+
+
   )
 }
 
@@ -83,19 +160,21 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       paddingTop: StatusBar.currentHeight,
-      // paddingHorizontal: 40,
-      //paddingVertical: 30,
-      alignContent: "center",
+      //alignContent: "center",
     },
-      scrollView: {
-        
-        marginHorizontal: 40,
-        //paddingVertical: 30
-      },
+      
     containerbox: {
       alignItems: "center",
       flexDirection: "row",
       justifyContent: "center",
+    },
+
+    Bottombutton:{
+      height:  50,
+      borderRadius:25,
+      opacity:0.6,
+      aspectRatio: 1,
+      backgroundColor: 'white',
     },
     
     header: {
@@ -129,7 +208,7 @@ const styles = StyleSheet.create({
       fontWeight: "bold",
       lineHeight: 21,
       letterSpacing: 0.25,
-      color: "215A88",
+      color: "#215A88",
       paddingVertical:15
     },
     textSubHead: {

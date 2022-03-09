@@ -17,7 +17,7 @@ export default function Landing({ navigation }) {
             <Image source={logo} style={{ width: 136, height: 235, left: 10, top: -10}} />
           </View>
           <TouchableOpacity
-            style={[styles.button, { backgroundColor: "#1F465B" }]}
+            style={[styles.button, { backgroundColor: "#1F465B", borderWidth: 3, borderColor: "#1F465B"  }]}
             onPress={() => navigation.navigate("Register")}>
             <Text style={styles.text}>Register</Text>
           </TouchableOpacity>

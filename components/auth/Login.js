@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   ScrollView,
   ActivityIndicator,
-  Modal
 } from "react-native";
 
 import { TextInput } from "react-native-paper";
@@ -43,10 +42,7 @@ export default class Login extends Component {
         console.log(result);
       })
       .catch((error) => {
-        <Modal style={{background: 'red'}} ref={"modal1"}>
-          <Text style={{color: 'white'}}>Basic modal</Text>
-          <Button onPress={this.toggleSwipeToClose} style={styles.btn}>Disable swipeToClose({this.state.swipeToClose ? "true" : "false"})</Button>
-        </Modal>
+        alert("Email or password is incorrect");
       });
   }
   render() {
@@ -56,8 +52,8 @@ export default class Login extends Component {
     return (
       <ScrollView style={styles.container}>
          {/* LOGO */}
-         <View style={styles.logoContainer}>
-           <Image source={logo} style={{ width: 246, height: 66, left: 10, top: 25 }} />
+         <View style={{alignItems:'center'}}>
+           <Image source={logo} style={{ width: 246, height: 66 }} />
         </View>
 
 
