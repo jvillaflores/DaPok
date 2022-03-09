@@ -80,7 +80,7 @@ export default class Register extends ValidationComponent {
 
     return (
       <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView}>
+        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
             <View style={{alignSelf:'center' }}>
                   <Image source={logo} style={{ width: 230, height: 65, }} />
             </View>
