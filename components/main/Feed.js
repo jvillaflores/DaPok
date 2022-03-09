@@ -41,7 +41,13 @@ function Feed({ currentUser, navigation }) {
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
       {/* Kumusta box" */}
         
-          
+      <View style={[styles.headline_box,]}>
+                  <View style={{padding:5}}>
+                     <Text style={[styles.textHead,{}]}>Kumusta {currentUser.username}! </Text>
+                     <Text>Pag-abiabi sa DaPok! Ang DaPok ay isa ka aplikasyon nga kaya mu tigom 
+                       ug mga datos bahin sa mga pulong ug mga tudlong-pulong nga imonga kayang ma amot. </Text>
+                   </View>
+               </View>
 
 
 
