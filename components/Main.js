@@ -15,8 +15,8 @@ import {
 } from '../redux/actions/index';
 
 import FeedScreen from './main/Feed';
-import ContributeScreen from './main/Contribute'
-import ProfileScreen from './main/Profile'
+import ContributeScreen from './main/Contribute';
+import ProfileScreen from './main/Profile' ;
 
 
 const Tab = createBottomTabNavigator();
@@ -26,7 +26,7 @@ export class Main extends Component {
         this.props.fetchUser();
     }
   render() {
-    
+     
     return (
       <Tab.Navigator 
       initialRouteName="Feed"
@@ -50,11 +50,16 @@ export class Main extends Component {
 
             {/* 5:50:14 Listener Navigation */}
             <Tab.Screen
-                name="Contribute"
+                name="Data Collected"
                 // listeners={({ navigation })}
                 component={ContributeScreen}
                 //navigation = {this.props.navigation}
                 options={{
+                  headerTintColor: "#fff",
+                  headerStyle: {
+                    backgroundColor: "#215A88",
+                    borderBottomWidth: 0,
+                  },
                   tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons
                         name="book-open-page-variant"
