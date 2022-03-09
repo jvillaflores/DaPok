@@ -57,7 +57,7 @@ export default class Login extends Component {
       <ScrollView style={styles.container}>
          {/* LOGO */}
          <View style={styles.logoContainer}>
-           <Image source={logo} style={{ width: 245, height: 62, left: 10, top: 25 }} />
+           <Image source={logo} style={{ width: 246, height: 66, left: 10, top: 25 }} />
         </View>
 
 
@@ -117,7 +117,7 @@ export default class Login extends Component {
             <Text style={styles.textMini}>Forgot password?</Text>
           </TouchableOpacity>
         </View>
-        <View style={{ paddingVertical: 15 }}>
+        <View style={{ paddingVertical: 10 }}>
           <TouchableOpacity
             style={styles.button}
             onPress={() => this.onSignUp()}>
@@ -126,9 +126,10 @@ export default class Login extends Component {
         </View>
         <View style={{ alignItems: "center" }}>
           <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-            <Text>
-              I'm a new user. <Text style={styles.textSignUp}>Sign Up</Text>
-            </Text>
+              <Text >
+                    Don't have account yet? <Text style={styles.textSignUp}>Sign Up</Text>
+                  </Text>
+    
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
     paddingVertical: 13,
     borderRadius: 20,
     width: "100%",
-    backgroundColor: "#215A88",
+    backgroundColor: "#1F465B",
   },
   text: {
     alignSelf: "center",
@@ -200,7 +201,7 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   textSignUp: {
-    fontSize: 14,
+    fontSize: 15,
     color: "#215A88",
     fontWeight: "bold",
     left: 200,
@@ -208,13 +209,13 @@ const styles = StyleSheet.create({
 logoContainer: {
     position: "relative",
     alignSelf: "center",
-    top: -30,
+    top: -50,
   },
   placeholder: {
     alignSelf: "center",
     borderRadius: 20,
     padding: 10,
-    margin: 30,
+    margin: 10,
     width: "100%",
     },
   placeholder1: {

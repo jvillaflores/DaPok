@@ -14,18 +14,18 @@ export default function Landing({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: "center" }}>
           <View style={styles.logoContainer}>
-            <Image source={logo} style={{ width: 251, height: 194, left: 10, top: -55 }} />
+            <Image source={logo} style={{ width: 136, height: 235, left: 10, top: -10}} />
           </View>
           <TouchableOpacity
-            style={[styles.button, { backgroundColor: "#215A88" }]}
+            style={[styles.button, { backgroundColor: "#1F465B" }]}
             onPress={() => navigation.navigate("Register")}>
             <Text style={styles.text}>Register</Text>
           </TouchableOpacity>
     
           <TouchableOpacity
-            style={[styles.button, { borderWidth: 3, borderColor: "#215A88" }]}
+            style={[styles.button, { borderWidth: 3, borderColor: "#1F465B" }]}
             onPress={() => navigation.navigate("Login")}>
-            <Text style={[styles.text, { color: "#215A88" }]}>Login</Text>
+            <Text style={[styles.text, { color: "#1F465B" }]}>Login</Text>
           </TouchableOpacity>
         </View>
   )
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderRadius: 15,
     padding: 15,
-    margin: 10,
+    margin: 5 ,
     width: "80%",
   },
   text: {

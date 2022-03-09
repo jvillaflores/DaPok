@@ -90,7 +90,7 @@ export class App extends Component {
                 name ="Register" 
                 component = {RegisterScreen} 
                 options={{
-                  headerShadowVisible: false,
+                  headerShadowVisible: true,
                   headerTintColor: "#000000",
                   headerStyle: {
                     backgroundColor: "#F2F2F2",
@@ -111,7 +111,14 @@ export class App extends Component {
             <Stack.Screen 
                 name ="Login" 
                 component = {LoginScreen} 
-                options={{headerShown:false}}/>
+                options={{
+                  headerShadowVisible: true,
+                  headerTintColor: "#000000",
+                  headerStyle: {
+                    backgroundColor: "#F2F2F2",
+                    borderBottomWidth: 0,
+                  },
+                  }}/>
             {/* <Stack.Screen 
                 name ="Home" 
                 component = {HomeScreen} 

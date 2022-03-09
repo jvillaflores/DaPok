@@ -78,30 +78,29 @@ export default class Register extends ValidationComponent {
 
     return (
       <ScrollView style={styles.container}>
-          <View style={{flex: 1, justifyContent: "center" }}>
-                <View style={styles.logoContainer}>
-                  <Image source={logo} style={{ width: 205, height: 50 }} />
-                  <Text style={styles.regis}>Register</Text>
+        <View style={styles.logoContainer}>
+                  <Image source={logo} style={{ width: 230, height: 65 }} />
                 </View>
-
-                  
-               <View style={styles.fieldCont}>
-                    <View style={styles.placeholder}>
+          <View style={{flex: 1, justifyContent: "center" }}>
+          <Text style={styles.regis}>Register</Text>
+               {/* registration field */}
+               <View style={styles.placeholder}>
+                    <View>
                         {this.isFieldInError("name") &&
                           this.getErrorsInField("name").map((errorMessage) => (
                             <Text style={{ color: "red" }}>
                               Please enter your Full Name
                             </Text>
                           ))}
-                        <TextInput
+                        <TextInput style={styles.placeholder}
                           label="Name"
                           activeUnderlineColor="#215A88"
                           onChangeText={(name) => this.setState({ name })}
                         />
                     </View>
 
-                    <View style={styles.placeholder}>
-                      <TextInput
+                    <View>
+                      <TextInput style={styles.placeholder}
                         keyboardType="email-address"
                         label="Email"
                         activeUnderlineColor="#215A88"
@@ -207,20 +206,16 @@ export default class Register extends ValidationComponent {
                           onChangeText={(language) => this.setState({ language })}
                         />
                     </View>
-                    
-                    
                 </View> 
-
               <TouchableOpacity
-                  style={[styles.button, { backgroundColor: "#215A88" }]}
+                  style={[styles.button, { backgroundColor: "#1F465B" }]}
                   onPress={() => this.onSignUp()}>
                   <Text style={[styles.text]}>Register</Text>
               </TouchableOpacity>
-
               <TouchableOpacity 
               style={[styles.login, { alignItems: "center" }]}
               onPress={() => navigation.navigate("Login")}>
-                  <Text>
+                  <Text style={styles.alacc}>
                     Already have an account? <Text style={styles.textSignUp}>Login</Text>
                   </Text>
               </TouchableOpacity>
@@ -234,8 +229,8 @@ export default class Register extends ValidationComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 30,
-    paddingVertical: 130,
+    paddingHorizontal: 20,
+    paddingVertical: 0,
     alignContent: "center",
   },
   button: {
@@ -243,15 +238,14 @@ const styles = StyleSheet.create({
       borderRadius: 20,
       padding: 13,
       margin: 20,
-      width: "80%",   
+      width: "90%",   
       },
   fieldCont:{
-    paddingTop: 20,
+    paddingTop: -0,
   },
   login:{
     alignSelf: "center",
-    margin: 0,
-    paddingTop: 0, 
+    margin: 0, 
   },
   text: {
       alignSelf: "center",
@@ -262,8 +256,8 @@ const styles = StyleSheet.create({
       color: "white",
       },
   placeholder: {
-      borderRadius: 10,
-      marginVertical:5
+      borderRadius: 5,
+      marginVertical: 5
       },
   image: {
       alignSelf: "center",
@@ -274,20 +268,25 @@ const styles = StyleSheet.create({
   logoContainer: {
       flex:1,
       alignItems: "center",
-      top: -30,
+      top: 40,
       },
   regis: {
       fontSize: 22,
       lineHeight: 21,
       fontWeight: "bold",
       letterSpacing: 0.25,
-      color: "#215A88",
-      paddingVertical:10,
+      color: "#1F465B",
+      paddingVertical:0,
+      margin: 5,
       },
   textSignUp: {
     fontSize: 14,
-    color: "#215A88",
+    color: "#1F465B",
     fontWeight: "bold",
     left: 250,
   },
+  alacc: {
+    margin: -10,
+  },
+  
   });

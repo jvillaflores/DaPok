@@ -29,47 +29,34 @@ function Feed({ currentUser, navigation }) {
 
             <Text style={[styles.textHead,{}]}>Kumusta {currentUser.username}! </Text>
             <Text>Pag-abiabi sa DaPok! Ang DaPok ay isa ka aplikasyon nga kaya mu tigom 
-              ug mga datos bahin sa mga pulong ug mga tudlong-pulong nga imonga kayang ma amot. </Text>
-
+              ug mga datos bahin sa mga pulong ug mga tudlong-pulong nga imonga kayang ma amot.</Text>
           </View>
-               
         </View>
-          
-
-
-
           {/* Buttons */}
           <View>
             <Text style={styles.titleText}>Kontribusyon </Text>
           </View>
-          
           <View>
-            
                  {/* Chatbot.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Profile")}
-                >
+                  onPress={() => navigation.navigate("Profile")}>
                   <View style={styles.contextButton}>
-                    
-
                     <View style={styles.text_Context}>
                       <Text style={styles.textVocab}>Chatbot</Text>
                       <Text style={styles.textVocabSub}>Diri maka amot ug translation para sa MinNa chatbot.</Text>
                     </View>
                   </View>
                 </TouchableOpacity>
-
                 {/* Grammar.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Grammar")}
-                >
+                  onPress={() => navigation.navigate("Grammar")}>
                   <View style={styles.contextButton}>
                      <Image
                       style={{ width: 40, height: 40 }}
-                      source={require("../../assets/grammar.png")}
-                    /> 
+                      // source={require("../../assets/grammar.png")}
+                      /> 
                     <View style={styles.text_Context}>
                       <Text style={styles.textVocab}>Translation</Text>
                       <Text style={styles.textVocabSub}>
@@ -142,7 +129,7 @@ const styles = StyleSheet.create({
       fontWeight: "bold",
       lineHeight: 21,
       letterSpacing: 0.25,
-      color: "black",
+      color: "215A88",
       paddingVertical:15
     },
     textSubHead: {
