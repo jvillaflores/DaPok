@@ -44,7 +44,7 @@ function Feed({ currentUser, navigation }) {
           {/* //////// */}
           
               <View style={{alignItems:'center', paddingHorizontal:20,}}>
-                 <Text style={[styles.titleText ,{paddingVertical:15}]}>Kontribusyon </Text>
+                 <Text style={[styles.titleText ,{paddingVertical:10}]}>Kontribusyon </Text>
               </View>
           {/* //////// */}  
               <View style={{paddingHorizontal:25,}}>
