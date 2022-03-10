@@ -75,6 +75,11 @@ export class Main extends Component {
                 component={ProfileScreen}
                 //navigation = {this.props.navigation}
                 options={{
+                  headerTintColor: "#fff",
+                  headerStyle: {
+                    backgroundColor: "#215A88",
+                    borderBottomWidth: 0,
+                  },
                   tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons
                         name="account"

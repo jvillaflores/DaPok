@@ -12,6 +12,7 @@ import {
   Avatar,
   Title,
   Caption,
+  TextInput,
   Text,
   TouchableRipple,
 } from "react-native-paper";
@@ -20,24 +21,102 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import firebase from "firebase/app";
 require("firebase/auth");
 import { connect } from "react-redux";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const onLogout = () => {
-  firebase.auth().signOut();
-};
+var logo = require("../../assets/dapok.png");
+
+
+
 
 function Profile({ currentUser, navigation }) {
+  const [username, setUsername] = useState(currentUser.username);
+
+  const onLogout = () => {
+    firebase.auth().signOut();
+  };
+  
+  const onUpdate = () =>{
+    firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .update({
+          username,
+        })
+        .then(function () {
+          alert("Saved ");
+          navigation.popToTop();
+          setLoading(null);
+          alert(
+            "Profile photo might not yet be available after, please restart application if it occurs. Thank you!"
+          );
+        });
+  }
+  console.log(currentUser.uid)
   return (
     <SafeAreaView style={styles.container}>
-        
+        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+        <View style={{flex: 1, justifyContent: "center" }}>
+                      <View>
+                            <Text>Name</Text>
+                            <TextInput style={styles.placeholder}
+                              editable={false}
+                              activeUnderlineColor="#215A88"
+                              // onChangeText={(name) => this.setState({ name })}
+                            >{currentUser.name}</TextInput>
+                      </View>
+                      <View>
+                          <Text>Email</Text>
+                          <TextInput style={styles.placeholder}
+                            editable={false}
+                            activeUnderlineColor="#215A88"
+                            // onChangeText={(email) => this.setState({ email })}
+                           >{currentUser.email}</TextInput>
+                    </View>
+                    <View style={styles.placeholder}>
+                          <Text>Username</Text>
+                          <TextInput
+                            activeUnderlineColor="#215A88"
+                            onChangeText={(username) => setUsername(username)}
+                          ></TextInput>
+                          
+                    </View>
+                    
+                    <View style={styles.placeholder}>
+                        <Text>Address</Text>
+                        <TextInput
+                            editable={false}
+                            activeUnderlineColor="#215A88"
+                            // onChangeText={(address) => this.setState({ address })}
+                        >{currentUser.address}</TextInput>
+                    </View>   
+                     <View style={styles.placeholder}>
+                        <Text>Spoken Language</Text>
+                        <TextInput
+                          editable={false}
+                          activeUnderlineColor="#215A88"
+                          // onChangeText={(language) => this.setState({ language })}
+                        >{currentUser.language}</TextInput> 
+                    </View>       
 
-          <TouchableRipple onPress={() => onLogout()}>
-            <View style={styles.menuItem}>
-              <Icon name="logout" color="#777777" size={25} />
-              <Text style={styles.menuItemText}>Logout</Text>
-            </View>
-          </TouchableRipple>
-        
-      </SafeAreaView>
+                </View>  
+
+                <View>  
+                    <TouchableOpacity
+                        style={[styles.Bbutton, { backgroundColor: "#1F465B" }]}
+                        onPress={() => onUpdate()}>
+                        <Text style={[styles.text]}>Save</Text>
+                    </TouchableOpacity>
+                </View>
+                <View>
+                  <TouchableOpacity style={styles.button}onPress={() => onLogout()}>
+                      <Text style={styles.menuItemText}>Logout</Text>
+                  </TouchableOpacity>
+                </View>    
+            
+
+        </ScrollView>
+    </SafeAreaView>
   )
 }
 const mapStateToProps = (store) => ({
@@ -49,7 +128,8 @@ export default connect(mapStateToProps, null)(Profile);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: 30,
+    paddingTop: 30,
+    paddingHorizontal: 40
   },
   userInfoSelection: {
     // paddingHorizontal: 30,
@@ -61,6 +141,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
+  },
+  scrollView: {
+    marginVertical: 20,
   },
   caption: {
     fontSize: 14,
@@ -79,6 +162,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 100,
   },
+  Bbutton: {
+    alignSelf: "center",
+    borderRadius: 20,
+    padding: 13,
+    marginTop: 20,
+    width: "90%",   
+    },
+  text: {
+      alignSelf: "center",
+      fontSize: 18,
+      fontWeight: "bold",
+      lineHeight: 21,
+      letterSpacing: 0.25,
+      color: "white",
+      },
   infoBox: {
     width: "50%",
     alignItems: "center",
@@ -89,16 +187,22 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-  menuItem: {
-    flexDirection: "row",
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-  },
+  
   menuItemText: {
     color: "#777777",
-    marginLeft: 20,
     fontWeight: "600",
     fontSize: 16,
-    lineHeight: 26,
+  },
+  placeholder: {
+    borderRadius: 5,
+    marginVertical: 5
+  },
+  button: {
+    alignItems: "center",
+    justifyContent:'center',
+    borderRadius: 20,
+    marginTop: 20,
+    width: "100%",  
+    flexDirection: "row", 
   },
 });

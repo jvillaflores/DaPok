@@ -55,6 +55,9 @@ export default class Login extends Component {
          <View style={{alignItems:'center'}}>
            <Image source={logo} style={{ width: 246, height: 66 }} />
         </View>
+        <View style={{alignSelf:'center' }}>
+                  <Text style={styles.regis}>Login</Text>
+        </View>
 
 
         <View>
@@ -162,6 +165,11 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#1F465B",
   },
+  regis: {
+    fontSize: 22,
+    color: "#1F465B",
+    margin: 5,
+    },
   text: {
     alignSelf: "center",
     fontSize: 18,
