@@ -5,6 +5,7 @@ import {
     FlatList,
     TouchableOpacity,
     StyleSheet,
+    TextInput
 
 }from 'react-native'
 
@@ -14,13 +15,13 @@ require("firebase/firebase-storage");
 import { connect } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 
-function Kagan({ filteredDictionary, navigation }) {
+function Kagan({ words, navigation }) {
   const [playing, setPlaying] = useState(false);
-  const [datalist, setDatalist] = useState(filteredDictionary);
+  const [datalist, setDatalist] = useState(words);
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] =
-    useState(filteredDictionary);
-  const [masterDataSource, setMasterDataSource] = useState(filteredDictionary);
+    useState(words);
+  const [masterDataSource, setMasterDataSource] = useState(words);
   const [loading, setLoading] = useState(false);
 
  
@@ -33,15 +34,15 @@ function Kagan({ filteredDictionary, navigation }) {
         .where("status", "==", "1")
         .get()
         .then((snapshot) => {
-          let filteredDictionary = snapshot.docs.map((doc) => {
+          let words = snapshot.docs.map((doc) => {
             const data = doc.data();
             const id = doc.id;
             return { id, ...data };
           });
 
-          setDatalist(filteredDictionary);
-          setFilteredDataSource(filteredDictionary);
-          setMasterDataSource(filteredDictionary);
+          setDatalist(words);
+          setFilteredDataSource(words);
+          setMasterDataSource(words);
         });
     });
 
@@ -98,10 +99,8 @@ function Kagan({ filteredDictionary, navigation }) {
               onPress={() => navigation.navigate("Word", { data: item })}
             >
               <View style={styles.bodycontainer}>
-                <Text style={styles.inKagan}>{item.kagan} </Text>
-                <Text style={styles.inFilipino}>
-                  {item.filipino} (in filipino)
-                </Text>
+                <Text style={styles.inKagan}>{item.bisaya} </Text>
+                
                 <Text style={styles.meaning}>{item.meaning}</Text>
               </View>
             </TouchableOpacity>
