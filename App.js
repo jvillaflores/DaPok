@@ -44,7 +44,7 @@ import RegisterScreen from './components/auth/Register'
 import MainScreen, { Main } from './components/Main'
 import LoginScreen from './components/auth/Login'
 import ForgotPasswordScreen from './components/auth/ForgotPassword';
-import ChatbotScreen from './components/main/Chatbot';
+import ChatbotScreen from './components/main/Contribution/Chatbot';
 import TranslateScreen from './components/main/Translate';
 import CKaganScreen from './components/main/Data Collection/Chatbot/CKagan';
 import CManoboScreen from './components/main/Data Collection/Chatbot/CManobo';

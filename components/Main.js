@@ -18,7 +18,6 @@ import {
 import FeedScreen from './main/Feed';
 import ContributeScreen from './main/Contribute'
 import ProfileScreen from './main/Profile'
-import ChatbotScreen from './main/Chatbot'
 
 const Tab = createBottomTabNavigator();
 const StackT = createStackNavigator();
@@ -87,6 +86,8 @@ export class Main extends Component {
                         ),
                       }}
               />
+
+             
       </Tab.Navigator>
     )
   }
