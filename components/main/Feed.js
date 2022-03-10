@@ -61,7 +61,7 @@ function Feed({ currentUser, navigation }) {
                  {/* Chatbot.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab}
-                  onPress={() => navigation.navigate("Profile")}
+                  onPress={() => navigation.navigate("ContribKagan")}
                 >
                   <View style={styles.contextButton}>
                     

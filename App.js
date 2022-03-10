@@ -45,6 +45,8 @@ import MainScreen, { Main } from './components/Main'
 import LoginScreen from './components/auth/Login'
 import ForgotPasswordScreen from './components/auth/ForgotPassword';
 
+import KaganScreen from './components/main/Contribution/Kagan'
+
 
 const Stack = createStackNavigator();
 
@@ -121,10 +123,7 @@ export class App extends Component {
                     borderBottomWidth: 0,
                   },
                   }}/>
-            {/* <Stack.Screen 
-                name ="Home" 
-                component = {HomeScreen} 
-                options={{headerShown:true}}/> */}
+           
         </Stack.Navigator>
       </NavigationContainer>
       )
@@ -137,6 +136,20 @@ export class App extends Component {
                         name ="Main" 
                         component = {MainScreen} 
                         options={{headerShown:false}}/>
+
+                    
+                    <Stack.Screen
+                        name="ContribKagan"
+                        component={KaganScreen}
+                        navigation={this.props.navigation}
+                        options={{
+                          title: "Kagan",
+                          headerTintColor: "#fff",
+                          headerStyle: {
+                            backgroundColor: "#215A88",
+                          },
+                        }}
+                    />
                         
               </Stack.Navigator>
           </NavigationContainer>

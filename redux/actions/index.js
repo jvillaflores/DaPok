@@ -1,6 +1,7 @@
 import { 
   USER_STATE_CHANGE,
   USER_ALL_STATE_CHANGE,
+  USER_WORDS_STATE_CHANGE,
  } from '../constants/index'
  
 import firebase from 'firebase'
@@ -48,3 +49,21 @@ export function fetchAllUser() {
         });
     };
   }
+
+export function fetchWords() {
+    return (dispatch) => {
+      firebase
+        .firestore()
+        .collection("words")
+        .doc(firebase.auth().currentUser.uid)
+        .get()
+        .then((snapshot) => {
+          let words = snapshot.docs.map((doc) => {
+            const data = doc.data();
+            const id = doc.id;
+            return { id, ...data };
+          });
+          dispatch({ type: USER_WORDS_STATE_CHANGE, words });
+        });
+    };
+}
