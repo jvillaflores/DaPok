@@ -13,29 +13,16 @@ import {
   ActivityIndicator
 } from "react-native";
 
-// import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { TextInput, Modal, Portal, Provider } from 'react-native-paper';
 
 import { connect } from "react-redux";
 
-// import BottomSheet , {BottomSheetRefProps} from '../main/BottomSheet'
 
 
 function Feed({ currentUser, navigation }) {
 
-  // const ref = useRef(BottomSheetRefProps);
-  // const onPress = useCallback(() => {
-  //   const isActive = ref?.current?.isActive()
-  //      if (isActive) {
-  //       ref?.current?.scrollTo(0)
-
-  //      }else {
-  //       ref?.current?.scrollTo(-500)
-
-  //      }  
-  // }, []);
-  return (
+   return (
 
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
@@ -43,7 +30,7 @@ function Feed({ currentUser, navigation }) {
         
       <View style={[styles.headline_box,]}>
                   <View style={{padding:5}}>
-                     <Text style={[styles.textHead,{}]}>Kumusta {currentUser.username}! </Text>
+                     <Text style={[styles.textHead,{}]}>Kamusta {currentUser.username}! </Text>
                      <Text>Pag-abiabi sa DaPok! Ang DaPok ay isa ka aplikasyon nga kaya mu tigom 
                        ug mga datos bahin sa mga pulong ug mga tudlong-pulong nga imonga kayang ma amot. </Text>
                    </View>
