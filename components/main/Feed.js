@@ -244,11 +244,6 @@ const styles = StyleSheet.create({
   transicon:{
     margin: 35,
   }
-  // // containerbox: {
-    // //   alignItems: "center",
-    // //   flexDirection: "row",
-    // //   justifyContent: "center",
-    // // },
 
     // Bottombutton:{
     //   height:  50,
