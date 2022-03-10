@@ -15,8 +15,8 @@ import {
 } from '../redux/actions/index';
 
 import FeedScreen from './main/Feed';
-import ContributeScreen from './main/Contribute';
-import ProfileScreen from './main/Profile' ;
+import ContributeScreen from './main/Contribute'
+import ProfileScreen from './main/Profile'
 
 
 const Tab = createBottomTabNavigator();
@@ -26,7 +26,7 @@ export class Main extends Component {
         this.props.fetchUser();
     }
   render() {
-     
+    
     return (
       <Tab.Navigator 
       initialRouteName="Feed"
