@@ -15,6 +15,7 @@ import {
   TextInput,
   Text,
   TouchableRipple,
+  Banner,
 } from "react-native-paper";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -30,7 +31,7 @@ var logo = require("../../assets/dapok.png");
 
 function Profile({ currentUser, navigation }) {
   const [username, setUsername] = useState(currentUser.username);
-
+  const [visible, setVisible] = React.useState(true);
 
   const onLogout = () => {
     firebase.auth().signOut();
@@ -54,8 +55,25 @@ function Profile({ currentUser, navigation }) {
         });
   }
   return (
+    
     <SafeAreaView style={styles.container}>
+        <Banner
+            visible={visible}
+            actions={[
+        {
+          label: 'Okay',
+          onPress: () => setVisible(false),
+        },
+        // {
+        //   label: 'Learn more',
+        //   onPress: () => setVisible(false),
+        // },
+      ]}
+      >
+      You can only edit your username.
+    </Banner>
         <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+        
         <View style={{flex: 1, justifyContent: "center" }}>
                       <View>
                             <Text>Name</Text>
@@ -133,8 +151,8 @@ export default connect(mapStateToProps, null)(Profile);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 30,
-    paddingHorizontal: 40
+    // paddingTop: 30,
+    // paddingHorizontal: 40
   },
   userInfoSelection: {
     // paddingHorizontal: 30,
@@ -149,6 +167,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     marginVertical: 20,
+    paddingHorizontal:40,
   },
   caption: {
     fontSize: 14,
