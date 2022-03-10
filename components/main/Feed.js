@@ -73,7 +73,7 @@ function Feed({ currentUser, navigation }) {
                 {/* Grammar.js */}
                 <TouchableOpacity
                   style={styles.buttonVocab1}
-                  onPress={() => navigation.navigate("Grammar")}>
+                  onPress={() => navigation.navigate("Translate")}>
                   <View style={styles.contextButton}>
                     <View style={styles.text_Context}>
                       <Text style={styles.textVocab}>Translation</Text>

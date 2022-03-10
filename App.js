@@ -44,6 +44,14 @@ import RegisterScreen from './components/auth/Register'
 import MainScreen, { Main } from './components/Main'
 import LoginScreen from './components/auth/Login'
 import ForgotPasswordScreen from './components/auth/ForgotPassword';
+import ChatbotScreen from './components/main/Chatbot';
+import TranslateScreen from './components/main/Translate';
+import CKaganScreen from './components/main/Data Collection/Chatbot/CKagan';
+import CManoboScreen from './components/main/Data Collection/Chatbot/CManobo';
+import CMansakaScreen from './components/main/Data Collection/Chatbot/CMansaka';
+import TKaganScreen from './components/main/Data Collection/Translate/TKagan';
+import TManoboScreen from './components/main/Data Collection/Translate/TManobo';
+import TMansakaScreen from './components/main/Data Collection/Translate/TMansaka';
 
 import KaganScreen from './components/main/Contribution/Kagan'
 
@@ -123,7 +131,6 @@ export class App extends Component {
                     borderBottomWidth: 0,
                   },
                   }}/>
-           
         </Stack.Navigator>
       </NavigationContainer>
       )
@@ -136,8 +143,6 @@ export class App extends Component {
                         name ="Main" 
                         component = {MainScreen} 
                         options={{headerShown:false}}/>
-
-                    
                     <Stack.Screen
                         name="ContribKagan"
                         component={KaganScreen}
@@ -150,14 +155,90 @@ export class App extends Component {
                           },
                         }}
                     />
-                        
-              </Stack.Navigator>
+              <Stack.Screen 
+                name ="Chatbot" 
+                component = {ChatbotScreen}
+                navigation={this.props.navigation}
+                options={{
+                  title: 'Chatbot',
+                  headerTintColor: '#fff',
+                  headerStyle:{
+                    backgroundColor: "#215A88",
+                  }
+                  }}/>
+              <Stack.Screen 
+                name ="Translate" 
+                component = {TranslateScreen}
+                navigation={this.props.navigation}
+                options={{
+                  title: 'Translate',
+                  headerTintColor: '#fff',
+                  headerStyle:{
+                    backgroundColor: "#215A88",}}}/>
+              
+              <Stack.Screen 
+                        name ="CKagan" 
+                        component = {CKaganScreen}
+                        navigation={this.props.navigation}
+                        options={{
+                          title: 'Kagan Data',
+                          headerTintColor: '#fff',
+                          headerStyle:{
+                          backgroundColor: "#215A88",}}}/>
+
+              <Stack.Screen 
+                        name ="CManobo" 
+                        component = {CManoboScreen}
+                        navigation={this.props.navigation}
+                        options={{
+                          title: 'Manobo Data',
+                          headerTintColor: '#fff',
+                          headerStyle:{
+                          backgroundColor: "#215A88",}}}/>  
+
+              <Stack.Screen 
+                        name ="CMansaka" 
+                        component = {CMansakaScreen}
+                        navigation={this.props.navigation}
+                        options={{
+                          title: 'Mansaka Data',
+                          headerTintColor: '#fff',
+                          headerStyle:{
+                          backgroundColor: "#215A88",}}}/>
+              
+              <Stack.Screen 
+                        name ="TKagan" 
+                        component = {TKaganScreen}
+                        navigation={this.props.navigation}
+                        options={{
+                          title: 'Kagan Data',
+                          headerTintColor: '#fff',
+                          headerStyle:{
+                          backgroundColor: "#215A88",}}}/>
+
+              <Stack.Screen 
+                        name ="TManobo" 
+                        component = {TManoboScreen}
+                        navigation={this.props.navigation}
+                        options={{
+                          title: 'Manobo Data',
+                          headerTintColor: '#fff',
+                          headerStyle:{
+                          backgroundColor: "#215A88",}}}/>
+
+              <Stack.Screen 
+                        name ="TMansaka" 
+                        component = {TMansakaScreen}
+                        navigation={this.props.navigation}
+                        options={{
+                          title: 'Mansaka Data',
+                          headerTintColor: '#fff',
+                          headerStyle:{
+                          backgroundColor: "#215A88",}}}/>
+        </Stack.Navigator>
           </NavigationContainer>
       </Provider>
     )
   }
 }
 export default App
-
-
-

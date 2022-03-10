@@ -14,7 +14,7 @@ import React, { Component } from 'react'
     return (
       <ScrollView style={styles.container}>
       <View>
-          <Text>Chatbot</Text>
+          <Text>Translate</Text>
       </View>
       </ScrollView>
     )

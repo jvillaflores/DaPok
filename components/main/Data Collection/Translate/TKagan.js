@@ -10,11 +10,11 @@ import React, { Component } from 'react'
   }
   from 'react-native'
 
-  export default function Chatbot() {
+  export default function TKagan() {
     return (
       <ScrollView style={styles.container}>
       <View>
-          <Text>Chatbot</Text>
+          <Text>This is the collected data from the Translation of Kagan</Text>
       </View>
       </ScrollView>
     )

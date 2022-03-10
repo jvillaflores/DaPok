@@ -10,111 +10,72 @@ import React, { Component } from 'react'
   }
   from 'react-native'
 
-  export default function Contribute() {
-    return (
-      <ScrollView style={styles.container}>
-      <View>
-          <Text style={styles.chatword}>Chatbot</Text>
+  import {List} from 'react-native-paper';
+
+  const MyComponent = ({navigation}) => (
+    <ScrollView style={styles.container}>
+    <List.Section>
+        <List.Subheader style={styles.text}>Chatbot</List.Subheader>
+      <View >
+      <TouchableOpacity>
+        <List.Item 
+          onPress={() => navigation.navigate("CKagan")}
+          style = {{margin: -15}} title="Kagan/Kalagan" left={() => <List.Icon color="#215A88" icon="folder" />}/>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <List.Item 
+          onPress={() => navigation.navigate("CMansaka")}
+          style = {{margin: -15, top: 5}} title="Mansaka" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <List.Item 
+          onPress={() => navigation.navigate("CManobo")}
+          style = {{margin: -15, top: 10}} title="Manobo" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
+      </TouchableOpacity>
       </View>
-      <TouchableOpacity
-          style={[styles.button, { backgroundColor: "#CACACA" }]}
-          onPress={() => navigation.navigate("Register")}>
-          <Text style={styles.text}>Kagan/Kalagan</Text>
+      <List.Subheader style={styles.text1}>Translate</List.Subheader>
+      <TouchableOpacity>
+        <List.Item 
+          onPress={() => navigation.navigate("TKagan")}
+          style = {{margin: -15, top: -15}} title="Kagan/Kalagan" left={() => <List.Icon color="#215A88" icon="folder" />} />
       </TouchableOpacity>
-      <TouchableOpacity
-          style={[styles.button1, { backgroundColor: "#CACACA" }]}
-          onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.text}>Mansaka</Text>
+      <TouchableOpacity>
+        <List.Item 
+          onPress={() => navigation.navigate("TManobo")}
+          style = {{margin: -15, top: -10}} title="Mansaka" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
       </TouchableOpacity>
-      <TouchableOpacity
-          style={[styles.button2, { backgroundColor: "#CACACA" }]}
-          onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.text}>Manobo</Text>
+      <TouchableOpacity>
+        <List.Item 
+          onPress={() => navigation.navigate("TMansaka")}
+          style = {{margin: -15, top: -5}} title="Manobo" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
       </TouchableOpacity>
-      <View>
-          <Text style={styles.transword}>Translation</Text>
-      </View>
-      <TouchableOpacity
-          style={[styles.button3, { backgroundColor: "#CACACA" }]}
-          onPress={() => navigation.navigate("Register")}>
-          <Text style={styles.text}>Kagan/Kalagan</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-          style={[styles.button4, { backgroundColor: "#CACACA" }]}
-          onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.text}>Mansaka</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-          style={[styles.button5, { backgroundColor: "#CACACA" }]}
-          onPress={() => navigation.navigate("Login")}>
-          <Text style={styles.text}>Manobo</Text>
-      </TouchableOpacity>
-      </ScrollView>
-    )
-  }
+    </List.Section>
+    </ScrollView>
+  );
+
+  export default MyComponent;
 
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      paddingHorizontal: 25,
-      alignContent: "center",
-    },
-    chatword:{
-      fontSize: 15,
-      lineHeight: 21,
-      fontWeight: "bold",
-      letterSpacing: 0.25,
-      color: "#181616",
-      paddingVertical:52,
-    },
-    transword:{
-      fontSize: 15,
-      lineHeight: 21,
-      fontWeight: "bold",
-      letterSpacing: 0.25,
-      color: "#181616",
-      paddingVertical:70,
-    },
-    button: {
-      alignSelf: "center",
-      borderRadius: 10,
-      padding: 13,
-      margin: -45,
-      width: "100%",   
+      container: {
+        flex: 1,
+        paddingHorizontal: 25,
       },
-    button1: {
-      alignSelf: "center",
-      borderRadius: 10,
-      padding: 13,
-      margin: 60,
-      width: "100%",   
+      text:{
+        fontSize: 15,
+        lineHeight: 21,
+        fontWeight: "bold",
+        letterSpacing: 0.25,
+        color: "#1F465B",
+        paddingVertical:30,
+        margin: -10,
       },
-    button2: {
-      alignSelf: "center",
-      borderRadius: 10,
-      padding: 13,
-      margin: -45,
-      width: "100%",   
+      text1:{
+        fontSize: 15,
+        lineHeight: 21,
+        fontWeight: "bold",
+        letterSpacing: 0.25,
+        color: "#1F465B",
+        paddingVertical:50,
+        margin: -10,
       },
-    button3: {
-      alignSelf: "center",
-      borderRadius: 10,
-      padding: 13,
-      margin: -60,
-      width: "100%",   
-      },
-    button4: {
-      alignSelf: "center",
-      borderRadius: 10,
-      padding: 13,
-      margin: 75,
-      width: "100%",   
-      },
-    button5: {
-      alignSelf: "center",
-      borderRadius: 10,
-      padding: 13,
-      margin: -60,
-      width: "100%",   
-      },
-  });
+    });
