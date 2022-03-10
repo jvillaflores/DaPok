@@ -10,7 +10,7 @@ import React, { Component } from 'react'
   }
   from 'react-native'
 
-  export default function Feed() {
+  export default function Contribute() {
     return (
       <ScrollView style={styles.container}>
       <View>

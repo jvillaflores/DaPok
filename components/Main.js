@@ -6,6 +6,7 @@ import {
   } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { createStackNavigator } from "@react-navigation/stack";
 
 
 import { connect } from 'react-redux'
@@ -17,9 +18,10 @@ import {
 import FeedScreen from './main/Feed';
 import ContributeScreen from './main/Contribute'
 import ProfileScreen from './main/Profile'
-
+import ChatbotScreen from './main/Chatbot'
 
 const Tab = createBottomTabNavigator();
+const StackT = createStackNavigator();
 
 export class Main extends Component {
     componentDidMount(){
@@ -31,9 +33,7 @@ export class Main extends Component {
       <Tab.Navigator 
       initialRouteName="Feed"
       screenOptions={{
-        tabBarActiveTintColor: '#215A88', tabBarStyle:{ backgroundColor: "#f2f2f2" } }}
-     >
-
+        tabBarActiveTintColor: '#215A88', tabBarStyle:{ backgroundColor: "#f2f2f2" } }}>
       {/* https://materialdesignicons.com/  LOOK FOR VECTOR ICONS HERE */}
             <Tab.Screen 
                 name="Feed" 
@@ -67,9 +67,7 @@ export class Main extends Component {
                         size={26}
                           />
                         ),
-                      }}
-              />
-
+                      }}/>
              <Tab.Screen
                 name="Profile"
                 component={ProfileScreen}
@@ -90,6 +88,26 @@ export class Main extends Component {
                       }}
               />
 
+              {/* <Tab.Screen
+                name="Chatbot"
+                // listeners={({ navigation })}
+                component={ChatbotScreen}
+                //navigation = {this.props.navigation}
+                options={{
+                  headerTintColor: "#fff",
+                  headerStyle: {
+                    backgroundColor: "#215A88",
+                    borderBottomWidth: 0,
+                  },
+                  tabBarIcon: ({ color, size }) => (
+                    <MaterialCommunityIcons
+                        name="book-open-page-variant"
+                        color={color}
+                        size={26}
+                          />
+                        ),
+                      }}
+              /> */}
       </Tab.Navigator>
     )
   }
