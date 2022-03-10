@@ -31,6 +31,7 @@ var logo = require("../../assets/dapok.png");
 function Profile({ currentUser, navigation }) {
   const [username, setUsername] = useState(currentUser.username);
 
+
   const onLogout = () => {
     firebase.auth().signOut();
   };
@@ -45,14 +46,13 @@ function Profile({ currentUser, navigation }) {
         })
         .then(function () {
           alert("Saved ");
-          navigation.popToTop();
+          // navigation.popToTop();
           setLoading(null);
           alert(
             "Profile photo might not yet be available after, please restart application if it occurs. Thank you!"
           );
         });
   }
-  console.log(currentUser.uid)
   return (
     <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
@@ -60,25 +60,28 @@ function Profile({ currentUser, navigation }) {
                       <View>
                             <Text>Name</Text>
                             <TextInput style={styles.placeholder}
+                              placeholder={currentUser.name}
                               editable={false}
                               activeUnderlineColor="#215A88"
                               // onChangeText={(name) => this.setState({ name })}
-                            >{currentUser.name}</TextInput>
+                            />
                       </View>
                       <View>
                           <Text>Email</Text>
                           <TextInput style={styles.placeholder}
+                            placeholder={currentUser.email}
                             editable={false}
                             activeUnderlineColor="#215A88"
                             // onChangeText={(email) => this.setState({ email })}
-                           >{currentUser.email}</TextInput>
+                           />
                     </View>
                     <View style={styles.placeholder}>
                           <Text>Username</Text>
                           <TextInput
                             activeUnderlineColor="#215A88"
+                            placeholder={currentUser.username}
                             onChangeText={(username) => setUsername(username)}
-                          ></TextInput>
+                          />
                           
                     </View>
                     
@@ -86,17 +89,19 @@ function Profile({ currentUser, navigation }) {
                         <Text>Address</Text>
                         <TextInput
                             editable={false}
+                            placeholder={currentUser.address}
                             activeUnderlineColor="#215A88"
                             // onChangeText={(address) => this.setState({ address })}
-                        >{currentUser.address}</TextInput>
+                        />
                     </View>   
                      <View style={styles.placeholder}>
                         <Text>Spoken Language</Text>
                         <TextInput
                           editable={false}
+                          placeholder={currentUser.language}
                           activeUnderlineColor="#215A88"
                           // onChangeText={(language) => this.setState({ language })}
-                        >{currentUser.language}</TextInput> 
+                        />
                     </View>       
 
                 </View>  
