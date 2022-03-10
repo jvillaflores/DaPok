@@ -5,7 +5,8 @@ import {
     FlatList,
     TouchableOpacity,
     StyleSheet,
-    TextInput
+    TextInput, 
+    Modal
 
 }from 'react-native'
 
