@@ -61,7 +61,7 @@ function Profile({ currentUser, navigation }) {
             visible={visible}
             actions={[
         {
-          label: 'Okay',
+          label: 'Okay',color:'#215A88',
           onPress: () => setVisible(false),
         },
         // {
