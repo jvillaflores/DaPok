@@ -7,10 +7,10 @@ import React, { Component } from 'react'
     TouchableOpacity,
     Image,
     ScrollView,
+    SafeAreaView,
   }
   from 'react-native'
 
-  import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
@@ -22,7 +22,8 @@ const Tab = createMaterialTopTabNavigator();
 
 function Chatbot({ currentUser, navigation }) {
   return (
-    <NavigationContainer independent={true}>
+    //Check whether Navigation Container >> wont navigate
+    <SafeAreaView >
       
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -42,7 +43,7 @@ function Chatbot({ currentUser, navigation }) {
         <Tab.Screen name="Translate" component={TranslateScreen} />
         <Tab.Screen name="Done" component={DoneScreen} />
       </Tab.Navigator>
-    </NavigationContainer>
+    </SafeAreaView>
   );
 }
 

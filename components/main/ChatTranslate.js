@@ -52,7 +52,7 @@ function ChatTranslate({ words, navigation, props }) {
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() => navigation.navigate("AddWord")}
+        onPress={() => navigation.navigate('WordScreen')}
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>

@@ -239,8 +239,9 @@ export class App extends Component {
                           headerStyle:{
                           backgroundColor: "#215A88",}}}/>
                <Stack.Screen
-                  name="AddWord"
+                  name="WordScreen"
                   component={WordScreen}
+                  navigation={this.props.navigation}
                   options={{
                     title: "My Contribution",
                     headerShadowVisible: false,
