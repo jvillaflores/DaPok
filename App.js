@@ -44,7 +44,7 @@ import RegisterScreen from './components/auth/Register'
 import MainScreen, { Main } from './components/Main'
 import LoginScreen from './components/auth/Login'
 import ForgotPasswordScreen from './components/auth/ForgotPassword';
-import ChatbotScreen from './components/main/Contribution/Chatbot';
+import ChatbotScreen from './components/main/Chatbot';
 import TranslateScreen from './components/main/Translate';
 import CKaganScreen from './components/main/Data Collection/Chatbot/CKagan';
 import CManoboScreen from './components/main/Data Collection/Chatbot/CManobo';
@@ -52,6 +52,9 @@ import CMansakaScreen from './components/main/Data Collection/Chatbot/CMansaka';
 import TKaganScreen from './components/main/Data Collection/Translate/TKagan';
 import TManoboScreen from './components/main/Data Collection/Translate/TManobo';
 import TMansakaScreen from './components/main/Data Collection/Translate/TMansaka';
+import WordScreen from './components/main/AddWord'
+import UserContributionScreen from "./components/main/Contribution/UserContribution";
+
 
 import KaganScreen from './components/main/Contribution/Kagan'
 
@@ -235,6 +238,40 @@ export class App extends Component {
                           headerTintColor: '#fff',
                           headerStyle:{
                           backgroundColor: "#215A88",}}}/>
+               <Stack.Screen
+                  name="AddWord"
+                  component={WordScreen}
+                  options={{
+                    title: "My Contribution",
+                    headerShadowVisible: false,
+                    headerTintColor: "#fff",
+                    headerStyle: {
+                      backgroundColor: "#8E2835",
+                      elevation: 0,
+                      borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="UserContribution"
+              component={UserContributionScreen}
+              options={{
+                title: "My Contribution",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#8E2835",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+
+
+
+
+
+
         </Stack.Navigator>
           </NavigationContainer>
       </Provider>

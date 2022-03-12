@@ -46,6 +46,7 @@ export class Main extends Component {
                     <MaterialCommunityIcons name="home" color={color} size={26} />
                   ),
               }}/>
+              
 
             {/* 5:50:14 Listener Navigation */}
             <Tab.Screen

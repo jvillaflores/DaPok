@@ -55,7 +55,6 @@ export function fetchWords() {
       firebase
         .firestore()
         .collection("words")
-        .doc(firebase.auth().currentUser.uid)
         .get()
         .then((snapshot) => {
           let words = snapshot.docs.map((doc) => {
