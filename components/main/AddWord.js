@@ -20,26 +20,123 @@ import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useValidation } from "react-native-form-validator";
+import * as FileSystem from "expo-file-system";
+
+
 
 function AddWord({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
 
+  const [bisaya, setBisaya] = useState("");
+  const [ newLanguage, setNewLanguage ] = useState("");
+  const [wordID, setWordID] = useState(makeid());
 
-  const Accept = () => {
-    setLoading(true);
-    firebase
-      .firestore()
-      .doc(`dictionaryAll/${data?.id}`)
-      .update({
-        status: "1",
-      })
-      .then((result) => {
-        navigation.goBack();
-        setLoading(false);
-      })
-      .catch((err) => console.log(err, "-=error"));
-  };
+function makeid() {
+    var randomText = "";
+    var possible =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 15; i++)
+      randomText += possible.charAt(
+        Math.floor(Math.random() * possible.length)
+      );
+
+    return randomText;
+  }
+
+  const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
+    useValidation({
+      state: {
+        bisaya,
+        newLanguage
+      },
+    });
+
+
+  const uploadLanguage = async () => {
+      validate({
+        bisaya: { required: true },
+        newLanguage: { required: true },
+        
+      });
+      
+  
+      const taskCompleted = () => {
+          SavePostData(snapshot);
+          saveAllPostData(snapshot);
+          setLoading(null);
+          console.log(snapshot);
+      };
+  
+      const taskError = (snapshot) => {
+        setLoading(null);
+        alert(snapshot);
+        console.log(snapshot);
+      };
+  
+    };
+
+    const SavePostData = () => {
+      firebase
+        .firestore()
+        .collection("userAllChatbotAnswers")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("userChatbotAnswers")
+        .doc(wordID)
+        .set({
+          wordId: wordID,
+          email: currentUser.email,
+          language:currentUser.language,
+          
+          bisaya,
+          newLanguage,
+          status: "0",
+          upload: "1",
+          creation: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        .then(function () {
+          alert("Thanks for contribution!!");
+          setLoading(null);
+          navigation.popToTop();
+        });
+        
+    };
+    const saveAllPostData = () => {
+      firebase
+        .firestore()
+        .collection("words")
+        .add({
+          uid: firebase.auth().currentUser.uid,
+          wordId: wordID,
+          email: currentUser.email,
+          username: currentUser.name,
+          language:currentUser.language,
+          bisaya:data?.bisaya,
+          newLanguage,
+          upload: "1",
+          creation: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        .then(function () {
+          alert("Thanks for contribution!!");
+          setLoading(null);
+          navigation.popToTop();
+        });
+    };
+
+    const onUpdate = () =>{
+      firebase
+          .firestore()
+          .collection("words")
+          .doc('status')
+          .update({
+            status:"0",
+          })
+          
+    }
+  
+  
    {
     return (
       <ScrollView style={styles.container}>
@@ -50,14 +147,15 @@ function AddWord({ currentUser, route, navigation }) {
           </View>
           <View style={styles.horiz}>
               <TextInput
-                 
                   multiline={true}
                   activeUnderlineColor="#215A88"
-
-                />
+                  onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
+              />
+            
           </View>
           <View style={styles.horiz}>
-              <TouchableOpacity style={[styles.buttonVocab,{
+              <TouchableOpacity onPress={()=>{SavePostData()}}
+                  style={[styles.buttonVocab,{
                      backgroundColor: "#215A88",}]}>
                   <Text style={{
                      color:"#ffffff",
