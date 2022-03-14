@@ -52,7 +52,7 @@ function ChatTranslate({ words, navigation, props }) {
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() => navigation.navigate('WordScreen')}
+        onPress={() => navigation.navigate('WordScreen',{data:item})}
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   },
 
   itemsName: {
-    fontWeight: "bold",
+    
     fontSize: 16,
   },
   itemStatus: {

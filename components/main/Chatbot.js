@@ -16,14 +16,15 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 
 import DoneScreen from "./ChatDone";
 import TranslateScreen from "./ChatTranslate";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from '@react-navigation/native';
+
 
 const Tab = createMaterialTopTabNavigator();
 
-function Chatbot({ currentUser, navigation }) {
+function Chatbot() {
   return (
     //Check whether Navigation Container >> wont navigate
-    <SafeAreaView >
+    <SafeAreaView style={styles.container}>
       
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -43,6 +44,8 @@ function Chatbot({ currentUser, navigation }) {
         <Tab.Screen name="Translate" component={TranslateScreen} />
         <Tab.Screen name="Done" component={DoneScreen} />
       </Tab.Navigator>
+
+      <View><Text>HHEYY</Text></View>
     </SafeAreaView>
   );
 }
@@ -61,9 +64,9 @@ const styles = StyleSheet.create({
     left: 10,
   },
   container: {
-    alignItems: "center",
-    marginTop: 20,
-    marginBottom: 70,
+    flex: 1,
+    //paddingHorizontal:10,
+    justifyContent: "center",
   },
   innercontainer: {
     flex: 1,

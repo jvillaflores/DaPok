@@ -90,25 +90,7 @@ export class Main extends Component {
                       }}
               />
 
-              <Tab.Screen
-                name="AddWord"
-                component={AddWordScreen}
-                //navigation = {this.props.navigation}
-                options={{
-                  headerTintColor: "#fff",
-                  headerStyle: {
-                    backgroundColor: "#215A88",
-                    borderBottomWidth: 0,
-                  },
-                  tabBarIcon: ({ color, size }) => (
-                    <MaterialCommunityIcons
-                        name="account"
-                        color={color}
-                        size={26}
-                          />
-                        ),
-                      }}
-              />
+              
 
              
       </Tab.Navigator>

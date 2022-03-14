@@ -53,10 +53,8 @@ import TKaganScreen from './components/main/Data Collection/Translate/TKagan';
 import TManoboScreen from './components/main/Data Collection/Translate/TManobo';
 import TMansakaScreen from './components/main/Data Collection/Translate/TMansaka';
 import WordScreen from './components/main/AddWord'
-import UserContributionScreen from "./components/main/Contribution/UserContribution";
 
 
-import KaganScreen from './components/main/Contribution/Kagan'
 
 
 const Stack = createStackNavigator();
@@ -146,18 +144,7 @@ export class App extends Component {
                         name ="Main" 
                         component = {MainScreen} 
                         options={{headerShown:false}}/>
-                    <Stack.Screen
-                        name="ContribKagan"
-                        component={KaganScreen}
-                        navigation={this.props.navigation}
-                        options={{
-                          title: "Kagan",
-                          headerTintColor: "#fff",
-                          headerStyle: {
-                            backgroundColor: "#215A88",
-                          },
-                        }}
-                    />
+                    
               <Stack.Screen 
                 name ="Chatbot" 
                 component = {ChatbotScreen}
@@ -243,30 +230,17 @@ export class App extends Component {
                   component={WordScreen}
                   navigation={this.props.navigation}
                   options={{
-                    title: "My Contribution",
+                    title: "Answer",
                     headerShadowVisible: false,
                     headerTintColor: "#fff",
                     headerStyle: {
-                      backgroundColor: "#8E2835",
+                      backgroundColor: "#215A88",
                       elevation: 0,
                       borderBottomWidth: 0,
                 },
               }}
             />
-            <Stack.Screen
-              name="UserContribution"
-              component={UserContributionScreen}
-              options={{
-                title: "My Contribution",
-                headerShadowVisible: false,
-                headerTintColor: "#fff",
-                headerStyle: {
-                  backgroundColor: "#8E2835",
-                  elevation: 0,
-                  borderBottomWidth: 0,
-                },
-              }}
-            />
+            
 
 
 

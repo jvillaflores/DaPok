@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import {
   View,
-  TextInput,
-  Image,
+  StatusBar,
   Button,
   TouchableOpacity,
   Text,
@@ -10,14 +9,19 @@ import {
   Pressable,
   ScrollView,
   Alert,
+
 } from "react-native";
+
+import {
+  TextInput
+} from 'react-native-paper'
 import { connect } from "react-redux";
 import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-function AddWord({ words, route, navigation }) {
+function AddWord({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
 
@@ -39,18 +43,36 @@ function AddWord({ words, route, navigation }) {
    {
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.center}>
-          <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Word </Text>
-
-            <TextInput
-              style={[styles.input, { color: "black" }]}
-              value={data?.kagan}
-              multiline={true}
-              editable={false}
-            />
+        <View>
+          <View style={styles.center}>
+            <Text style={{fontSize:20}}>Itubag kini nga panguatana sa {currentUser.language}</Text>
+            <Text style={styles.text}>{data?.bisaya} </Text>
           </View>
-          
+          <View style={styles.horiz}>
+              <TextInput
+                 
+                  multiline={true}
+                  activeUnderlineColor="#215A88"
+
+                />
+          </View>
+          <View style={styles.horiz}>
+              <TouchableOpacity style={[styles.buttonVocab,{
+                     backgroundColor: "#215A88",}]}>
+                  <Text style={{
+                     color:"#ffffff",
+                     alignSelf:'center',
+                     fontSize: 18}}>Save</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.buttonVocab,{
+                     backgroundColor: "#e7e7e7",}]}>
+                  <Text style={{
+                     color:"#215A88",
+                     alignSelf:'center',
+                     fontWeight:'700',
+                     fontSize: 18}}>Iris</Text>
+              </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     );
@@ -59,131 +81,32 @@ function AddWord({ words, route, navigation }) {
 
 const mapStateToProps = (store) => ({
   words: store.userState.words,
+  currentUser: store.userState.currentUser,
 });
 
 export default connect(mapStateToProps, null)(AddWord);
 const styles = StyleSheet.create({
   container: {
-    alignContent: "center",
-    // /justifyContent: "center",
-    top: 1,
-    //left: 40,
+    flex:1,
+    paddingVertical:50,
   },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-around",
-    marginBottom: 100,
-    marginTop: 30,
+  center:{
+    alignItems:"center",
   },
-  subtitle: {
+  horiz: {
+    paddingHorizontal: 40,
+    paddingVertical:20,
+  },
+  buttonVocab: {
     alignSelf: "center",
-    fontSize: 18,
-
-    letterSpacing: 0.25,
-    color: "white",
-  },
-  buttonAccept: {
-    // alignSelf: "flex-start",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 10,
-    // elevation: 1,
-    width: "40%",
-    backgroundColor: "#73B504",
-    //top: 130,
-    // marginTop: 20,
-    // marginBottom: 80,
-  },
-  button: {
-    // alignSelf: "flex-end",
-    paddingVertical: 12,
-    paddingHorizontal: 32,
-    borderRadius: 10,
-    // elevation: 1,
-    width: "40%",
-    backgroundColor: "#8E2835",
-    //top: 130,
-    // marginBottom: 100,
-  },
-  audioButton: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: "95%",
-    borderWidth: 1,
-    borderRadius: 10,
-    height: 70,
-    borderColor: "#707070",
-    paddingTop: 20,
-    marginTop: 10,
-  },
-  guidelines: {
-    fontSize: 12,
-    fontStyle: "italic",
-    color: "#707070",
-  },
-  addAudio: {
-    flex: 1,
-  },
-
-  bottom: {
-    marginBottom: 20,
-  },
-
-  center: {
-    justifyContent: "center",
-    alignContent: "center",
-  },
-
-  paddingLeft: {
-    alignContent: "flex-start",
-    // padding:15,
-    // paddingRight:5,
+    borderRadius: 20,
+    paddingVertical: 20,
     marginTop: 20,
-    paddingLeft: 20,
+    width: "100%",  
+    paddingHorizontal:20,
   },
-
-  title_text: {
-    //alignContent:"flex-start",
-    fontWeight: "bold",
-    fontSize: 17,
-  },
-  text_input: {
-    alignSelf: "flex-start",
-    paddingLeft: 12,
-    paddingTop: 10,
-  },
-  input: {
-    letterSpacing: 0.25,
-    height: 50,
-    width: "95%",
-    paddingLeft: 12,
-    paddingTop: 1,
-    marginTop: 10,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: "#707070",
-  },
-  tags_input: {
-    letterSpacing: 0.25,
-    height: 80,
-    width: "95%",
-    paddingLeft: 12,
-    paddingTop: 1,
-    marginTop: 10,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: "#707070",
-  },
-  description_input: {
-    letterSpacing: 0.25,
-    height: 100,
-    width: "95%",
-    paddingLeft: 12,
-    paddingTop: 1,
-    marginTop: 10,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: "#707070",
-  },
+  text:{
+    fontWeight:'bold',
+    fontSize:24
+  }, 
 });
