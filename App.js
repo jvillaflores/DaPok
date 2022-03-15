@@ -52,7 +52,8 @@ import CMansakaScreen from './components/main/Data Collection/Chatbot/CMansaka';
 import TKaganScreen from './components/main/Data Collection/Translate/TKagan';
 import TManoboScreen from './components/main/Data Collection/Translate/TManobo';
 import TMansakaScreen from './components/main/Data Collection/Translate/TMansaka';
-import WordScreen from './components/main/AddWord'
+import WordScreen from './components/main/AddWord';
+import DoneScreen from './components/main/Contribution/CDone';
 
 
 
@@ -226,21 +227,35 @@ export class App extends Component {
                           headerStyle:{
                           backgroundColor: "#215A88",}}}/>
                <Stack.Screen
-                  name="WordScreen"
-                  component={WordScreen}
-                  navigation={this.props.navigation}
-                  options={{
-                    title: "Answer",
-                    headerShadowVisible: false,
-                    headerTintColor: "#fff",
-                    headerStyle: {
-                      backgroundColor: "#215A88",
-                      elevation: 0,
-                      borderBottomWidth: 0,
+                        name="WordScreen"
+                        component={WordScreen}
+                        navigation={this.props.navigation}
+                        options={{
+                          title: "Answer",
+                          headerShadowVisible: false,
+                          headerTintColor: "#fff",
+                          headerStyle: {
+                            backgroundColor: "#215A88",
+                            elevation: 0,
+                            borderBottomWidth: 0,
                 },
               }}
             />
-            
+            <Stack.Screen
+                        name="ChatbotDone"
+                        component={DoneScreen}
+                        navigation={this.props.navigation}
+                        options={{
+                          title: "Chatbot Done",
+                          headerShadowVisible: false,
+                          headerTintColor: "#fff",
+                          headerStyle: {
+                            backgroundColor: "#215A88",
+                            elevation: 0,
+                            borderBottomWidth: 0,
+                },
+              }}
+            />            
 
 
 

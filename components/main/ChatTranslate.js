@@ -46,7 +46,8 @@ function ChatTranslate({ words, navigation, props }) {
 
     return unsubscribe;
   }, [navigation]);
-
+  
+  console.log(words)
   const renderItem = ({ item, index }) => {
     return (
       <TouchableOpacity

@@ -149,28 +149,12 @@ function makeid() {
               <TextInput
                   multiline={false}
                   activeUnderlineColor="#215A88"
+                  placeholder={data?.newLanguage}
                   onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
               />
             
           </View>
-          <View style={styles.horiz}>
-              <TouchableOpacity onPress={()=>{SavePostData()}}
-                  style={[styles.buttonVocab,{
-                     backgroundColor: "#215A88",}]}>
-                  <Text style={{
-                     color:"#ffffff",
-                     alignSelf:'center',
-                     fontSize: 18}}>Save</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.buttonVocab,{
-                     backgroundColor: "#e7e7e7",}]}>
-                  <Text style={{
-                     color:"#215A88",
-                     alignSelf:'center',
-                     fontWeight:'700',
-                     fontSize: 18}}>Iris</Text>
-              </TouchableOpacity>
-          </View>
+          
         </View>
       </ScrollView>
     );

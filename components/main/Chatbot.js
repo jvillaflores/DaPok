@@ -45,7 +45,7 @@ function Chatbot() {
         <Tab.Screen name="Done" component={DoneScreen} />
       </Tab.Navigator>
 
-      <View><Text>HHEYY</Text></View>
+      
     </SafeAreaView>
   );
 }
