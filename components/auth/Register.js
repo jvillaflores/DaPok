@@ -36,7 +36,7 @@ export default class Register extends ValidationComponent {
           username: "",
           password: "",
           address: "",
-          language: "",
+          setLanguage: "",
           setStatus:"",
           secureTextEntry: true,
         };
@@ -44,7 +44,7 @@ export default class Register extends ValidationComponent {
       }
     
       onSignUp() {
-        const { email, password, name, address, username, language, setStatus } = this.state;
+        const { email, password, name, address, username, setLanguage, setStatus } = this.state;
 
         this.validate({
           email: { email: true },
@@ -65,7 +65,8 @@ export default class Register extends ValidationComponent {
             email,
             address, 
             username,
-            language,
+            language:"0",
+            setLanguage,
             status: "0",
             setStatus,
           });
@@ -197,18 +198,14 @@ export default class Register extends ValidationComponent {
                             />
                     </View>   
                      <View style={styles.placeholder}>
-                        {this.isFieldInError("language") &&
-                          this.getErrorsInField("language").map((errorMessage) => (
-                            <Text style={{ color: "red" }}>
-                              Please enter your Spoken Language
-                            </Text>
-                          ))}
-                        <TextInput
-                          label="Spoken Language"
-                          activeUnderlineColor="#215A88"
-                          onChangeText={(language) => this.setState({ language })}
-                        />
-                        
+                        <Picker
+                          style={[styles.pickerStyle, {backgroundColor:'#e7e7e7', border: '0px'}]}
+                          onValueChange={(setLanguage) => this.setState({ setLanguage })}>
+                          <Picker.Item label="Choose your Spoken Language" />
+                          <Picker.Item label="Kagan" value="Kagan" />
+                          <Picker.Item label="Mansaka" value="Mansaka" />
+                          <Picker.Item label="Manobo" value="Manobo" />
+                        </Picker>
                     </View>
 
                     <View style={styles.placeholder}>

@@ -116,7 +116,7 @@ function Profile({ currentUser, navigation }) {
                         <Text>Spoken Language</Text>
                         <TextInput
                           editable={false}
-                          placeholder={currentUser.language}
+                          placeholder={currentUser.setLanguage}
                           activeUnderlineColor="#215A88"
                           // onChangeText={(language) => this.setState({ language })}
                         />
