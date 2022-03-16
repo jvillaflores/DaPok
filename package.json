@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.11",
     "@react-native-firebase/app": "^14.5.0",
+    "@react-native-picker/picker": "^2.4.0",
     "@react-navigation/bottom-tabs": "^6.2.0",
     "@react-navigation/material-bottom-tabs": "^6.1.1",
     "@react-navigation/material-top-tabs": "^6.1.1",
@@ -30,6 +31,7 @@
     "react-native-modalbox": "^2.0.2",
     "react-native-pager-view": "5.4.9",
     "react-native-paper": "^4.11.2",
+    "react-native-paper-dropdown": "^1.0.7",
     "react-native-reanimated": "^2.4.1",
     "react-native-screens": "^3.13.0",
     "react-native-svg": "12.1.1",

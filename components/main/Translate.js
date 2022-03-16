@@ -33,18 +33,18 @@ function Translate({ currentUser, navigation }) {
           tabBarContentContainerStyle: {
             backgroundColor: "#f2f2f2",
           },
-          tabBarActiveTintColor: "#8E2835",
+          tabBarActiveTintColor: "#215A88",
           tabBarInactiveTintColor: "#B2B2B2",
 
-          tabBarPressColor: "#8E2835",
+          tabBarPressColor: "#215A88",
           tabBarLabelStyle: {
             fontSize: 15,
             fontWeight: "bold",
           },
         })}
       >
-        <Tab.Screen name="Feed" component={TranslateScreen} />
-        <Tab.Screen name="Social" component={DoneScreen} />
+        <Tab.Screen name="Translate" component={TranslateScreen} />
+        <Tab.Screen name="Done" component={DoneScreen} />
       </Tab.Navigator>
 
     </NavigationContainer>

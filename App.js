@@ -54,6 +54,7 @@ import TManoboScreen from './components/main/Data Collection/Translate/TManobo';
 import TMansakaScreen from './components/main/Data Collection/Translate/TMansaka';
 import WordScreen from './components/main/AddWord';
 import DoneScreen from './components/main/Contribution/CDone';
+import TranslationScreen from './components/main/Contribution/TranslateSets'
 
 
 
@@ -255,7 +256,23 @@ export class App extends Component {
                             borderBottomWidth: 0,
                 },
               }}
-            />            
+            />   
+
+            <Stack.Screen
+                        name="TranslateSets"
+                        component={TranslationScreen}
+                        navigation={this.props.navigation}
+                        options={{
+                          title: "Sets",
+                          headerShadowVisible: false,
+                          headerTintColor: "#fff",
+                          headerStyle: {
+                            backgroundColor: "#215A88",
+                            elevation: 0,
+                            borderBottomWidth: 0,
+                },
+              }}
+            />          
 
 
 
