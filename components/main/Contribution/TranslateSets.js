@@ -41,7 +41,7 @@ function TranslateSets() {
           },
         })}
       >
-        <Tab.Screen name="Answer" component={TranslateScreen} />
+        <Tab.Screen name="Translate" component={TranslateScreen} />
         <Tab.Screen name="Done" component={DoneScreen} />
       </Tab.Navigator>
 

@@ -58,9 +58,9 @@ function ChatTranslate({ words, navigation, props }) {
           <View style={styles.itemBody}>
             <Text style={styles.itemsName}> {item?.bisaya}</Text>
           </View>
-          {/* <View style={styles.itemBody}>
+          <View style={styles.itemBody}>
             <Text> {item?.status}</Text>
-          </View> */}
+          </View>
         </View>
 
         
