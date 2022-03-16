@@ -213,11 +213,8 @@ export default class Register extends ValidationComponent {
 
                     <View style={styles.placeholder}>
                         <Picker
-                          style={{backgroundColor:'#e7e7e7', border: '0px'}}
-                          onValueChange={(setStatus) => this.setState({ setStatus })}
-                          
-                          
-                        >
+                          style={[styles.pickerStyle, {backgroundColor:'#e7e7e7', border: '0px'}]}
+                          onValueChange={(setStatus) => this.setState({ setStatus })}>
                           <Picker.Item label="Choose a Set" />
                           <Picker.Item label="Set A" value="1" />
                           <Picker.Item label="Set B" value="2" />
@@ -326,6 +323,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     left: 250,
   },
-  
-  
+  pickerStyle:{  
+    height: 50,  
+    width: "100%",  
+    color: '#344953',
+    padding:10,
+    justifyContent: 'center',  
+} 
   });
