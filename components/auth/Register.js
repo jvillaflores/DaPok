@@ -36,7 +36,7 @@ export default class Register extends ValidationComponent {
           username: "",
           password: "",
           address: "",
-          setLanguage: "",
+          language: "",
           setStatus:"",
           secureTextEntry: true,
         };
@@ -44,7 +44,7 @@ export default class Register extends ValidationComponent {
       }
     
       onSignUp() {
-        const { email, password, name, address, username, setLanguage, setStatus } = this.state;
+        const { email, password, name, address, username, language, setStatus } = this.state;
 
         this.validate({
           email: { email: true },
@@ -65,8 +65,7 @@ export default class Register extends ValidationComponent {
             email,
             address, 
             username,
-            language:"0",
-            setLanguage,
+            language,
             status: "0",
             setStatus,
           });
@@ -200,7 +199,7 @@ export default class Register extends ValidationComponent {
                      <View style={styles.placeholder}>
                         <Picker
                           style={[styles.pickerStyle, {backgroundColor:'#e7e7e7', border: '0px'}]}
-                          onValueChange={(setLanguage) => this.setState({ setLanguage })}>
+                          onValueChange={(language) => this.setState({ language })}>
                           <Picker.Item label="Choose your Spoken Language" />
                           <Picker.Item label="Kagan" value="Kagan" />
                           <Picker.Item label="Mansaka" value="Mansaka" />
