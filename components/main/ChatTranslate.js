@@ -56,7 +56,7 @@ function ChatTranslate({ words, navigation, props }) {
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
-            <Text style={styles.itemsName}> {item?.bisaya}</Text>
+            <Text style={{fontSize:15}}>{item?.bisaya}</Text>
           </View>
           <View style={styles.itemBody}>
             {/* <Text> {item?.status}</Text> */}
@@ -96,49 +96,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     top: 5,
-    paddingHorizontal: 30,
+    marginBottom:15,
   },
-  userInfoSelection: {
-    // paddingHorizontal: 30,
-    // marginBottom: 25,
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  caption: {
-    fontSize: 14,
-    lineHeight: 14,
-    fontWeight: "500",
-  },
-  row: {
-    flexDirection: "row",
-    marginBottom: 10,
-  },
-  infoBoxWrapper: {
-    borderBottomColor: "#dddddd",
-    borderBottomWidth: 1,
-    borderTopColor: "#dddddd",
-    borderTopWidth: 1,
-    flexDirection: "row",
-    height: 100,
-  },
-  infoBox: {
-    width: "50%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  menuWrapper: {
-    marginTop: 20,
-  },
-  menuItem: {
-    flexDirection: "row",
-    paddingVertical: 15,
-    paddingHorizontal: 30,
+  
+  itemContainer: {
+    paddingHorizontal: 40,
+    paddingVertical:15,
   },
   itemBody: {
     color: "#777777",

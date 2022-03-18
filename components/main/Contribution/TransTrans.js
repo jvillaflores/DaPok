@@ -52,11 +52,11 @@ function TransTrans({ currentUser, navigation }) {
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() => navigation.navigate('WordScreen',{data:item})}
+        onPress={() => navigation.navigate('TransAddWord',{data:item})}
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
-            <Text style={styles.itemsName}> {item?.bisaya}</Text>
+            <Text style={{fontSize:15}}>{item?.bisaya}</Text>
           </View>
           <View style={styles.itemBody}>
             {/* <Text> {item?.status}</Text> */}
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     top: 5,
+    
   },
   userInfoSelection: {
     // paddingHorizontal: 30,
@@ -125,10 +126,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 100,
   },
-  infoBox: {
-    width: "50%",
-    alignItems: "center",
-    justifyContent: "center",
+  itemContainer: {
+    paddingHorizontal: 40,
+    paddingVertical:15,
   },
   menuWrapper: {
     marginTop: 10,
