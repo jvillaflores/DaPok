@@ -31,16 +31,16 @@ function TransTrans({ currentUser, navigation }) {
     const unsubscribe = navigation.addListener("focus", () => {
       firebase
         .firestore()
-        .collection("words")
-        .where("status", "==", "1")
+        .collection("translate")
+        .where("status", "==", currentUser.setStatus)
         .get()
         .then((snapshot) => {
-          let words = snapshot.docs.map((doc) => {
+          let translate = snapshot.docs.map((doc) => {
             const data = doc.data();
             const id = doc.id;
             return { id, ...data };
           });
-          setDatalist(words);
+          setDatalist(translate);
         });
     });
 
@@ -73,7 +73,6 @@ function TransTrans({ currentUser, navigation }) {
   };
 
 
-  if (currentUser.setStatus == "2") {
     return (
       <SafeAreaView style={styles.container}>
       <FlatList
@@ -84,107 +83,7 @@ function TransTrans({ currentUser, navigation }) {
       />
     </SafeAreaView>
     );
-  } else if (currentUser.setStatus == "1") {
-    return (
-      <SafeAreaView style={styles.container}>
-        <View>
-          <View style={styles.userInfoSelection}>
-            {currentUser.userImage != " " ? (
-              <Avatar.Image source={{ uri: currentUser.userImage }} size={80} />
-            ) : null}
-            {currentUser.userImage == " " ? (
-              <Avatar.Image
-                source={require("../../../assets/chat.png")}
-                size={80}
-              />
-            ) : null}
-
-            <View>
-              <Title style={[styles.title, { marginTop: 15, marginBottom: 5 }]}>
-                {currentUser.name}
-              </Title>
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.menuWrapper}>
-          <TouchableRipple
-            onPress={() => navigation.navigate("MyContribution")}
-          >
-            <View style={styles.menuItem}>
-              <Icon name="folder-outline" color="#777777" size={25} />
-              <Text style={styles.menuItemText}>My Contributions</Text>
-            </View>
-          </TouchableRipple>
-          <TouchableRipple onPress={() => navigation.navigate("Validate")}>
-            <View style={styles.menuItem}>
-              <Icon
-                name="checkbox-marked-circle-outline"
-                color="#777777"
-                size={25}
-              />
-              <Text style={styles.menuItemText}>Check Submissions</Text>
-            </View>
-          </TouchableRipple>
-          <TouchableRipple onPress={() => onLogout()}>
-            <View style={styles.menuItem}>
-              <Icon name="logout" color="#777777" size={25} />
-              <Text style={styles.menuItemText}>Logout</Text>
-            </View>
-          </TouchableRipple>
-        </View>
-      </SafeAreaView>
-    );
-  } return (
-    <SafeAreaView style={styles.container}>
-      <View>
-        <View style={styles.userInfoSelection}>
-          {currentUser.userImage != " " ? (
-            <Avatar.Image source={{ uri: currentUser.userImage }} size={80} />
-          ) : null}
-          {currentUser.userImage == " " ? (
-            <Avatar.Image
-              source={require("../../../assets/chat.png")}
-              size={80}
-            />
-          ) : null}
-
-          <View>
-            <Title style={[styles.title, { marginTop: 15, marginBottom: 5 }]}>
-              {currentUser.name}
-            </Title>
-          </View>
-        </View>
-      </View>
-
-      <View style={styles.menuWrapper}>
-        <TouchableRipple
-          onPress={() => navigation.navigate("MyContribution")}
-        >
-          <View style={styles.menuItem}>
-            <Icon name="folder-outline" color="#777777" size={25} />
-            <Text style={styles.menuItemText}>My Contributions</Text>
-          </View>
-        </TouchableRipple>
-        <TouchableRipple onPress={() => navigation.navigate("Validate")}>
-          <View style={styles.menuItem}>
-            <Icon
-              name="checkbox-marked-circle-outline"
-              color="#777777"
-              size={25}
-            />
-            <Text style={styles.menuItemText}>Check Submissions</Text>
-          </View>
-        </TouchableRipple>
-        <TouchableRipple onPress={() => onLogout()}>
-          <View style={styles.menuItem}>
-            <Icon name="logout" color="#777777" size={25} />
-            <Text style={styles.menuItemText}>Logout</Text>
-          </View>
-        </TouchableRipple>
-      </View>
-    </SafeAreaView>
-  );
+   
 }
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
