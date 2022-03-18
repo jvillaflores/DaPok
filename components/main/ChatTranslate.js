@@ -59,7 +59,7 @@ function ChatTranslate({ words, navigation, props }) {
             <Text style={styles.itemsName}> {item?.bisaya}</Text>
           </View>
           <View style={styles.itemBody}>
-            <Text> {item?.status}</Text>
+            {/* <Text> {item?.status}</Text> */}
           </View>
         </View>
 
@@ -69,10 +69,12 @@ function ChatTranslate({ words, navigation, props }) {
   };
 
   const separator = () => {
-    return <View style={{ height: 1, backgroundColor: "#E6E5E5" }} />;
+    return <View style={{ height: 1, backgroundColor: "#E6E5E5",padding: 1 }} />;
   };
-  return (
-    <SafeAreaView style={styles.container}>
+
+
+    return (
+      <SafeAreaView style={styles.container}>
       <FlatList
         data={datalist}
         keyExtractor={(e, i) => i.toString()}
@@ -80,9 +82,11 @@ function ChatTranslate({ words, navigation, props }) {
         ItemSeparatorComponent={separator}
       />
     </SafeAreaView>
-  );
+    );
+   
 }
 const mapStateToProps = (store) => ({
+  currentUser: store.userState.currentUser,
   words: store.userState.words,
 });
 
@@ -91,116 +95,59 @@ export default connect(mapStateToProps, null)(ChatTranslate);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //paddingHorizontal:10,
-    justifyContent: "center",
+    top: 5,
+    paddingHorizontal: 30,
   },
-  listTab: {
-    alignSelf: "center",
-    marginBottom: 20,
-    flexDirection: "row",
-    paddingHorizontal: 2,
-    backgroundColor: "#ebebeb",
-    borderRadius: 10,
-  },
-
-  btnTab: {
-    width: Dimensions.get("window").width / 4.5,
-    flexDirection: "row",
-    borderWidth: 0.5,
-    borderColor: "#ebebeb",
-    padding: 10,
-    justifyContent: "center",
-  },
-  textTab: {
-    fontSize: 12,
-    fontWeight: "bold",
-    color: "#000000",
-    //lineHeight: 1,
-  },
-  brnTabActive: {
-    backgroundColor: "#fff",
-    borderRadius: 10,
-  },
-  textTabActive: {
-    color: "#8E2835",
-    fontWeight: "bold",
-    fontSize: 13,
-  },
-  itemContainer: {
-    flexDirection: "row",
-    paddingVertical: 15,
-    paddingHorizontal: 20,
-  },
-  itemLogo: {
-    padding: 10,
-  },
-  itemImage: {
-    width: 50,
-    height: 50,
-  },
-
-  itemBody: {
-    flex: 1,
-    paddingHorizontal: 10,
-    justifyContent: "center",
-  },
-
-  itemsName: {
-    
-    fontSize: 16,
-  },
-  itemStatus: {
-    backgroundColor: "#69C080",
-    paddingHorizontal: 17,
-    height: 30,
-    justifyContent: "center",
-    right: 14,
-    borderRadius: 5,
-  },
-  headLine: {
+  userInfoSelection: {
+    // paddingHorizontal: 30,
+    // marginBottom: 25,
     flexDirection: "column",
-    width: "100%",
-    padding: 30,
-    top: -20,
-    height: 150,
-    backgroundColor: "#8E2835",
-    alignItems: "flex-start",
+    alignItems: "center",
     justifyContent: "center",
-    position: "relative",
-  },
-  textHead: {
-    fontSize: 20,
-    fontWeight: "bold",
-    letterSpacing: 0.25,
-    position: "relative",
-    alignSelf: "center",
-    color: "white",
-  },
-  textSubHead: {
-    flexDirection: "row",
-    fontSize: 13,
-    letterSpacing: 0.25,
-    color: "white",
   },
   title: {
-    top: 40,
-    //left: 110,
-  },
-  statusFont: {
+    fontSize: 24,
     fontWeight: "bold",
   },
-  arrowRight: {
-    backgroundColor: "#ebebeb",
-    paddingHorizontal: 5,
-    width: 30,
-    height: 30,
-    justifyContent: "center",
-    right: 2,
-    borderRadius: 5,
-    margin: 10,
+  caption: {
+    fontSize: 14,
+    lineHeight: 14,
+    fontWeight: "500",
   },
-  buttonContainer: {
-    alignItems: "flex-end",
-    alignSelf: "center",
+  row: {
+    flexDirection: "row",
+    marginBottom: 10,
+  },
+  infoBoxWrapper: {
+    borderBottomColor: "#dddddd",
+    borderBottomWidth: 1,
+    borderTopColor: "#dddddd",
+    borderTopWidth: 1,
+    flexDirection: "row",
+    height: 100,
+  },
+  infoBox: {
+    width: "50%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  menuWrapper: {
+    marginTop: 20,
+  },
+  menuItem: {
+    flexDirection: "row",
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+  },
+  itemBody: {
+    color: "#777777",
+    marginLeft: 0,
+    fontWeight: "600",
+    fontSize: 16,
+    lineHeight: 26,
+    paddingVertical: 3,
+    marginLeft: 5,
+    
   },
 });

@@ -41,7 +41,7 @@ function Chatbot() {
           },
         })}
       >
-        <Tab.Screen name="Answer" component={TranslateScreen} />
+        <Tab.Screen name="Questions" component={TranslateScreen} />
         <Tab.Screen name="Done" component={DoneScreen} />
       </Tab.Navigator>
 

@@ -49,15 +49,6 @@ function Translate({ currentUser, navigation }) {
 
     </NavigationContainer>
 
-
-
-
-
-
-
-
-
-
     // <SafeAreaView >
       
     //   <Tab.Navigator

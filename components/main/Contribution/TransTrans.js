@@ -59,7 +59,7 @@ function TransTrans({ currentUser, navigation }) {
             <Text style={styles.itemsName}> {item?.bisaya}</Text>
           </View>
           <View style={styles.itemBody}>
-            <Text> {item?.status}</Text>
+            {/* <Text> {item?.status}</Text> */}
           </View>
         </View>
 
@@ -69,7 +69,7 @@ function TransTrans({ currentUser, navigation }) {
   };
 
   const separator = () => {
-    return <View style={{ height: 1, backgroundColor: "#E6E5E5" }} />;
+    return <View style={{ height: 1, backgroundColor: "#E6E5E5",padding: 1 }} />;
   };
 
 
@@ -95,7 +95,7 @@ export default connect(mapStateToProps, null)(TransTrans);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: 30,
+    top: 5,
   },
   userInfoSelection: {
     // paddingHorizontal: 30,
@@ -130,21 +130,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-
   menuWrapper: {
     marginTop: 10,
   },
-
   menuItem: {
     flexDirection: "row",
     paddingVertical: 15,
     paddingHorizontal: 30,
   },
-  menuItemText: {
+  itemBody: {
     color: "#777777",
-    marginLeft: 20,
+    marginLeft: 0,
     fontWeight: "600",
     fontSize: 16,
     lineHeight: 26,
+    paddingVertical: 3,
+    marginLeft: 5
   },
 });
