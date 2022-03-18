@@ -142,7 +142,7 @@ function makeid() {
       <ScrollView style={styles.container}>
         <View>
           <View style={styles.center}>
-            <Text style={{fontSize:20}}>Itubag kini nga panguatana sa {currentUser.language}</Text>
+            <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {currentUser.language}</Text>
             <Text style={styles.text}>{data?.bisaya} </Text>
           </View>
           <View style={styles.horiz}>
@@ -170,25 +170,30 @@ export default connect(mapStateToProps, null)(AddWord);
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    paddingVertical:50,
+    paddingVertical:70, 
+    justifyContent: 'center'
   },
   center:{
     alignItems:"center",
   },
   horiz: {
-    paddingHorizontal: 40,
+    paddingHorizontal: 30,
     paddingVertical:20,
+    justifyContent: 'center',
+    marginTop:10,
+    marginBottom:-15,
   },
   buttonVocab: {
     alignSelf: "center",
     borderRadius: 20,
-    paddingVertical: 20,
-    marginTop: 20,
+    paddingVertical: 10,
+    marginTop: 10,
     width: "100%",  
     paddingHorizontal:20,
   },
   text:{
     fontWeight:'bold',
-    fontSize:24
+    fontSize:18,
+    justifyContent:'center'
   }, 
 });
