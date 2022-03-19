@@ -75,6 +75,7 @@ function TransTrans({ currentUser, navigation }) {
 
     return (
       <SafeAreaView style={styles.container}>
+        
       <FlatList
         data={datalist}
         keyExtractor={(e, i) => i.toString()}

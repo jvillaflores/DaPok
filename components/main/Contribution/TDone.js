@@ -25,7 +25,7 @@ import * as FileSystem from "expo-file-system";
 
 
 
-function TransAdd({ currentUser, route, navigation }) {
+function AddWord({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
 
@@ -81,9 +81,9 @@ function makeid() {
     const SavePostData = () => {
       firebase
         .firestore()
-        .collection("userAllTranslateAnswers")
+        .collection("userAllChatbotAnswers")
         .doc(firebase.auth().currentUser.uid)
-        .collection("userTranslateAnswers")
+        .collection("userChatbotAnswers")
         .doc(wordID)
         .set({
           wordId: wordID,
@@ -140,38 +140,22 @@ function makeid() {
    {
     return (
       <ScrollView style={styles.container}>
-          <View>
+        <View>
           <View style={styles.center}>
-            <Text style={{fontSize:18}}>I-translate kini sa {currentUser.language}</Text>
+            <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {currentUser.language}</Text>
             <Text style={styles.text}>{data?.bisaya} </Text>
           </View>
           <View style={styles.horiz}>
               <TextInput
                   multiline={false}
                   activeUnderlineColor="#215A88"
+                  placeholder={data?.newLanguage}
                   onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
               />
             
           </View>
-          <View style={styles.horiz}>
-              <TouchableOpacity onPress={()=>{SavePostData()}}
-                  style={[styles.buttonVocab,{
-                     backgroundColor: "#215A88",}]}>
-                  <Text style={{
-                     color:"#ffffff",
-                     alignSelf:'center',
-                     fontSize: 18}}>Save</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={[styles.buttonVocab,{
-                     backgroundColor: "#e7e7e7",}]}>
-                  <Text style={{
-                     color:"#215A88",
-                     alignSelf:'center',
-                     fontWeight:'700',
-                     fontSize: 18}}>Iris</Text>
-              </TouchableOpacity>
-          </View>
-        </View> 
+          
+        </View>
       </ScrollView>
     );
   } 
@@ -182,31 +166,33 @@ const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
 });
 
-export default connect(mapStateToProps, null)(TransAdd);
+export default connect(mapStateToProps, null)(AddWord);
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    paddingVertical:50,
-    paddingHorizontal:20,
+    paddingVertical:70, 
   },
   center:{
-     alignItems:'center'
+    alignItems:"center",
   },
   horiz: {
-    paddingHorizontal: 40,
+    paddingHorizontal: 30,
     paddingVertical:20,
+    justifyContent: 'center',
+    marginTop:10,
+    marginBottom:-15,
   },
   buttonVocab: {
     alignSelf: "center",
     borderRadius: 20,
-    paddingVertical: 20,
-    marginTop: 20,
+    paddingVertical: 10,
+    marginTop: 10,
     width: "100%",  
     paddingHorizontal:20,
   },
   text:{
     fontWeight:'bold',
-    fontSize:22,
+    fontSize:18,
     textAlign:'center'
   }, 
 });

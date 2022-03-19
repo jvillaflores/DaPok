@@ -58,7 +58,7 @@ import TranslationScreen from './components/main/Contribution/TranslateSets'
 import TransDoneScreen from './components/main/Contribution/TransDone'
 import TransTransScreen from './components/main/Contribution/TransTrans'
 import TransAddWord from './components/main/Contribution/TransAdd'
-
+import TDone from './components/main/Contribution/TDone';
 
 
 
@@ -314,6 +314,21 @@ export class App extends Component {
                         navigation={this.props.navigation}
                         options={{
                           title: "Translate",
+                          headerShadowVisible: false,
+                          headerTintColor: "#fff",
+                          headerStyle: {
+                            backgroundColor: "#215A88",
+                            elevation: 0,
+                            borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+                        name="TDone"
+                        component={TDone}
+                        navigation={this.props.navigation}
+                        options={{
+                          title: "Translated",
                           headerShadowVisible: false,
                           headerTintColor: "#fff",
                           headerStyle: {

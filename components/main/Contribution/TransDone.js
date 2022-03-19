@@ -55,15 +55,13 @@ function TransDone({ words, navigation, props }) {
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() => navigation.navigate('ChatbotDone',{data:item})}
+        onPress={() => navigation.navigate('TDone',{data:item})}
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
             <Text style={styles.itemsName}>{item?.bisaya}</Text>
           </View>
-          <View style={styles.itemBody}>
-            <Text> {item?.status}</Text>
-          </View>
+          
         </View>
 
         
