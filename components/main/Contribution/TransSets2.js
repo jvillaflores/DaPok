@@ -35,114 +35,114 @@ function TransSets2({ currentUser, navigation }) {
             style={styles.button}
             onPress={() => navigation.navigate("TranslateSets")}
           >
-            <Text style={styles.text}>A </Text>
+            <Text style={styles.text}>Ad</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>B</Text>
+            <Text style={styles.text}>Ae</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>C</Text>
+            <Text style={styles.text}>Af</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>D</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>E</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>F</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>G</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>H</Text>
+            <Text style={styles.text}>Ag</Text>
           </TouchableOpacity>
         </View>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>I</Text>
+            <Text style={styles.text}>Ah</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>J</Text>
+            <Text style={styles.text}>Ai</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>K</Text>
+            <Text style={styles.text}>Aj</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>L</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>M</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>N</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>O</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>P</Text>
+            <Text style={styles.text}>Ak</Text>
           </TouchableOpacity>
         </View>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Q</Text>
+            <Text style={styles.text}>Al</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>R</Text>
+            <Text style={styles.text1}>Am</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>S</Text>
+            <Text style={styles.text}>An</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>T</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>R</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>S</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>T</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>U</Text>
+            <Text style={styles.text}>Ao</Text>
           </TouchableOpacity>
         </View>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>V</Text>
+            <Text style={styles.text}>Ap</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>W</Text>
+            <Text style={styles.text}>Aq</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>X</Text>
+            <Text style={styles.text}>Ar</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Y</Text>
+            <Text style={styles.text}>As</Text>
           </TouchableOpacity>
         </View>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Z</Text>
+            <Text style={styles.text}>At</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Aa</Text>
+            <Text style={styles.text}>Au</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Ab</Text>
+            <Text style={styles.text}>Av</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.button}>
-            <Text style={styles.text}>Ac</Text>
+            <Text style={styles.text1}>Aw</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Ax</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Ay</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Az</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Ba</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Bb</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Bc</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Bd</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Be</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Bf</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Bg</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Bh</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Bi</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -219,6 +219,14 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 9.5,
+    fontWeight: "bold",
+    lineHeight: 21,
+    letterSpacing: 0.55,
+    color: "white",
+    margin: 18,
+  },
+  text1: {
+    fontSize: 8,
     fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.55,
