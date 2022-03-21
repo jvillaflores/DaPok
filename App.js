@@ -59,8 +59,9 @@ import TransDoneScreen from './components/main/Contribution/TransDone'
 import TransTransScreen from './components/main/Contribution/TransTrans'
 import TransAddWord from './components/main/Contribution/TransAdd'
 import TDone from './components/main/Contribution/TDone';
-
-
+import ScreenTranslation from './components/main/Contribution/ScreenTranslate'
+import TransSet2Screen from './components/main/Contribution/TransSets2'
+import Set1Screen from './components/main/TranslationButtons/Set1'
 
 
 const Stack = createStackNavigator();
@@ -276,11 +277,27 @@ export class App extends Component {
                             borderBottomWidth: 0,
                 },
               }}
-            />     
+            />      
 
             <Stack.Screen
                         name="TranslateDone"
                         component={TransDoneScreen}
+                        navigation={this.props.navigation}
+                        options={{
+                          title: "Translation",
+                          headerShadowVisible: false,
+                          headerTintColor: "#fff",
+                          headerStyle: {
+                            backgroundColor: "#215A88",
+                            elevation: 0,
+                            borderBottomWidth: 0,
+                },
+              }}
+            />     
+
+            <Stack.Screen
+                        name="ScreenTranslate"
+                        component={ScreenTranslation}
                         navigation={this.props.navigation}
                         options={{
                           title: "Sets",
@@ -292,13 +309,13 @@ export class App extends Component {
                             borderBottomWidth: 0,
                 },
               }}
-            />      
+            /> 
             <Stack.Screen
-                        name="TranslateTrans"
+                        name="TransTrans"
                         component={TransTransScreen}
                         navigation={this.props.navigation}
                         options={{
-                          title: "Sets",
+                          title: "Set 1",
                           headerShadowVisible: false,
                           headerTintColor: "#fff",
                           headerStyle: {
@@ -308,6 +325,22 @@ export class App extends Component {
                 },
               }}
             />
+
+        <Stack.Screen
+                        name="TransSets2"
+                        component={TransSet2Screen}
+                        navigation={this.props.navigation}
+                        options={{
+                          title: "Set 2",
+                          headerShadowVisible: false,
+                          headerTintColor: "#fff",
+                          headerStyle: {
+                            backgroundColor: "#215A88",
+                            elevation: 0,
+                            borderBottomWidth: 0,
+                },
+              }}
+            />  
             <Stack.Screen
                         name="TransAddWord"
                         component={TransAddWord}
@@ -338,7 +371,21 @@ export class App extends Component {
                 },
               }}
             />
-
+          <Stack.Screen
+                        name="Set1"
+                        component={Set1Screen}
+                        navigation={this.props.navigation}
+                        options={{
+                          title: "Set A",
+                          headerShadowVisible: false,
+                          headerTintColor: "#fff",
+                          headerStyle: {
+                            backgroundColor: "#215A88",
+                            elevation: 0,
+                            borderBottomWidth: 0,
+                },
+              }}
+            />
 
 
 

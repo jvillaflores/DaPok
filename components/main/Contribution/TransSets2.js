@@ -21,7 +21,7 @@ require("firebase/auth");
 import { connect } from "react-redux";
 
 
-function TransTrans({ currentUser, navigation }) {
+function TransSets2({ currentUser, navigation }) {
   
     return(
         <SafeAreaView style={styles.container}>
@@ -30,12 +30,10 @@ function TransTrans({ currentUser, navigation }) {
                 <View style={{flexDirection:'row'}}>
                     <TouchableOpacity 
                     style={styles.button}
-                    onPress={() => navigation.navigate("Set1")}>
+                    onPress={() => navigation.navigate("TranslateSets")}>
                         <Text style={styles.text}>A </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity 
-                    onPress={() => navigation.navigate("TranslateSets")}
-                    style={styles.button}>
+                    <TouchableOpacity style={styles.button}>
                         <Text style={styles.text}>B</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button}>
@@ -154,7 +152,7 @@ const mapStateToProps = (store) => ({
   words: store.userState.words,
 });
 
-export default connect(mapStateToProps, null)(TransTrans);
+export default connect(mapStateToProps, null)(TransSets2);
 
 const styles = StyleSheet.create({
   container: {

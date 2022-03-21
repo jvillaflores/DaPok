@@ -32,7 +32,7 @@ function ChatTranslate({ words, navigation, props }) {
       firebase
         .firestore()
         .collection("translate")
-        .where("status", "==", "1")
+        .where("status", "==", "2")
         .get()
         .then((snapshot) => {
           let words = snapshot.docs.map((doc) => {

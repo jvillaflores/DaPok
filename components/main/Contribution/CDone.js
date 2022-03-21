@@ -145,7 +145,7 @@ function makeid() {
             <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {currentUser.language}</Text>
             <Text style={styles.text}>{data?.bisaya} </Text>
           </View>
-          <View style={styles.horiz}>
+          <View style={[styles.horiz,{textAlign:'center',}]}>
               <TextInput
                   multiline={false}
                   activeUnderlineColor="#215A88"
@@ -171,6 +171,7 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     paddingVertical:70, 
+    alignItems:'center'
   },
   center:{
     alignItems:"center",
@@ -181,6 +182,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop:10,
     marginBottom:-15,
+    
   },
   buttonVocab: {
     alignSelf: "center",

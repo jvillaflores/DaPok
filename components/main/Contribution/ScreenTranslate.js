@@ -16,13 +16,14 @@ import { createMaterialTopTabNavigator } from "@react-navigation/material-top-ta
 
 import DoneScreen from "./TransDone";
 import TranslateScreen from "./TransTrans";
+import TranslateSets2Screen from "./TransSets2";
 import { NavigationContainer } from '@react-navigation/native';
-import ChatTranslate from '../ChatTranslate';
-import Set1Screen from '../TranslationButtons/Set1';
+import TransSets2 from './TransSets2';
+
 
 const Tab = createMaterialTopTabNavigator();
 
-function TranslateSets() {
+function ScreenTranslate() {
   return (
     //Check whether Navigation Container >> wont navigate
     <SafeAreaView style={styles.container}>
@@ -42,8 +43,8 @@ function TranslateSets() {
           },
         })}
       >
-        <Tab.Screen name="Translate" component={Set1Screen} />
-        <Tab.Screen name="Done" component={DoneScreen} />
+        <Tab.Screen name="1" component={TranslateScreen} />
+        <Tab.Screen name="2" component={TranslateSets2Screen} />
       </Tab.Navigator>
 
       
@@ -57,7 +58,7 @@ const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
 });
 
-export default connect(mapStateToProps, null)(TranslateSets);
+export default connect(mapStateToProps, null)(ScreenTranslate);
 
 const styles = StyleSheet.create({
   title: {
