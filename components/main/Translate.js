@@ -43,35 +43,13 @@ function Translate({ currentUser, navigation }) {
           },
         })}
       >
-        <Tab.Screen name="Translate" component={TranslateScreen} />
+        <Tab.Screen name="Obe" component={TranslateScreen} />
         <Tab.Screen name="Done" component={DoneScreen} />
       </Tab.Navigator>
 
     </NavigationContainer>
 
-    // <SafeAreaView >
-      
-    //   <Tab.Navigator
-    //     screenOptions={({ route }) => ({
-    //       tabBarContentContainerStyle: {
-    //         backgroundColor: "#f2f2f2",
-    //       },
-    //       tabBarActiveTintColor: "#215A88",
-    //       tabBarInactiveTintColor: "#B2B2B2",
-
-    //       tabBarPressColor: "#215A88",
-    //       tabBarLabelStyle: {
-    //         fontSize: 15,
-    //         fontWeight: "bold",
-    //       },
-    //     })}
-    //   >
-    //     <Tab.Screen name="Translate" component={TranslateScreen} />
-    //     <Tab.Screen name="Done" component={DoneScreen} />
-    //   </Tab.Navigator>
-
-    //   <View><Text>Translate</Text></View>
-    // </SafeAreaView>
+    
   );
 }
 

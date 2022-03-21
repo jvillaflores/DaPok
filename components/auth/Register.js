@@ -198,7 +198,7 @@ export default class Register extends ValidationComponent {
                     </View>   
                      <View style={styles.placeholder}>
                         <Picker
-                          style={[styles.pickerStyle, {backgroundColor:'#e7e7e7', border: '0px'}]}
+                          style={[styles.pickerStyle, {backgroundColor:'#e7e7e7', borderBottomColor:'#d0d0d0'}]}
                           onValueChange={(language) => this.setState({ language })}>
                           <Picker.Item label="Choose your Spoken Language" />
                           <Picker.Item label="Kagan" value="Kagan" />
@@ -207,7 +207,7 @@ export default class Register extends ValidationComponent {
                         </Picker>
                     </View>
 
-                    <View style={styles.placeholder}>
+                    {/* <View style={styles.placeholder}>
                         <Picker
                           style={[styles.pickerStyle, {backgroundColor:'#e7e7e7', border: '0px'}]}
                           onValueChange={(setStatus) => this.setState({ setStatus })}>
@@ -223,7 +223,7 @@ export default class Register extends ValidationComponent {
                           <Picker.Item label="Set I" value="9" />
                           <Picker.Item label="Set J" value="10" />
                         </Picker>
-                      </View>
+                      </View> */}
                     
                     
 
@@ -320,10 +320,14 @@ const styles = StyleSheet.create({
     left: 250,
   },
   pickerStyle:{  
-    height: 50,  
+    height: 60,  
     width: "100%",  
     color: '#344953',
     padding:10,
     justifyContent: 'center',  
+    borderTopWidth:0,
+    borderBottomWidth:2,
+    borderLeftWidth:0,
+    borderRightWidth:0,
 } 
   });
