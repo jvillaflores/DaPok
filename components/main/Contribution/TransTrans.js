@@ -4,7 +4,7 @@ import {
   SafeAreaView,
   StyleSheet,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 
 import {
@@ -20,134 +20,140 @@ import firebase from "firebase/app";
 require("firebase/auth");
 import { connect } from "react-redux";
 
-
 function TransTrans({ currentUser, navigation }) {
-  
-    return(
-        <SafeAreaView style={styles.container}>
-            <View style={{paddingHorizontal:20, paddingVertical:20,flexDirection:'column'}}>
-                
-                <View style={{flexDirection:'row'}}>
-                    <TouchableOpacity 
-                    style={styles.button}
-                    onPress={() => navigation.navigate("Set1")}>
-                        <Text style={styles.text}>A </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                    onPress={() => navigation.navigate("TranslateSets")}
-                    style={styles.button}>
-                        <Text style={styles.text}>B</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>C</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>D</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{flexDirection:'row'}}>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>E</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>F</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>G</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>H</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{flexDirection:'row'}}>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>I</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>J</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>K</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>L</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{flexDirection:'row'}}>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>M</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>N</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>O</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>P</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{flexDirection:'row'}}>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>Q</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>R</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>S</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>T</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{flexDirection:'row'}}>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>R</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>S</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>T</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>U</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{flexDirection:'row'}}>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>V</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>W</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>X</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>Y</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{flexDirection:'row'}}>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>Z</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>Aa</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>Ab</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.text}>Ac</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-            
-        </SafeAreaView>
-    )
-   
+  return (
+    <SafeAreaView style={styles.container}>
+      <View
+        style={{
+          paddingHorizontal: 20,
+          paddingVertical: 20,
+          flexDirection: "column",
+        }}
+      >
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("Set1Screen", { dataset: "1" })}
+          >
+            <Text style={styles.text}>A </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Set1Screen", { dataset: "2" })}
+            style={styles.button}
+          >
+            <Text style={styles.text}>B</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Set1Screen", { dataset: "3" })}
+            style={styles.button}
+          >
+            <Text style={styles.text}>C</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>D</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>E</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>F</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>G</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>H</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>I</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>J</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>K</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>L</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>M</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>N</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>O</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>P</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Q</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>R</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>S</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>T</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>R</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>S</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>T</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>U</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>V</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>W</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>X</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Y</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Z</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Aa</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Ab</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.text}>Ac</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
 }
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
@@ -160,7 +166,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     top: 5,
-    
   },
   userInfoSelection: {
     // paddingHorizontal: 30,
@@ -173,12 +178,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
   },
-  button:{
-      backgroundColor:"#AEAEAE",
-      borderRadius: 5,
-      width:50,
-      height:50,
-      margin:20,
+  button: {
+    backgroundColor: "#AEAEAE",
+    borderRadius: 5,
+    width: 50,
+    height: 50,
+    margin: 20,
   },
   caption: {
     fontSize: 14,
@@ -199,7 +204,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     paddingHorizontal: 40,
-    paddingVertical:15,
+    paddingVertical: 15,
   },
   menuWrapper: {
     marginTop: 10,
@@ -216,14 +221,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 26,
     paddingVertical: 3,
-    marginLeft: 5
+    marginLeft: 5,
   },
-  text:{
+  text: {
     fontSize: 9.5,
     fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.55,
     color: "white",
     margin: 18,
-  }
+  },
 });

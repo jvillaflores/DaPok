@@ -19,10 +19,11 @@ require("firebase/firestore");
 require("firebase/firebase-storage");
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-function ChatTranslate({ words, navigation, props }) {
+function ChatTranslate({ words, navigation, props, route }) {
   const [status, setStatus] = useState("Translate");
   const [datalist, setDatalist] = useState("");
-
+  const { dataset } = route?.params ?? {};
+  console.log(dataset);
   // useEffect(() => {
   //   setDatalist(dictionaryAll);
   // }, [dictionaryAll]);
@@ -32,7 +33,7 @@ function ChatTranslate({ words, navigation, props }) {
       firebase
         .firestore()
         .collection("translate")
-        .where("status", "==", "1")
+        .where("status", "==", dataset)
         .get()
         .then((snapshot) => {
           let words = snapshot.docs.map((doc) => {
@@ -46,35 +47,34 @@ function ChatTranslate({ words, navigation, props }) {
 
     return unsubscribe;
   }, [navigation]);
-  
+
   const renderItem = ({ item, index }) => {
     return (
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() => navigation.navigate('WordScreen',{data:item})}
+        onPress={() => navigation.navigate("WordScreen", { data: item })}
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
-            <Text style={{fontSize:15}}>{item?.bisaya}</Text>
+            <Text style={{ fontSize: 15 }}>{item?.bisaya}</Text>
           </View>
           <View style={styles.itemBody}>
             {/* <Text> {item?.status}</Text> */}
           </View>
         </View>
-
-        
       </TouchableOpacity>
     );
   };
 
   const separator = () => {
-    return <View style={{ height: 1, backgroundColor: "#E6E5E5",padding: 1 }} />;
+    return (
+      <View style={{ height: 1, backgroundColor: "#E6E5E5", padding: 1 }} />
+    );
   };
 
-
-    return (
-      <SafeAreaView style={styles.container}>
+  return (
+    <SafeAreaView style={styles.container}>
       <FlatList
         data={datalist}
         keyExtractor={(e, i) => i.toString()}
@@ -82,8 +82,7 @@ function ChatTranslate({ words, navigation, props }) {
         ItemSeparatorComponent={separator}
       />
     </SafeAreaView>
-    );
-   
+  );
 }
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
@@ -96,12 +95,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     top: 5,
-    marginBottom:15,
+    marginBottom: 15,
   },
-  
+
   itemContainer: {
     paddingHorizontal: 40,
-    paddingVertical:15,
+    paddingVertical: 15,
   },
   itemBody: {
     color: "#777777",
@@ -111,6 +110,5 @@ const styles = StyleSheet.create({
     lineHeight: 26,
     paddingVertical: 3,
     marginLeft: 5,
-    
   },
 });
