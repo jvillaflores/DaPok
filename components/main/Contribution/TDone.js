@@ -152,6 +152,7 @@ function makeid() {
                   placeholder={data?.newLanguage}
                   onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
               />
+              {/* <Text>{data?.newLanguage}</Text> */}
             
           </View>
           

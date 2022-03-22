@@ -146,12 +146,15 @@ function makeid() {
             <Text style={styles.text}>{data?.bisaya} </Text>
           </View>
           <View style={[styles.horiz,{textAlign:'center',}]}>
-              <TextInput
+              {/* <TextInput
                   multiline={false}
                   activeUnderlineColor="#215A88"
                   placeholder={data?.newLanguage}
                   onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
-              />
+              /> */}
+              <Text style={{fontSize:20}}>
+              {data?.newLanguage}
+              </Text>
             
           </View>
           
@@ -171,7 +174,6 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     paddingVertical:70, 
-    alignItems:'center'
   },
   center:{
     alignItems:"center",
