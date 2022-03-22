@@ -62,7 +62,7 @@ function ChatTranslate({ words, navigation, props }) {
             <Text style={styles.itemsName}>{item?.bisaya}</Text>
           </View>
           <View style={styles.itemBody}>
-            <Text> {item?.status}</Text>
+            <Text> {item?.newLanguage}</Text>
           </View>
         </View>
 
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   },
 
   itemsName: {
-    
+    fontWeight:'bold',
     fontSize: 16,
   },
   itemStatus: {
