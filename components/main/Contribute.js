@@ -41,12 +41,12 @@ import React, { Component } from 'react'
       </TouchableOpacity>
       <TouchableOpacity>
         <List.Item 
-          onPress={() => navigation.navigate("TManobo")}
+          onPress={() => navigation.navigate("TMansaka")}
           style = {{margin: -15, top: -10}} title="Mansaka" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
       </TouchableOpacity>
       <TouchableOpacity>
         <List.Item 
-          onPress={() => navigation.navigate("TMansaka")}
+          onPress={() => navigation.navigate("TManobo")}
           style = {{margin: -15, top: -5}} title="Manobo" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
       </TouchableOpacity>
     </List.Section>
