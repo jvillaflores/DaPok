@@ -143,7 +143,7 @@ function makeid() {
         <View>
           <View style={styles.center}>
             <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {currentUser.language}</Text>
-            <Text style={styles.text}>{data?.bisaya} </Text>
+            <Text style={[styles.text,{justifyContent:'center',alignContent:'center'}]}>{data?.bisaya} </Text>
           </View>
           <View style={[styles.horiz,{textAlign:'center',}]}>
               {/* <TextInput
@@ -197,6 +197,7 @@ const styles = StyleSheet.create({
   text:{
     fontWeight:'bold',
     fontSize:18,
-    justifyContent:'center'
+    justifyContent:'center',
+    alignItems:'center'
   }, 
 });

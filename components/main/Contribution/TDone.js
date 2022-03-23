@@ -171,7 +171,10 @@ export default connect(mapStateToProps, null)(AddWord);
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    paddingVertical:70, 
+    paddingVertical:70,
+    justifyContent:'center',
+    alignItems: 'center',
+    alignContent: 'center',
   },
   center:{
     alignItems:"center",
@@ -194,6 +197,7 @@ const styles = StyleSheet.create({
   text:{
     fontWeight:'bold',
     fontSize:18,
-    textAlign:'center'
+    textAlign:'center',
+    margin: -150
   }, 
 });

@@ -59,14 +59,16 @@ function TransDone({ words, navigation, props }) {
         onPress={() => navigation.navigate('TDone',{data:item})}
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
-          <View style={styles.itemBody}>
+        <View style={styles.itemBody}>
             <Text style={styles.itemsName}>{item?.bisaya}</Text>
           </View>
-          
+          <View style={styles.itemBody}>
+            <Text> {item?.newLanguage}</Text>
+          </View>
         </View>
-
         
       </TouchableOpacity>
+      
     );
   };
 
@@ -146,9 +148,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: "center",
   },
-
   itemsName: {
-    
+    fontWeight: 'bold',
     fontSize: 16,
   },
   itemStatus: {
