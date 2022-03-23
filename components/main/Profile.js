@@ -18,6 +18,8 @@ import {
   Banner,
 } from "react-native-paper";
 
+import {Picker} from '@react-native-picker/picker';
+
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import firebase from "firebase/app";
 require("firebase/auth");
@@ -31,6 +33,9 @@ var logo = require("../../assets/dapok.png");
 
 function Profile({ currentUser, navigation }) {
   const [username, setUsername] = useState(currentUser.username);
+  const [language, setLanguage] = useState(currentUser.language);
+  const [isLoading, setLoading] = useState(false);
+
   const [visible, setVisible] = React.useState(true);
 
   const onLogout = () => {
@@ -44,6 +49,7 @@ function Profile({ currentUser, navigation }) {
         .doc(firebase.auth().currentUser.uid)
         .update({
           username,
+          language:language
         })
         .then(function () {
           alert("Saved ");
@@ -112,15 +118,34 @@ function Profile({ currentUser, navigation }) {
                             // onChangeText={(address) => this.setState({ address })}
                         />
                     </View>   
-                     <View style={styles.placeholder}>
+                     {/* <View style={styles.placeholder}>
                         <Text>Spoken Language</Text>
                         <TextInput
                           editable={false}
-                          placeholder={currentUser.language}
+                          placeholder={currentUser.language.language}
                           activeUnderlineColor="#215A88"
                           // onChangeText={(language) => this.setState({ language })}
                         />
-                    </View>       
+                    </View>   */}
+                    {/* <View style={styles.placeholder}>
+                        <Picker
+                          style={[styles.pickerStyle, {backgroundColor:'#e7e7e7', borderBottomColor:'#d0d0d0'}]}
+                          onValueChange={(language) => setLanguage({ language })}>
+                          <Picker.Item label=""/>
+                          <Picker.Item label="Kagan" value="Kagan" />
+                          <Picker.Item label="Mansaka" value="Mansaka" />
+                          <Picker.Item label="Manobo" value="Manobo" />
+                        </Picker>
+                    </View>      */}
+                    <View style={styles.placeholder}>
+                          <Text>Username</Text>
+                          <TextInput
+                            activeUnderlineColor="#215A88"
+                            placeholder={currentUser.username}
+                            onChangeText={(language) => setLanguage(language)}
+                          />
+                          
+                    </View>
 
                 </View>  
 
@@ -229,4 +254,16 @@ const styles = StyleSheet.create({
     width: "100%",  
     flexDirection: "row", 
   },
+  
+  pickerStyle:{  
+    height: 60,  
+    width: "100%",  
+    color: '#344953',
+    padding:10,
+    justifyContent: 'center',  
+    borderTopWidth:0,
+    borderBottomWidth:2,
+    borderLeftWidth:0,
+    borderRightWidth:0,
+} 
 });

@@ -31,6 +31,7 @@ function TransAdd({ currentUser, route, navigation }) {
 
   const [bisaya, setBisaya] = useState("");
   const [ newLanguage, setNewLanguage ] = useState("");
+  
   const [wordID, setWordID] = useState(makeid());
 
 function makeid() {
@@ -50,7 +51,8 @@ function makeid() {
     useValidation({
       state: {
         bisaya,
-        newLanguage
+        newLanguage,
+        translatedLangugae,
       },
     });
 
