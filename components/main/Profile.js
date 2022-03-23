@@ -18,7 +18,7 @@ import {
   Banner,
 } from "react-native-paper";
 
-import {Picker} from '@react-native-picker/picker';
+import { Picker } from "@react-native-picker/picker";
 
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import firebase from "firebase/app";
@@ -27,9 +27,6 @@ import { connect } from "react-redux";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 var logo = require("../../assets/dapok.png");
-
-
-
 
 function Profile({ currentUser, navigation }) {
   const [username, setUsername] = useState(currentUser.username);
@@ -41,131 +38,138 @@ function Profile({ currentUser, navigation }) {
   const onLogout = () => {
     firebase.auth().signOut();
   };
-  
-  const onUpdate = () =>{
+
+  const onUpdate = () => {
     firebase
-        .firestore()
-        .collection("users")
-        .doc(firebase.auth().currentUser.uid)
-        .update({
-          username,
-          language:language
-        })
-        .then(function () {
-          alert("Saved ");
-          // navigation.popToTop();
-          setLoading(null);
-          alert(
-            "Profile photo might not yet be available after, please restart application if it occurs. Thank you!"
-          );
-        });
-  }
+      .firestore()
+      .collection("users")
+      .doc(firebase.auth().currentUser.uid)
+      .update({
+        username,
+        language: language,
+      })
+      .then(function () {
+        alert("Saved ");
+        // navigation.popToTop();
+        setLoading(null);
+        alert(
+          "Profile photo might not yet be available after, please restart application if it occurs. Thank you!"
+        );
+      });
+  };
   return (
-    
     <SafeAreaView style={styles.container}>
-        <Banner
-            visible={visible}
-            actions={[
-        {
-          label: 'Okay',color:'#215A88',
-          onPress: () => setVisible(false),
-        },
-        // {
-        //   label: 'Learn more',
-        //   onPress: () => setVisible(false),
-        // },
-      ]}
+      <Banner
+        visible={visible}
+        actions={[
+          {
+            label: "Okay",
+            color: "#215A88",
+            onPress: () => setVisible(false),
+          },
+          // {
+          //   label: 'Learn more',
+          //   onPress: () => setVisible(false),
+          // },
+        ]}
       >
-      You can only edit your username.
-    </Banner>
-        <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        
-        <View style={{flex: 1, justifyContent: "center" }}>
-                      <View>
-                            <Text>Name</Text>
-                            <TextInput style={styles.placeholder}
-                              placeholder={currentUser.name}
-                              editable={false}
-                              activeUnderlineColor="#215A88"
-                              // onChangeText={(name) => this.setState({ name })}
-                            />
-                      </View>
-                      <View>
-                          <Text>Email</Text>
-                          <TextInput style={styles.placeholder}
-                            placeholder={currentUser.email}
-                            editable={false}
-                            activeUnderlineColor="#215A88"
-                            // onChangeText={(email) => this.setState({ email })}
-                           />
-                    </View>
-                    <View style={styles.placeholder}>
-                          <Text>Username</Text>
-                          <TextInput
-                            activeUnderlineColor="#215A88"
-                            placeholder={currentUser.username}
-                            onChangeText={(username) => setUsername(username)}
-                          />
-                          
-                    </View>
-                    
-                    <View style={styles.placeholder}>
-                        <Text>Address</Text>
-                        <TextInput
-                            editable={false}
-                            placeholder={currentUser.address}
-                            activeUnderlineColor="#215A88"
-                            // onChangeText={(address) => this.setState({ address })}
-                        />
-                    </View>   
-                     {/* <View style={styles.placeholder}>
-                        <Text>Spoken Language</Text>
-                        <TextInput
-                          editable={false}
-                          placeholder={currentUser.language.language}
-                          activeUnderlineColor="#215A88"
-                          // onChangeText={(language) => this.setState({ language })}
-                        />
-                    </View>   */}
-                    {/* <View style={styles.placeholder}>
-                        <Picker
-                          style={[styles.pickerStyle, {backgroundColor:'#e7e7e7', borderBottomColor:'#d0d0d0'}]}
-                          onValueChange={(language) => setLanguage({ language })}>
-                          <Picker.Item label=""/>
-                          <Picker.Item label="Kagan" value="Kagan" />
-                          <Picker.Item label="Mansaka" value="Mansaka" />
-                          <Picker.Item label="Manobo" value="Manobo" />
-                        </Picker>
-                    </View>      */}
-                    <View style={styles.placeholder}>
-                          <Text>Username</Text>
-                          <TextInput
-                            activeUnderlineColor="#215A88"
-                            placeholder={currentUser.username}
-                            onChangeText={(language) => setLanguage(language)}
-                          />
-                          
-                    </View>
+        You can only edit your username.
+      </Banner>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <View>
+            <Text>Name</Text>
+            <TextInput
+              style={styles.placeholder}
+              placeholder={currentUser.name}
+              editable={false}
+              activeUnderlineColor="#215A88"
+              // onChangeText={(name) => this.setState({ name })}
+            />
+          </View>
+          <View>
+            <Text>Email</Text>
+            <TextInput
+              style={styles.placeholder}
+              placeholder={currentUser.email}
+              editable={false}
+              activeUnderlineColor="#215A88"
+              // onChangeText={(email) => this.setState({ email })}
+            />
+          </View>
+          <View style={styles.placeholder}>
+            <Text>Username</Text>
+            <TextInput
+              activeUnderlineColor="#215A88"
+              placeholder={currentUser.username}
+              onChangeText={(username) => setUsername(username)}
+            />
+          </View>
 
-                </View>  
+          <View style={styles.placeholder}>
+            <Text>Address</Text>
+            <TextInput
+              editable={false}
+              placeholder={currentUser.address}
+              activeUnderlineColor="#215A88"
+              // onChangeText={(address) => this.setState({ address })}
+            />
+          </View>
+          {/* <View style={styles.placeholder}>
+            <Text>Spoken Language</Text>
+            <TextInput
+              editable={false}
+              placeholder={currentUser.language.language}
+              activeUnderlineColor="#215A88"
+              // onChangeText={(language) => this.setState({ language })}
+            />
+          </View> */}
+          <View style={styles.placeholder}>
+            <Picker
+              style={[
+                styles.pickerStyle,
+                { backgroundColor: "#e7e7e7", borderBottomColor: "#d0d0d0" },
+              ]}
+              onValueChange={(itemValue, itemIndex) => setLanguage(itemValue)}
+            >
+              <Picker.Item
+                label={currentUser.language}
+                value={currentUser.language}
+              />
+              <Picker.Item label="Kagan" value="Kagan" />
+              <Picker.Item label="Mansaka" value="Mansaka" />
+              <Picker.Item label="Manobo" value="Manobo" />
+            </Picker>
+          </View>
+          <View style={styles.placeholder}>
+            <Text>Username</Text>
+            <TextInput
+              activeUnderlineColor="#215A88"
+              placeholder={currentUser.username}
+              onChangeText={(language) => setLanguage(language)}
+            />
+          </View>
+        </View>
 
-                <View>  
-                    <TouchableOpacity
-                        style={[styles.Bbutton, { backgroundColor: "#1F465B" }]}
-                        onPress={() => onUpdate()}>
-                        <Text style={[styles.text]}>Save</Text>
-                    </TouchableOpacity>
-                </View>
-                <View>
-                  <TouchableOpacity style={styles.button}onPress={() => onLogout()}>
-                      <Text style={styles.menuItemText}>Logout</Text>
-                  </TouchableOpacity>
-                </View>    
-            
-
-        </ScrollView>
+        <View>
+          <TouchableOpacity
+            style={[styles.Bbutton, { backgroundColor: "#1F465B" }]}
+            onPress={() => onUpdate()}
+          >
+            <Text style={[styles.text]}>Save</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity style={styles.button} onPress={() => onLogout()}>
+            <Text style={styles.menuItemText}>Logout</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </SafeAreaView>
-  )
+  );
 }
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
@@ -192,7 +196,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     marginVertical: 20,
-    paddingHorizontal:40,
+    paddingHorizontal: 40,
   },
   caption: {
     fontSize: 14,
@@ -216,16 +220,16 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 13,
     marginTop: 20,
-    width: "90%",   
-    },
+    width: "90%",
+  },
   text: {
-      alignSelf: "center",
-      fontSize: 18,
-      fontWeight: "bold",
-      lineHeight: 21,
-      letterSpacing: 0.25,
-      color: "white",
-      },
+    alignSelf: "center",
+    fontSize: 18,
+    fontWeight: "bold",
+    lineHeight: 21,
+    letterSpacing: 0.25,
+    color: "white",
+  },
   infoBox: {
     width: "50%",
     alignItems: "center",
@@ -236,7 +240,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 
-  
   menuItemText: {
     color: "#777777",
     fontWeight: "600",
@@ -244,26 +247,26 @@ const styles = StyleSheet.create({
   },
   placeholder: {
     borderRadius: 5,
-    marginVertical: 5
+    marginVertical: 5,
   },
   button: {
     alignItems: "center",
-    justifyContent:'center',
+    justifyContent: "center",
     borderRadius: 20,
     marginTop: 20,
-    width: "100%",  
-    flexDirection: "row", 
+    width: "100%",
+    flexDirection: "row",
   },
-  
-  pickerStyle:{  
-    height: 60,  
-    width: "100%",  
-    color: '#344953',
-    padding:10,
-    justifyContent: 'center',  
-    borderTopWidth:0,
-    borderBottomWidth:2,
-    borderLeftWidth:0,
-    borderRightWidth:0,
-} 
+
+  pickerStyle: {
+    height: 60,
+    width: "100%",
+    color: "#344953",
+    padding: 10,
+    justifyContent: "center",
+    borderTopWidth: 0,
+    borderBottomWidth: 2,
+    borderLeftWidth: 0,
+    borderRightWidth: 0,
+  },
 });
