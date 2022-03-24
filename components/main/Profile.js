@@ -65,7 +65,7 @@ function close() {
         );
       });
   };
-  if (currentUser.type == "1"){
+  if (currentUser.status == "1"){
   return (
     <SafeAreaView style={styles.container}>
       <Banner
@@ -163,12 +163,12 @@ function close() {
           
         </View>
         <View>
-        <TouchableRipple onPress={() => navigation.navigate("Validate")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Validate")}>
             <View style={[styles.Bbuttonn, { backgroundColor: "#e7e7e7" }]}
             onPress={() => onUpdate()}>
             <Text style={[styles.text1]}>Report Generator</Text>
             </View>
-          </TouchableRipple>
+          </TouchableOpacity>
           </View> 
         <View>
           <TouchableOpacity
