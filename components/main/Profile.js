@@ -82,7 +82,7 @@ function close() {
           // },
         ]}
       >
-        You can only edit your username.
+        Ang username lang ang pwede ma-ilis. Kung naa pud kay ma hatag nga mga impormasyon sa laing lengwahe, pwede mailis ang 'Spoken Language'.
       </Banner>
       <ScrollView
         style={styles.scrollView}
