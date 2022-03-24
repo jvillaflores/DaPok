@@ -138,6 +138,7 @@ function Profile({ currentUser, navigation }) {
             >
               <Picker.Item
                  label={currentUser.language}
+                 //value={currentUser.language}
               />
               <Picker.Item label="Kagan" value="Kagan" />
               <Picker.Item label="Mansaka" value="Mansaka" />
