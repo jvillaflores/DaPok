@@ -61,6 +61,9 @@ function TransDone({ words, navigation, props }) {
           <View style={styles.itemBody}>
             <Text style={styles.itemsName}>{item?.bisaya}</Text>
           </View>
+          <View style={styles.itemBody}>
+            <Text> {item?.newLanguage}</Text>
+          </View>
           
         </View>
 
@@ -147,7 +150,7 @@ const styles = StyleSheet.create({
   },
 
   itemsName: {
-    
+    fontWeight:'bold',
     fontSize: 16,
   },
   itemStatus: {

@@ -172,9 +172,9 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     paddingVertical:70,
-    justifyContent:'center',
-    alignItems: 'center',
-    alignContent: 'center',
+    // justifyContent:'center',
+    // alignItems: 'center',
+    // alignContent: 'center',
   },
   center:{
     alignItems:"center",

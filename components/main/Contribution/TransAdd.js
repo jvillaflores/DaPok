@@ -52,7 +52,6 @@ function makeid() {
       state: {
         bisaya,
         newLanguage,
-        translatedLangugae,
       },
     });
 

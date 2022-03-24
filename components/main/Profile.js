@@ -50,10 +50,9 @@ function Profile({ currentUser, navigation }) {
       })
       .then(function () {
         alert("Saved ");
-        // navigation.popToTop();
         setLoading(null);
         alert(
-          "Profile photo might not yet be available after, please restart application if it occurs. Thank you!"
+          "Updates might not be changed after, please restart application if it occurs. Thank you!"
         );
       });
   };
@@ -128,6 +127,8 @@ function Profile({ currentUser, navigation }) {
             />
           </View> */}
           <View style={styles.placeholder}>
+          <Text>Spoken Language</Text>
+
             <Picker
               style={[
                 styles.pickerStyle,
@@ -136,22 +137,14 @@ function Profile({ currentUser, navigation }) {
               onValueChange={(itemValue, itemIndex) => setLanguage(itemValue)}
             >
               <Picker.Item
-                label={currentUser.language}
-                value={currentUser.language}
+                 label={currentUser.language}
               />
               <Picker.Item label="Kagan" value="Kagan" />
               <Picker.Item label="Mansaka" value="Mansaka" />
               <Picker.Item label="Manobo" value="Manobo" />
             </Picker>
           </View>
-          <View style={styles.placeholder}>
-            <Text>Username</Text>
-            <TextInput
-              activeUnderlineColor="#215A88"
-              placeholder={currentUser.username}
-              onChangeText={(language) => setLanguage(language)}
-            />
-          </View>
+          
         </View>
 
         <View>
