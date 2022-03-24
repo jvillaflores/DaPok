@@ -162,14 +162,14 @@ function close() {
           
           
         </View>
-        <View>
+        {/* <View>
         <TouchableOpacity onPress={() => navigation.navigate("Validate")}>
             <View style={[styles.Bbuttonn, { backgroundColor: "#e7e7e7" }]}
             onPress={() => onUpdate()}>
             <Text style={[styles.text1]}>Report Generator</Text>
             </View>
           </TouchableOpacity>
-          </View> 
+          </View>  */}
         <View>
           <TouchableOpacity
             style={[styles.Bbutton, { backgroundColor: "#1F465B" }]}
