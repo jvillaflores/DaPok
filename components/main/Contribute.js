@@ -9,13 +9,14 @@ import React, { Component } from 'react'
     ScrollView,
   }
   from 'react-native'
+  import { connect } from "react-redux";
 
   import { connect } from "react-redux";
   import firebase from "firebase/app";
   require("firebase/auth");
   import {List} from 'react-native-paper';
 
-  function MyComponent ({currentUser, navigation}){
+  function Contribute ({currentUser, navigation}){
     if (currentUser.status == "1"){
       return (
     <ScrollView style={styles.container}>
@@ -59,7 +60,7 @@ import React, { Component } from 'react'
         <TouchableOpacity onPress={() => navigation.navigate("Validate")}>
             <View style={[styles.Bbuttonn, { backgroundColor: "#e7e7e7" }]}
             onPress={() => onUpdate()}>
-            <Text style={[styles.text1]}>Report Generator</Text>
+            <Text style={[styles.text11]}>Report Generator</Text>
             </View>
           </TouchableOpacity>
           </View> 
@@ -108,12 +109,12 @@ import React, { Component } from 'react'
    )
  }
   }
-
   const mapStateToProps = (store) => ({
     currentUser: store.userState.currentUser,
   });
   
-  export default connect(mapStateToProps,null)(MyComponent);
+  export default connect(mapStateToProps, null)(Contribute);
+  
 
   const styles = StyleSheet.create({
       container: {
@@ -145,7 +146,7 @@ import React, { Component } from 'react'
         marginTop: 15,
         width: "100%",
       },
-      text1: {
+      text11: {
         alignSelf: "center",
         fontSize: 18,
         fontWeight: "normal",
