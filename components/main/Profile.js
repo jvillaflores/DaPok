@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   View,
   SafeAreaView,
@@ -33,6 +33,15 @@ function Profile({ currentUser, navigation }) {
   const [language, setLanguage] = useState(currentUser.language);
   const [isLoading, setLoading] = useState(false);
 
+  const pickerRef = useRef();
+
+function open() {
+  pickerRef.current.focus();
+}
+
+function close() {
+  pickerRef.current.blur();
+}
   const [visible, setVisible] = React.useState(true);
 
   const onLogout = () => {
@@ -131,6 +140,8 @@ function Profile({ currentUser, navigation }) {
           <Text>Spoken Language</Text>
 
             <Picker
+            ref={pickerRef}
+            selectedValue={language}
               style={[
                 styles.pickerStyle,
                 { backgroundColor: "#e7e7e7", borderBottomColor: "#d0d0d0" },
@@ -146,6 +157,9 @@ function Profile({ currentUser, navigation }) {
               <Picker.Item label="Manobo" value="Manobo" />
             </Picker>
           </View>
+
+
+          
           
         </View>
         <View>
