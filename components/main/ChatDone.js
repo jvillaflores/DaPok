@@ -34,7 +34,6 @@ function ChatTranslate({ words, navigation, props }) {
         .collection("userAllChatbotAnswers")
         .doc(firebase.auth().currentUser.uid)
         .collection("userChatbotAnswers")
-
         .where("status", "==", "0")
         .get()
         .then((snapshot) => {

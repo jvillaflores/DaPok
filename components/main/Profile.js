@@ -56,6 +56,7 @@ function Profile({ currentUser, navigation }) {
         );
       });
   };
+  if (currentUser.type == "1"){
   return (
     <SafeAreaView style={styles.container}>
       <Banner
@@ -147,7 +148,14 @@ function Profile({ currentUser, navigation }) {
           </View>
           
         </View>
-
+        <View>
+        <TouchableRipple onPress={() => navigation.navigate("Validate")}>
+            <View style={[styles.Bbuttonn, { backgroundColor: "#e7e7e7" }]}
+            onPress={() => onUpdate()}>
+            <Text style={[styles.text1]}>Report Generator</Text>
+            </View>
+          </TouchableRipple>
+          </View> 
         <View>
           <TouchableOpacity
             style={[styles.Bbutton, { backgroundColor: "#1F465B" }]}
@@ -164,6 +172,123 @@ function Profile({ currentUser, navigation }) {
       </ScrollView>
     </SafeAreaView>
   );
+}else{
+  return(
+    <SafeAreaView style={styles.container}>
+      <Banner
+        visible={visible}
+        actions={[
+          {
+            label: "Okay",
+            color: "#215A88",
+            onPress: () => setVisible(false),
+          },
+          // {
+          //   label: 'Learn more',
+          //   onPress: () => setVisible(false),
+          // },
+        ]}
+      >
+        You can only edit your username.
+      </Banner>
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={{ flex: 1, justifyContent: "center" }}>
+          <View>
+            <Text>Name</Text>
+            <TextInput
+              style={styles.placeholder}
+              placeholder={currentUser.name}
+              editable={false}
+              activeUnderlineColor="#215A88"
+              // onChangeText={(name) => this.setState({ name })}
+            />
+          </View>
+          <View>
+            <Text>Email</Text>
+            <TextInput
+              style={styles.placeholder}
+              placeholder={currentUser.email}
+              editable={false}
+              activeUnderlineColor="#215A88"
+              // onChangeText={(email) => this.setState({ email })}
+            />
+          </View>
+          <View style={styles.placeholder}>
+            <Text>Username</Text>
+            <TextInput
+              activeUnderlineColor="#215A88"
+              placeholder={currentUser.username}
+              onChangeText={(username) => setUsername(username)}
+            />
+          </View>
+
+          <View style={styles.placeholder}>
+            <Text>Address</Text>
+            <TextInput
+              editable={false}
+              placeholder={currentUser.address}
+              activeUnderlineColor="#215A88"
+              // onChangeText={(address) => this.setState({ address })}
+            />
+          </View>
+          {/* <View style={styles.placeholder}>
+            <Text>Spoken Language</Text>
+            <TextInput
+              editable={false}
+              placeholder={currentUser.language.language}
+              activeUnderlineColor="#215A88"
+              // onChangeText={(language) => this.setState({ language })}
+            />
+          </View> */}
+          <View style={styles.placeholder}>
+          <Text>Spoken Language</Text>
+
+            <Picker
+              style={[
+                styles.pickerStyle,
+                { backgroundColor: "#e7e7e7", borderBottomColor: "#d0d0d0" },
+              ]}
+              onValueChange={(itemValue, itemIndex) => setLanguage(itemValue)}
+            >
+              <Picker.Item
+                 label={currentUser.language}
+                 //value={currentUser.language}
+              />
+              <Picker.Item label="Kagan" value="Kagan" />
+              <Picker.Item label="Mansaka" value="Mansaka" />
+              <Picker.Item label="Manobo" value="Manobo" />
+            </Picker>
+          </View>
+          
+        </View>
+        {/* <View>
+        <TouchableRipple onPress={() => navigation.navigate("Validate")}>
+            <View style={[styles.Bbuttonn, { backgroundColor: "#e7e7e7" }]}
+            onPress={() => onUpdate()}>
+            <Text style={[styles.text1]}>Report Generator</Text>
+            </View>
+          </TouchableRipple>
+          </View>  */}
+        <View>
+          <TouchableOpacity
+            style={[styles.Bbutton, { backgroundColor: "#1F465B" }]}
+            onPress={() => onUpdate()}
+          >
+            <Text style={[styles.text]}>Save</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity style={styles.button} onPress={() => onLogout()}>
+            <Text style={styles.menuItemText}>Logout</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
 }
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
@@ -216,6 +341,13 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: "90%",
   },
+  Bbuttonn: {
+    alignSelf: "center",
+    borderRadius: 5,
+    padding: 13,
+    marginTop: 15,
+    width: "100%",
+  },
   text: {
     alignSelf: "center",
     fontSize: 18,
@@ -223,6 +355,14 @@ const styles = StyleSheet.create({
     lineHeight: 21,
     letterSpacing: 0.25,
     color: "white",
+  },
+  text1: {
+    alignSelf: "center",
+    fontSize: 18,
+    fontWeight: "normal",
+    lineHeight: 21,
+    letterSpacing: 0.25,
+    color: "black",
   },
   infoBox: {
     width: "50%",
