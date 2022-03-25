@@ -9,7 +9,7 @@ import React, { Component } from 'react'
     ScrollView,
   }
   from 'react-native'
-  import { connect } from "react-redux";
+  
 
   import { connect } from "react-redux";
   import firebase from "firebase/app";
@@ -57,7 +57,7 @@ import React, { Component } from 'react'
       </TouchableOpacity>
     </List.Section>
     <View>
-        <TouchableOpacity onPress={() => navigation.navigate("Validate")}>
+        <TouchableOpacity onPress={() => navigation.navigate("ReportGenerate")}>
             <View style={[styles.Bbuttonn, { backgroundColor: "#e7e7e7" }]}
             onPress={() => onUpdate()}>
             <Text style={[styles.text11]}>Report Generator</Text>

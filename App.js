@@ -56,6 +56,7 @@ import TDone from "./components/main/Contribution/TDone";
 import ScreenTranslation from "./components/main/Contribution/ScreenTranslate";
 import TransSet2Screen from "./components/main/Contribution/TransSets2";
 import Set1Screen from "./components/main/TranslationButtons/Set1";
+import GenerateReport from "./components/main/Data Collection/reportGenerate";
 
 const Stack = createStackNavigator();
 
@@ -386,6 +387,22 @@ export class App extends Component {
               navigation={this.props.navigation}
               options={{
                 title: "DataSet",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+
+            <Stack.Screen
+              name="ReportGenerate"
+              component={GenerateReport}
+              navigation={this.props.navigation}
+              options={{
+                title: "Generating",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {
