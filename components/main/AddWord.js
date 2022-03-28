@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StatusBar,
@@ -32,6 +32,29 @@ function AddWord({ currentUser, route, navigation }) {
   const [bisaya, setBisaya] = useState("");
   const [ newLanguage, setNewLanguage ] = useState("");
   const [wordID, setWordID] = useState(makeid());
+  const [datalist, setDatalist] = useState("");
+  useEffect(() => {
+    setDatalist(currentUser);
+  }, [currentUser]);
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .get()
+        .then((snapshot) => {
+          console.log(snapshot, "-=-=-=-=-=-=-=-=");
+          if (snapshot.exists) {
+            let currentUser = snapshot.data();
+            setDatalist(currentUser);
+          } else {
+          }
+        });
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
 function makeid() {
     var randomText = "";
@@ -142,7 +165,7 @@ function makeid() {
       <ScrollView style={styles.container}>
         <View>
           <View style={styles.center}>
-            <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {currentUser.language}</Text>
+            <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {datalist.language}</Text>
             <Text style={styles.text}>{data?.bisaya} </Text>
           </View>
           <View style={styles.horiz}>
