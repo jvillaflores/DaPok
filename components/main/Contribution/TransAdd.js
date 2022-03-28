@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StatusBar,
@@ -26,14 +26,7 @@ import * as FileSystem from "expo-file-system";
 
 
 function TransAdd({ currentUser, route, navigation }) {
-  const wait = (timeout) => {
-    return new Promise(resolve => setTimeout(resolve, timeout));
-  }
-  const [refreshing, setRefreshing] = React.useState(false);
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(2000).then(() => setRefreshing(false));
-  }, []);
+  
 
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
@@ -42,6 +35,31 @@ function TransAdd({ currentUser, route, navigation }) {
   const [ newLanguage, setNewLanguage ] = useState("");
   
   const [wordID, setWordID] = useState(makeid());
+
+  const [datalist, setDatalist] = useState("");
+
+  useEffect(() => {
+    setDatalist(currentUser);
+  }, [currentUser]);
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .get()
+        .then((snapshot) => {
+          console.log(snapshot, "-=-=-=-=-=-=-=-=");
+          if (snapshot.exists) {
+            let currentUser = snapshot.data();
+            setDatalist(currentUser);
+          } else {
+          }
+        });
+    });
+
+    return unsubscribe;
+  }, [navigation]);
 
 function makeid() {
     var randomText = "";
@@ -175,15 +193,10 @@ function makeid() {
     return (
       <ScrollView 
         style={styles.container}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-          />
-        }>
+        >
           <View>
           <View style={styles.center}>
-            <Text style={{fontSize:18}}>I-translate kini sa {currentUser.language}</Text>
+            <Text style={{fontSize:18}}>I-translate kini sa {datalist.language}</Text>
             <Text style={styles.text}>{data?.bisaya} </Text>
           </View>
           <View style={styles.horiz}>

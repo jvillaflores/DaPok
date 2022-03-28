@@ -26,62 +26,37 @@ var chat = require("../../assets/chat.png");
 var translate = require("../../assets/translate.png");
 
 function Feed({ currentUser, navigation }) {
- 
-  const [refreshing, setRefreshing] = useState(true);
-  const [dataSource, setDataSource] = useState("");
+  const [datalist, setDatalist] = useState("");
 
   useEffect(() => {
-    getData();
-  }, []);
+    setDatalist(currentUser);
+  }, [currentUser]);
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(firebase.auth().currentUser.uid)
+        .get()
+        .then((snapshot) => {
+          console.log(snapshot, "-=-=-=-=-=-=-=-=");
+          if (snapshot.exists) {
+            let currentUser = snapshot.data();
+            setDatalist(currentUser);
+          } else {
+          }
+        });
+    });
 
-  const getData = () => {
-    //Service to get the data from the server to render
-    firebase.firestore()
-    .collection("users")
-    .doc(firebase.auth().currentUser.uid)
-    .get()
-    .then((snapshot) => {
-        if(snapshot.exists){
-            setRefreshing(false);
-            console.log(snapshot.data())
-            dispatch({currentUser: snapshot.data()})
-        }
-
-        else{
-            console.log('does not exist')
-        }
-    })
-  };
-  console.log(dataSource.username)
-
-  const ItemView = ({ item }) => {
-    return (
-      // Flat List Item
-      <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-        {item.title}
-      </Text>
-    );
-  };
-
-  const onRefresh = () => {
-    //Clear old data of the list
-    setDataSource(currentUser);
-    //Call the Service to get the latest data
-    getData();
-  };
-
-
+    return unsubscribe;
+  }, [navigation]);
+  
    return (
     <SafeAreaView style={[styles.container, ]}>
         <ScrollView 
             style={{paddingVertical: 40,}} 
             showsVerticalScrollIndicator={false}
-            refreshControl={
-              <RefreshControl
-                refreshing={refreshing}
-                onRefresh={onRefresh}
-              />
-            }>
+            >
           <View>
             <View style={{alignSelf:'center' }}>
                   <Image source={logo} style={{ width: 178, height: 50,}} />
@@ -89,7 +64,7 @@ function Feed({ currentUser, navigation }) {
             {/* //////// */}
             <View style={[styles.headline_box,]}>
                   <View >
-                      <Text style={[styles.textHead,{}]}>Kamusta {currentUser.username}! </Text>
+                      <Text style={[styles.textHead,{}]}>Kamusta {datalist.username}! </Text>
                       <Text style={{textAlign:'justify'}}>Pag-abiabi sa DaPok! Ang DaPok ay isa ka aplikasyon nga kaya mu tigom 
                        ug mga datos bahin sa mga pulong ug mga tudlong-pulong nga imonga kayang ma amot. </Text>
                    </View>
