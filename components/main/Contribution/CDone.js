@@ -142,7 +142,7 @@ function makeid() {
       <ScrollView style={styles.container}>
         <View>
           <View style={styles.center}>
-            <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {currentUser.language}</Text>
+            <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {data?.language}</Text>
             <Text style={[styles.text,{justifyContent:'center',alignContent:'center'}]}>{data?.bisaya} </Text>
           </View>
           <View style={[styles.horiz,{textAlign:'center',}]}>

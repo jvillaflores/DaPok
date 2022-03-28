@@ -58,11 +58,15 @@ function ChatTranslate({ words, navigation, props }) {
       >
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
+            <Text>{item?.language}</Text>
+          </View>
+          <View style={styles.itemBody}>
             <Text style={styles.itemsName}>{item?.bisaya}</Text>
           </View>
           <View style={styles.itemBody}>
-            <Text> {item?.newLanguage}</Text>
+            <Text>{item?.newLanguage}</Text>
           </View>
+          
         </View>
 
         
