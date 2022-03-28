@@ -23,7 +23,7 @@ function reportGenerate({ navigation }) {
     const unsubscribe = navigation.addListener("focus", () => {
        firebase
         .firestore()
-        .collection("usersAllTranslateAnswers")
+        .collection("userAllTranslations")
         .where("status", "==", "0")
         .get()
         .then((snapshot) => {

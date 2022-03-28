@@ -1,11 +1,11 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback,useState, useEffect, useRef } from "react";
 
 import {
   View,
   Text,
   StyleSheet,
   Image,
-  Pressable,
+  RefreshControl,
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
@@ -13,7 +13,9 @@ import {
   ActivityIndicator
 } from "react-native";
 
-
+import firebase from "firebase";
+require("firebase/firestore");
+require("firebase/firebase-storage");
 import { TextInput, Modal, Portal, Provider } from 'react-native-paper';
 
 import { connect } from "react-redux";
@@ -24,10 +26,62 @@ var chat = require("../../assets/chat.png");
 var translate = require("../../assets/translate.png");
 
 function Feed({ currentUser, navigation }) {
+ 
+  const [refreshing, setRefreshing] = useState(true);
+  const [dataSource, setDataSource] = useState("");
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = () => {
+    //Service to get the data from the server to render
+    firebase.firestore()
+    .collection("users")
+    .doc(firebase.auth().currentUser.uid)
+    .get()
+    .then((snapshot) => {
+        if(snapshot.exists){
+            setRefreshing(false);
+            console.log(snapshot.data())
+            dispatch({currentUser: snapshot.data()})
+        }
+
+        else{
+            console.log('does not exist')
+        }
+    })
+  };
+  console.log(dataSource.username)
+
+  const ItemView = ({ item }) => {
+    return (
+      // Flat List Item
+      <Text style={styles.itemStyle} onPress={() => getItem(item)}>
+        {item.title}
+      </Text>
+    );
+  };
+
+  const onRefresh = () => {
+    //Clear old data of the list
+    setDataSource(currentUser);
+    //Call the Service to get the latest data
+    getData();
+  };
+
 
    return (
     <SafeAreaView style={[styles.container, ]}>
-        <ScrollView style={{paddingVertical: 40,}} showsVerticalScrollIndicator={false}>
+        <ScrollView 
+            style={{paddingVertical: 40,}} 
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={onRefresh}
+              />
+            }>
           <View>
             <View style={{alignSelf:'center' }}>
                   <Image source={logo} style={{ width: 178, height: 50,}} />
