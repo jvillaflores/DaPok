@@ -8,9 +8,8 @@ import React, { Component } from 'react'
     Image,
     ScrollView,
   }
-  from 'react-native'
+  from 'react-native';
   
-
   import { connect } from "react-redux";
   import firebase from "firebase/app";
   require("firebase/auth");
@@ -21,89 +20,33 @@ import React, { Component } from 'react'
       return (
     <ScrollView style={styles.container}>
     <List.Section>
-        <List.Subheader style={styles.text}>Chatbot</List.Subheader>
-      <View >
-      <TouchableOpacity>
-        <List.Item 
-          onPress={() => navigation.navigate("CKagan")}
-          style = {{margin: -15}} title="Kagan/Kalagan" left={() => <List.Icon color="#215A88" icon="folder" />}/>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <List.Item 
-          onPress={() => navigation.navigate("CMansaka")}
-          style = {{margin: -15, top: 5}} title="Mansaka" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <List.Item 
-          onPress={() => navigation.navigate("CManobo")}
-          style = {{margin: -15, top: 10}} title="Manobo" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
-      </TouchableOpacity>
-      </View>
-      <List.Subheader style={styles.text1}>Translate</List.Subheader>
-      <TouchableOpacity>
-        <List.Item 
-          onPress={() => navigation.navigate("TKagan")}
-          style = {{margin: -15, top: -15}} title="Kagan/Kalagan" left={() => <List.Icon color="#215A88" icon="folder" />} />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <List.Item 
-          onPress={() => navigation.navigate("TMansaka")}
-          style = {{margin: -15, top: -10}} title="Mansaka" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <List.Item 
-          onPress={() => navigation.navigate("TManobo")}
-          style = {{margin: -15, top: -5}} title="Manobo" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
-      </TouchableOpacity>
     </List.Section>
-    <View>
-        <TouchableOpacity onPress={() => navigation.navigate("ReportGenerate")}>
+    {/* <View>
+        <TouchableOpacity onPress={() => navigation.navigate("reportGenerate")}>
             <View style={[styles.Bbuttonn, { backgroundColor: "#e7e7e7" }]}
             onPress={() => onUpdate()}>
             <Text style={[styles.text11]}>Report Generator</Text>
             </View>
           </TouchableOpacity>
-          </View> 
+          </View>  */}
+      <List.Section>
+      <TouchableOpacity>
+        <List.Item 
+          onPress={() => navigation.navigate("ChatbotFolder")}
+          style = {{margin: -10, top: -5}} title="Chatbot" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <List.Item 
+          onPress={() => navigation.navigate("TranslationFolder")}
+          style = {{margin: -10, top: 5}} title="Translation" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
+      </TouchableOpacity>
+      </List.Section>
     </ScrollView>
       );
  }else{
    return(
     <ScrollView style={styles.container}>
     <List.Section>
-        <List.Subheader style={styles.text}>Chatbot</List.Subheader>
-      <View >
-      <TouchableOpacity>
-        <List.Item 
-          onPress={() => navigation.navigate("CKagan")}
-          style = {{margin: -15}} title="Kagan/Kalagan" left={() => <List.Icon color="#215A88" icon="folder" />}/>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <List.Item 
-          onPress={() => navigation.navigate("CMansaka")}
-          style = {{margin: -15, top: 5}} title="Mansaka" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <List.Item 
-          onPress={() => navigation.navigate("CManobo")}
-          style = {{margin: -15, top: 10}} title="Manobo" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
-      </TouchableOpacity>
-      </View>
-      <List.Subheader style={styles.text1}>Translate</List.Subheader>
-      <TouchableOpacity>
-        <List.Item 
-          onPress={() => navigation.navigate("TKagan")}
-          style = {{margin: -15, top: -15}} title="Kagan/Kalagan" left={() => <List.Icon color="#215A88" icon="folder" />} />
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <List.Item 
-          onPress={() => navigation.navigate("TMansaka")}
-          style = {{margin: -15, top: -10}} title="Mansaka" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <List.Item 
-          onPress={() => navigation.navigate("TManobo")}
-          style = {{margin: -15, top: -5}} title="Manobo" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
-      </TouchableOpacity>
     </List.Section>
     </ScrollView>
    )

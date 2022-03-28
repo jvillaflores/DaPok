@@ -56,7 +56,9 @@ import TDone from "./components/main/Contribution/TDone";
 import ScreenTranslation from "./components/main/Contribution/ScreenTranslate";
 import TransSet2Screen from "./components/main/Contribution/TransSets2";
 import Set1Screen from "./components/main/TranslationButtons/Set1";
-import GenerateReport from "./components/main/Data Collection/reportGenerate";
+import reportGenerateScreen from "./components/main/Data Collection/reportGenerate";
+import TranslationFolderScreen from "./components/main/Data Collection/Translate/TranslationFolder";
+import ChatbotFolderScreen from "./components/main/Data Collection/Chatbot/ChatbotFolder";
 
 const Stack = createStackNavigator();
 
@@ -209,7 +211,7 @@ export class App extends Component {
               component={TKaganScreen}
               navigation={this.props.navigation}
               options={{
-                title: "Kagan Data",
+                title: "Data Collected",
                 headerTintColor: "#fff",
                 headerStyle: {
                   backgroundColor: "#215A88",
@@ -236,6 +238,31 @@ export class App extends Component {
               navigation={this.props.navigation}
               options={{
                 title: "Mansaka Data",
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                },
+              }}
+            />
+          <Stack.Screen
+              name="TranslationFolder"
+              component={TranslationFolderScreen}
+              navigation={this.props.navigation}
+              options={{
+                title: "Translation Data",
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                },
+              }}
+            />
+
+          <Stack.Screen
+              name="ChatbotFolder"
+              component={ChatbotFolderScreen}
+              navigation={this.props.navigation}
+              options={{
+                title: "Chatbot Data",
                 headerTintColor: "#fff",
                 headerStyle: {
                   backgroundColor: "#215A88",
@@ -398,8 +425,8 @@ export class App extends Component {
             />
 
             <Stack.Screen
-              name="ReportGenerate"
-              component={GenerateReport}
+              name="Report Generate"
+              component={reportGenerateScreen}
               navigation={this.props.navigation}
               options={{
                 title: "Generating",

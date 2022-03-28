@@ -34,8 +34,8 @@ function TransDone({ words, navigation, props }) {
         .collection("userAllTranslateAnswers")
         .doc(firebase.auth().currentUser.uid)
         .collection("userTranslateAnswers")
-        .where("status", "==", "0")
         .where("language","==","Kagan")
+        .where("status", "==", "0")
         .get()
         .then((snapshot) => {
           let words = snapshot.docs.map((doc) => {
@@ -64,7 +64,6 @@ function TransDone({ words, navigation, props }) {
           <View style={styles.itemBody}>
             <Text> {item?.newLanguage}</Text>
           </View>
-          
         </View>
 
         
@@ -150,7 +149,7 @@ const styles = StyleSheet.create({
   },
 
   itemsName: {
-    fontWeight:'bold',
+    fontWeight:'bold',   
     fontSize: 16,
   },
   itemStatus: {
