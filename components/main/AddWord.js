@@ -183,7 +183,7 @@ function makeid() {
                   <Text style={{
                      color:"#ffffff",
                      alignSelf:'center',
-                     fontSize: 18}}>Save</Text>
+                     fontSize: 18}}>itigom</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.buttonVocab,{
                      backgroundColor: "#e7e7e7",}]}>
@@ -191,7 +191,7 @@ function makeid() {
                      color:"#215A88",
                      alignSelf:'center',
                      fontWeight:'700',
-                     fontSize: 18}}>Iris</Text>
+                     fontSize: 18}}>kanselahon</Text>
               </TouchableOpacity>
           </View>
         </View>
