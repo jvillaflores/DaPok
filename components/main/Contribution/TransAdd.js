@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   View,
   StatusBar,
-  Button,
+  RefreshControl,
   TouchableOpacity,
   Text,
   StyleSheet,
@@ -26,6 +26,15 @@ import * as FileSystem from "expo-file-system";
 
 
 function TransAdd({ currentUser, route, navigation }) {
+  const wait = (timeout) => {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+  }
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
+
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
 
@@ -79,7 +88,7 @@ function makeid() {
   
     };
 
-    const SavePostData = () => {
+    const SaveAllData = () => {
       firebase
         .firestore()
         .collection("userAllTranslateAnswers")
@@ -91,6 +100,30 @@ function makeid() {
           email: currentUser.email,
           language:currentUser.language,
           
+          bisaya: data?.bisaya,
+          newLanguage,
+          status: "0",
+          upload: "1",
+          creation: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        .then(function () {
+          alert("Thanks for contribution!!");
+          setLoading(null);
+          navigation.popToTop();
+        });
+        
+    };
+
+    const SavePostData = () => {
+      firebase
+        .firestore()
+        .collection("userAllTranslations")
+        .doc(wordID)
+        .set({
+          wordId: wordID,
+          email: currentUser.email,
+          language:currentUser.language,
+          username: currentUser.name,
           bisaya: data?.bisaya,
           newLanguage,
           status: "0",
@@ -140,7 +173,14 @@ function makeid() {
   
    {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView 
+        style={styles.container}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }>
           <View>
           <View style={styles.center}>
             <Text style={{fontSize:18}}>I-translate kini sa {currentUser.language}</Text>
@@ -155,7 +195,7 @@ function makeid() {
             
           </View>
           <View style={styles.horiz}>
-              <TouchableOpacity onPress={()=>{SavePostData()}}
+              <TouchableOpacity onPress={()=>{SavePostData(),SaveAllData()}}
                   style={[styles.buttonVocab,{
                      backgroundColor: "#215A88",}]}>
                   <Text style={{
