@@ -111,7 +111,7 @@ function makeid() {
         .set({
           wordId: wordID,
           email: currentUser.email,
-          language:currentUser.language,
+          language:datalist.language,
           
           bisaya: data?.bisaya,
           newLanguage,
@@ -135,7 +135,7 @@ function makeid() {
           wordId: wordID,
           email: currentUser.email,
           username: currentUser.name,
-          language:currentUser.language,
+          language:datalist.language,
           bisaya:data?.bisaya,
           newLanguage,
           upload: "1",
@@ -165,7 +165,7 @@ function makeid() {
       <ScrollView style={styles.container}>
         <View>
           <View style={styles.center}>
-            <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {datalist.language}</Text>
+            <Text style={{fontSize:18}}>Itubag kini nga panguatana sa {datalist.language}</Text>
             <Text style={styles.text}>{data?.bisaya} </Text>
           </View>
           <View style={styles.horiz}>
@@ -210,28 +210,28 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     paddingVertical:70,
+    paddingHorizontal:20,
+
   },
   center:{
     alignItems:"center",
   },
   horiz: {
-    paddingHorizontal: 30,
+    paddingHorizontal: 40,
     paddingVertical:20,
-    justifyContent: 'center',
-    marginTop:10,
-    marginBottom:-15
+    
   },
   buttonVocab: {
     alignSelf: "center",
     borderRadius: 20,
-    paddingVertical: 10,
-    marginTop: 10,
+    paddingVertical: 20,
+    marginTop: 20,
     width: "100%",  
     paddingHorizontal:20,
   },
   text:{
     fontWeight:'bold',
-    fontSize:18,
+    fontSize:20,
     justifyContent:'center'
   }, 
 });

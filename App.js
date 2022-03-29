@@ -39,6 +39,7 @@ import RegisterScreen from "./components/auth/Register";
 import MainScreen, { Main } from "./components/Main";
 import LoginScreen from "./components/auth/Login";
 import ForgotPasswordScreen from "./components/auth/ForgotPassword";
+import WordScreen from "./components/main/ChatbotAdd";
 import ChatbotScreen from "./components/main/Chatbot";
 import CKaganScreen from "./components/main/Data Collection/Chatbot/CKagan";
 import CManoboScreen from "./components/main/Data Collection/Chatbot/CManobo";
@@ -46,7 +47,6 @@ import CMansakaScreen from "./components/main/Data Collection/Chatbot/CMansaka";
 import TKaganScreen from "./components/main/Data Collection/Translate/TKagan";
 import TManoboScreen from "./components/main/Data Collection/Translate/TManobo";
 import TMansakaScreen from "./components/main/Data Collection/Translate/TMansaka";
-import WordScreen from "./components/main/AddWord";
 import DoneScreen from "./components/main/Contribution/CDone";
 import TranslationScreen from "./components/main/Contribution/TranslateSets";
 import TransDoneScreen from "./components/main/Contribution/TransDone";
@@ -269,21 +269,7 @@ export class App extends Component {
                 },
               }}
             />
-            <Stack.Screen
-              name="WordScreen"
-              component={WordScreen}
-              navigation={this.props.navigation}
-              options={{
-                title: "Answer",
-                headerShadowVisible: false,
-                headerTintColor: "#fff",
-                headerStyle: {
-                  backgroundColor: "#215A88",
-                  elevation: 0,
-                  borderBottomWidth: 0,
-                },
-              }}
-            />
+            
             <Stack.Screen
               name="ChatbotDone"
               component={DoneScreen}
@@ -331,7 +317,21 @@ export class App extends Component {
                 },
               }}
             />
-
+            <Stack.Screen
+              name="WordScreen"
+              component={WordScreen}
+              navigation={this.props.navigation}
+              options={{
+                title: "Sets",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
             <Stack.Screen
               name="ScreenTranslate"
               component={ScreenTranslation}

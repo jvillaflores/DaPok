@@ -116,7 +116,7 @@ function makeid() {
         .set({
           wordId: wordID,
           email: currentUser.email,
-          language:currentUser.language,
+          language:datalist.language,
           
           bisaya: data?.bisaya,
           newLanguage,
@@ -151,7 +151,6 @@ function makeid() {
         .then(function () {
           alert("Thanks for contribution!!");
           setLoading(null);
-          navigation.popToTop();
         });
         
     };
@@ -173,7 +172,6 @@ function makeid() {
         .then(function () {
           alert("Thanks for contribution!!");
           setLoading(null);
-          navigation.popToTop();
         });
     };
 
@@ -191,9 +189,7 @@ function makeid() {
   
    {
     return (
-      <ScrollView 
-        style={styles.container}
-        >
+      <ScrollView style={styles.container}>
           <View>
           <View style={styles.center}>
             <Text style={{fontSize:18}}>I-translate kini sa {datalist.language}</Text>
@@ -240,8 +236,8 @@ export default connect(mapStateToProps, null)(TransAdd);
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    paddingVertical:50,
-    paddingHorizontal:20,
+    paddingVertical:70,
+    paddingHorizontal:10,
   },
   center:{
      alignItems:'center'
@@ -260,7 +256,7 @@ const styles = StyleSheet.create({
   },
   text:{
     fontWeight:'bold',
-    fontSize:22,
+    fontSize:20,
     textAlign:'center'
   }, 
 });

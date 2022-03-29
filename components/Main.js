@@ -19,7 +19,6 @@ import FeedScreen from './main/Feed';
 import ContributeScreen from './main/Contribute'
 import ProfileScreen from './main/Profile'
 
-import AddWordScreen from './main/AddWord';
 
 const Tab = createBottomTabNavigator();
 const StackT = createStackNavigator();

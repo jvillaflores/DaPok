@@ -152,9 +152,10 @@ function makeid() {
                   placeholder={data?.newLanguage}
                   onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
               /> */}
-              <Text style={{fontSize:20}}>
+              <Text style={{fontSize:30,  fontWeight:'bold',textAlign:'center'}}>
               {data?.newLanguage}
               </Text>
+
             
           </View>
           
@@ -181,7 +182,6 @@ const styles = StyleSheet.create({
   horiz: {
     paddingHorizontal: 30,
     paddingVertical:20,
-    justifyContent: 'center',
     marginTop:10,
     marginBottom:-15,
     
