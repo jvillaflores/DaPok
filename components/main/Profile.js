@@ -60,9 +60,6 @@ function close() {
       .then(function () {
         alert("Saved ");
         setLoading(null);
-        alert(
-          "Updates might not be changed after, please restart application if it occurs. Thank you!"
-        );
       });
   };
   if (currentUser.status == "1"){
