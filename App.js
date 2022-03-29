@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "react-native-gesture-handler";
 
 import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -254,6 +255,17 @@ export class App extends Component {
                 headerStyle: {
                   backgroundColor: "#215A88",
                 },
+                headerRight: () => (
+                  <View style={{ marginRight: 10 }}>
+                    <MaterialCommunityIcons.Button
+                      name="folder"
+                      size={25}
+                      backgroundColor="#215A88"
+                      color="#fff"
+                      onPress={() => navigation.navigate("EditProfile")}
+                    />
+                  </View>
+                ),
               }}
             />
 
