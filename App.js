@@ -12,6 +12,15 @@ import rootReducer from "./redux/reducers";
 import thunk from "redux-thunk";
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
+
+import { AppRegistry } from 'react-native';
+import database from '@react-native-firebase/database';
+
+database().setPersistenceEnabled(true);
+
+AppRegistry.registerComponent('app', () => App);
+
+
 // This import loads the firebase namespace.
 import firebase from "firebase/app";
 

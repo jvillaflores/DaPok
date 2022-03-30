@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     paddingVertical:70,
-    paddingHorizontal:20,
+    paddingHorizontal:10,
 
   },
   center:{
