@@ -210,6 +210,29 @@ function TransTrans({ currentUser, navigation }) {
                 </TouchableOpacity>
             </View>
 
+            <View style={{ flexDirection: "row" }}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "65" })}
+                  style={styles.button}>
+                  <Text style={styles.text}>Bj</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "66" })}
+                  style={styles.button}>
+                  <Text style={styles.text}>Bk</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "67" })}
+                  style={styles.button}>
+                  <Text style={styles.text}>Bl</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "68" })}
+                  style={styles.button}>
+                  <Text style={styles.text}>Bm</Text>
+                </TouchableOpacity>
+            </View>
+
           </View>
           </ScrollView>
     </SafeAreaView>
