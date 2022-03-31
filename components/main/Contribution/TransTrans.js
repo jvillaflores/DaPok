@@ -91,80 +91,124 @@ function TransTrans({ currentUser, navigation }) {
                     style={styles.button}>
                     <Text style={styles.text}>J</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.button}>
+                  <TouchableOpacity 
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "11" })}
+                    style={styles.button}>
                     <Text style={styles.text}>K</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.button}>
+                  <TouchableOpacity 
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "12" })}
+                    style={styles.button}>
                     <Text style={styles.text}>L</Text>
                   </TouchableOpacity>
             </View>
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "13" })}
+                  style={styles.button}>
                   <Text style={styles.text}>M</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "14" })}
+                  style={styles.button}>
                   <Text style={styles.text}>N</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "15" })}
+                  style={styles.button}>
                   <Text style={styles.text}>O</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "16" })}
+                  style={styles.button}>
                   <Text style={styles.text}>P</Text>
                 </TouchableOpacity>
             </View>
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "17" })}
+                  style={styles.button}>
                   <Text style={styles.text}>Q</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "18" })}
+                  style={styles.button}>
                   <Text style={styles.text}>R</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "19" })}
+                  style={styles.button}>
                   <Text style={styles.text}>S</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "20" })}
+                  style={styles.button}>
                   <Text style={styles.text}>T</Text>
                 </TouchableOpacity>
             </View>
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "21" })}
+                  style={styles.button}>
                   <Text style={styles.text}>R</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "22" })}
+                  style={styles.button}>
                   <Text style={styles.text}>S</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "23" })}
+                  style={styles.button}>
                   <Text style={styles.text}>T</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "24" })}
+                  style={styles.button}>
                   <Text style={styles.text}>U</Text>
                 </TouchableOpacity>
             </View>
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "25" })}
+                  style={styles.button}>
                   <Text style={styles.text}>V</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "26" })}
+                  style={styles.button}>
                   <Text style={styles.text}>W</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "27" })}
+                  style={styles.button}>
                   <Text style={styles.text}>X</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "28" })}
+                  style={styles.button}>
                   <Text style={styles.text}>Y</Text>
                 </TouchableOpacity>
             </View>
             <View style={{ flexDirection: "row" }}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "29" })}
+                  style={styles.button}>
                   <Text style={styles.text}>Z</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "30" })}
+                  style={styles.button}>
                   <Text style={styles.text}>Aa</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "31" })}
+                  style={styles.button}>
                   <Text style={styles.text}>Ab</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity 
+                  onPress={() => navigation.navigate("Set1Screen", { dataset: "32" })}
+                  style={styles.button}>
                   <Text style={styles.text}>Ac</Text>
                 </TouchableOpacity>
             </View>
