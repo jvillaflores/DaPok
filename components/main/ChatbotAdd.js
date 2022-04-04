@@ -23,7 +23,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { useValidation } from "react-native-form-validator";
 import * as FileSystem from "expo-file-system";
 import * as DocumentPicker from "expo-document-picker";
-
+import { Audio } from 'expo-av';
 
 
 function AddWord({ currentUser, route, navigation }) {
@@ -34,7 +34,10 @@ function AddWord({ currentUser, route, navigation }) {
   const [ newLanguage, setNewLanguage ] = useState("");
   const [wordID, setWordID] = useState(makeid());
   const [datalist, setDatalist] = useState("");
-  const [audio, setAudio] = useState(null);
+  const [recording, setRecording] = React.useState("");
+  
+
+
 
   useEffect(() => {
     setDatalist(currentUser);
@@ -59,6 +62,10 @@ function AddWord({ currentUser, route, navigation }) {
     return unsubscribe;
   }, [navigation]);
 
+
+
+
+
 function makeid() {
     var randomText = "";
     var possible =
@@ -77,30 +84,36 @@ function makeid() {
       state: {
         bisaya,
         newLanguage,
-        audio
       },
     });  
-  const uploadLanguage = async () => {
-      validate({
-        bisaya: { required: true },
-        newLanguage: { required: true },
-        
-      });
-      
-      const taskCompleted = () => {
-          SavePostData(snapshot);
-          saveAllPostData(snapshot);
-          setLoading(null);
-          console.log(snapshot);
-      };
-  
-      const taskError = (snapshot) => {
-        setLoading(null);
-        alert(snapshot);
-        console.log(snapshot);
-      };
-  
-    };
+
+    async function startRecording() {
+      try {
+        console.log('Requesting permissions..');
+        await Audio.requestPermissionsAsync();
+        await Audio.setAudioModeAsync({
+          allowsRecordingIOS: true,
+          playsInSilentModeIOS: true,
+        }); 
+        console.log('Starting recording..');
+        const { recording } = await Audio.Recording.createAsync(
+           Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
+        );
+        setRecording(recording);
+        console.log('Recording started');
+      } catch (err) {
+        console.error('Failed to start recording', err);
+      }
+    }
+
+    async function stopRecording() {
+      console.log('Stopping recording..');
+      setRecording(undefined);
+      await recording.stopAndUnloadAsync();
+      const uri = recording.getURI(); 
+      console.log('Recording stopped and stored at', uri);
+    }
+
     const SavePostData = () => {
       firebase
         .firestore()
@@ -112,7 +125,7 @@ function makeid() {
           wordId: wordID,
           email: currentUser.email,
           language:datalist.language,
-          
+          downloadURL,
           bisaya: data?.bisaya,
           newLanguage,
           status: "0",
@@ -148,73 +161,8 @@ function makeid() {
         });
     };
 
-    const onUpdate = () =>{
-      firebase
-          .firestore()
-          .collection("words")
-          .doc('status')
-          .update({
-            status:"0",
-          })
-          
-    }
-    const chooseFile = async () => {
-      let result = await DocumentPicker.getDocumentAsync({
-        type: "audio/*",
-        copyToCacheDirectory: false,
-      });
-      // Alert.alert("Audio File", result.name);
-  
-      console.log(result);
-      if (result.type === "success") {
-        setAudio(result);
-      } else {
-        alert("something went wrong!!");
-      }
-    };
-  
-    const uploadAudios = async () => {
-      // const uri = recording.getURI();
-      const uri = FileSystem.documentDirectory + audio.name;
-  
-      await FileSystem.copyAsync({
-        from: audio.uri,
-        to: uri,
-      });
-      try {
-        let res = await fetch(uri);
-        let blobs = await res.blob();
-        if (blobs != null) {
-          const uriParts = audio?.uri.split(".");
-          const fileType = uriParts[uriParts.length - 1];
-          console.log(uriParts, "0-0-0", fileType);
-        } else {
-          console.log("erroor with blob");
-        }
-      } catch (error) {
-        console.log("error:", error);
-      }
-    };
-    const uploadAudio = async () => {
-      validate({
-        audio: { required: true },
-      });
-      const childPath = `audio/${
-        firebase.auth().currentUser.uid
-      }/${Math.random().toString(36)}`;
-      console.log(childPath);
-      const uri = FileSystem.documentDirectory + audio.name;
-  
-      await FileSystem.copyAsync({
-        from: audio.uri,
-        to: uri,
-      });
-  
-      let res = await fetch(uri);
-      let blob = await res.blob();
-  
-      const task = firebase.storage().ref().child(childPath).put(blob);
-    }
+         
+    
    {
     return (
       <ScrollView style={styles.container}>
@@ -230,7 +178,7 @@ function makeid() {
                   onChangeText={(newLanguage) => setNewLanguage(newLanguage)}/>
           </View>
           
-          <View style={styles.paddingLeft}>
+          {/* <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Audio </Text>
           <Text style={styles.guidelines}>
             Pwede nimo butangan ug audio kung unsaon pag sulti ani na sentensiya.
@@ -256,13 +204,21 @@ function makeid() {
             </View>
           </TouchableOpacity>
         </View>
-        {/* <Pressable style={styles.button} onPress={() => uploadAudio()}></Pressable> */}
+       
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Hulagway(Imahe)</Text>
           <Text style={styles.guidelines}>
             Pwede nimo butangan ug hulagway(imahe).
           </Text>
-          </View>
+        </View> */}
+
+<View >
+      <Button
+        title={recording ? 'Stop Recording' : 'Start Recording'}
+        onPress={recording ? stopRecording : startRecording}
+      />
+    </View>
+
           <View style={styles.horiz}>
 {/*           
           <Pressable style={styles.buttonVocab} onPress={() => uploadAudio()}>
@@ -274,7 +230,7 @@ function makeid() {
             </Text>
           </Pressable> */}
           
-              <TouchableOpacity onPress={()=>{SavePostData(),uploadAudio()}}
+              <TouchableOpacity onPress={()=>{SavePostData()}}
                   style={[styles.buttonVocab,{
                      backgroundColor: "#215A88",}]}>
                   <Text style={{
