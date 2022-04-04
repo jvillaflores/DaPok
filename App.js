@@ -64,21 +64,21 @@ import ChatbotFolderScreen from "./components/main/Data Collection/Chatbot/Chatb
 
 const Stack = createStackNavigator();
 
-firebase.firestore().enablePersistence()
-  .catch(function(err) {
-      if (err.code == 'failed-precondition') {
-firebase.firestore().enablePersistence()
-  .catch(function(err) {
-      if (err.code == 'failed-precondition') {
-        console.log("error occure while setup enlablePersistence")
-      } else if (err.code == 'unimplemented') {
-        console.log("error occure while setup enlablePersistence")
-      }
-    });
-    } else if (err.code == 'unimplemented') {
-      console.log("error occure while setup enlablePersistence")
-    }
-  });
+// firebase.firestore().enablePersistence()
+//   .catch(function(err) {
+//       if (err.code == 'failed-precondition') {
+// firebase.firestore().enablePersistence()
+//   .catch(function(err) {
+//       if (err.code == 'failed-precondition') {
+//         console.log("error occure while setup enlablePersistence")
+//       } else if (err.code == 'unimplemented') {
+//         console.log("error occure while setup enlablePersistence")
+//       }
+//     });
+//     } else if (err.code == 'unimplemented') {
+//       console.log("error occure while setup enlablePersistence")
+//     }
+//   });
 
 export class App extends Component {
   constructor(props) {

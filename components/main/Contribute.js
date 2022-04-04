@@ -48,6 +48,19 @@ import React, { Component } from 'react'
     <ScrollView style={styles.container}>
     <List.Section>
     </List.Section>
+    
+      <List.Section>
+      <TouchableOpacity>
+        <List.Item 
+          onPress={() => navigation.navigate("ChatbotFolder")}
+          style = {{margin: -10, top: -5}} title="Chatbot" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <List.Item 
+          onPress={() => navigation.navigate("TranslationFolder")}
+          style = {{margin: -10, top: 5}} title="Translation" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
+      </TouchableOpacity>
+      </List.Section>
     </ScrollView>
    )
  }
