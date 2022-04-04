@@ -127,7 +127,7 @@ function makeid() {
         .then(function () {
           alert("Thanks for contribution!!");
           setLoading(null);
-          // navigation.popToTop();
+          navigation.goBack();
         });
         
     };
@@ -149,7 +149,7 @@ function makeid() {
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(function () {
-          alert("Thanks for contribution!!");
+          // alert("Thanks for contribution!!");
           setLoading(null);
         });
         

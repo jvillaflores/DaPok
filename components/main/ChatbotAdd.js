@@ -122,7 +122,7 @@ function makeid() {
         .then(function () {
           alert("Thanks for contribution!!");
           setLoading(null);
-          navigation.popToTop();
+          navigation.goBack();
         });
         
     };
