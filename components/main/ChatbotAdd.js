@@ -9,6 +9,8 @@ import {
   Pressable,
   ScrollView,
   Alert,
+  Platform,
+  Image
 
 } from "react-native";
 
@@ -24,9 +26,10 @@ import { useValidation } from "react-native-form-validator";
 import * as FileSystem from "expo-file-system";
 import * as DocumentPicker from "expo-document-picker";
 import { Audio } from 'expo-av';
+import * as ImagePicker from 'expo-image-picker';
 
 
-function AddWord({ currentUser, route, navigation }) {
+function AddWord({ currentUser, route, navigation,ImagePickerExample }) {
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
 
@@ -34,11 +37,57 @@ function AddWord({ currentUser, route, navigation }) {
   const [ newLanguage, setNewLanguage ] = useState("");
   const [wordID, setWordID] = useState(makeid());
   const [datalist, setDatalist] = useState("");
-  const [recording, setRecording] = React.useState("");
+  const [audio, setAudio] = useState(null); 
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAYcFQheZ9scuPnsfn6doXXxfAq9nZKu4Y",
+    authDomain: "dapok-app.firebaseapp.com",
+    projectId: "dapok-app",
+    storageBucket: "dapok-app.appspot.com",
+    messagingSenderId: "598253020006",
+    appId: "1:598253020006:web:b456cdd8104a9d452c1ea7",
+  };
+
+  try {
+    if (firebaseConfig.apiKey) {
+      firebase.initializeApp(firebaseConfig);
+    }
+  } catch (err) {
+    // ignore app already initialized error on snack
+  }
+    const [image, setImage] = useState(null);
   
-
-
-
+    useEffect(() => {
+      (async () => {
+        if (Platform.OS !== 'web') {
+          const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+          if (status !== 'granted') {
+            alert('Sorry, we need camera roll permissions to make this work!');
+          }
+        }
+      })();
+    }, []);
+    const pickImage = async () => {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+  
+      console.log(result);
+  
+      if (!result.cancelled) {
+        setImage(result.uri);
+        // this.uploadImage(result.uri,"test-image");
+      }
+    };
+  var uploadImage = async (uri,imageName) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    var ref = firebase.storage().ref().child("images/"+imageName);
+  }
+//image
   useEffect(() => {
     setDatalist(currentUser);
   }, [currentUser]);
@@ -62,10 +111,6 @@ function AddWord({ currentUser, route, navigation }) {
     return unsubscribe;
   }, [navigation]);
 
-
-
-
-
 function makeid() {
     var randomText = "";
     var possible =
@@ -84,36 +129,10 @@ function makeid() {
       state: {
         bisaya,
         newLanguage,
+        audio,
+        image
       },
     });  
-
-    async function startRecording() {
-      try {
-        console.log('Requesting permissions..');
-        await Audio.requestPermissionsAsync();
-        await Audio.setAudioModeAsync({
-          allowsRecordingIOS: true,
-          playsInSilentModeIOS: true,
-        }); 
-        console.log('Starting recording..');
-        const { recording } = await Audio.Recording.createAsync(
-           Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
-        );
-        setRecording(recording);
-        console.log('Recording started');
-      } catch (err) {
-        console.error('Failed to start recording', err);
-      }
-    }
-
-    async function stopRecording() {
-      console.log('Stopping recording..');
-      setRecording(undefined);
-      await recording.stopAndUnloadAsync();
-      const uri = recording.getURI(); 
-      console.log('Recording stopped and stored at', uri);
-    }
-
     const SavePostData = () => {
       firebase
         .firestore()
@@ -125,9 +144,11 @@ function makeid() {
           wordId: wordID,
           email: currentUser.email,
           language:datalist.language,
-          downloadURL,
+          // downloadURL,
           bisaya: data?.bisaya,
           newLanguage,
+          audio,
+          image,
           status: "0",
           upload: "1",
           creation: firebase.firestore.FieldValue.serverTimestamp(),
@@ -151,6 +172,8 @@ function makeid() {
           language:datalist.language,
           bisaya:data?.bisaya,
           newLanguage,
+          audio,
+          image,
           upload: "1",
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
@@ -161,8 +184,63 @@ function makeid() {
         });
     };
 
-         
-    
+// audio
+      const chooseFile = async () => {
+        let result = await DocumentPicker.getDocumentAsync({
+          type: "audio/*",
+          copyToCacheDirectory: false,
+        });
+        // Alert.alert("Audio File", result.name);
+
+        console.log(result);
+        if (result.type === "success") {
+          setAudio(result);
+        } else {
+          alert("something went wrong!!");
+        }
+      };
+      const uploadAudios = async () => {
+        // const uri = recording.getURI();
+        const uri = FileSystem.documentDirectory + audio.name;
+
+        await FileSystem.copyAsync({
+          from: audio.uri,
+          to: uri,
+        });
+        try {
+          let res = await fetch(uri);
+          let blobs = await res.blob();
+          if (blobs != null) {
+            const uriParts = audio?.uri.split(".");
+            const fileType = uriParts[uriParts.length - 1];
+            console.log(uriParts, "0-0-0", fileType);
+            console.log("erroor with blob");
+          }
+        } catch (error) {
+          console.log("error:", error);
+        }
+      };
+          const uploadAudio = async () => {
+            validate({
+              audio: { required: true },
+            });
+            const childPath = `audio/${
+              firebase.auth().currentUser.uid
+            }/${Math.random().toString(36)}`;
+            console.log(childPath);
+            const uri = FileSystem.documentDirectory + audio.name;
+
+            await FileSystem.copyAsync({
+              from: audio.uri,
+              to: uri,
+            });
+
+            let res = await fetch(uri);
+            let blob = await res.blob();
+
+            const task = firebase.storage().ref().child(childPath).put(blob);
+          }
+            //audio
    {
     return (
       <ScrollView style={styles.container}>
@@ -178,14 +256,15 @@ function makeid() {
                   onChangeText={(newLanguage) => setNewLanguage(newLanguage)}/>
           </View>
           
-          {/* <View style={styles.paddingLeft}>
+          <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Audio </Text>
           <Text style={styles.guidelines}>
-            Pwede nimo butangan ug audio kung unsaon pag sulti ani na sentensiya.
+            Upload an audio on how to pronounce the Kinagan word you have
+            suggested.
           </Text>
           {isFieldInError("audio") &&
             getErrorsInField("aduio").map((errorMessage) => (
-              <Text></Text>
+              <Text>Please select an audio file</Text>
             ))}
           <TouchableOpacity
             style={styles.audioButton}
@@ -195,7 +274,7 @@ function makeid() {
                 <TextInput>{audio?.name}</TextInput>
               ) : (
                 <MaterialCommunityIcons
-                  style={styles.addAudio} 
+                  style={styles.addAudio}
                   name="plus-box"
                   color={"#707070"}
                   size={26}
@@ -210,18 +289,13 @@ function makeid() {
           <Text style={styles.guidelines}>
             Pwede nimo butangan ug hulagway(imahe).
           </Text>
-        </View> */}
-
-<View >
-      <Button
-        title={recording ? 'Stop Recording' : 'Start Recording'}
-        onPress={recording ? stopRecording : startRecording}
-      />
+        </View>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Button title="Pick an image from camera roll" onPress={pickImage} />
+      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
     </View>
-
           <View style={styles.horiz}>
-{/*           
-          <Pressable style={styles.buttonVocab} onPress={() => uploadAudio()}>
+{/*     <Pressable style={styles.buttonVocab} onPress={() => uploadAudio()}>
             <Text style={{
                      color:"#ffffff",
                      alignSelf:'center',
@@ -230,7 +304,7 @@ function makeid() {
             </Text>
           </Pressable> */}
           
-              <TouchableOpacity onPress={()=>{SavePostData()}}
+              <TouchableOpacity onPress={()=>{SavePostData(), uploadAudio}}
                   style={[styles.buttonVocab,{
                      backgroundColor: "#215A88",}]}>
                   <Text style={{
@@ -307,7 +381,7 @@ const styles = StyleSheet.create({
   audioButton: {
     alignItems: "center",
     justifyContent: "center",
-    width: "90%",
+    width: "95%",
     borderWidth: 1,
     borderRadius: 10,
     height: 50,
