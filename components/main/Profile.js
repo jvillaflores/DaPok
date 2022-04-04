@@ -258,6 +258,8 @@ function close() {
           <Text>Spoken Language</Text>
 
             <Picker
+            ref={pickerRef}
+            selectedValue={language}
               style={[
                 styles.pickerStyle,
                 { backgroundColor: "#e7e7e7", borderBottomColor: "#d0d0d0" },

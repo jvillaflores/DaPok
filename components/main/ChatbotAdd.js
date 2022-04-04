@@ -375,7 +375,7 @@ const styles = StyleSheet.create({
   },
   addAudio:{
     flex: 1,
-    position: 'center',
+    position: 'absolute',
     marginTop: -15 
   }
 });
