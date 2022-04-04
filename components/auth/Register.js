@@ -48,8 +48,7 @@ export default class Register extends ValidationComponent {
 
         this.validate({
           email: { email: true },
-          username: {required: true },
-          //name: { required: true },
+          name: { required: true },
           password: { required: true },
         });
 
