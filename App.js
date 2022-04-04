@@ -272,17 +272,6 @@ export class App extends Component {
                 headerStyle: {
                   backgroundColor: "#215A88",
                 },
-                headerRight: () => (
-                  <View style={{ marginRight: 10 }}>
-                    <MaterialCommunityIcons.Button
-                      name="folder"
-                      size={25}
-                      backgroundColor="#215A88"
-                      color="#fff"
-                      onPress={() => navigation.navigate("EditProfile")}
-                    />
-                  </View>
-                ),
               }}
             />
 
