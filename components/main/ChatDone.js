@@ -66,11 +66,24 @@ function ChatTranslate({ words, navigation, props }) {
           <View style={styles.itemBody}>
             <Text>{item?.newLanguage}</Text>
           </View>
-          
         </View>
-
-        
-      </TouchableOpacity>
+      <View style={styles.paddingLeft}>
+            <Text style={styles.title_text}>Audio </Text>
+            <Text style={styles.guidelines}></Text>
+            <TouchableOpacity
+              style={styles.audioButton}
+              onPress={() => downloadAudio()}>
+              <View>
+                <MaterialCommunityIcons
+                  style={styles.addAudio}
+                  name="volume-high"
+                  color={"#707070"}
+                  size={26}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
+          </TouchableOpacity>
     );
   };
 

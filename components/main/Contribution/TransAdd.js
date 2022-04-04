@@ -199,9 +199,13 @@ function makeid() {
               <TextInput
                   multiline={false}
                   activeUnderlineColor="#215A88"
-                  onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
-              />
+                  onChangeText={(newLanguage) => setNewLanguage(newLanguage)}/>
+          <View> 
+            {/* this is for audio */}
+
             
+            
+            </View>  
           </View>
           <View style={styles.horiz}>
               <TouchableOpacity onPress={()=>{SavePostData(),SaveAllData()}}

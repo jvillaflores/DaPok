@@ -10,10 +10,8 @@ import { createStore, applyMiddleware } from "redux";
 import rootReducer from "./redux/reducers";
 //allow use the dispatch function
 import thunk from "redux-thunk";
+
 const store = createStore(rootReducer, applyMiddleware(thunk));
-
-
-
 
 // This import loads the firebase namespace.
 import firebase from "firebase/app";
@@ -65,6 +63,22 @@ import TranslationFolderScreen from "./components/main/Data Collection/Translate
 import ChatbotFolderScreen from "./components/main/Data Collection/Chatbot/ChatbotFolder";
 
 const Stack = createStackNavigator();
+
+firebase.firestore().enablePersistence()
+  .catch(function(err) {
+      if (err.code == 'failed-precondition') {
+firebase.firestore().enablePersistence()
+  .catch(function(err) {
+      if (err.code == 'failed-precondition') {
+        console.log("error occure while setup enlablePersistence")
+      } else if (err.code == 'unimplemented') {
+        console.log("error occure while setup enlablePersistence")
+      }
+    });
+    } else if (err.code == 'unimplemented') {
+      console.log("error occure while setup enlablePersistence")
+    }
+  });
 
 export class App extends Component {
   constructor(props) {
