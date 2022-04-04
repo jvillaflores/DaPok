@@ -48,8 +48,12 @@ export default class Register extends ValidationComponent {
 
         this.validate({
           email: { email: true },
+<<<<<<< HEAD
           //name: { required: true },
           username: {required: true },
+=======
+          name: { required: true },
+>>>>>>> parent of 30bd2e5 (user side)
           password: { required: true },
         });
 
@@ -114,11 +118,6 @@ export default class Register extends ValidationComponent {
                               activeUnderlineColor="#215A88"
                               onChangeText={(name) => this.setState({ name })}
                             />
-                            {/* <TextInput style={styles.placeholder}
-                              label="Name"
-                              activeUnderlineColor="#215A88"
-                              onChangeText={(name) => this.setState({ name })}
-                            /> */}
                       </View>
                       <View>
                           <TextInput style={styles.placeholder}
@@ -206,7 +205,7 @@ export default class Register extends ValidationComponent {
                         <Picker
                           style={[styles.pickerStyle, {backgroundColor:'#e7e7e7', borderBottomColor:'#d0d0d0'}]}
                           onValueChange={(language) => this.setState({ language })}>
-                          <Picker.Item label={"Choose your Spoken Language"} />
+                          <Picker.Item label="Choose your Spoken Language" />
                           <Picker.Item label="Kagan" value="Kagan" />
                           <Picker.Item label="Mansaka" value="Mansaka" />
                           <Picker.Item label="Manobo" value="Manobo" />

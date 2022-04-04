@@ -48,26 +48,6 @@ import React, { Component } from 'react'
     <ScrollView style={styles.container}>
     <List.Section>
     </List.Section>
-    {/* <View>
-        <TouchableOpacity onPress={() => navigation.navigate("reportGenerate")}>
-            <View style={[styles.Bbuttonn, { backgroundColor: "#e7e7e7" }]}
-            onPress={() => onUpdate()}>
-            <Text style={[styles.text11]}>Report Generator</Text>
-            </View>
-          </TouchableOpacity>
-          </View>  */}
-      <List.Section>
-      <TouchableOpacity>
-        <List.Item 
-          onPress={() => navigation.navigate("ChatbotFolder")}
-          style = {{margin: -10, top: -5}} title="Chatbot" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <List.Item 
-          onPress={() => navigation.navigate("TranslationFolder")}
-          style = {{margin: -10, top: 5}} title="Translation" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
-      </TouchableOpacity>
-      </List.Section>
     </ScrollView>
    )
  }

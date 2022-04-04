@@ -122,7 +122,7 @@ function makeid() {
         .then(function () {
           alert("Daghang Salamat sa imohang kontribusyon!!");
           setLoading(null);
-          navigation.goBack();
+          navigation.popToTop();
         });
         
     };
