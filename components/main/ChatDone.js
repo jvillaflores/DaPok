@@ -54,8 +54,7 @@ function ChatTranslate({ words, navigation, props }) {
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() => navigation.navigate('ChatbotDone',{data:item})}
-      >
+        onPress={() => navigation.navigate('ChatbotDone',{data:item})}>
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
             <Text>{item?.language}</Text>
@@ -66,23 +65,10 @@ function ChatTranslate({ words, navigation, props }) {
           <View style={styles.itemBody}>
             <Text>{item?.newLanguage}</Text>
           </View>
-        </View>
-      <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Audio </Text>
-            <Text style={styles.guidelines}></Text>
-            <TouchableOpacity
-              style={styles.audioButton}
-              onPress={() => downloadAudio()}>
-              <View>
-                <MaterialCommunityIcons
-                  style={styles.addAudio}
-                  name="volume-high"
-                  color={"#707070"}
-                  size={26}
-                />
-              </View>
-            </TouchableOpacity>
+          <View style={styles.itemBody}>
+            <Image src={item?.Image}></Image>
           </View>
+        </View>
           </TouchableOpacity>
     );
   };

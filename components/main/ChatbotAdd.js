@@ -76,13 +76,16 @@ function AddWord({ currentUser, route, navigation,ImagePickerExample }) {
       });
   
       console.log(result);
+      
   
       if (!result.cancelled) {
         setImage(result.uri);
         // this.uploadImage(result.uri,"test-image");
+        
       }
     };
   var uploadImage = async (uri,imageName) => {
+    this.uploadImage(result.uri,"test-image");
     const response = await fetch(uri);
     const blob = await response.blob();
     var ref = firebase.storage().ref().child("images/"+imageName);
@@ -256,7 +259,7 @@ function makeid() {
                   onChangeText={(newLanguage) => setNewLanguage(newLanguage)}/>
           </View>
           
-          <View style={styles.paddingLeft}>
+          {/* <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Audio </Text>
           <Text style={styles.guidelines}>
             Upload an audio on how to pronounce the Kinagan word you have
@@ -282,17 +285,28 @@ function makeid() {
               )}
             </View>
           </TouchableOpacity>
-        </View>
+        </View> */}
        
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Hulagway(Imahe)</Text>
           <Text style={styles.guidelines}>
-            Pwede nimo butangan ug hulagway(imahe).
+            Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
           </Text>
         </View>
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title="Pick an image from camera roll" onPress={pickImage} />
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        <TouchableOpacity
+            style={styles.imageButton}
+            onPress={pickImage}
+            title="Pick an image from camera roll">
+              <MaterialCommunityIcons
+                  style={styles.addImage}
+                  name="plus-box"
+                  color={"#707070"}
+                  size={26}
+                />
+          </TouchableOpacity>
+      {/* <Button style={styles.audioButton} title="Pick an image from camera roll" onPress={pickImage} /> */}
+      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, marginTop: 20 }} />}
     </View>
           <View style={styles.horiz}>
 {/*     <Pressable style={styles.buttonVocab} onPress={() => uploadAudio()}>
@@ -378,12 +392,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 80,
   },
-  audioButton: {
+  imageButton: {
     alignItems: "center",
     justifyContent: "center",
-    width: "95%",
+    width: "90%",
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 15,
     height: 50,
     borderColor: "#707070",
     paddingTop: 20,
@@ -403,7 +417,7 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     color: "#707070",
   },
-  addAudio:{
+  addImage:{
     flex: 1,
     position: 'absolute',
     marginTop: -15 
