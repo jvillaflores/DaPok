@@ -42,6 +42,49 @@ function AddWord({ currentUser, route, navigation,ImagePickerExample }) {
  
 
 
+  try {
+    if (firebaseConfig.apiKey) {
+      firebase.initializeApp(firebaseConfig);
+    }
+  } catch (err) {
+    // ignore app already initialized error on snack
+  }
+    const [image, setImage] = useState(null);
+  
+    useEffect(() => {
+      (async () => {
+        if (Platform.OS !== 'web') {
+          const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+          if (status !== 'granted') {
+            alert('Sorry, we need camera roll permissions to make this work!');
+          }
+        }
+      })();
+    }, []);
+    const pickImage = async () => {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+  
+      console.log(result);
+      
+  
+      if (!result.cancelled) {
+        setImage(result.uri);
+        // this.uploadImage(result.uri,"test-image");
+        
+      }
+    };
+  var uploadImage = async (uri,imageName) => {
+    this.uploadImage(result.uri,"test-image");
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    var ref = firebase.storage().ref().child("images/"+imageName);
+  }
+//image
   useEffect(() => {
     setDatalist(currentUser);
   }, [currentUser]);
@@ -152,16 +195,55 @@ function makeid() {
                   onChangeText={(newLanguage) => setNewLanguage(newLanguage)}/>
           </View>
           
-         
+          {/* <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Audio </Text>
+          <Text style={styles.guidelines}>
+            Upload an audio on how to pronounce the Kinagan word you have
+            suggested.
+          </Text>
+          {isFieldInError("audio") &&
+            getErrorsInField("aduio").map((errorMessage) => (
+              <Text>Please select an audio file</Text>
+            ))}
+          <TouchableOpacity
+            style={styles.audioButton}
+            onPress={() => chooseFile()}>
+            <View>
+              {audio ? (
+                <TextInput>{audio?.name}</TextInput>
+              ) : (
+                <MaterialCommunityIcons
+                  style={styles.addAudio}
+                  name="plus-box"
+                  color={"#707070"}
+                  size={26}
+                />
+              )}
+            </View>
+          </TouchableOpacity>
+        </View> */}
        
         <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Hulagway(Imahe)</Text>
-            <Text style={styles.guidelines}>
-              Pwede nimo butangan ug hulagway(imahe).
-            </Text>
-            
+          <Text style={styles.title_text}>Hulagway(Imahe)</Text>
+          <Text style={styles.guidelines}>
+            Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
+          </Text>
         </View>
-       
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <TouchableOpacity
+            style={styles.imageButton}
+            onPress={pickImage}
+            title="Pick an image from camera roll">
+              <MaterialCommunityIcons
+                  style={styles.addImage}
+                  name="plus-box"
+                  color={"#707070"}
+                  size={26}
+                />
+          </TouchableOpacity>
+      {/* <Button style={styles.audioButton} title="Pick an image from camera roll" onPress={pickImage} /> */}
+      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, marginTop: 20 }} />}
+    </View>
           <View style={styles.horiz}>
 
 
@@ -240,12 +322,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 80,
   },
-  audioButton: {
+  imageButton: {
     alignItems: "center",
     justifyContent: "center",
-    width: "95%",
+    width: "90%",
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 15,
     height: 50,
     borderColor: "#707070",
     paddingTop: 20,
@@ -265,7 +347,7 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     color: "#707070",
   },
-  addAudio:{
+  addImage:{
     flex: 1,
     position: 'absolute',
     marginTop: -15 
