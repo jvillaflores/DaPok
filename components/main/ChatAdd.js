@@ -9,8 +9,6 @@ import {
   Pressable,
   ScrollView,
   Alert,
-  Platform,
-  Image
 
 } from "react-native";
 
@@ -26,10 +24,9 @@ import { useValidation } from "react-native-form-validator";
 import * as FileSystem from "expo-file-system";
 import * as DocumentPicker from "expo-document-picker";
 import { Audio } from 'expo-av';
-import * as ImagePicker from 'expo-image-picker';
 
 
-function AddWord({ currentUser, route, navigation,ImagePickerExample }) {
+function AddWord({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
 
@@ -37,10 +34,7 @@ function AddWord({ currentUser, route, navigation,ImagePickerExample }) {
   const [ newLanguage, setNewLanguage ] = useState("");
   const [wordID, setWordID] = useState(makeid());
   const [datalist, setDatalist] = useState("");
-  const [audio, setAudio] = useState(null); 
-
- 
-
+  const [audio, setAudio] = useState(null);
 
   useEffect(() => {
     setDatalist(currentUser);
@@ -65,6 +59,10 @@ function AddWord({ currentUser, route, navigation,ImagePickerExample }) {
     return unsubscribe;
   }, [navigation]);
 
+
+
+
+
 function makeid() {
     var randomText = "";
     var possible =
@@ -83,9 +81,68 @@ function makeid() {
       state: {
         bisaya,
         newLanguage,
-        audio
+        audio,
       },
     });  
+
+    const chooseFile = async () => {
+      let result = await DocumentPicker.getDocumentAsync({
+        type: "audio/*",
+        copyToCacheDirectory: false,
+      });
+      // Alert.alert("Audio File", result.name);
+  
+      console.log(result);
+      if (result.type === "success") {
+        setAudio(result);
+      } else {
+        alert("something went wrong!!");
+      }
+    };
+  
+    const uploadAudio = async () => {
+      validate({
+        
+        audio: { required: false },
+      });
+      const childPath = `audio/${
+        firebase.auth().currentUser.uid
+      }/${Math.random().toString(36)}`;
+      console.log(childPath);
+      const uri = FileSystem.documentDirectory + audio.name;
+  
+      await FileSystem.copyAsync({
+        from: audio.uri,
+        to: uri,
+      });
+  
+      let res = await fetch(uri);
+      let blob = await res.blob();
+  
+      const task = firebase.storage().ref().child(childPath).put(blob);
+  
+      const taskProgress = (snapshot) => {
+        setLoading((snapshot.bytesTransferred / audio?.size) * 100);
+        console.log(`transferred: ${snapshot.bytesTransferred}`);
+      };
+  
+      const taskCompleted = () => {
+        task.snapshot.ref.getDownloadURL().then((snapshot) => {
+          SavePostData(snapshot);
+          setLoading(null);
+          console.log(snapshot);
+        });
+      };
+  
+      const taskError = (snapshot) => {
+        setLoading(null);
+        alert(snapshot);
+        console.log(snapshot);
+      };
+  
+      task.on("state_changed", taskProgress, taskError, taskCompleted);
+    };
+
     const SavePostData = (downloadURL) => {
       firebase
         .firestore()
@@ -100,7 +157,6 @@ function makeid() {
           downloadURL,
           bisaya: data?.bisaya,
           newLanguage,
-          audio,
           status: "0",
           upload: "1",
           creation: firebase.firestore.FieldValue.serverTimestamp(),
@@ -108,7 +164,7 @@ function makeid() {
         .then(function () {
           alert("Daghang Salamat sa imohang kontribusyon!!");
           setLoading(null);
-          navigation.popToTop();
+          navigation.goBack();
         });
         
     };
@@ -124,19 +180,18 @@ function makeid() {
           language:datalist.language,
           bisaya:data?.bisaya,
           newLanguage,
-          audio,
-          image,
           upload: "1",
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(function () {
           alert("Daghang Salamat sa imohang kontribusyon!!");
           setLoading(null);
-          navigation.popToTop();
+          navigation.goB();
         });
     };
 
-
+            
+    
    {
     return (
       <ScrollView style={styles.container}>
@@ -152,27 +207,59 @@ function makeid() {
                   onChangeText={(newLanguage) => setNewLanguage(newLanguage)}/>
           </View>
           
-         
-       
-        <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Hulagway(Imahe)</Text>
-            <Text style={styles.guidelines}>
-              Pwede nimo butangan ug hulagway(imahe).
-            </Text>
-            
+          <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Audio </Text>
+          <Text style={styles.guidelines}>
+            Pwede nimo butangan ug audio kung unsaon pag sulti ani na sentensiya.
+          </Text>
+          {isFieldInError("audio") &&
+            getErrorsInField("aduio").map((errorMessage) => (
+              <Text></Text>
+            ))}
+          <TouchableOpacity
+            style={styles.audioButton}
+            onPress={() => chooseFile()}>
+            <View>
+              {audio ? (
+                <TextInput>{audio?.name}</TextInput>
+              ) : (
+                <MaterialCommunityIcons
+                  style={styles.addAudio} 
+                  name="plus-box"
+                  color={"#707070"}
+                  size={26}
+                />
+              )}
+            </View>
+          </TouchableOpacity>
         </View>
        
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Hulagway(Imahe)</Text>
+          <Text style={styles.guidelines}>
+            Pwede nimo butangan ug hulagway(imahe).
+          </Text>
+        </View>
+
+
           <View style={styles.horiz}>
-
-
+{/*           
+          <Pressable style={styles.buttonVocab} onPress={() => uploadAudio()}>
+            <Text style={{
+                     color:"#ffffff",
+                     alignSelf:'center',
+                     fontSize: 18}}>
+              {loading ? `Sharing...  ${parseInt(loading)}%` : "Itigom"}
+            </Text>
+          </Pressable> */}
           
-              <TouchableOpacity onPress={()=>{SavePostData(), uploadAudio}}
+              <TouchableOpacity onPress={()=>{uploadAudio()}}
                   style={[styles.buttonVocab,{
                      backgroundColor: "#215A88",}]}>
                   <Text style={{
                      color:"#ffffff",
                      alignSelf:'center',
-                     fontSize: 18}}>itigom</Text>
+                     fontSize: 18}}>{loading ? `Sharing...  ${parseInt(loading)}%` : "Itigom"}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.buttonVocab,{
                      backgroundColor: "#e7e7e7",}]}>
@@ -243,7 +330,7 @@ const styles = StyleSheet.create({
   audioButton: {
     alignItems: "center",
     justifyContent: "center",
-    width: "95%",
+    width: "90%",
     borderWidth: 1,
     borderRadius: 10,
     height: 50,
