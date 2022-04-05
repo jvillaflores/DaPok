@@ -37,19 +37,7 @@ function AddWord({ currentUser, route, navigation,ImagePickerExample }) {
   const [ newLanguage, setNewLanguage ] = useState("");
   const [wordID, setWordID] = useState(makeid());
   const [datalist, setDatalist] = useState("");
-  const [audio, setAudio] = useState(null); 
-
- 
-
-
-  try {
-    if (firebaseConfig.apiKey) {
-      firebase.initializeApp(firebaseConfig);
-    }
-  } catch (err) {
-    // ignore app already initialized error on snack
-  }
-    const [image, setImage] = useState(null);
+  const [image, setImage] = useState(null);
   
     useEffect(() => {
       (async () => {
@@ -61,9 +49,10 @@ function AddWord({ currentUser, route, navigation,ImagePickerExample }) {
         }
       })();
     }, []);
+
     const pickImage = async () => {
       let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
         allowsEditing: true,
         aspect: [4, 3],
         quality: 1,
@@ -78,13 +67,58 @@ function AddWord({ currentUser, route, navigation,ImagePickerExample }) {
         
       }
     };
-  var uploadImage = async (uri,imageName) => {
-    this.uploadImage(result.uri,"test-image");
+  // var uploadImage = async (uri,imageName) => {
+  //   this.uploadImage(result.uri,"test-image");
+  //   const response = await fetch(uri);
+  //   const blob = await response.blob();
+  //   var ref = firebase.storage().ref().child("images/"+imageName);
+  // }
+
+  const uploadImage = async () => {
+    const uri = route.params.image;
+    const childPath = `post/${
+      firebase.auth().currentUser.uid
+    }/${Math.random().toString(36)}`;
+    console.log(childPath);
     const response = await fetch(uri);
     const blob = await response.blob();
-    var ref = firebase.storage().ref().child("images/"+imageName);
-  }
+
+    const task = firebase.storage().ref().child(childPath).put(blob);
+
+    const taskProgress = (snapshot) => {
+      setLoading((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+      console.log(`transferred: ${snapshot.bytesTransferred}`);
+    };
+
+    const taskCompleted = () => {
+      task.snapshot.ref.getDownloadURL().then((snapshot) => {
+        SavePostData(snapshot);
+        setLoading(null);
+        console.log(snapshot);
+      });
+    };
+
+    const taskError = (snapshot) => {
+      console.log(snapshot);
+      setLoading(null);
+    };
+
+    task.on("state_changed", taskProgress, taskError, taskCompleted);
+  };
+
+  const onSubmit = () => {
+    validate({
+      bisaya,
+      newLanguage,
+    });
+    uploadImage();
+  };
+
 //image
+
+
+
+
   useEffect(() => {
     setDatalist(currentUser);
   }, [currentUser]);
@@ -121,12 +155,13 @@ function makeid() {
     return randomText;
   }
 
+  
+
   const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
     useValidation({
       state: {
         bisaya,
         newLanguage,
-        audio
       },
     });  
     const SavePostData = (downloadURL) => {
@@ -143,7 +178,6 @@ function makeid() {
           downloadURL,
           bisaya: data?.bisaya,
           newLanguage,
-          audio,
           status: "0",
           upload: "1",
           creation: firebase.firestore.FieldValue.serverTimestamp(),
@@ -195,33 +229,6 @@ function makeid() {
                   onChangeText={(newLanguage) => setNewLanguage(newLanguage)}/>
           </View>
           
-          {/* <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Audio </Text>
-          <Text style={styles.guidelines}>
-            Upload an audio on how to pronounce the Kinagan word you have
-            suggested.
-          </Text>
-          {isFieldInError("audio") &&
-            getErrorsInField("aduio").map((errorMessage) => (
-              <Text>Please select an audio file</Text>
-            ))}
-          <TouchableOpacity
-            style={styles.audioButton}
-            onPress={() => chooseFile()}>
-            <View>
-              {audio ? (
-                <TextInput>{audio?.name}</TextInput>
-              ) : (
-                <MaterialCommunityIcons
-                  style={styles.addAudio}
-                  name="plus-box"
-                  color={"#707070"}
-                  size={26}
-                />
-              )}
-            </View>
-          </TouchableOpacity>
-        </View> */}
        
         <View style={styles.paddingLeft}>
           <Text style={styles.title_text}>Hulagway(Imahe)</Text>
@@ -248,7 +255,7 @@ function makeid() {
 
 
           
-              <TouchableOpacity onPress={()=>{SavePostData(), uploadAudio}}
+              <TouchableOpacity onPress={()=>{onSubmit()}}
                   style={[styles.buttonVocab,{
                      backgroundColor: "#215A88",}]}>
                   <Text style={{
