@@ -234,7 +234,84 @@ function TransTrans({ currentUser, navigation }) {
                     <Text style={styles.text}>Ag</Text>
                   </TouchableOpacity>
               </View>
-
+              <View style={{ flexDirection: "row"}}>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "37" })}
+                    style={styles.button}>
+                    <Text style={styles.text}>Ah</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "38" })}
+                    style={styles.button}>
+                    <Text style={styles.text}>Ai</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "39" })}
+                    style={styles.button}>
+                    <Text style={styles.text}>Aj</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity 
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "40" })}
+                    style={styles.button}>
+                    <Text style={styles.text}>Ak</Text>
+                  </TouchableOpacity>
+              </View>
+              <View style={{ flexDirection: "row"}}>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "41" })}
+                    style={styles.button}>
+                    <Text style={styles.text}>Al</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "42" })}
+                    style={styles.button}>
+                    <Text style={styles.text}>Am</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "43" })}
+                    style={styles.button}>
+                    <Text style={styles.text}>An</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity 
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "44" })}
+                    style={styles.button}>
+                    <Text style={styles.text}>Ao</Text>
+                  </TouchableOpacity>
+              </View>
+              <View style={{ flexDirection: "row"}}>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "45" })}
+                    style={styles.button}>
+                    <Text style={styles.text}>Ap</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "46" })}
+                    style={styles.button}>
+                    <Text style={styles.text}>Aq</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "47" })}
+                    style={styles.button}>
+                    <Text style={styles.text}>Ar</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity 
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "48" })}
+                    style={styles.button}>
+                    <Text style={styles.text}>As</Text>
+                  </TouchableOpacity>
+              </View>
+              <View style={{ flexDirection: "row"}}>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "49" })}
+                    style={styles.button}>
+                    <Text style={styles.text}>At</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("Set1Screen", { dataset: "50" })}
+                    style={styles.button}>
+                    <Text style={styles.text}>Au</Text>
+                  </TouchableOpacity>
+              </View>
           </View>
           </ScrollView>
     </SafeAreaView>

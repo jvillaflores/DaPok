@@ -39,6 +39,7 @@ function AddWord({ currentUser, route, navigation,ImagePickerExample }) {
   const [datalist, setDatalist] = useState("");
   const [audio, setAudio] = useState(null); 
 
+  // image start
   const firebaseConfig = {
     apiKey: "AIzaSyAYcFQheZ9scuPnsfn6doXXxfAq9nZKu4Y",
     authDomain: "dapok-app.firebaseapp.com",
@@ -90,7 +91,9 @@ function AddWord({ currentUser, route, navigation,ImagePickerExample }) {
     const blob = await response.blob();
     var ref = firebase.storage().ref().child("images/"+imageName);
   }
-//image
+
+//image end
+
   useEffect(() => {
     setDatalist(currentUser);
   }, [currentUser]);
