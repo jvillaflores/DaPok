@@ -9,8 +9,6 @@ import {
   Pressable,
   ScrollView,
   Alert,
-  Platform,
-  Image
 
 } from "react-native";
 
@@ -26,7 +24,6 @@ import { useValidation } from "react-native-form-validator";
 import * as FileSystem from "expo-file-system";
 import * as DocumentPicker from "expo-document-picker";
 import { Audio } from 'expo-av';
-import * as ImagePicker from 'expo-image-picker';
 
 
 function AddWord({ currentUser, route, navigation }) {
@@ -37,80 +34,7 @@ function AddWord({ currentUser, route, navigation }) {
   const [ newLanguage, setNewLanguage ] = useState("");
   const [wordID, setWordID] = useState(makeid());
   const [datalist, setDatalist] = useState("");
-  const [image, setImage] = useState(null);
-  const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
-  
-    useEffect(() => {
-      (async () => {
-        const galleryStatus =
-          await ImagePicker.requestMediaLibraryPermissionsAsync();
-          setHasGalleryPermission(galleryStatus.status === "granted");
-      })();
-    }, []);
-
-    const pickImage = async () => {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [1,1],
-        quality: 1,
-      });
-      
-      if (!result.cancelled) {
-        setImage(result.uri);
-        
-      }
-    };
-    const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
-    useValidation({
-      state: { newLanguage },
-    });
-  const onSubmit = () => {
-      validate({
-        bisaya:{required:true},
-        newLanguage:{required:true},
-      });
-      uploadImage();
-    };
-
-  const uploadImage = async () => {
-    const uri = route.params.image;
-    const childPath = `post/${
-      firebase.auth().currentUser.uid
-    }/${Math.random().toString(36)}`;
-    console.log(childPath);
-    const response = await fetch(uri);
-    const blob = await response.blob();
-
-    const task = firebase.storage().ref().child(childPath).put(blob);
-
-    const taskProgress = (snapshot) => {
-      setLoading((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-      console.log(`transferred: ${snapshot.bytesTransferred}`);
-    };
-
-    const taskCompleted = () => {
-      task.snapshot.ref.getDownloadURL().then((snapshot) => {
-        SavePostData(snapshot);
-        setLoading(null);
-        console.log(snapshot);
-      });
-    };
-
-    const taskError = (snapshot) => {
-      console.log(snapshot);
-      setLoading(null);
-    };
-
-    task.on("state_changed", taskProgress, taskError, taskCompleted);
-  };
-
- 
-
-//image
-
-
-
+  const [audio, setAudio] = useState(null);
 
   useEffect(() => {
     setDatalist(currentUser);
@@ -135,6 +59,10 @@ function AddWord({ currentUser, route, navigation }) {
     return unsubscribe;
   }, [navigation]);
 
+
+
+
+
 function makeid() {
     var randomText = "";
     var possible =
@@ -148,8 +76,74 @@ function makeid() {
     return randomText;
   }
 
+  const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
+    useValidation({
+      state: {
+        bisaya,
+        newLanguage,
+        audio,
+      },
+    });  
 
-  const SavePostData = (downloadURL) => {
+    const chooseFile = async () => {
+      let result = await DocumentPicker.getDocumentAsync({
+        type: "audio/*",
+        copyToCacheDirectory: false,
+      });
+      // Alert.alert("Audio File", result.name);
+  
+      console.log(result);
+      if (result.type === "success") {
+        setAudio(result);
+      } else {
+        alert("something went wrong!!");
+      }
+    };
+  
+    const uploadAudio = async () => {
+      validate({
+        
+        audio: { required: false },
+      });
+      const childPath = `audio/${
+        firebase.auth().currentUser.uid
+      }/${Math.random().toString(36)}`;
+      console.log(childPath);
+      const uri = FileSystem.documentDirectory + audio.name;
+  
+      await FileSystem.copyAsync({
+        from: audio.uri,
+        to: uri,
+      });
+  
+      let res = await fetch(uri);
+      let blob = await res.blob();
+  
+      const task = firebase.storage().ref().child(childPath).put(blob);
+  
+      const taskProgress = (snapshot) => {
+        setLoading((snapshot.bytesTransferred / audio?.size) * 100);
+        console.log(`transferred: ${snapshot.bytesTransferred}`);
+      };
+  
+      const taskCompleted = () => {
+        task.snapshot.ref.getDownloadURL().then((snapshot) => {
+          SavePostData(snapshot);
+          setLoading(null);
+          console.log(snapshot);
+        });
+      };
+  
+      const taskError = (snapshot) => {
+        setLoading(null);
+        alert(snapshot);
+        console.log(snapshot);
+      };
+  
+      task.on("state_changed", taskProgress, taskError, taskCompleted);
+    };
+
+    const SavePostData = (downloadURL) => {
       firebase
         .firestore()
         .collection("userAllChatbotAnswers")
@@ -170,7 +164,7 @@ function makeid() {
         .then(function () {
           alert("Daghang Salamat sa imohang kontribusyon!!");
           setLoading(null);
-          navigation.popToTop();
+          navigation.goBack();
         });
         
     };
@@ -186,19 +180,18 @@ function makeid() {
           language:datalist.language,
           bisaya:data?.bisaya,
           newLanguage,
-          audio,
-          image,
           upload: "1",
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(function () {
           alert("Daghang Salamat sa imohang kontribusyon!!");
           setLoading(null);
-          navigation.popToTop();
+          navigation.goB();
         });
     };
 
-
+            
+    
    {
     return (
       <ScrollView style={styles.container}>
@@ -214,39 +207,59 @@ function makeid() {
                   onChangeText={(newLanguage) => setNewLanguage(newLanguage)}/>
           </View>
           
-       
-        <View style={styles.paddingLeft}>
-          <Text style={styles.title_text}>Hulagway(Imahe)</Text>
+          <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Audio </Text>
           <Text style={styles.guidelines}>
-            Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
+            Pwede nimo butangan ug audio kung unsaon pag sulti ani na sentensiya.
           </Text>
-        </View>
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <TouchableOpacity
-            style={styles.imageButton}
-            onPress={pickImage}
-            title="Pick an image from camera roll">
-              <MaterialCommunityIcons
-                  style={styles.addImage}
+          {isFieldInError("audio") &&
+            getErrorsInField("aduio").map((errorMessage) => (
+              <Text></Text>
+            ))}
+          <TouchableOpacity
+            style={styles.audioButton}
+            onPress={() => chooseFile()}>
+            <View>
+              {audio ? (
+                <TextInput>{audio?.name}</TextInput>
+              ) : (
+                <MaterialCommunityIcons
+                  style={styles.addAudio} 
                   name="plus-box"
                   color={"#707070"}
                   size={26}
                 />
+              )}
+            </View>
           </TouchableOpacity>
-      {/* <Button style={styles.audioButton} title="Pick an image from camera roll" onPress={pickImage} /> */}
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200, marginTop: 20 }} />}
-    </View>
+        </View>
+       
+        <View style={styles.paddingLeft}>
+          <Text style={styles.title_text}>Hulagway(Imahe)</Text>
+          <Text style={styles.guidelines}>
+            Pwede nimo butangan ug hulagway(imahe).
+          </Text>
+        </View>
+
+
           <View style={styles.horiz}>
-
-
+{/*           
+          <Pressable style={styles.buttonVocab} onPress={() => uploadAudio()}>
+            <Text style={{
+                     color:"#ffffff",
+                     alignSelf:'center',
+                     fontSize: 18}}>
+              {loading ? `Sharing...  ${parseInt(loading)}%` : "Itigom"}
+            </Text>
+          </Pressable> */}
           
-              <TouchableOpacity onPress={()=>{onSubmit()}}
+              <TouchableOpacity onPress={()=>{uploadAudio()}}
                   style={[styles.buttonVocab,{
                      backgroundColor: "#215A88",}]}>
                   <Text style={{
                      color:"#ffffff",
                      alignSelf:'center',
-                     fontSize: 18}}>itigom</Text>
+                     fontSize: 18}}>{loading ? `Sharing...  ${parseInt(loading)}%` : "Itigom"}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={[styles.buttonVocab,{
                      backgroundColor: "#e7e7e7",}]}>
@@ -314,12 +327,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 80,
   },
-  imageButton: {
+  audioButton: {
     alignItems: "center",
     justifyContent: "center",
     width: "90%",
     borderWidth: 1,
-    borderRadius: 15,
+    borderRadius: 10,
     height: 50,
     borderColor: "#707070",
     paddingTop: 20,
@@ -339,7 +352,7 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
     color: "#707070",
   },
-  addImage:{
+  addAudio:{
     flex: 1,
     position: 'absolute',
     marginTop: -15 
