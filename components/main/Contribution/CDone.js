@@ -9,12 +9,13 @@ import {
   Pressable,
   ScrollView,
   Alert,
-
+  Image
 } from "react-native";
 
 import {
   TextInput
 } from 'react-native-paper'
+import { Dimensions } from "react-native";
 import { connect } from "react-redux";
 import firebase from "firebase";
 require("firebase/firestore");
@@ -25,13 +26,16 @@ import * as FileSystem from "expo-file-system";
 
 
 
+
 function AddWord({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
-
   const [bisaya, setBisaya] = useState("");
   const [ newLanguage, setNewLanguage ] = useState("");
   const [wordID, setWordID] = useState(makeid());
+  const dimensions = Dimensions.get("window");
+  const [image, setImage] = useState(false);
+  const imageWidth = dimensions.width;
 
 function makeid() {
     var randomText = "";
@@ -155,10 +159,13 @@ function makeid() {
               <Text style={{fontSize:30,  fontWeight:'bold',textAlign:'center'}}>
               {data?.newLanguage}
               </Text>
-
-            
           </View>
-          
+          <View>
+          <Image
+            style={{ width: imageWidth, height: imageWidth }}
+            source={{ uri: data?.downloadURL }}
+            />
+          </View>
         </View>
       </ScrollView>
     );

@@ -20,9 +20,12 @@ require("firebase/firebase-storage");
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 function ChatTranslate({ words, navigation, props }) {
+  const dimensions = Dimensions.get("window");
   const [status, setStatus] = useState("Translate");
   const [datalist, setDatalist] = useState("");
-
+  const [image, setImage] = useState(false);
+  const imageWidth = dimensions.width;
+  
   // useEffect(() => {
   //   setDatalist(dictionaryAll);
   // }, [dictionaryAll]);
@@ -64,9 +67,6 @@ function ChatTranslate({ words, navigation, props }) {
           </View>
           <View style={styles.itemBody}>
             <Text>{item?.newLanguage}</Text>
-          </View>
-          <View style={styles.itemBody}>
-            <Image src={item?.Image}></Image>
           </View>
         </View>
           </TouchableOpacity>
