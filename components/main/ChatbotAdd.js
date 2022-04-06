@@ -40,57 +40,57 @@ function AddWord({ currentUser, route, navigation,ImagePickerExample }) {
   const [audio, setAudio] = useState(null); 
 
   // image start
-  const firebaseConfig = {
-    apiKey: "AIzaSyAYcFQheZ9scuPnsfn6doXXxfAq9nZKu4Y",
-    authDomain: "dapok-app.firebaseapp.com",
-    projectId: "dapok-app",
-    storageBucket: "dapok-app.appspot.com",
-    messagingSenderId: "598253020006",
-    appId: "1:598253020006:web:b456cdd8104a9d452c1ea7",
-  };
+  // const firebaseConfig = {
+  //   apiKey: "AIzaSyAYcFQheZ9scuPnsfn6doXXxfAq9nZKu4Y",
+  //   authDomain: "dapok-app.firebaseapp.com",
+  //   projectId: "dapok-app",
+  //   storageBucket: "dapok-app.appspot.com",
+  //   messagingSenderId: "598253020006",
+  //   appId: "1:598253020006:web:b456cdd8104a9d452c1ea7",
+  // };
 
-  try {
-    if (firebaseConfig.apiKey) {
-      firebase.initializeApp(firebaseConfig);
-    }
-  } catch (err) {
-    // ignore app already initialized error on snack
-  }
-    const [image, setImage] = useState(null);
+  // try {
+  //   if (firebaseConfig.apiKey) {
+  //     firebase.initializeApp(firebaseConfig);
+  //   }
+  // } catch (err) {
+  //   // ignore app already initialized error on snack
+  // }
+  //   const [image, setImage] = useState(null);
   
-    useEffect(() => {
-      (async () => {
-        if (Platform.OS !== 'web') {
-          const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-          if (status !== 'granted') {
-            alert('Sorry, we need camera roll permissions to make this work!');
-          }
-        }
-      })();
-    }, []);
-    const pickImage = async () => {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
+  //   useEffect(() => {
+  //     (async () => {
+  //       if (Platform.OS !== 'web') {
+  //         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+  //         if (status !== 'granted') {
+  //           alert('Sorry, we need camera roll permissions to make this work!');
+  //         }
+  //       }
+  //     })();
+  //   }, []);
+  //   const pickImage = async () => {
+  //     let result = await ImagePicker.launchImageLibraryAsync({
+  //       mediaTypes: ImagePicker.MediaTypeOptions.All,
+  //       allowsEditing: true,
+  //       aspect: [4, 3],
+  //       quality: 1,
+  //     });
   
-      console.log(result);
+  //     console.log(result);
       
   
-      if (!result.cancelled) {
-        setImage(result.uri);
-        // this.uploadImage(result.uri,"test-image");
+  //     if (!result.cancelled) {
+  //       setImage(result.uri);
+  //       // this.uploadImage(result.uri,"test-image");
         
-      }
-    };
-  var uploadImage = async (uri,imageName) => {
-    this.uploadImage(result.uri,"test-image");
-    const response = await fetch(uri);
-    const blob = await response.blob();
-    var ref = firebase.storage().ref().child("images/"+imageName);
-  }
+  //     }
+  //   };
+  // var uploadImage = async (uri,imageName) => {
+  //   this.uploadImage(result.uri,"test-image");
+  //   const response = await fetch(uri);
+  //   const blob = await response.blob();
+  //   var ref = firebase.storage().ref().child("images/"+imageName);
+  // }
 
 //image end
 
