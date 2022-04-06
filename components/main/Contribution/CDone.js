@@ -162,7 +162,7 @@ function makeid() {
           </View>
           <View>
           <Image
-            style={{ width: imageWidth, height: imageWidth }}
+            style={[styles.picture, { width: 250, height: 150}]}
             source={{ uri: data?.downloadURL }}
             />
           </View>
@@ -206,5 +206,11 @@ const styles = StyleSheet.create({
     fontSize:18,
     justifyContent:'center',
     alignItems:'center'
+  }, 
+  picture:{
+    justifyContent:'center',
+    alignItems:'center',
+    margin:10,
+    marginLeft: 85
   }, 
 });
