@@ -26,11 +26,11 @@ import { Audio } from "expo-av";
 import * as ImagePicker from "expo-image-picker";
 
 function AddWord({ currentUser, route, navigation }) {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(null);
   const { data } = route?.params ?? {};
 
   const [bisaya, setBisaya] = useState("");
-  const [newLanguage, setNewLanguage] = useState("");
+  const [newLanguage, setNewLanguage] = useState(null);
   const [wordID, setWordID] = useState(makeid());
   const [datalist, setDatalist] = useState("");
   const [image, setImage] = useState(null);
@@ -48,7 +48,7 @@ function AddWord({ currentUser, route, navigation }) {
     let image = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [1, 1],
+      aspect: [4, 3],
       quality: 1,
     });
 
@@ -64,7 +64,8 @@ function AddWord({ currentUser, route, navigation }) {
   const onSubmit = () => {
     validate({
       bisaya,
-      newLanguage,
+      newLanguage:  { required: true },
+      image:{ required: true },
     });
     uploadImage();
   };
@@ -99,6 +100,7 @@ function AddWord({ currentUser, route, navigation }) {
     };
 
     task.on("state_changed", taskProgress, taskError, taskCompleted);
+    
   };
 
   //image
@@ -161,7 +163,11 @@ function AddWord({ currentUser, route, navigation }) {
         alert("Daghang Salamat sa imohang kontribusyon!!");
         setLoading(null);
         navigation.goBack();
+      })
+      .catch((error) => {
+        alert("Email or password is incorrect");
       });
+      
   };
   const saveAllPostData = () => {
     firebase
@@ -186,7 +192,9 @@ function AddWord({ currentUser, route, navigation }) {
         navigation.popToTop();
       });
   };
-
+  const exit =() => {
+    navigation.goBack();
+  }
   {
     return (
       <ScrollView style={styles.container}>
@@ -263,6 +271,9 @@ function AddWord({ currentUser, route, navigation }) {
                   backgroundColor: "#e7e7e7",
                 },
               ]}
+              onPress={() => {
+                exit();
+              }}
             >
               <Text
                 style={{
