@@ -63,8 +63,8 @@ function AddWord({ currentUser, route, navigation }) {
     });
   const onSubmit = () => {
     validate({
-      bisaya: { required: true },
-      newLanguage: { required: true },
+      bisaya,
+      newLanguage,
     });
     uploadImage();
   };
@@ -160,7 +160,7 @@ function AddWord({ currentUser, route, navigation }) {
       .then(function () {
         alert("Daghang Salamat sa imohang kontribusyon!!");
         setLoading(null);
-        navigation.popToTop();
+        navigation.goBack();
       });
   };
   const saveAllPostData = () => {
@@ -253,7 +253,7 @@ function AddWord({ currentUser, route, navigation }) {
                   fontSize: 18,
                 }}
               >
-                itigom
+                {loading ? `itigom...  ${parseInt(loading)}%` : "itigom"}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity

@@ -23,10 +23,6 @@ function ChatTranslate({ words, navigation, props, route }) {
   const [status, setStatus] = useState("Translate");
   const [datalist, setDatalist] = useState("");
   const { dataset } = route?.params ?? {};
-  console.log(dataset);
-  // useEffect(() => {
-  //   setDatalist(dictionaryAll);
-  // }, [dictionaryAll]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {

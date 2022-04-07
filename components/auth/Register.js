@@ -31,7 +31,7 @@ export default class Register extends ValidationComponent {
         super(props);
         
         this.state = {
-          name: "",
+          name: "anonymous",
           email: "",
           username: "",
           password: "",

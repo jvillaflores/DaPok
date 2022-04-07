@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import {
   View,
   Button,
@@ -49,6 +49,8 @@ export default class Login extends Component {
     const { navigation } = this.props;
     const { secureTextEntry } = this.state;
     const { password } = this.state;
+    const {loading} = this.state;
+  
     return (
       <ScrollView style={styles.container}>
          {/* LOGO */}
@@ -120,7 +122,8 @@ export default class Login extends Component {
           <TouchableOpacity
             style={styles.button}
             onPress={() => this.onSignUp()}>
-            <Text style={styles.text}>Login</Text>
+            <Text style={styles.text}>{loading ? `Logging In...  ${parseInt(loading)}%` : "Login"}</Text>
+            
           </TouchableOpacity>
         </View>
         <View style={{ alignItems: "center" }}>
