@@ -68,14 +68,31 @@ function AddWord({ currentUser, route, navigation }) {
       image:{ required: true },
     });
 
-    if (image != null){
+    //if may laman ang image and walang laman si newlanguage
+    // if (image != null && newLanguage == null){
+    //   alert("Please enter a text")
+    // }
+    // else if (image != null){
+    //   uploadImage()
+    // }
+    // else if (newLanguage != null){
+    //   saveAllPostData()
+    // }
+    // else {
+    //   alert("Please enter a text")
+    // }
+
+    if (newLanguage !=null ){
+      saveAllPostData();
+    }
+    else if (image !=null && newLanguage != null){
       uploadImage();
     }
-    else if (newLanguage != null){
-      saveAllPostData()
+    else if (image != null) {
+      alert ("Please enter a text.")
     }
     else {
-      alert("Please enter a text")
+      alert("Please enter a text.")
     }
     
   };
@@ -247,7 +264,7 @@ function AddWord({ currentUser, route, navigation }) {
             {image && (
               <Image
                 source={{ uri: image }}
-                style={{ width: 200, height: 200, marginTop: 20 }}
+                style={{ width: 300, height: 200, marginTop: 20 }}
               />
             )}
           </View>
