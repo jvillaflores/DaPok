@@ -11,6 +11,7 @@ import {
   Alert,
   Platform,
   Image,
+  SafeAreaView,
 } from "react-native";
 
 import { TextInput } from "react-native-paper";
@@ -211,7 +212,8 @@ function AddWord({ currentUser, route, navigation }) {
   }
   {
     return (
-      <ScrollView style={styles.container}>
+      <SafeAreaView  style={styles.container}>
+      <ScrollView>
         <View>
           <View style={styles.center}>
             <Text style={{ fontSize: 18 }}>
@@ -334,6 +336,7 @@ function AddWord({ currentUser, route, navigation }) {
           </View>
         </View>
       </ScrollView>
+      </SafeAreaView>
     );
   }
 }
