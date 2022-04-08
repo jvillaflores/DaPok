@@ -67,7 +67,17 @@ function AddWord({ currentUser, route, navigation }) {
       newLanguage:  { required: true },
       image:{ required: true },
     });
-    uploadImage();
+
+    if (image != null){
+      uploadImage();
+    }
+    else if (newLanguage != null){
+      saveAllPostData()
+    }
+    else {
+      alert("Please enter a text")
+    }
+    
   };
 
   const uploadImage = async () => {
@@ -102,6 +112,8 @@ function AddWord({ currentUser, route, navigation }) {
     task.on("state_changed", taskProgress, taskError, taskCompleted);
     
   };
+
+
 
   //image
 
@@ -164,32 +176,30 @@ function AddWord({ currentUser, route, navigation }) {
         setLoading(null);
         navigation.goBack();
       })
-      .catch((error) => {
-        alert("Email or password is incorrect");
-      });
+      
       
   };
   const saveAllPostData = () => {
     firebase
       .firestore()
-      .collection("words")
-      .add({
-        uid: firebase.auth().currentUser.uid,
+      .collection("userAllChatbotAnswers")
+      .doc(firebase.auth().currentUser.uid)
+      .collection("userChatbotAnswers")
+      .doc(wordID)
+      .set({
         wordId: wordID,
         email: currentUser.email,
-        username: currentUser.name,
         language: datalist.language,
         bisaya: data?.bisaya,
         newLanguage,
-        audio,
-        image,
+        status: "0",
         upload: "1",
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
         alert("Daghang Salamat sa imohang kontribusyon!!");
         setLoading(null);
-        navigation.popToTop();
+        navigation.goBack();
       });
   };
   const exit =() => {
@@ -213,12 +223,7 @@ function AddWord({ currentUser, route, navigation }) {
             />
           </View>
 
-          <View style={styles.paddingLeft}>
-            <Text style={styles.title_text}>Hulagway(Imahe)</Text>
-            <Text style={styles.guidelines}>
-              Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
-            </Text>
-          </View>
+          
           <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
           >
@@ -229,12 +234,16 @@ function AddWord({ currentUser, route, navigation }) {
             >
               <MaterialCommunityIcons
                 style={styles.addImage}
-                name="plus-box"
+                name="image"
                 color={"#707070"}
                 size={26}
               />
             </TouchableOpacity>
-            {/* <Button style={styles.audioButton} title="Pick an image from camera roll" onPress={pickImage} /> */}
+            <View style={styles.paddingLeft}>
+            <Text style={styles.guidelines}>
+              Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
+            </Text>
+          </View>
             {image && (
               <Image
                 source={{ uri: image }}
@@ -242,6 +251,8 @@ function AddWord({ currentUser, route, navigation }) {
               />
             )}
           </View>
+
+          
           <View style={styles.horiz}>
             <TouchableOpacity
               onPress={() => {
@@ -345,19 +356,18 @@ const styles = StyleSheet.create({
   imageButton: {
     alignItems: "center",
     justifyContent: "center",
-    width: "90%",
-    borderWidth: 1,
+    width: "75%",
     borderRadius: 15,
-    height: 50,
-    borderColor: "#707070",
+    height: 60,
     paddingTop: 20,
     marginTop: 10,
+    backgroundColor:"#e7e7e7"
   },
   paddingLeft: {
     alignContent: "flex-start",
     // padding:15,
     // paddingRight:5,
-    marginTop: 20,
+    //marginTop: 20,
     paddingLeft: 20,
     fontWeight: "bold",
     fontSize: 17,
@@ -366,6 +376,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: "italic",
     color: "#707070",
+    paddingHorizontal:20
   },
   addImage: {
     flex: 1,
