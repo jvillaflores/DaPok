@@ -68,20 +68,6 @@ function AddWord({ currentUser, route, navigation }) {
       image:{ required: true },
     });
 
-    //if may laman ang image and walang laman si newlanguage
-    // if (image != null && newLanguage == null){
-    //   alert("Please enter a text")
-    // }
-    // else if (image != null){
-    //   uploadImage()
-    // }
-    // else if (newLanguage != null){
-    //   saveAllPostData()
-    // }
-    // else {
-    //   alert("Please enter a text")
-    // }
-
     if (newLanguage !=null ){
       saveAllPostData();
     }
@@ -97,6 +83,7 @@ function AddWord({ currentUser, route, navigation }) {
     
   };
 
+  ///////////////////////////////
   const uploadImage = async () => {
     const uri = image;
     const childPath = `post/${
@@ -240,6 +227,9 @@ function AddWord({ currentUser, route, navigation }) {
             />
           </View>
 
+
+
+
           
           <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
@@ -268,6 +258,33 @@ function AddWord({ currentUser, route, navigation }) {
               />
             )}
           </View>
+
+              {/* //audio */}
+          <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          >
+            <TouchableOpacity
+              style={styles.imageButton}
+              onPress={pickImage}
+              title="Pick an image from camera roll"
+            >
+              <MaterialCommunityIcons
+                style={styles.addImage}
+                name="volume-plus"
+                color={"#707070"}
+                size={26}
+              />
+            </TouchableOpacity>
+            <View style={styles.paddingLeft}>
+            <Text style={styles.guidelines}>
+              Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
+            </Text>
+          </View>
+           
+          </View>
+          
+          
+
 
           
           <View style={styles.horiz}>
@@ -373,11 +390,9 @@ const styles = StyleSheet.create({
   imageButton: {
     alignItems: "center",
     justifyContent: "center",
-    width: "75%",
-    borderRadius: 15,
+    width: "80%",
+    margin: 5,
     height: 60,
-    paddingTop: 20,
-    marginTop: 10,
     backgroundColor:"#e7e7e7"
   },
   paddingLeft: {
@@ -398,6 +413,5 @@ const styles = StyleSheet.create({
   addImage: {
     flex: 1,
     position: "absolute",
-    marginTop: -15,
   },
 });
