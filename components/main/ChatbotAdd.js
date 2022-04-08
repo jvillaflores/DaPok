@@ -35,6 +35,7 @@ function AddWord({ currentUser, route, navigation }) {
   const [wordID, setWordID] = useState(makeid());
   const [datalist, setDatalist] = useState("");
   const [image, setImage] = useState(null);
+  const [audio, setAudio] = useState(null);
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
 
   useEffect(() => {
@@ -67,12 +68,16 @@ function AddWord({ currentUser, route, navigation }) {
       bisaya,
       newLanguage:  { required: true },
       image:{ required: true },
+      audio: { required: true },
     });
 
     if (newLanguage !=null ){
       saveAllPostData();
     }
-    else if (image !=null && newLanguage != null){
+    else if (audio != null){
+      uploadAudio();
+    }
+    else if (image !=null && newLanguage != null && audio != null){
       uploadImage();
     }
     else if (image != null) {
@@ -117,10 +122,67 @@ function AddWord({ currentUser, route, navigation }) {
     task.on("state_changed", taskProgress, taskError, taskCompleted);
     
   };
-
-
-
   //image
+
+  //AUDIO
+
+  // const chooseFile = async () => {
+  //   let result = await DocumentPicker.getDocumentAsync({
+  //     type: "audio/*",
+  //     copyToCacheDirectory: false,
+  //   });
+  //   // Alert.alert("Audio File", result.name);
+
+  //   console.log(result);
+  //   if (result.type === "success") {
+  //     setAudio(result);
+  //   } else {
+  //     alert("something went wrong!!");
+  //   }
+  // };
+  // const uploadAudio = async () => {
+  //   validate({
+  //     audio: { required: true },
+  //   });
+  //   const childPath = `audio/${
+  //     firebase.auth().currentUser.uid
+  //   }/${Math.random().toString(36)}`;
+  //   console.log(childPath);
+  //   const uri = FileSystem.documentDirectory + audio.name;
+
+  //   await FileSystem.copyAsync({
+  //     from: audio.uri,
+  //     to: uri,
+  //   });
+  //   let res = await fetch(uri);
+  //   let blob = await res.blob();
+
+  //   const task = firebase.storage().ref().child(childPath).put(blob);
+
+  //   const taskProgress = (snapshot) => {
+  //     setLoading((snapshot.bytesTransferred / audio?.size) * 100);
+  //     console.log(`transferred: ${snapshot.bytesTransferred}`);
+  //   };
+
+  //   const taskCompleted = () => {
+  //     task.snapshot.ref.getDownloadURL().then((snapshot) => {
+  //       SavePostData(snapshot);
+  //       saveAllPostData(snapshot);
+  //       setLoading(null);
+  //       console.log(snapshot);
+  //     });
+  //   };
+
+  //   const taskError = (snapshot) => {
+  //     setLoading(null);
+  //     alert(snapshot);
+  //     console.log(snapshot);
+  //   };
+
+  //   task.on("state_changed", taskProgress, taskError, taskCompleted);
+  // };
+
+  //AUDIO
 
   useEffect(() => {
     setDatalist(currentUser);
@@ -172,6 +234,7 @@ function AddWord({ currentUser, route, navigation }) {
         downloadURL: downloadURL,
         bisaya: data?.bisaya,
         newLanguage,
+        audio,
         status: "0",
         upload: "1",
         creation: firebase.firestore.FieldValue.serverTimestamp(),
@@ -197,6 +260,7 @@ function AddWord({ currentUser, route, navigation }) {
         language: datalist.language,
         bisaya: data?.bisaya,
         newLanguage,
+        audio,
         status: "0",
         upload: "1",
         creation: firebase.firestore.FieldValue.serverTimestamp(),
@@ -228,25 +292,17 @@ function AddWord({ currentUser, route, navigation }) {
               onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
             />
           </View>
-
-
-
-
-          
           <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-          >
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
             <TouchableOpacity
               style={styles.imageButton}
               onPress={pickImage}
-              title="Pick an image from camera roll"
-            >
+              title="Pick an image from camera roll">
               <MaterialCommunityIcons
                 style={styles.addImage}
                 name="image"
                 color={"#707070"}
-                size={26}
-              />
+                size={26}/>
             </TouchableOpacity>
             <View style={styles.paddingLeft}>
             <Text style={styles.guidelines}>
@@ -256,39 +312,36 @@ function AddWord({ currentUser, route, navigation }) {
             {image && (
               <Image
                 source={{ uri: image }}
-                style={{ width: 300, height: 200, marginTop: 20 }}
-              />
-            )}
+                style={{ width: 300, height: 200, marginTop: 20 }}/>)}
           </View>
 
               {/* //audio */}
-          <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-          >
+          {/* <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
             <TouchableOpacity
               style={styles.imageButton}
-              onPress={pickImage}
-              title="Pick an image from camera roll"
-            >
+              onPress={() => chooseFile()}>
+                <View>  
+                {audio ? (
+                <TextInput>{audio?.name}</TextInput>
+              ) : (
               <MaterialCommunityIcons
-                style={styles.addImage}
-                name="volume-plus"
-                color={"#707070"}
-                size={26}
-              />
+                  style={styles.addAudio}
+                  name="volume-plus"
+                  color={"#707070"}
+                  size={26}/>
+              )}
+                </View>
             </TouchableOpacity>
             <View style={styles.paddingLeft}>
             <Text style={styles.guidelines}>
               Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
             </Text>
           </View>
-           
-          </View>
-          
-          
+          </View> */}
 
+          {/* audio */}
 
-          
           <View style={styles.horiz}>
             <TouchableOpacity
               onPress={() => {
@@ -351,7 +404,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingVertical: 70,
-    paddingHorizontal: 10,
+    paddingHorizontal: 50,
+    marginTop: 20
   },
   center: {
     alignItems: "center",
@@ -416,5 +470,10 @@ const styles = StyleSheet.create({
   addImage: {
     flex: 1,
     position: "absolute",
+  },
+  addAudio: {
+    flex: 1,
+    position: "absolute",
+    marginTop: -10,
   },
 });
