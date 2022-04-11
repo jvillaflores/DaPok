@@ -63,6 +63,7 @@ function AddWord({ currentUser, route, navigation }) {
     useValidation({
       state: { newLanguage },
     });
+
   const onSubmit = () => {
     validate({
       bisaya,
@@ -125,6 +126,13 @@ function AddWord({ currentUser, route, navigation }) {
   //image
 
   //AUDIO
+///////////////////////////////////////////////////////////
+  const chooseFile = async () => {
+    let result = await DocumentPicker.getDocumentAsync({
+      type: "audio/*",
+      copyToCacheDirectory: false,
+    });
+    // Alert.alert("Audio File", result.name);
 
   // const chooseFile = async () => {
   //   let result = await DocumentPicker.getDocumentAsync({
@@ -186,8 +194,43 @@ function AddWord({ currentUser, route, navigation }) {
 
   //   task.on("state_changed", taskProgress, taskError, taskCompleted);
   // };
+    console.log(result);
+    if (result.type === "success") {
+      setAudio(result);
+    } else {
+      alert("something went wrong!!");
+    }
+  };
+  const uploadAudio = async () => {
+    const uri = audio;
+    const childPath = `audio/${
+      firebase.auth().currentUser.uid
+    }/${Math.random().toString(36)}`;
+    console.log(childPath);
+    
 
-  //AUDIO
+    await FileSystem.copyAsync({
+      from: audio.uri,
+      to: uri,
+    });
+    let res = await fetch(uri);
+    let blob = await res.blob();
+
+    const task = firebase.storage().ref().child(childPath).put(blob);
+
+    const taskProgress = (snapshot) => {
+      setLoading((snapshot.bytesTransferred / audio?.size) * 100);
+      console.log(`transferred: ${snapshot.bytesTransferred}`);
+    };
+
+    const taskCompleted = () => {
+      task.snapshot.ref.getDownloadURL().then((snapshot) => {
+       
+        saveAllPostData(snapshot);
+        setLoading(null);
+        console.log(snapshot);
+      });
+    };
 
   //AUDIO 2
   async function startRecording() {
@@ -249,6 +292,17 @@ function AddWord({ currentUser, route, navigation }) {
   }
   //AUDIO 2
 
+    const taskError = (snapshot) => {
+      setLoading(null);
+      alert(snapshot);
+      console.log(snapshot);
+    };
+
+    task.on("state_changed", taskProgress, taskError, taskCompleted);
+  };
+
+  //AUDIO
+/////////////////////////////////////////////////////////////
   useEffect(() => {
     setDatalist(currentUser);
   }, [currentUser]);
@@ -300,7 +354,6 @@ function AddWord({ currentUser, route, navigation }) {
         downloadURL: downloadURL,
         bisaya: data?.bisaya,
         newLanguage,
-        audio,
         status: "0",
         upload: "1",
         creation: firebase.firestore.FieldValue.serverTimestamp(),
@@ -313,7 +366,7 @@ function AddWord({ currentUser, route, navigation }) {
       
       
   };
-  const saveAllPostData = () => {
+  const saveAllPostData = (downloadURL) => {
     firebase
       .firestore()
       .collection("userAllChatbotAnswers")
@@ -346,43 +399,49 @@ function AddWord({ currentUser, route, navigation }) {
     return (
       <SafeAreaView  style={styles.container}>
       <ScrollView>
-        <View>
-          <View style={styles.center}>
-            <Text style={{ fontSize: 18 }}>
-              Itubag kini nga panguatana sa {datalist.language}
-            </Text>
-            <Text style={styles.text}>{data?.bisaya} </Text>
-          </View>
-          <View style={styles.horiz}>
-            <TextInput
-              multiline={false}
-              activeUnderlineColor="#215A88"
-              onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
-            />
-          </View>
-          <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-            <TouchableOpacity
-              style={styles.imageButton}
-              onPress={pickImage}
-              title="Pick an image from camera roll">
-              <MaterialCommunityIcons
-                style={styles.addImage}
-                name="image"
-                color={"#707070"}
-                size={26}/>
-            </TouchableOpacity>
-            <View style={styles.paddingLeft}>
-            <Text style={styles.guidelines}>
-              Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
-            </Text>
-          </View>
-            {image && (
-              <Image
-                source={{ uri: image }}
-                style={{ width: 300, height: 200, marginTop: 20 }}/>)}
-          </View>
+          <View style = {{paddingHorizontal:40, paddingVertical:40}}>
 
+
+              <View style={styles.center}>
+                  <Text style={{ fontSize: 18 }}>
+                    Itubag kini nga panguatana sa {datalist.language}
+                  </Text>
+                  <Text style={styles.text}>{data?.bisaya} </Text>
+              </View>
+              <View style={{marginVertical:25}}>
+                  <TextInput
+                    multiline={false}
+                    activeUnderlineColor="#215A88"
+                    onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
+                  />
+              </View>
+
+{/* ///////////////////////////IMAGE/////////////////////////////// */}
+
+              <View style={{ flex: 1, justifyContent:'center'}}>
+                  <Text style={styles.guidelines}>Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
+                  </Text>
+                  <TouchableOpacity
+                      style={styles.imageButton}
+                      onPress={pickImage}
+                      title="Pick an image from camera roll">
+                      <MaterialCommunityIcons
+                        style={styles.addImage}
+                        name="image"
+                        color={"#707070"}
+                        size={26}/>
+                    </TouchableOpacity>
+                  <View style ={{alignItems:'center'}}>
+                      {image && (
+                        <Image
+                        source={{ uri: image }}
+                        style={{ width: 300, height: 200, marginTop: 20 , }}/>)}
+                  </View>
+               
+              </View>
+
+
+{/* /////////////////////////////////////////////////////////////////////////// */}
               {/* //audio */}
           <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -416,55 +475,75 @@ function AddWord({ currentUser, route, navigation }) {
         title={recording ? 'Stop Recording' : 'Start Recording'}
         onPress={recording ? stopRecording : startRecording}
       />
+              <View
+                style={{ flex: 1, justifyContent: "center" }}>
+              
+                <Text style={styles.guidelines}>Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.</Text>
+          
+                <TouchableOpacity
+                    style={styles.imageButton}
+                    onPress={() => chooseFile()}>
+                      <View style={{alignSelf:"center", alignItems:'center'}}>  
+                            {audio ? (
+                            <TextInput>{audio?.name}</TextInput>
+                          ) : (
+                          <MaterialCommunityIcons
+                              style={styles.addAudio}
+                              name="volume-plus"
+                              color={"#707070"}
+                              size={26}/>
+                          )}
+                      </View>
+                </TouchableOpacity>
+            
+          </View>
+          
 
           {/* audio */}
+{/* ////////////////////////////////////////////////// SAVING  */}
+                <View style={styles.horiz}>
+                     <TouchableOpacity
+                        onPress={() => {
+                          onSubmit();
+                        }}
+                         style={[
+                          styles.buttonVocab,
+                          {
+                            backgroundColor: "#215A88",
+                          },
+                        ]}
+                        >
+                          <Text
+                            style={{
+                              color: "#ffffff",
+                              alignSelf: "center",
+                              fontSize: 18,
+                            }}
+                          >{loading ? `itigom...  ${parseInt(loading)}%` : "itigom"}</Text>
+                      </TouchableOpacity>
 
-          <View style={styles.horiz}>
-            <TouchableOpacity
-              onPress={() => {
-                onSubmit();
-              }}
-              style={[
-                styles.buttonVocab,
-                {
-                  backgroundColor: "#215A88",
-                },
-              ]}
-            >
-              <Text
-                style={{
-                  color: "#ffffff",
-                  alignSelf: "center",
-                  fontSize: 18,
-                }}
-              >
-                {loading ? `itigom...  ${parseInt(loading)}%` : "itigom"}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.buttonVocab,
-                {
-                  backgroundColor: "#e7e7e7",
-                },
-              ]}
-              onPress={() => {
-                exit();
-              }}
-            >
-              <Text
-                style={{
-                  color: "#215A88",
-                  alignSelf: "center",
-                  fontWeight: "700",
-                  fontSize: 18,
-                }}
-              >
-                kanselahon
-              </Text>
-            </TouchableOpacity>
+                      <TouchableOpacity
+                        style={[
+                          styles.buttonVocab,
+                          {
+                            backgroundColor: "#e7e7e7",
+                          },
+                        ]}
+                        onPress={() => {
+                          exit();
+                        }}
+                      >
+                        <Text
+                          style={{
+                            color: "#215A88",
+                            alignSelf: "center",
+                            fontWeight: "700",
+                            fontSize: 18,
+                          }}
+                        >kanselahon</Text>
+                      </TouchableOpacity>
+                  </View>
           </View>
-        </View>
       </ScrollView>
       </SafeAreaView>
     );
@@ -480,15 +559,14 @@ export default connect(mapStateToProps, null)(AddWord);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 70,
-    paddingHorizontal: 50,
+    
     marginTop: 20
   },
   center: {
     alignItems: "center",
   },
   horiz: {
-    paddingHorizontal: 40,
+    //paddingHorizontal: 40,
     paddingVertical: 20,
   },
   buttonVocab: {
@@ -502,7 +580,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
     fontSize: 20,
-    justifyContent: "center",
+    textAlign:"center"
   },
   title_text: {
     //alignContent:"flex-start",
@@ -524,7 +602,7 @@ const styles = StyleSheet.create({
   imageButton: {
     alignItems: "center",
     justifyContent: "center",
-    width: "80%",
+    width: "100%",
     margin: 5,
     height: 60,
     backgroundColor:"#e7e7e7"
@@ -542,7 +620,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: "italic",
     color: "#707070",
-    paddingHorizontal:20
+    marginTop:15,
+    paddingHorizontal:5,
   },
   addImage: {
     flex: 1,
@@ -550,7 +629,7 @@ const styles = StyleSheet.create({
   },
   addAudio: {
     flex: 1,
-    position: "absolute",
-    marginTop: -10,
+    position: "relative",
+    paddingVertical:15
   },
 });
