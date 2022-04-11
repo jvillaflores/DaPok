@@ -63,6 +63,7 @@ function AddWord({ currentUser, route, navigation }) {
     useValidation({
       state: { newLanguage },
     });
+
   const onSubmit = () => {
     validate({
       bisaya,
@@ -125,65 +126,63 @@ function AddWord({ currentUser, route, navigation }) {
   //image
 
   //AUDIO
+///////////////////////////////////////////////////////////
+  const chooseFile = async () => {
+    let result = await DocumentPicker.getDocumentAsync({
+      type: "audio/*",
+      copyToCacheDirectory: false,
+    });
+    // Alert.alert("Audio File", result.name);
 
-  // const chooseFile = async () => {
-  //   let result = await DocumentPicker.getDocumentAsync({
-  //     type: "audio/*",
-  //     copyToCacheDirectory: false,
-  //   });
-  //   // Alert.alert("Audio File", result.name);
+    console.log(result);
+    if (result.type === "success") {
+      setAudio(result);
+    } else {
+      alert("something went wrong!!");
+    }
+  };
+  const uploadAudio = async () => {
+    const uri = audio;
+    const childPath = `audio/${
+      firebase.auth().currentUser.uid
+    }/${Math.random().toString(36)}`;
+    console.log(childPath);
+    
 
-  //   console.log(result);
-  //   if (result.type === "success") {
-  //     setAudio(result);
-  //   } else {
-  //     alert("something went wrong!!");
-  //   }
-  // };
-  // const uploadAudio = async () => {
-  //   validate({
-  //     audio: { required: true },
-  //   });
-  //   const childPath = `audio/${
-  //     firebase.auth().currentUser.uid
-  //   }/${Math.random().toString(36)}`;
-  //   console.log(childPath);
-  //   const uri = FileSystem.documentDirectory + audio.name;
+    await FileSystem.copyAsync({
+      from: audio.uri,
+      to: uri,
+    });
+    let res = await fetch(uri);
+    let blob = await res.blob();
 
-  //   await FileSystem.copyAsync({
-  //     from: audio.uri,
-  //     to: uri,
-  //   });
-  //   let res = await fetch(uri);
-  //   let blob = await res.blob();
+    const task = firebase.storage().ref().child(childPath).put(blob);
 
-  //   const task = firebase.storage().ref().child(childPath).put(blob);
+    const taskProgress = (snapshot) => {
+      setLoading((snapshot.bytesTransferred / audio?.size) * 100);
+      console.log(`transferred: ${snapshot.bytesTransferred}`);
+    };
 
-  //   const taskProgress = (snapshot) => {
-  //     setLoading((snapshot.bytesTransferred / audio?.size) * 100);
-  //     console.log(`transferred: ${snapshot.bytesTransferred}`);
-  //   };
+    const taskCompleted = () => {
+      task.snapshot.ref.getDownloadURL().then((snapshot) => {
+       
+        saveAllPostData(snapshot);
+        setLoading(null);
+        console.log(snapshot);
+      });
+    };
 
-  //   const taskCompleted = () => {
-  //     task.snapshot.ref.getDownloadURL().then((snapshot) => {
-  //       SavePostData(snapshot);
-  //       saveAllPostData(snapshot);
-  //       setLoading(null);
-  //       console.log(snapshot);
-  //     });
-  //   };
+    const taskError = (snapshot) => {
+      setLoading(null);
+      alert(snapshot);
+      console.log(snapshot);
+    };
 
-  //   const taskError = (snapshot) => {
-  //     setLoading(null);
-  //     alert(snapshot);
-  //     console.log(snapshot);
-  //   };
-
-  //   task.on("state_changed", taskProgress, taskError, taskCompleted);
-  // };
+    task.on("state_changed", taskProgress, taskError, taskCompleted);
+  };
 
   //AUDIO
-
+/////////////////////////////////////////////////////////////
   useEffect(() => {
     setDatalist(currentUser);
   }, [currentUser]);
@@ -234,7 +233,6 @@ function AddWord({ currentUser, route, navigation }) {
         downloadURL: downloadURL,
         bisaya: data?.bisaya,
         newLanguage,
-        audio,
         status: "0",
         upload: "1",
         creation: firebase.firestore.FieldValue.serverTimestamp(),
@@ -247,7 +245,7 @@ function AddWord({ currentUser, route, navigation }) {
       
       
   };
-  const saveAllPostData = () => {
+  const saveAllPostData = (downloadURL) => {
     firebase
       .firestore()
       .collection("userAllChatbotAnswers")
@@ -260,7 +258,6 @@ function AddWord({ currentUser, route, navigation }) {
         language: datalist.language,
         bisaya: data?.bisaya,
         newLanguage,
-        audio,
         status: "0",
         upload: "1",
         creation: firebase.firestore.FieldValue.serverTimestamp(),
@@ -310,12 +307,14 @@ function AddWord({ currentUser, route, navigation }) {
                         color={"#707070"}
                         size={26}/>
                     </TouchableOpacity>
-            
-                {image && (
-                <Image
-                    source={{ uri: image }}
-                    style={{ width: 300, height: 200, marginTop: 20 }}/>)}
-                </View>
+                  <View style ={{alignItems:'center'}}>
+                      {image && (
+                        <Image
+                        source={{ uri: image }}
+                        style={{ width: 300, height: 200, marginTop: 20 , }}/>)}
+                  </View>
+               
+              </View>
 
 
 {/* /////////////////////////////////////////////////////////////////////////// */}
@@ -328,20 +327,21 @@ function AddWord({ currentUser, route, navigation }) {
                 <TouchableOpacity
                     style={styles.imageButton}
                     onPress={() => chooseFile()}>
-                      <View>  
-                      {audio ? (
-                      <TextInput>{audio?.name}</TextInput>
-                    ) : (
-                    <MaterialCommunityIcons
-                        style={styles.addAudio}
-                        name="volume-plus"
-                        color={"#707070"}
-                        size={26}/>
-                    )}
+                      <View style={{alignSelf:"center", alignItems:'center'}}>  
+                            {audio ? (
+                            <TextInput>{audio?.name}</TextInput>
+                          ) : (
+                          <MaterialCommunityIcons
+                              style={styles.addAudio}
+                              name="volume-plus"
+                              color={"#707070"}
+                              size={26}/>
+                          )}
                       </View>
                 </TouchableOpacity>
             
           </View>
+          
 
           {/* audio */}
 {/* ////////////////////////////////////////////////// SAVING  */}
@@ -473,7 +473,7 @@ const styles = StyleSheet.create({
   },
   addAudio: {
     flex: 1,
-    position: "absolute",
-    marginTop: -10,
+    position: "relative",
+    paddingVertical:15
   },
 });
