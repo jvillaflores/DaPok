@@ -29,7 +29,7 @@ import * as ImagePicker from "expo-image-picker";
 function AddWord({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(null);
   const { data } = route?.params ?? {};
-
+  const [recording, setRecording] = React.useState();
   const [bisaya, setBisaya] = useState("");
   const [newLanguage, setNewLanguage] = useState(null);
   const [wordID, setWordID] = useState(makeid());
@@ -139,7 +139,12 @@ function AddWord({ currentUser, route, navigation }) {
   //   } else {
   //     alert("something went wrong!!");
   //   }
+  //   // if (!result.cancelled) {
+  //   //   setAudio(result.uri);
+  //   //   console.log(result.uri);
+  //   // }
   // };
+  
   // const uploadAudio = async () => {
   //   validate({
   //     audio: { required: true },
@@ -184,6 +189,66 @@ function AddWord({ currentUser, route, navigation }) {
 
   //AUDIO
 
+  //AUDIO 2
+  async function startRecording() {
+    try {
+      console.log('Requesting permissions..');
+      await Audio.requestPermissionsAsync();
+      await Audio.setAudioModeAsync({
+        allowsRecordingIOS: true,
+        playsInSilentModeIOS: true,
+      }); 
+      console.log('Starting recording..');
+      const { recording } = await Audio.Recording.createAsync(
+         Audio.RECORDING_OPTIONS_PRESET_HIGH_QUALITY
+      );
+      setRecording(recording);
+      console.log('Recording started');
+    } catch (err) {
+      console.error('Failed to start recording', err);
+    }
+  }
+
+  async function stopRecording() {
+    console.log('Stopping recording..');
+    setRecording(undefined);
+    await recording.stopAndUnloadAsync();
+    const uri = recording;
+    const childPath = `audio/${
+      firebase.auth().currentUser.uid
+    }/${Math.random().toString(36)}`;
+    console.log(childPath);
+    const response = await fetch(uri);
+    const blob = await response.blob();
+
+    const task = firebase.storage().ref().child(childPath).put(blob);
+
+    const taskProgress = (snapshot) => {
+      setLoading((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+      console.log(`transferred: ${snapshot.bytesTransferred}`);
+    };
+
+    const taskCompleted = () => {
+      task.snapshot.ref.getDownloadURL().then((snapshot) => {
+        SavePostData(snapshot);
+        setLoading(null);
+        console.log(snapshot);
+      });
+    };
+
+    const taskError = (snapshot) => {
+      console.log(snapshot);
+      setLoading(null);
+    };
+
+    task.on("state_changed", taskProgress, taskError, taskCompleted);
+    
+
+    console.log('Recording stopped and stored at', uri);
+
+  }
+  //AUDIO 2
+
   useEffect(() => {
     setDatalist(currentUser);
   }, [currentUser]);
@@ -227,6 +292,7 @@ function AddWord({ currentUser, route, navigation }) {
       .doc(firebase.auth().currentUser.uid)
       .collection("userChatbotAnswers")
       .doc(wordID)
+      // .collection("userAllChatbotAnswerAudio")
       .set({
         wordId: wordID,
         email: currentUser.email,
@@ -253,6 +319,7 @@ function AddWord({ currentUser, route, navigation }) {
       .collection("userAllChatbotAnswers")
       .doc(firebase.auth().currentUser.uid)
       .collection("userChatbotAnswers")
+      .collection("userAllChatbotAnswerAudio")
       .doc(wordID)
       .set({
         wordId: wordID,
@@ -261,6 +328,7 @@ function AddWord({ currentUser, route, navigation }) {
         bisaya: data?.bisaya,
         newLanguage,
         audio,
+        recording,
         status: "0",
         upload: "1",
         creation: firebase.firestore.FieldValue.serverTimestamp(),
@@ -316,7 +384,7 @@ function AddWord({ currentUser, route, navigation }) {
           </View>
 
               {/* //audio */}
-          {/* <View
+          <View
             style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
             <TouchableOpacity
               style={styles.imageButton}
@@ -335,10 +403,19 @@ function AddWord({ currentUser, route, navigation }) {
             </TouchableOpacity>
             <View style={styles.paddingLeft}>
             <Text style={styles.guidelines}>
-              Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
+              Pwede nimo butangan ug audio kung unsaon sya pag storya.
             </Text>
           </View>
-          </View> */}
+          </View>
+
+          {/* audio */}
+
+          {/* audio */}
+
+          <Button
+        title={recording ? 'Stop Recording' : 'Start Recording'}
+        onPress={recording ? stopRecording : startRecording}
+      />
 
           {/* audio */}
 
