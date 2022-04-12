@@ -65,23 +65,21 @@ function AddWord({ currentUser, route, navigation }) {
   const onSubmit = () => {
     validate({
       bisaya,
-      newLanguage:  { required: true },
-      image:{ required: true },
+      newLanguage: { required: true },
+      image: { required: true },
     });
 
-    if (newLanguage !=null ){
-      saveAllPostData();
+    if (newLanguage != null) {
+      if (image != null) {
+        uploadImage();
+      } else {
+        saveAllPostData();
+      }
+    } else if (image != null) {
+      alert("Please enter a text.");
+    } else {
+      alert("Please enter a text.");
     }
-    else if (image !=null && newLanguage != null){
-      uploadImage();
-    }
-    else if (image != null) {
-      alert ("Please enter a text.")
-    }
-    else {
-      alert("Please enter a text.")
-    }
-    
   };
 
   ///////////////////////////////
@@ -115,42 +113,40 @@ function AddWord({ currentUser, route, navigation }) {
   //   };
 
   //   task.on("state_changed", taskProgress, taskError, taskCompleted);
-    
+
   // };
 
-  
   const uploadImage = async () => {
-      const uri = image;
-      const childPath = `post/${
-        firebase.auth().currentUser.uid
-      }/${Math.random().toString(36)}`;
-      console.log(childPath);
-      const response = await fetch(uri);
-      const blob = await response.blob();
-  
-      const task = firebase.storage().ref().child(childPath).put(blob);
-  
-      const taskProgress = (snapshot) => {
-        setLoading((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-        console.log(`transferred: ${snapshot.bytesTransferred}`);
-      };
-  
-      const taskCompleted = () => {
-        task.snapshot.ref.getDownloadURL().then((snapshot) => {
-          SavePostData(snapshot);
-          // setImageURL(snapshot);
-          setLoading(null);
-          console.log(imageURL);
-        });
-      };
-  
-      const taskError = (snapshot) => {
-        console.log(snapshot);
-        setLoading(null);
-      };
-  
-      task.on("state_changed", taskProgress, taskError, taskCompleted);
+    const uri = image;
+    const childPath = `post/${
+      firebase.auth().currentUser.uid
+    }/${Math.random().toString(36)}`;
+    console.log(childPath);
+    const response = await fetch(uri);
+    const blob = await response.blob();
+
+    const task = firebase.storage().ref().child(childPath).put(blob);
+
+    const taskProgress = (snapshot) => {
+      setLoading((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+      console.log(`transferred: ${snapshot.bytesTransferred}`);
     };
+
+    const taskCompleted = () => {
+      task.snapshot.ref.getDownloadURL().then((snapshot) => {
+        SavePostData(snapshot);
+
+        setLoading(null);
+      });
+    };
+
+    const taskError = (snapshot) => {
+      console.log(snapshot);
+      setLoading(null);
+    };
+
+    task.on("state_changed", taskProgress, taskError, taskCompleted);
+  };
 
   //image
 
@@ -212,9 +208,7 @@ function AddWord({ currentUser, route, navigation }) {
         alert("Daghang Salamat sa imohang kontribusyon!!");
         setLoading(null);
         navigation.goBack();
-      })
-      
-      
+      });
   };
   const saveAllPostData = () => {
     firebase
@@ -239,111 +233,109 @@ function AddWord({ currentUser, route, navigation }) {
         navigation.goBack();
       });
   };
-  const exit =() => {
+  const exit = () => {
     navigation.goBack();
-  }
+  };
   {
     return (
-      <SafeAreaView  style={styles.container}>
-      <ScrollView>
-        <View>
-          <View style={styles.center}>
-            <Text style={{ fontSize: 18 }}>
-              Itubag kini nga panguatana sa {datalist.language}
-            </Text>
-            <Text style={styles.text}>{data?.bisaya} </Text>
-          </View>
-          <View style={styles.horiz}>
-            <TextInput
-              multiline={false}
-              activeUnderlineColor="#215A88"
-              onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
-            />
-          </View>
-
-
-
-
-          
-          <View
-            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-          >
-            <TouchableOpacity
-              style={styles.imageButton}
-              onPress={pickImage}
-              title="Pick an image from camera roll"
-            >
-              <MaterialCommunityIcons
-                style={styles.addImage}
-                name="image"
-                color={"#707070"}
-                size={26}
-              />
-            </TouchableOpacity>
-            <View style={styles.paddingLeft}>
-            <Text style={styles.guidelines}>
-              Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
-            </Text>
-          </View>
-            {image && (
-              <Image
-                source={{ uri: image }}
-                style={{ width: 300, height: 200, marginTop: 20 }}
-              />
-            )}
-          </View>
-
-              {/* //audio */}
-          
-        
-          
-          <View style={styles.horiz}>
-            <TouchableOpacity
-              onPress={() => {
-                onSubmit();
-              }}
-              style={[
-                styles.buttonVocab,
-                {
-                  backgroundColor: "#215A88",
-                },
-              ]}
-            >
-              <Text
-                style={{
-                  color: "#ffffff",
-                  alignSelf: "center",
-                  fontSize: 18,
-                }}
-              >
-                {loading ? `itigom...  ${parseInt(loading)}%` : "itigom"}
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
+          <View>
+            <View style={styles.center}>
+              <Text style={{ fontSize: 18 }}>
+                Itubag kini nga panguatana sa {datalist.language}
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.buttonVocab,
-                {
-                  backgroundColor: "#e7e7e7",
-                },
-              ]}
-              onPress={() => {
-                exit();
+              <Text style={styles.text}>{data?.bisaya} </Text>
+            </View>
+            <View style={styles.horiz}>
+              <TextInput
+                multiline={false}
+                activeUnderlineColor="#215A88"
+                onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
+              />
+            </View>
+
+            <View
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
-              <Text
-                style={{
-                  color: "#215A88",
-                  alignSelf: "center",
-                  fontWeight: "700",
-                  fontSize: 18,
+              <TouchableOpacity
+                style={styles.imageButton}
+                onPress={pickImage}
+                title="Pick an image from camera roll"
+              >
+                <MaterialCommunityIcons
+                  style={styles.addImage}
+                  name="image"
+                  color={"#707070"}
+                  size={26}
+                />
+              </TouchableOpacity>
+              <View style={styles.paddingLeft}>
+                <Text style={styles.guidelines}>
+                  Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
+                </Text>
+              </View>
+              {image && (
+                <Image
+                  source={{ uri: image }}
+                  style={{ width: 300, height: 200, marginTop: 20 }}
+                />
+              )}
+            </View>
+
+            {/* //audio */}
+
+            <View style={styles.horiz}>
+              <TouchableOpacity
+                onPress={() => {
+                  onSubmit();
+                }}
+                style={[
+                  styles.buttonVocab,
+                  {
+                    backgroundColor: "#215A88",
+                  },
+                ]}
+              >
+                <Text
+                  style={{
+                    color: "#ffffff",
+                    alignSelf: "center",
+                    fontSize: 18,
+                  }}
+                >
+                  {loading ? `itigom...  ${parseInt(loading)}%` : "itigom"}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.buttonVocab,
+                  {
+                    backgroundColor: "#e7e7e7",
+                  },
+                ]}
+                onPress={() => {
+                  exit();
                 }}
               >
-                kanselahon
-              </Text>
-            </TouchableOpacity>
+                <Text
+                  style={{
+                    color: "#215A88",
+                    alignSelf: "center",
+                    fontWeight: "700",
+                    fontSize: 18,
+                  }}
+                >
+                  kanselahon
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -404,7 +396,7 @@ const styles = StyleSheet.create({
     width: "80%",
     margin: 5,
     height: 60,
-    backgroundColor:"#e7e7e7"
+    backgroundColor: "#e7e7e7",
   },
   paddingLeft: {
     alignContent: "flex-start",
@@ -419,7 +411,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: "italic",
     color: "#707070",
-    paddingHorizontal:20
+    paddingHorizontal: 20,
   },
   addImage: {
     flex: 1,
