@@ -29,7 +29,6 @@ import * as ImagePicker from "expo-image-picker";
 function AddWord({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(null);
   const { data } = route?.params ?? {};
-  const [audio, setAudio] = useState(null);
 
   const [bisaya, setBisaya] = useState("");
   const [newLanguage, setNewLanguage] = useState(null);
@@ -72,7 +71,6 @@ function AddWord({ currentUser, route, navigation }) {
 
     if (newLanguage !=null ){
       saveAllPostData();
-      uploadAudio();
     }
     else if (image !=null && newLanguage != null){
       uploadImage();
@@ -86,97 +84,76 @@ function AddWord({ currentUser, route, navigation }) {
     
   };
 
-  
   ///////////////////////////////
-  const uploadImage = async () => {
-    const uri = image;
-    const childPath = `post/${
-      firebase.auth().currentUser.uid
-    }/${Math.random().toString(36)}`;
-    console.log(childPath);
-    const response = await fetch(uri);
-    const blob = await response.blob();
+  // const uploadImage = async () => {
+  //   const uri = image;
+  //   const childPath = `post/${
+  //     firebase.auth().currentUser.uid
+  //   }/${Math.random().toString(36)}`;
+  //   console.log(childPath);
+  //   const response = await fetch(uri);
+  //   const blob = await response.blob();
 
-    const task = firebase.storage().ref().child(childPath).put(blob);
+  //   const task = firebase.storage().ref().child(childPath).put(blob);
 
-    const taskProgress = (snapshot) => {
-      setLoading((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-      console.log(`transferred: ${snapshot.bytesTransferred}`);
-    };
+  //   const taskProgress = (snapshot) => {
+  //     setLoading((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+  //     console.log(`transferred: ${snapshot.bytesTransferred}`);
+  //   };
 
-    const taskCompleted = () => {
-      task.snapshot.ref.getDownloadURL().then((snapshot) => {
-        SavePostData(snapshot);
-        setLoading(null);
-        console.log(snapshot);
-      });
-    };
+  //   const taskCompleted = () => {
+  //     task.snapshot.ref.getDownloadURL().then((snapshot) => {
+  //       SavePostData(snapshot);
+  //       setLoading(null);
+  //       console.log(snapshot);
+  //     });
+  //   };
 
-    const taskError = (snapshot) => {
-      console.log(snapshot);
-      setLoading(null);
-    };
+  //   const taskError = (snapshot) => {
+  //     console.log(snapshot);
+  //     setLoading(null);
+  //   };
 
-    task.on("state_changed", taskProgress, taskError, taskCompleted);
+  //   task.on("state_changed", taskProgress, taskError, taskCompleted);
     
-  };
- ///////////////////////////////////////////////// //image////////////////
+  // };
 
-
-/////////////////////AUDIO/////////////////////////////////
-const chooseFile = async () => {
-  let result = await DocumentPicker.getDocumentAsync({
-    type: "audio/*",
-    copyToCacheDirectory: false,
-  });
-  // Alert.alert("Audio File", result.name);
-
-  console.log(result);
-  if (result.type === "success") {
-    setAudio(result);
-  } else {
-    alert("something went wrong!!");
-  }
-};
-
-const uploadAudio = async () => {
-  const uri = audio;
-  const childPath = `audio/${
-    firebase.auth().currentUser.uid
-  }/${Math.random().toString(36)}`;
-  console.log(childPath);
   
-  let res = await fetch(uri);
-  let blob = await res.blob();
+  const uploadImage = async () => {
+      const uri = image;
+      const childPath = `post/${
+        firebase.auth().currentUser.uid
+      }/${Math.random().toString(36)}`;
+      console.log(childPath);
+      const response = await fetch(uri);
+      const blob = await response.blob();
+  
+      const task = firebase.storage().ref().child(childPath).put(blob);
+  
+      const taskProgress = (snapshot) => {
+        setLoading((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        console.log(`transferred: ${snapshot.bytesTransferred}`);
+      };
+  
+      const taskCompleted = () => {
+        task.snapshot.ref.getDownloadURL().then((snapshot) => {
+          SavePostData(snapshot);
+          // setImageURL(snapshot);
+          setLoading(null);
+          console.log(imageURL);
+        });
+      };
+  
+      const taskError = (snapshot) => {
+        console.log(snapshot);
+        setLoading(null);
+      };
+  
+      task.on("state_changed", taskProgress, taskError, taskCompleted);
+    };
 
-  const task = firebase.storage().ref().child(childPath).put(blob);
+  //image
 
-  const taskProgress = (snapshot) => {
-    setLoading((snapshot.bytesTransferred / audio?.size) * 100);
-    console.log(`transferred: ${snapshot.bytesTransferred}`);
-  };
-
-  const taskCompleted = () => {
-    task.snapshot.ref.getDownloadURL().then((snapshot) => {
-      SavePostData(snapshot);
-      saveAllPostData(snapshot);
-      setLoading(null);
-      console.log(snapshot);
-    });
-  };
-
-  const taskError = (snapshot) => {
-    setLoading(null);
-    alert(snapshot);
-    console.log(snapshot);
-  };
-
-  task.on("state_changed", taskProgress, taskError, taskCompleted);
-  console.log(audio.downloadURL)
-};
-
-
-////////////////////////////////////////////////////////////
   useEffect(() => {
     setDatalist(currentUser);
   }, [currentUser]);
@@ -269,116 +246,103 @@ const uploadAudio = async () => {
     return (
       <SafeAreaView  style={styles.container}>
       <ScrollView>
-          <View style = {{paddingHorizontal:40, paddingVertical:40}}>
-
-              <View style={styles.center}>
-                  <Text style={{ fontSize: 18 }}>
-                    Itubag kini nga panguatana sa {datalist.language}
-                  </Text>
-                  <Text style={styles.text}>{data?.bisaya} </Text>
-              </View>
-              <View style={{marginTop:20}}>
-                  <TextInput
-                    multiline={false}
-                    activeUnderlineColor="#215A88"
-                    onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
-                  />
-              </View>
-
-{/* ///////////////////////////IMAGE/////////////////////////////// */}
-
-              <View style={{ flex: 1, justifyContent:'center'}}>
-                  <Text style={styles.guidelines}>Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
-                  </Text>
-                  <TouchableOpacity
-                      style={styles.imageButton}
-                      onPress={pickImage}
-                      title="Pick an image from camera roll">
-                      <MaterialCommunityIcons
-                        style={styles.addImage}
-                        name="image"
-                        color={"#707070"}
-                        size={26}/>
-                    </TouchableOpacity>
-                  <View style={{alignItems:'center'}}>
-                    {image && (
-                    <Image
-                        source={{ uri: image }}
-                        style={{ width: 300, height: 200, marginTop: 20, }}/>)}
-                    </View>
-                </View>
+        <View>
+          <View style={styles.center}>
+            <Text style={{ fontSize: 18 }}>
+              Itubag kini nga panguatana sa {datalist.language}
+            </Text>
+            <Text style={styles.text}>{data?.bisaya} </Text>
+          </View>
+          <View style={styles.horiz}>
+            <TextInput
+              multiline={false}
+              activeUnderlineColor="#215A88"
+              onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
+            />
+          </View>
 
 
-{/* /////////////////////////////////////////////////////////////////////////// */}
+
+
+          
+          <View
+            style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+          >
+            <TouchableOpacity
+              style={styles.imageButton}
+              onPress={pickImage}
+              title="Pick an image from camera roll"
+            >
+              <MaterialCommunityIcons
+                style={styles.addImage}
+                name="image"
+                color={"#707070"}
+                size={26}
+              />
+            </TouchableOpacity>
+            <View style={styles.paddingLeft}>
+            <Text style={styles.guidelines}>
+              Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
+            </Text>
+          </View>
+            {image && (
+              <Image
+                source={{ uri: image }}
+                style={{ width: 300, height: 200, marginTop: 20 }}
+              />
+            )}
+          </View>
+
               {/* //audio */}
-              <View
-                style={{ flex: 1, justifyContent: "center" }}>
-              
-                <Text style={styles.guidelines}>Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.</Text>
-                      <Text>{audio?.downloadURL}</Text>
-                <TouchableOpacity
-                    style={styles.imageButton}
-                    onPress={() => chooseFile()}>
-                      <View>  
-                      {audio ? (
-                      <TextInput>{audio?.name}</TextInput>
-                    ) : (
-                    <MaterialCommunityIcons
-                        style={styles.addAudio}
-                        name="volume-plus"
-                        color={"#707070"}
-                        size={26}/>
-                    )}
-                      </View>
-                </TouchableOpacity>
-
+          
+        
+          
+          <View style={styles.horiz}>
+            <TouchableOpacity
+              onPress={() => {
+                onSubmit();
+              }}
+              style={[
+                styles.buttonVocab,
+                {
+                  backgroundColor: "#215A88",
+                },
+              ]}
+            >
+              <Text
+                style={{
+                  color: "#ffffff",
+                  alignSelf: "center",
+                  fontSize: 18,
+                }}
+              >
+                {loading ? `itigom...  ${parseInt(loading)}%` : "itigom"}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.buttonVocab,
+                {
+                  backgroundColor: "#e7e7e7",
+                },
+              ]}
+              onPress={() => {
+                exit();
+              }}
+            >
+              <Text
+                style={{
+                  color: "#215A88",
+                  alignSelf: "center",
+                  fontWeight: "700",
+                  fontSize: 18,
+                }}
+              >
+                kanselahon
+              </Text>
+            </TouchableOpacity>
           </View>
-
-          {/* audio */}
-{/* ////////////////////////////////////////////////// SAVING  */}
-                <View style={styles.horiz}>
-                     <TouchableOpacity
-                        onPress={() => {
-                          onSubmit();
-                        }}
-                         style={[
-                          styles.buttonVocab,
-                          {
-                            backgroundColor: "#215A88",
-                          },
-                        ]}
-                        >
-                          <Text
-                            style={{
-                              color: "#ffffff",
-                              alignSelf: "center",
-                              fontSize: 18,
-                            }}
-                          >{loading ? `itigom...  ${parseInt(loading)}%` : "itigom"}</Text>
-                      </TouchableOpacity>
-
-                      <TouchableOpacity
-                        style={[
-                          styles.buttonVocab,
-                          {
-                            backgroundColor: "#e7e7e7",
-                          },
-                        ]}
-                        onPress={() => {
-                          exit();
-                        }}
-                      >
-                        <Text
-                          style={{
-                            color: "#215A88",
-                            alignSelf: "center",
-                            fontWeight: "700",
-                            fontSize: 18,
-                          }}
-                        >kanselahon</Text>
-                      </TouchableOpacity>
-                  </View>
-          </View>
+        </View>
       </ScrollView>
       </SafeAreaView>
     );
@@ -394,12 +358,14 @@ export default connect(mapStateToProps, null)(AddWord);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop:20,
+    paddingVertical: 70,
+    paddingHorizontal: 10,
   },
   center: {
     alignItems: "center",
   },
   horiz: {
+    paddingHorizontal: 40,
     paddingVertical: 20,
   },
   buttonVocab: {
@@ -413,7 +379,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
     fontSize: 20,
-    textAlign: "center",
+    justifyContent: "center",
   },
   title_text: {
     //alignContent:"flex-start",
@@ -435,7 +401,7 @@ const styles = StyleSheet.create({
   imageButton: {
     alignItems: "center",
     justifyContent: "center",
-    width: "100%",
+    width: "80%",
     margin: 5,
     height: 60,
     backgroundColor:"#e7e7e7"
@@ -453,9 +419,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: "italic",
     color: "#707070",
-    marginTop:20,
-    paddingHorizontal:5,
-    textAlign:'justify'
+    paddingHorizontal:20
   },
   addImage: {
     flex: 1,
