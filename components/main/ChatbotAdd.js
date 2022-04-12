@@ -29,6 +29,7 @@ import * as ImagePicker from "expo-image-picker";
 function AddWord({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(null);
   const { data } = route?.params ?? {};
+  const [audio, setAudio] = useState(null);
 
   const [bisaya, setBisaya] = useState("");
   const [newLanguage, setNewLanguage] = useState(null);
@@ -71,6 +72,7 @@ function AddWord({ currentUser, route, navigation }) {
 
     if (newLanguage !=null ){
       saveAllPostData();
+      uploadAudio();
     }
     else if (image !=null && newLanguage != null){
       uploadImage();
@@ -84,64 +86,7 @@ function AddWord({ currentUser, route, navigation }) {
     
   };
 
-    //AUDIO
-///////////////////////////////////////////////////////////
-const chooseFile = async () => {
-  let result = await DocumentPicker.getDocumentAsync({
-    type: "audio/*",
-    copyToCacheDirectory: false,
-  });
-  // Alert.alert("Audio File", result.name);
-
-  console.log(result);
-  if (result.type === "success") {
-    setAudio(result);
-  } else {
-    alert("something went wrong!!");
-  }
-};
-const uploadAudio = async () => {
-  const uri = audio;
-  const childPath = `audio/${
-    firebase.auth().currentUser.uid
-  }/${Math.random().toString(36)}`;
-  console.log(childPath);
-
-
-  await FileSystem.copyAsync({
-    from: audio.uri,
-    to: uri,
-  });
-  let res = await fetch(uri);
-  let blob = await res.blob();
-
-  const task = firebase.storage().ref().child(childPath).put(blob);
-
-  const taskProgress = (snapshot) => {
-    setLoading((snapshot.bytesTransferred / audio?.size) * 100);
-    console.log(`transferred: ${snapshot.bytesTransferred}`);
-  };
-
-  const taskCompleted = () => {
-    task.snapshot.ref.getDownloadURL().then((snapshot) => {
-
-      saveAllPostData(snapshot);
-      setLoading(null);
-      console.log(snapshot);
-    });
-  };
-
-  const taskError = (snapshot) => {
-    setLoading(null);
-    alert(snapshot);
-    console.log(snapshot);
-  };
-
-  task.on("state_changed", taskProgress, taskError, taskCompleted);
-};
-
-//AUDIO
-/////////////////////////////////////////////////////////////
+  
   ///////////////////////////////
   const uploadImage = async () => {
     const uri = image;
@@ -175,11 +120,63 @@ const uploadAudio = async () => {
     task.on("state_changed", taskProgress, taskError, taskCompleted);
     
   };
+ ///////////////////////////////////////////////// //image////////////////
 
 
+/////////////////////AUDIO/////////////////////////////////
+const chooseFile = async () => {
+  let result = await DocumentPicker.getDocumentAsync({
+    type: "audio/*",
+    copyToCacheDirectory: false,
+  });
+  // Alert.alert("Audio File", result.name);
 
-  //image
+  console.log(result);
+  if (result.type === "success") {
+    setAudio(result);
+  } else {
+    alert("something went wrong!!");
+  }
+};
 
+const uploadAudio = async () => {
+  const uri = audio;
+  const childPath = `audio/${
+    firebase.auth().currentUser.uid
+  }/${Math.random().toString(36)}`;
+  console.log(childPath);
+  
+  let res = await fetch(uri);
+  let blob = await res.blob();
+
+  const task = firebase.storage().ref().child(childPath).put(blob);
+
+  const taskProgress = (snapshot) => {
+    setLoading((snapshot.bytesTransferred / audio?.size) * 100);
+    console.log(`transferred: ${snapshot.bytesTransferred}`);
+  };
+
+  const taskCompleted = () => {
+    task.snapshot.ref.getDownloadURL().then((snapshot) => {
+      SavePostData(snapshot);
+      saveAllPostData(snapshot);
+      setLoading(null);
+      console.log(snapshot);
+    });
+  };
+
+  const taskError = (snapshot) => {
+    setLoading(null);
+    alert(snapshot);
+    console.log(snapshot);
+  };
+
+  task.on("state_changed", taskProgress, taskError, taskCompleted);
+  console.log(audio.downloadURL)
+};
+
+
+////////////////////////////////////////////////////////////
   useEffect(() => {
     setDatalist(currentUser);
   }, [currentUser]);
@@ -274,14 +271,13 @@ const uploadAudio = async () => {
       <ScrollView>
           <View style = {{paddingHorizontal:40, paddingVertical:40}}>
 
-
               <View style={styles.center}>
                   <Text style={{ fontSize: 18 }}>
                     Itubag kini nga panguatana sa {datalist.language}
                   </Text>
                   <Text style={styles.text}>{data?.bisaya} </Text>
               </View>
-              <View style={{marginVertical:25}}>
+              <View style={{marginTop:20}}>
                   <TextInput
                     multiline={false}
                     activeUnderlineColor="#215A88"
@@ -304,11 +300,12 @@ const uploadAudio = async () => {
                         color={"#707070"}
                         size={26}/>
                     </TouchableOpacity>
-
-                {image && (
-                <Image
-                    source={{ uri: image }}
-                    style={{ width: 300, height: 200, marginTop: 20 }}/>)}
+                  <View style={{alignItems:'center'}}>
+                    {image && (
+                    <Image
+                        source={{ uri: image }}
+                        style={{ width: 300, height: 200, marginTop: 20, }}/>)}
+                    </View>
                 </View>
 
 
@@ -318,7 +315,7 @@ const uploadAudio = async () => {
                 style={{ flex: 1, justifyContent: "center" }}>
               
                 <Text style={styles.guidelines}>Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.</Text>
-
+                      <Text>{audio?.downloadURL}</Text>
                 <TouchableOpacity
                     style={styles.imageButton}
                     onPress={() => chooseFile()}>
@@ -397,14 +394,12 @@ export default connect(mapStateToProps, null)(AddWord);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 70,
-    paddingHorizontal: 10,
+    marginTop:20,
   },
   center: {
     alignItems: "center",
   },
   horiz: {
-    paddingHorizontal: 40,
     paddingVertical: 20,
   },
   buttonVocab: {
@@ -418,7 +413,7 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",
     fontSize: 20,
-    justifyContent: "center",
+    textAlign: "center",
   },
   title_text: {
     //alignContent:"flex-start",
@@ -440,7 +435,7 @@ const styles = StyleSheet.create({
   imageButton: {
     alignItems: "center",
     justifyContent: "center",
-    width: "80%",
+    width: "100%",
     margin: 5,
     height: 60,
     backgroundColor:"#e7e7e7"
@@ -458,7 +453,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontStyle: "italic",
     color: "#707070",
-    paddingHorizontal:20
+    marginTop:20,
+    paddingHorizontal:5,
+    textAlign:'justify'
   },
   addImage: {
     flex: 1,
