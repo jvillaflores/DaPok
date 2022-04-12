@@ -82,7 +82,8 @@ function AddWord({ currentUser, route, navigation }) {
     }
   };
 
-  ///////////////////////////////
+
+  /////////////////////////////
   // const uploadImage = async () => {
   //   const uri = image;
   //   const childPath = `post/${
