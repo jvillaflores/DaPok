@@ -21,12 +21,13 @@ import "firebase/auth";
 import "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAYcFQheZ9scuPnsfn6doXXxfAq9nZKu4Y",
-  authDomain: "dapok-app.firebaseapp.com",
-  projectId: "dapok-app",
-  storageBucket: "dapok-app.appspot.com",
-  messagingSenderId: "598253020006",
-  appId: "1:598253020006:web:b456cdd8104a9d452c1ea7",
+  apiKey: "AIzaSyAe7hfw7C3yj0d3PxM1aXevnabGcEUA7jc",
+  authDomain: "project-dapok.firebaseapp.com",
+  projectId: "project-dapok",
+  storageBucket: "project-dapok.appspot.com",
+  messagingSenderId: "596406246604",
+  appId: "1:596406246604:web:f37ed79ccf1c3a51f67669",
+  measurementId: "G-GNYJWGX35V"
 };
 
 if (firebase.apps.length === 0) {
