@@ -69,19 +69,7 @@ function AddWord({ currentUser, route, navigation }) {
       image:{ required: true },
     });
 
-    // if (newLanguage !=null ){
-    //   saveAllPostData();
-    //   uploadAudio();
-    // }
-    // else if (image !=null && newLanguage != null){
-    //   uploadImage();
-    // }
-    // else if (image != null) {
-    //   alert ("Please enter a text.")
-    // }
-    // else {
-    //   alert("Please enter a text.")
-    // }
+    
 
     if (newLanguage != null) {
       if (image != null) {
@@ -111,6 +99,8 @@ function AddWord({ currentUser, route, navigation }) {
     console.log(childPath);
     const response = await fetch(uri);
     const blob = await response.blob();
+    const imageURL = image.downloadURL;
+
 
     const task = firebase.storage().ref().child(childPath).put(blob);
 
@@ -122,6 +112,7 @@ function AddWord({ currentUser, route, navigation }) {
     const taskCompleted = () => {
       task.snapshot.ref.getDownloadURL().then((snapshot) => {
         SavePostData(snapshot);
+        saveAllPostData(snapshot);
         setLoading(null);
         console.log(snapshot);
       });
@@ -155,11 +146,6 @@ const chooseFile = async () => {
         alert("something went wrong!!");
       }
 
-  // if (result.type === "success") {
-  //   setAudio(result);
-  // } else {
-  //   alert("something went wrong!!");
-  // }
 };
 
 const uploadAudio = async () => {
@@ -171,6 +157,7 @@ const uploadAudio = async () => {
   
   let res = await fetch(uri);
   let blob = await res.blob();
+  const audioURL = audio.downloadURL;
 
   const task = firebase.storage().ref().child(childPath).put(blob);
 
@@ -191,11 +178,11 @@ const uploadAudio = async () => {
   const taskError = (snapshot) => {
     setLoading(null);
     alert(snapshot);
-    console.log(snapshot);
+    console.log(snapshot );
   };
 
   task.on("state_changed", taskProgress, taskError, taskCompleted);
-  console.log(audio.downloadURL)
+  
 };
 
 
@@ -262,7 +249,7 @@ const uploadAudio = async () => {
       
       
   };
-  const saveAllPostData = () => {
+  const saveAllPostData = (audioURL,imageURL) => {
     firebase
       .firestore()
       .collection("userAllChatbotAnswers")
@@ -274,6 +261,8 @@ const uploadAudio = async () => {
         email: currentUser.email,
         language: datalist.language,
         bisaya: data?.bisaya,
+        audio: audioURL,
+        image: imageURL,
         newLanguage,
         status: "0",
         upload: "1",
