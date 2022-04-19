@@ -62,6 +62,7 @@ import Set1Screen from "./components/main/TranslationButtons/Set1";
 import reportGenerateScreen from "./components/main/Data Collection/reportGenerate";
 import TranslationFolderScreen from "./components/main/Data Collection/Translate/TranslationFolder";
 import ChatbotFolderScreen from "./components/main/Data Collection/Chatbot/ChatbotFolder";
+import AddImageScreen from "./components/main/AddImage"
 
 const Stack = createStackNavigator();
 
@@ -418,6 +419,21 @@ export class App extends Component {
               navigation={this.props.navigation}
               options={{
                 title: "Translated",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="AddImage"
+              component={AddImageScreen}
+              navigation={this.props.navigation}
+              options={{
+                title: "Add Image",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

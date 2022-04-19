@@ -72,20 +72,17 @@ function AddWord({ currentUser, route, navigation }) {
     
 
     if (newLanguage != null) {
-      if (image != null) {
-        uploadImage();
-      } 
-      else if (audio != null) {
-        uploadAudio();      
+      
+      if (audio != null) {
+        uploadAudio();  
+            
       } else {
-        saveAllPostData();
+        saveTextPostData();
       }
-    } else if (image != null) {
-      alert("Please enter a text.");
     } else if (audio != null) {
-      alert("Please enter a text.");
+      alert("Butangi ug tubag.");
     }else {
-      alert("Please enter a text.");
+      alert("Butangi ug tubag.");
     }
   };
 
@@ -112,7 +109,7 @@ function AddWord({ currentUser, route, navigation }) {
     const taskCompleted = () => {
       task.snapshot.ref.getDownloadURL().then((snapshot) => {
         SavePostData(snapshot);
-        saveAllPostData(snapshot);
+       // saveTextPostData(snapshot);
         setLoading(null);
         console.log(snapshot);
       });
@@ -169,7 +166,7 @@ const uploadAudio = async () => {
   const taskCompleted = () => {
     task.snapshot.ref.getDownloadURL().then((snapshot) => {
       SavePostData(snapshot);
-      saveAllPostData(snapshot);
+      //saveTextPostData(snapshot);
       setLoading(null);
       console.log(snapshot);
     });
@@ -223,6 +220,7 @@ const uploadAudio = async () => {
     return randomText;
   }
 
+  //Save Text and Audio
   const SavePostData = (downloadURL) => {
     firebase
       .firestore()
@@ -234,7 +232,7 @@ const uploadAudio = async () => {
         wordId: wordID,
         email: currentUser.email,
         language: datalist.language,
-        downloadURL: downloadURL,
+        audio: downloadURL,
         bisaya: data?.bisaya,
         newLanguage,
         status: "0",
@@ -242,14 +240,15 @@ const uploadAudio = async () => {
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
-        alert("Daghang Salamat sa imohang kontribusyon!!");
+        //alert("Daghang Salamat sa imohang kontribusyon!!");
         setLoading(null);
-        navigation.goBack();
+        navigation.navigate("AddImage",{wordID:wordID});
+        //navigation.goBack();
       })
       
       
   };
-  const saveAllPostData = (audioURL,imageURL) => {
+  const saveTextPostData = () => {
     firebase
       .firestore()
       .collection("userAllChatbotAnswers")
@@ -261,8 +260,6 @@ const uploadAudio = async () => {
         email: currentUser.email,
         language: datalist.language,
         bisaya: data?.bisaya,
-        audio: audioURL,
-        image: imageURL,
         newLanguage,
         status: "0",
         upload: "1",
@@ -271,7 +268,8 @@ const uploadAudio = async () => {
       .then(function () {
         alert("Daghang Salamat sa imohang kontribusyon!!");
         setLoading(null);
-        navigation.goBack();
+        // navigation.goBack();
+        navigation.navigate("AddImage",{wordID:wordID})
       });
   };
   const exit =() => {
@@ -325,7 +323,7 @@ const uploadAudio = async () => {
 {/* ////////////////////////////////////////////////// SAVING  */}
 
 {/* ///////////////////////////IMAGE/////////////////////////////// */}
-
+{/* 
               <View style={{ flex: 1, justifyContent:'center'}}>
                   <Text style={styles.guidelines}>Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
                   </Text>
@@ -345,7 +343,7 @@ const uploadAudio = async () => {
                         source={{ uri: image }}
                         style={{ width: 300, height: 200, marginTop: 20}}/>)}
                     </View>
-                </View>
+                </View> */}
 
                 <View style={styles.horiz}>
                      <TouchableOpacity
