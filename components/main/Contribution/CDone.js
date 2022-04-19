@@ -24,6 +24,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { useValidation } from "react-native-form-validator";
 import * as FileSystem from "expo-file-system";
 import { FlatList } from "react-native-gesture-handler";
+import { Audio } from "expo-av";
 
 function AddWord({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(false);
@@ -77,7 +78,7 @@ function makeid() {
     const downloadAudio = async () => {
       let SoundObject = new Audio.Sound();
       try {
-        await SoundObject.loadAsync({ uri: data.downloadURL });
+        await SoundObject.loadAsync({ uri: data.audio });
         const status = await SoundObject.playAsync();
         setTimeout(() => {
           SoundObject.unloadAsync();
@@ -103,8 +104,6 @@ function makeid() {
           wordId: wordID,
           email: currentUser.email,
           language:currentUser.language,
-          // audio: downloadURL,
-          // image: downloadURL,
           bisaya: data?.bisaya,
           newLanguage,
           status: "0",
