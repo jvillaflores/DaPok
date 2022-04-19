@@ -79,7 +79,7 @@ function makeid() {
     const downloadAudio = async () => {
       let SoundObject = new Audio.Sound();
       try {
-        await SoundObject.loadAsync({ uri: data.downloadURL });
+        await SoundObject.loadAsync({ uri: data.audio });
         const status = await SoundObject.playAsync();
         setTimeout(() => {
           SoundObject.unloadAsync();
@@ -105,8 +105,6 @@ function makeid() {
           wordId: wordID,
           email: currentUser.email,
           language:currentUser.language,
-          // audio: downloadURL,
-          // image: downloadURL,
           bisaya: data?.bisaya,
           newLanguage,
           status: "0",
