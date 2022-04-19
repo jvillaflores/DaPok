@@ -9,7 +9,8 @@ import {
   Pressable,
   ScrollView,
   Alert,
-  Image
+  Image,
+  SafeAreaView
 } from "react-native";
 
 import {
@@ -24,6 +25,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { useValidation } from "react-native-form-validator";
 import * as FileSystem from "expo-file-system";
 import { FlatList } from "react-native-gesture-handler";
+import { Audio } from "expo-av";
 
 function AddWord({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(false);
@@ -172,61 +174,39 @@ function makeid() {
   }, [navigation]);
    {
     return (
-    <ScrollView style={styles.container}>
-      <View style={styles.center}>
-        <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {data?.language}</Text>
-        <Text style={[styles.text,{justifyContent:'center',alignContent:'center'}]}>{data?.bisaya} </Text>
-      </View>
-      <View style={styles.center}>
-            <View style={[styles.horiz,{textAlign:'center',}]}>
-              <Text style={{fontSize:20,  fontWeight:'bold',textAlign:'center'}}>
-              {data?.newLanguage}
-              </Text>
-              <Text style={styles.title_text}>Halugway</Text>
-              <Image
-            style={[styles.picture, { width: 250, height: 150}]}
-            source={{ uri: data?.image }}/>
-          </View>
-
-          {/* display audio */}
-          <View style={styles.container}>
-          <Text style={styles.title_text}>Audio</Text>
-          <Text>{data?.audio}</Text>
-          <TouchableOpacity
-            style={styles.audioButton}
-            onPress={() => downloadAudio()}>
+      <SafeAreaView style={styles.container}>
+        <ScrollView>
             <View>
-              <MaterialCommunityIcons
-                style={styles.addAudio}
-                name="volume-high"
-                color={"#707070"}
-                size={26}/>
+                <View style = {styles.center} >
+                    <Text style={{fontSize:15}}>Itubag kini nga pangutana sa {data?.language}</Text>
+                    <Text style={[styles.text,{textAlign:'center'}]}>{data?.bisaya} </Text>
+                    <Text style={{fontSize:20,  fontWeight:'bold',textAlign:'center', marginTop:10}}>
+                        {data?.newLanguage}
+                    </Text>
+                </View>
+                <View style={[styles.center,{textAlign:'center', paddingVertical:15}]}>
+                    <Image
+                        style={{ width: 350, height: 250}}
+                        source={{ uri: data?.image }}/>
+                    <Text>(Halugway)</Text>
+                </View>
+                <View style={[styles.center,{flex:1}]}>
+                    <TouchableOpacity
+                      style={styles.audioButton}
+                      onPress={() => downloadAudio()}>
+                        <View>
+                          <MaterialCommunityIcons
+                            style={styles.addAudio}
+                            name="volume-high"
+                            color={"#707070"}
+                            size={26}/>
+                        </View>
+                    </TouchableOpacity>
+                        <Text>(Audio)</Text>
+                </View>
             </View>
-          </TouchableOpacity>
-          </View>
-          {/* display audio */}
-          </View>
-      
-    {/* <FlatList
-      data={datalist}
-      style={{ flex: 1 }}
-      renderItem={({ item }) => (
-        <View style={styles.center}>
-            <View style={[styles.horiz,{textAlign:'center',}]}>
-            {data.currentUser != " " ? (
-              <Text style={{fontSize:20,  fontWeight:'bold',textAlign:'center'}}>
-              {data?.newLanguage}
-              </Text>
-            ) : null}
-              <Image
-            style={[styles.picture, { width: 250, height: 150}]}
-            source={{ uri: data?.downloadURL }}
-            />
-          </View>
-          </View>
-      )}
-    /> */}
-    </ScrollView>
+        </ScrollView>
+    </SafeAreaView>
     );
   } 
 }
@@ -241,6 +221,7 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     paddingVertical:70, 
+    paddingHorizontal:20,
   },
   center:{
     alignItems:"center",
@@ -261,7 +242,7 @@ const styles = StyleSheet.create({
   },
   text:{
     fontWeight:'bold',
-    fontSize:18,
+    fontSize:15,
     justifyContent:'center',
     alignItems:'center'
   }, 
@@ -291,14 +272,14 @@ const styles = StyleSheet.create({
   },
   audioButton: {
     alignItems: "center",
-    justifyContent: "center",
-    width: "500%",
-    marginTop: 10,
+    //justifyContent: "center",
+    width: "95%",
+    margin: 5,
     height: 60,
-    margin: -100,
-    backgroundColor:"#e7e7e7",
+    backgroundColor:"#e7e7e7"
   },
   addAudio: {
     flex: 1,
+    marginTop:15,
   },
 });
