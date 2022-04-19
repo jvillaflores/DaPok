@@ -44,9 +44,6 @@ function AddWord({ currentUser, route, navigation }) {
       bisaya,
       newLanguage:  { required: true },
     });
-
-    
-
     if (newLanguage != null) {
       
       if (audio != null) {
@@ -212,7 +209,7 @@ const uploadAudio = async () => {
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
-        alert("Daghang Salamat sa imohang kontribusyon!!");
+        // alert("Daghang Salamat sa imohang kontribusyon!!");
         setLoading(null);
         // navigation.goBack();
         navigation.navigate("AddImage",{wordID:wordID})
@@ -292,17 +289,8 @@ const uploadAudio = async () => {
                 </View> */}
 
                 <View style={styles.horiz}>
-                     <TouchableOpacity
-                        onPress={() => {
-                          onSubmit();
-                        }}
-                         style={[
-                          styles.buttonVocab,
-                          {
-                            backgroundColor: "#215A88",
-                          },
-                        ]}
-                        >
+                     <TouchableOpacity onPress={() => {onSubmit(); }}
+                         style={[ styles.buttonVocab, { backgroundColor: "#215A88",},]}>
                           <Text
                             style={{
                               color: "#ffffff",
@@ -310,6 +298,7 @@ const uploadAudio = async () => {
                               fontSize: 18,
                             }}
                           >{loading ? `nagapadayon...  ${parseInt(loading)}%` : "magpadayon"}</Text>
+                          
                       </TouchableOpacity>
 
                       <TouchableOpacity

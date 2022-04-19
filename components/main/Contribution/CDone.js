@@ -73,6 +73,25 @@ function makeid() {
         console.log(snapshot);
       };
     };
+
+    const downloadAudio = async () => {
+      let SoundObject = new Audio.Sound();
+      try {
+        await SoundObject.loadAsync({ uri: data.downloadURL });
+        const status = await SoundObject.playAsync();
+        setTimeout(() => {
+          SoundObject.unloadAsync();
+        }, status.playableDurationMillis + 1000);
+      } catch (error) {
+        console.log(error);
+        await SoundObject.unloadAsync(); // Unload any sound loaded
+        SoundObject.setOnPlaybackStatusUpdate(null); // Unset all playback status loaded
+        retryPlaySound();
+      }
+    };
+  
+    const retryPlaySound = () => downloadAudio();
+
     const SavePostData = () => {
       firebase
         .firestore()
@@ -84,6 +103,8 @@ function makeid() {
           wordId: wordID,
           email: currentUser.email,
           language:currentUser.language,
+          // audio: downloadURL,
+          // image: downloadURL,
           bisaya: data?.bisaya,
           newLanguage,
           status: "0",
@@ -156,7 +177,37 @@ function makeid() {
         <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {data?.language}</Text>
         <Text style={[styles.text,{justifyContent:'center',alignContent:'center'}]}>{data?.bisaya} </Text>
       </View>
-    <FlatList
+      <View style={styles.center}>
+            <View style={[styles.horiz,{textAlign:'center',}]}>
+              <Text style={{fontSize:20,  fontWeight:'bold',textAlign:'center'}}>
+              {data?.newLanguage}
+              </Text>
+              <Text style={styles.title_text}>Halugway</Text>
+              <Image
+            style={[styles.picture, { width: 250, height: 150}]}
+            source={{ uri: data?.image }}/>
+          </View>
+
+          {/* display audio */}
+          <View style={styles.container}>
+          <Text style={styles.title_text}>Audio</Text>
+          <Text>{data?.audio}</Text>
+          <TouchableOpacity
+            style={styles.audioButton}
+            onPress={() => downloadAudio()}>
+            <View>
+              <MaterialCommunityIcons
+                style={styles.addAudio}
+                name="volume-high"
+                color={"#707070"}
+                size={26}/>
+            </View>
+          </TouchableOpacity>
+          </View>
+          {/* display audio */}
+          </View>
+      
+    {/* <FlatList
       data={datalist}
       style={{ flex: 1 }}
       renderItem={({ item }) => (
@@ -174,7 +225,7 @@ function makeid() {
           </View>
           </View>
       )}
-    />
+    /> */}
     </ScrollView>
     );
   } 
@@ -199,7 +250,6 @@ const styles = StyleSheet.create({
     paddingVertical:20,
     marginTop:10,
     marginBottom:-15,
-    
   },
   buttonVocab: {
     alignSelf: "center",
@@ -219,6 +269,36 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
     margin:10,
-    marginLeft: 85
+    marginLeft: 10
   }, 
+  paddingLeft: {
+    alignContent: "flex-start",
+    // padding:15,
+    // paddingRight:5,
+    marginTop: 20,
+    paddingLeft: 20,
+  },
+  title_text: {
+    //alignContent:"flex-start",
+    fontWeight: "bold",
+    fontSize: 17,
+    marginTop: 10
+  },
+  guidelines: {
+    fontSize: 12,
+    fontStyle: "italic",
+    color: "#707070",
+  },
+  audioButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: "500%",
+    marginTop: 10,
+    height: 60,
+    margin: -100,
+    backgroundColor:"#e7e7e7",
+  },
+  addAudio: {
+    flex: 1,
+  },
 });
