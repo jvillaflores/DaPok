@@ -34,30 +34,7 @@ function AddWord({ currentUser, route, navigation }) {
   const [newLanguage, setNewLanguage] = useState(null);
   const [wordID, setWordID] = useState(makeid());
   const [datalist, setDatalist] = useState("");
-  const [image, setImage] = useState(null);
-  const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
-
-  useEffect(() => {
-    (async () => {
-      const galleryStatus =
-        await ImagePicker.requestMediaLibraryPermissionsAsync();
-      setHasGalleryPermission(galleryStatus.status === "granted");
-    })();
-  }, []);
-
-  const pickImage = async () => {
-    let image = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!image.cancelled) {
-      setImage(image.uri);
-      console.log(image.uri);
-    }
-  };
+ 
   const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
     useValidation({
       state: { newLanguage },
@@ -66,7 +43,6 @@ function AddWord({ currentUser, route, navigation }) {
     validate({
       bisaya,
       newLanguage:  { required: true },
-      image:{ required: true },
     });
 
     
@@ -87,43 +63,6 @@ function AddWord({ currentUser, route, navigation }) {
   };
 
   
-  ///////////////////////////////
-  const uploadImage = async () => {
-    const uri = image;
-    const childPath = `post/${
-      firebase.auth().currentUser.uid
-    }/${Math.random().toString(36)}`;
-    console.log(childPath);
-    const response = await fetch(uri);
-    const blob = await response.blob();
-    const imageURL = image.downloadURL;
-
-
-    const task = firebase.storage().ref().child(childPath).put(blob);
-
-    const taskProgress = (snapshot) => {
-      setLoading((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-      console.log(`transferred: ${snapshot.bytesTransferred}`);
-    };
-
-    const taskCompleted = () => {
-      task.snapshot.ref.getDownloadURL().then((snapshot) => {
-        SavePostData(snapshot);
-       // saveTextPostData(snapshot);
-        setLoading(null);
-        console.log(snapshot);
-      });
-    };
-
-    const taskError = (snapshot) => {
-      console.log(snapshot);
-      setLoading(null);
-    };
-
-    task.on("state_changed", taskProgress, taskError, taskCompleted);
-    
-  };
- ///////////////////////////////////////////////// //image////////////////
 
 
 /////////////////////AUDIO/////////////////////////////////
@@ -132,13 +71,13 @@ const chooseFile = async () => {
     type: "audio/*",
     copyToCacheDirectory: false,
   });
-  // Alert.alert("Audio File", result.name);
 
-  // console.log(result);
+   console.log(result);
 
   if (result.type === "success") {
-      setAudio(result.uri);
-      console.log(result.uri);
+      setAudio(result);
+      //alert("Audio File", result);
+      console.log(result);
     }else {
         alert("something went wrong!!");
       }
@@ -146,15 +85,20 @@ const chooseFile = async () => {
 };
 
 const uploadAudio = async () => {
-  const uri = audio;
+  
   const childPath = `audio/${
     firebase.auth().currentUser.uid
   }/${Math.random().toString(36)}`;
   console.log(childPath);
-  
+  const uri = FileSystem.documentDirectory + audio.name;
+
+  await FileSystem.copyAsync({
+      from: audio.uri,
+      to: uri,
+  });
+
   let res = await fetch(uri);
   let blob = await res.blob();
-  const audioURL = audio.downloadURL;
 
   const task = firebase.storage().ref().child(childPath).put(blob);
 
@@ -242,8 +186,10 @@ const uploadAudio = async () => {
       .then(function () {
         //alert("Daghang Salamat sa imohang kontribusyon!!");
         setLoading(null);
-        navigation.navigate("AddImage",{wordID:wordID});
+        navigation.navigate("AddImage",{wordID:wordID})
         //navigation.goBack();
+        
+        console.log(audio?.name)
       })
       
       
@@ -300,21 +246,21 @@ const uploadAudio = async () => {
                 style={{ flex: 1, justifyContent: "center" }}>
               
                 <Text style={styles.guidelines}>Pwede nimo butangan ug audio.</Text>
-                      <Text>{audio?.downloadURL}</Text>
-                <TouchableOpacity
-                    style={styles.imageButton}
-                    onPress={() => chooseFile()}>
-                      <View>  
-                      {audio ? (
-                      <TextInput>{audio?.name}</TextInput>
-                    ) : (
-                    <MaterialCommunityIcons
-                        style={styles.addAudio}
-                        name="volume-plus"
-                        color={"#707070"}
-                        size={26}/>
-                    )}
-                      </View>
+                      {/* <Text>{audio?.downloadURL}</Text> */}
+                  <TouchableOpacity
+                        style={styles.imageButton}
+                        onPress={() => chooseFile()}>
+                          <View>  
+                              {audio ? (
+                              <TextInput>{audio?.name}</TextInput>
+                            ) : (
+                            <MaterialCommunityIcons
+                                style={styles.addAudio}
+                                name="volume-plus"
+                                color={"#707070"}
+                                size={26}/>
+                            )}
+                          </View>
                 </TouchableOpacity>
 
           </View>
@@ -363,7 +309,7 @@ const uploadAudio = async () => {
                               alignSelf: "center",
                               fontSize: 18,
                             }}
-                          >{loading ? `itigom...  ${parseInt(loading)}%` : "itigom"}</Text>
+                          >{loading ? `nagapadayon...  ${parseInt(loading)}%` : "magpadayon"}</Text>
                       </TouchableOpacity>
 
                       <TouchableOpacity
@@ -469,5 +415,8 @@ const styles = StyleSheet.create({
   addImage: {
     flex: 1,
     position: "absolute",
+  },
+  addAudio: {
+    flex: 1,
   },
 });
