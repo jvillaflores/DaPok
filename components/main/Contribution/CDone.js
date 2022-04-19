@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StatusBar,
@@ -23,9 +23,7 @@ require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useValidation } from "react-native-form-validator";
 import * as FileSystem from "expo-file-system";
-
-
-
+import { FlatList } from "react-native-gesture-handler";
 
 function AddWord({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(false);
@@ -34,6 +32,7 @@ function AddWord({ currentUser, route, navigation }) {
   const [ newLanguage, setNewLanguage ] = useState("");
   const [wordID, setWordID] = useState(makeid());
   const dimensions = Dimensions.get("window");
+  const [datalist, setDatalist] = useState("");
   const [image, setImage] = useState(false);
   const imageWidth = dimensions.width;
 
@@ -49,7 +48,6 @@ function makeid() {
 
     return randomText;
   }
-
   const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
     useValidation({
       state: {
@@ -57,31 +55,24 @@ function makeid() {
         newLanguage
       },
     });
-
-
   const uploadLanguage = async () => {
       validate({
         bisaya: { required: true },
         newLanguage: { required: true },
         
       });
-      
-  
       const taskCompleted = () => {
           SavePostData(snapshot);
           saveAllPostData(snapshot);
           setLoading(null);
           console.log(snapshot);
       };
-  
       const taskError = (snapshot) => {
         setLoading(null);
         alert(snapshot);
         console.log(snapshot);
       };
-  
     };
-
     const SavePostData = () => {
       firebase
         .firestore()
@@ -93,7 +84,6 @@ function makeid() {
           wordId: wordID,
           email: currentUser.email,
           language:currentUser.language,
-          
           bisaya: data?.bisaya,
           newLanguage,
           status: "0",
@@ -136,38 +126,56 @@ function makeid() {
           .doc('status')
           .update({
             status:"0",
-          })
-          
+          })    
     }
-  
-  
+    useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      firebase
+        .firestore()
+        .collection("userAllChatbotAnswers")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("userChatbotAnswers")
+        .where("status", "==", "0")
+        .get()
+        .then((snapshot) => {
+          let words = snapshot.docs.map((doc) => {
+            const data = doc.data();
+            const id = doc.id;
+            return { id, ...data };
+          });
+          setDatalist(words);
+        });
+    })
+
+    return unsubscribe;
+  }, [navigation]);
    {
     return (
-      <ScrollView style={styles.container}>
-        <View>
-          <View style={styles.center}>
-            <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {data?.language}</Text>
-            <Text style={[styles.text,{justifyContent:'center',alignContent:'center'}]}>{data?.bisaya} </Text>
-          </View>
-          <View style={[styles.horiz,{textAlign:'center',}]}>
-              {/* <TextInput
-                  multiline={false}
-                  activeUnderlineColor="#215A88"
-                  placeholder={data?.newLanguage}
-                  onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
-              /> */}
-              <Text style={{fontSize:30,  fontWeight:'bold',textAlign:'center'}}>
+    <ScrollView style={styles.container}>
+      <View style={styles.center}>
+        <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {data?.language}</Text>
+        <Text style={[styles.text,{justifyContent:'center',alignContent:'center'}]}>{data?.bisaya} </Text>
+      </View>
+    <FlatList
+      data={datalist}
+      style={{ flex: 1 }}
+      renderItem={({ item }) => (
+        <View style={styles.center}>
+            <View style={[styles.horiz,{textAlign:'center',}]}>
+            {data.currentUser != " " ? (
+              <Text style={{fontSize:20,  fontWeight:'bold',textAlign:'center'}}>
               {data?.newLanguage}
               </Text>
-          </View>
-          <View>
-          <Image
+            ) : null}
+              <Image
             style={[styles.picture, { width: 250, height: 150}]}
             source={{ uri: data?.downloadURL }}
             />
           </View>
-        </View>
-      </ScrollView>
+          </View>
+      )}
+    />
+    </ScrollView>
     );
   } 
 }

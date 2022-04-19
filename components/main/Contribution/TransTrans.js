@@ -22,7 +22,7 @@ import { connect } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
 
 function TransTrans({ currentUser, navigation }) {
-  return (
+  return (  
     <SafeAreaView style={styles.container}>
         <ScrollView>
            <View
