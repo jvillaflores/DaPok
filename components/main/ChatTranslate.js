@@ -59,8 +59,11 @@ function ChatTranslate({ words, navigation, props }) {
             <Text style={{fontSize:15}}>{item?.bisaya}</Text>
           </View>
           <View style={styles.itemBody}>
+            {/* <Text> {item?.status}</Text> */}
           </View>
         </View>
+
+        
       </TouchableOpacity>
     );
   };

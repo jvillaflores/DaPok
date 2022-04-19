@@ -30,51 +30,11 @@ import { Audio } from "expo-av";
 function AddWord({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
-  const [bisaya, setBisaya] = useState("");
   const [ newLanguage, setNewLanguage ] = useState("");
   const [wordID, setWordID] = useState(makeid());
   const dimensions = Dimensions.get("window");
   const [datalist, setDatalist] = useState("");
-  const [image, setImage] = useState(false);
-  const imageWidth = dimensions.width;
-
-function makeid() {
-    var randomText = "";
-    var possible =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for (var i = 0; i < 15; i++)
-      randomText += possible.charAt(
-        Math.floor(Math.random() * possible.length)
-      );
-
-    return randomText;
-  }
-  const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
-    useValidation({
-      state: {
-        bisaya,
-        newLanguage
-      },
-    });
-  const uploadLanguage = async () => {
-      validate({
-        bisaya: { required: true },
-        newLanguage: { required: true },
-        
-      });
-      const taskCompleted = () => {
-          SavePostData(snapshot);
-          saveAllPostData(snapshot);
-          setLoading(null);
-          console.log(snapshot);
-      };
-      const taskError = (snapshot) => {
-        setLoading(null);
-        alert(snapshot);
-        console.log(snapshot);
-      };
-    };
+  
 
     const downloadAudio = async () => {
       let SoundObject = new Audio.Sound();
