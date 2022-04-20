@@ -35,6 +35,18 @@ function AddWord({ currentUser, route, navigation }) {
   const dimensions = Dimensions.get("window");
   const [datalist, setDatalist] = useState("");
   
+  function makeid() {
+    var randomText = "";
+    var possible =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < 15; i++)
+      randomText += possible.charAt(
+        Math.floor(Math.random() * possible.length)
+      );
+
+    return randomText;
+  }
 
     const downloadAudio = async () => {
       let SoundObject = new Audio.Sound();
@@ -44,6 +56,8 @@ function AddWord({ currentUser, route, navigation }) {
         setTimeout(() => {
           SoundObject.unloadAsync();
         }, status.playableDurationMillis + 1000);
+        console.log('played')
+        console.log(data.audio)
       } catch (error) {
         console.log(error);
         await SoundObject.unloadAsync(); // Unload any sound loaded
