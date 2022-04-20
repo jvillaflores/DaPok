@@ -90,7 +90,7 @@ const mapStateToProps = (store) => ({
   words: store.userState.words,
 });
 
-export default connect(mapStateToProps, null)(ChatTranslate);
+ export default connect(mapStateToProps, null)(ChatTranslate);
 
 const styles = StyleSheet.create({
   container: {

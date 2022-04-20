@@ -34,7 +34,7 @@ function ChatTranslate({ words, navigation, props }) {
     const unsubscribe = navigation.addListener("focus", () => {
       firebase
         .firestore()
-        .collection("userAllChatbotAnswers")
+        .collection("words")
         .doc(firebase.auth().currentUser.uid)
         .collection("userChatbotAnswers")
         .where("status", "==", "0")
