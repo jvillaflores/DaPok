@@ -34,6 +34,7 @@ function AddWord({ currentUser, route, navigation }) {
   const [newLanguage, setNewLanguage] = useState(null);
   const [wordID, setWordID] = useState(makeid());
   const [datalist, setDatalist] = useState("");
+  
  
   const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
     useValidation({
@@ -54,8 +55,10 @@ function AddWord({ currentUser, route, navigation }) {
       }
     } else if (audio != null) {
       alert("Butangi ug tubag.");
+      
     }else {
       alert("Butangi ug tubag.");
+      
     }
   };
 
@@ -170,7 +173,8 @@ const uploadAudio = async () => {
       .collection("userChatbotAnswers")
       .doc(wordID)
       .set({
-        wordId: wordID,
+        wordId: data?.id,
+        
         email: currentUser.email,
         language: datalist.language,
         audio: downloadURL,
@@ -199,7 +203,7 @@ const uploadAudio = async () => {
       .collection("userChatbotAnswers")
       .doc(wordID)
       .set({
-        wordId: wordID,
+        wordId: data?.id,
         email: currentUser.email,
         language: datalist.language,
         bisaya: data?.bisaya,

@@ -63,6 +63,7 @@ import reportGenerateScreen from "./components/main/Data Collection/reportGenera
 import TranslationFolderScreen from "./components/main/Data Collection/Translate/TranslationFolder";
 import ChatbotFolderScreen from "./components/main/Data Collection/Chatbot/ChatbotFolder";
 import AddImageScreen from "./components/main/AddImage"
+import DoneAnswers from "./components/main/ChatbotAnswers"
 
 const Stack = createStackNavigator();
 
@@ -296,6 +297,21 @@ export class App extends Component {
               navigation={this.props.navigation}
               options={{
                 title: "Chatbot Done",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="DoneAnswers"
+              component={DoneAnswers}
+              navigation={this.props.navigation}
+              options={{
+                title: "Answers",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

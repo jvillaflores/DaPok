@@ -149,8 +149,9 @@ function makeid() {
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(function () {
-          alert("Thanks for contribution!!");
+          alert("Salamat sa imong kontribusyon");
           setLoading(null);
+          navigation.goBack();
         });
         
     };
@@ -170,8 +171,9 @@ function makeid() {
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(function () {
-          alert("Thanks for contribution!!");
+          alert("Daghang salamat sa imong kontribusyon!");
           setLoading(null);
+          navigation.goBack();
         });
     };
 
@@ -184,6 +186,10 @@ function makeid() {
             status:"0",
           })
           
+    }
+
+    const exit =() => {
+      navigation.goBack();
     }
   
   
@@ -216,8 +222,17 @@ function makeid() {
                      alignSelf:'center',
                      fontSize: 18}}>itigom</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.buttonVocab,{
-                     backgroundColor: "#e7e7e7",}]}>
+              <TouchableOpacity 
+                    style={[
+                      styles.buttonVocab,
+                      {
+                        backgroundColor: "#e7e7e7",
+                      },
+                     ]}
+                     onPress={() => {
+                      exit();
+                    }}
+                     >
                   <Text style={{
                      color:"#215A88",
                      alignSelf:'center',

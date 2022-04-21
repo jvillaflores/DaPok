@@ -35,9 +35,7 @@ function ChatTranslate({ words, navigation, props }) {
       firebase
         .firestore()
         .collection("words")
-        .doc(firebase.auth().currentUser.uid)
-        .collection("userChatbotAnswers")
-        .where("status", "==", "0")
+        .where("status", "==", "1")
         .get()
         .then((snapshot) => {
           let words = snapshot.docs.map((doc) => {
@@ -57,7 +55,8 @@ function ChatTranslate({ words, navigation, props }) {
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() => navigation.navigate('ChatbotDone',{data:item})}>
+        onPress={() => navigation.navigate('DoneAnswers',{data:item})}>
+          {/* /////////////////ChatbotAnswers.js//////////////// */}
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
             <Text>{item?.language}</Text>
