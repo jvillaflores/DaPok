@@ -411,5 +411,6 @@ const styles = StyleSheet.create({
   },
   addAudio: {
     flex: 1,
+    marginTop:15,
   },
 });

@@ -52,15 +52,13 @@ function ChatTranslate({ words, navigation, props }) {
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() => navigation.navigate('WordScreen',{data:item})}
-      >
+        onPress={() => navigation.navigate('WordScreen',{data:item})}> 
+        {/* ///////////////ChatbotAdd.js ////////////////*/}
         <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
-            <Text style={{fontSize:15}}>{item?.bisaya}</Text>
+            <Text style={{fontSize:16}}>{item?.bisaya}</Text>
           </View>
-          <View style={styles.itemBody}>
-            {/* <Text> {item?.status}</Text> */}
-          </View>
+         
         </View>
 
         
@@ -69,7 +67,7 @@ function ChatTranslate({ words, navigation, props }) {
   };
 
   const separator = () => {
-    return <View style={{ height: 1, backgroundColor: "#E6E5E5",padding: 1 }} />;
+    return <View style={{ height: 1, backgroundColor: "#E6E5E5" }} />;
   };
 
 
@@ -104,13 +102,9 @@ const styles = StyleSheet.create({
     paddingVertical:15,
   },
   itemBody: {
-    color: "#777777",
-    marginLeft: 0,
-    fontWeight: "600",
-    fontSize: 16,
-    lineHeight: 26,
-    paddingVertical: 3,
-    marginLeft: 5,
+    flex: 1,
+    paddingHorizontal: 15,
+    justifyContent: "center",
     
   },
 });

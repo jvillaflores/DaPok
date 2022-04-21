@@ -58,15 +58,11 @@ function ChatTranslate({ words, navigation, props }) {
         onPress={() => navigation.navigate('DoneAnswers',{data:item})}>
           {/* /////////////////ChatbotAnswers.js//////////////// */}
         <View style={{ flexDirection: "column", flex: 1 }}>
-          <View style={styles.itemBody}>
-            <Text>{item?.language}</Text>
-          </View>
+          
           <View style={styles.itemBody}>
             <Text style={styles.itemsName}>{item?.bisaya}</Text>
           </View>
-          {/* <View style={styles.itemBody}>
-            <Text>{item?.newLanguage}</Text>
-          </View> */}
+         
         </View>
           </TouchableOpacity>
     );
@@ -95,8 +91,8 @@ export default connect(mapStateToProps, null)(ChatTranslate);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //paddingHorizontal:10,
-    justifyContent: "center",
+    top: 5,
+    marginBottom:15,
   },
   listTab: {
     alignSelf: "center",
@@ -131,9 +127,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   itemContainer: {
-    flexDirection: "row",
     paddingVertical: 15,
-    paddingHorizontal: 20,
+    paddingHorizontal: 40,
   },
   itemLogo: {
     padding: 10,
@@ -145,12 +140,11 @@ const styles = StyleSheet.create({
 
   itemBody: {
     flex: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     justifyContent: "center",
   },
 
   itemsName: {
-    fontWeight:'bold',
     fontSize: 16,
   },
   itemStatus: {
