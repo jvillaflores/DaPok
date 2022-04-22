@@ -45,13 +45,15 @@ function AddWord({ currentUser, route, navigation }) {
       bisaya,
       newLanguage:  { required: true },
     });
+    
     if (newLanguage != null) {
       
       if (audio != null) {
         uploadAudio();  
-            
+        wordsContributed();    
       } else {
         saveTextPostData();
+        wordsContributed();
       }
     } else if (audio != null) {
       alert("Butangi ug tubag.");
@@ -163,6 +165,23 @@ const uploadAudio = async () => {
 
     return randomText;
   }
+
+  const wordsContributed = () => {
+    firebase
+      .firestore()
+      .collection("wordsDone")
+      .doc(firebase.auth().currentUser.uid)
+      .set({
+        wordID:data?.id,
+        userID: firebase.auth().currentUser.uid
+      })
+      .then(function () {
+        setLoading(null);
+       
+      })
+      
+      
+  };
 
   //Save Text and Audio
   const SavePostData = (downloadURL) => {

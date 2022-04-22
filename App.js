@@ -306,6 +306,7 @@ export class App extends Component {
                 },
               }}
             />
+             
             <Stack.Screen
               name="DoneAnswers"
               component={DoneAnswers}
