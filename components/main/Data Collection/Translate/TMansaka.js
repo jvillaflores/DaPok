@@ -35,7 +35,6 @@ function TransDone({ words, navigation, props }) {
         .doc(firebase.auth().currentUser.uid)
         .collection("userTranslateAnswers")
         .where("status", "==", "0")
-
         .where("language","==","Mansaka")
         .get()
         .then((snapshot) => {

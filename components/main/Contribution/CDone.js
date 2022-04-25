@@ -86,7 +86,7 @@ function AddWord({ currentUser, route, navigation }) {
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(function () {
-          alert("Thanks for contribution!!");
+          alert("Salamat sa imohang Kontribusyon!!");
           setLoading(null);
           navigation.popToTop();
         });
@@ -108,7 +108,7 @@ function AddWord({ currentUser, route, navigation }) {
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(function () {
-          alert("Thanks for contribution!!");
+          // alert("Thanks for contribution!!");
           setLoading(null);
           navigation.popToTop();
         });

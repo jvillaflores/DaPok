@@ -64,6 +64,9 @@ import TranslationFolderScreen from "./components/main/Data Collection/Translate
 import ChatbotFolderScreen from "./components/main/Data Collection/Chatbot/ChatbotFolder";
 import AddImageScreen from "./components/main/AddImage"
 import DoneAnswers from "./components/main/ChatbotAnswers"
+import ChatbotAnswerDCScreen from "./components/main/Data Collection/Chatbot/CKaganAnswer";
+import CMansakaAnswerScreen from "./components/main/Data Collection/Chatbot/CMansakaAnswer";
+import CManoboAnswerScreen from "./components/main/Data Collection/Chatbot/CManoboAnswer";
 
 const Stack = createStackNavigator();
 
@@ -310,6 +313,52 @@ export class App extends Component {
             <Stack.Screen
               name="DoneAnswers"
               component={DoneAnswers}
+              navigation={this.props.navigation}
+              options={{
+                title: "Answers",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+
+            <Stack.Screen
+              name="ChatbotDoneAnswer"
+              component={ChatbotAnswerDCScreen}
+              navigation={this.props.navigation}
+              options={{
+                title: "Answers",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="CMansakaAnswer"
+              component={CMansakaAnswerScreen}
+              navigation={this.props.navigation}
+              options={{
+                title: "Answers",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="CManoboAnswer"
+              component={CManoboAnswerScreen}
               navigation={this.props.navigation}
               options={{
                 title: "Answers",

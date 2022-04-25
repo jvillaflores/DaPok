@@ -53,16 +53,12 @@ function makeid() {
         newLanguage
       },
     });
-
-
   const uploadLanguage = async () => {
       validate({
         bisaya: { required: true },
         newLanguage: { required: true },
         
       });
-      
-  
       const taskCompleted = () => {
           SavePostData(snapshot);
           saveAllPostData(snapshot);

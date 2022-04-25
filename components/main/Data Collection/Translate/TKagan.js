@@ -19,10 +19,13 @@ require("firebase/firestore");
 require("firebase/firebase-storage");
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-function TransDone({ words, navigation, props }) {
+function ChatTranslate({ words, navigation, props }) {
+  const dimensions = Dimensions.get("window");
   const [status, setStatus] = useState("Translate");
   const [datalist, setDatalist] = useState("");
-
+  const [image, setImage] = useState(false);
+  const imageWidth = dimensions.width;
+  
   // useEffect(() => {
   //   setDatalist(dictionaryAll);
   // }, [dictionaryAll]);
@@ -31,11 +34,8 @@ function TransDone({ words, navigation, props }) {
     const unsubscribe = navigation.addListener("focus", () => {
       firebase
         .firestore()
-        .collection("userAllTranslateAnswers")
-        .doc(firebase.auth().currentUser.uid)
-        .collection("userTranslateAnswers")
-        .where("language","==","Kagan")
-        .where("status", "==", "0")
+        .collection("translate")
+        .where("callerID", "==", "id")
         .get()
         .then((snapshot) => {
           let words = snapshot.docs.map((doc) => {
@@ -45,7 +45,7 @@ function TransDone({ words, navigation, props }) {
           });
           setDatalist(words);
         });
-    });
+    })
 
     return unsubscribe;
   }, [navigation]);
@@ -55,19 +55,16 @@ function TransDone({ words, navigation, props }) {
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() => navigation.navigate('TDone',{data:item})}
-      >
+        onPress={() => navigation.navigate('DoneAnswers',{data:item})}>
+          {/* /////////////////ChatbotAnswers.js//////////////// */}
         <View style={{ flexDirection: "column", flex: 1 }}>
+          
           <View style={styles.itemBody}>
             <Text style={styles.itemsName}>{item?.bisaya}</Text>
           </View>
-          <View style={styles.itemBody}>
-            <Text> {item?.newLanguage}</Text>
-          </View>
+         
         </View>
-
-        
-      </TouchableOpacity>
+          </TouchableOpacity>
     );
   };
 
@@ -89,13 +86,13 @@ const mapStateToProps = (store) => ({
   words: store.userState.words,
 });
 
-export default connect(mapStateToProps, null)(TransDone);
+export default connect(mapStateToProps, null)(ChatTranslate);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //paddingHorizontal:10,
-    justifyContent: "center",
+    top: 5,
+    marginBottom:15,
   },
   listTab: {
     alignSelf: "center",
@@ -130,9 +127,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   itemContainer: {
-    flexDirection: "row",
     paddingVertical: 15,
-    paddingHorizontal: 20,
+    paddingHorizontal: 40,
   },
   itemLogo: {
     padding: 10,
@@ -144,12 +140,11 @@ const styles = StyleSheet.create({
 
   itemBody: {
     flex: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
     justifyContent: "center",
   },
 
   itemsName: {
-    fontWeight:'bold',   
     fontSize: 16,
   },
   itemStatus: {
