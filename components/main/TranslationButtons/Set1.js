@@ -50,8 +50,9 @@ function ChatTranslate({ words, navigation, props, route }) {
         key={index}
         style={styles.itemContainer}
         onPress={() => navigation.navigate("TransAddWord", { data: item })}
-      >
-        <View style={{ flexDirection: "column", flex: 1 }}>
+      > 
+      {/* //////////////////////TransAdd.js/////////////////////// */}
+                <View style={{ flexDirection: "column", flex: 1 }}>
           <View style={styles.itemBody}>
             <Text style={{ fontSize: 15 }}>{item?.bisaya}</Text>
           </View>
