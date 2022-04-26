@@ -32,7 +32,7 @@ function TransAdd({ currentUser, route, navigation }) {
   const { data } = route?.params ?? {};
 
   const [bisaya, setBisaya] = useState("");
-  const [ newLanguage, setNewLanguage ] = useState("");
+  const [ newLanguage, setNewLanguage ] = useState(null);
   
   const [wordID, setWordID] = useState(makeid());
 
@@ -85,25 +85,19 @@ function makeid() {
 
   const uploadLanguage = async () => {
       validate({
-        bisaya: { required: true },
+        bisaya,
         newLanguage: { required: true },
         
       });
+      if(newLanguage == null){
+        alert("Walay sulod ang sagutan.")
+      }
+      else{
+        
+        SaveAllData();  
+      }
+     
       
-  
-      const taskCompleted = () => {
-          SavePostData(snapshot);
-          saveAllPostData(snapshot);
-          setLoading(null);
-          console.log(snapshot);
-      };
-  
-      const taskError = (snapshot) => {
-        setLoading(null);
-        alert(snapshot);
-        console.log(snapshot);
-      };
-  
     };
 
     const SaveAllData = () => {
@@ -125,9 +119,9 @@ function makeid() {
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(function () {
-          // alert("Thanks for contribution!!");
+          alert("Salamat sa imong kontribusyon!");
           setLoading(null);
-          // navigation.popToTop();
+          navigation.goBack();
         });
         
     };
@@ -136,44 +130,37 @@ function makeid() {
       firebase
         .firestore()
         .collection("userAllTranslations")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("userTranslateAnswers")
         .doc(wordID)
         .set({
           wordId: wordID,
-          email: currentUser.email,
-          language:currentUser.language,
-          username: currentUser.name,
           bisaya: data?.bisaya,
-          newLanguage,
-          status: "0",
           upload: "1",
-          creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(function () {
-          alert("Salamat sa imong kontribusyon");
+          //alert("Salamat sa imong kontribusyon");
           setLoading(null);
-          navigation.goBack();
+          //navigation.goBack();
         });
         
     };
-    const saveAllPostData = () => {
+    const updateTranslation = () => {
       firebase
         .firestore()
-        .collection("words")
-        .add({
-          uid: firebase.auth().currentUser.uid,
-          wordId: wordID,
-          email: currentUser.email,
-          username: currentUser.name,
-          language:currentUser.language,
-          bisaya:data?.bisaya,
-          newLanguage,
+        .collection("userAllTranslations")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("userTranslateAnswers")
+        .doc(wordID)
+        .update({
+          
+          bisaya: data?.bisaya,
           upload: "1",
-          creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(function () {
-          alert("Daghang salamat sa imong kontribusyon!");
+          //alert("Salamat sa imong kontribusyon");
           setLoading(null);
-          navigation.goBack();
+          //navigation.goBack();
         });
     };
 
@@ -214,7 +201,8 @@ function makeid() {
             </View>  
           </View>
           <View style={styles.horiz}>
-              <TouchableOpacity onPress={()=>{SavePostData(),SaveAllData()}}
+              <TouchableOpacity 
+                  onPress={()=> uploadLanguage()}
                   style={[styles.buttonVocab,{
                      backgroundColor: "#215A88",}]}>
                   <Text style={{
