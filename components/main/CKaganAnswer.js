@@ -54,26 +54,41 @@ useEffect(() => {
         style={styles.itemContainer}
         onPress={() => navigation.navigate('ChatbotDone',{data:item})}>
           {/* ///////////////CDone////////////////// */}
-        <View style={{ flexDirection: "row", flex: 1 }}>
-          <View style={styles.itemBody}>
-            <Text>{item?.language}</Text>
-          </View>
-          <View style={{ flexDirection: "column"}}>
-            <View style={styles.itemBody}>
+          <View style={{ flexDirection: "row", flex: 1 }}>
+          
+          <View style={{ flex:1, flexDirection: "column"}}>
+            
+            <View style={[styles.itemBody,]}>
               <Text style={styles.itemsName}>{item?.bisaya}</Text>
             </View>
-            <View style={styles.itemBody}>
+            <View style={[styles.itemBody,]}>
               <Text>{item?.newLanguage}</Text>
             </View> 
-
           </View>
           
+          <View style={[styles.itemBody]}>
+            <Text>{item?.language}</Text>
+          </View>
         </View>
           </TouchableOpacity>
     );
   };
   const separator = () => {
     return <View style={{ height: 1, backgroundColor: "#E6E5E5" }} />;
+  };
+
+  const EmptyListMessage = ({item}) => {
+    return (
+      // Flat List Item
+      <SafeAreaView style={styles.container}>
+        <Text
+            style={{textAlign:"center", paddingVertical:150, fontSize:20}}
+            onPress={() => getItem(item)}>
+            Walang laman na data
+        </Text>
+      </SafeAreaView>
+      
+    );
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -82,6 +97,7 @@ useEffect(() => {
         keyExtractor={(e, i) => i.toString()}
         renderItem={renderItem}
         ItemSeparatorComponent={separator}
+        ListEmptyComponent={EmptyListMessage}
       />
     </SafeAreaView>
   );
@@ -142,7 +158,7 @@ const styles = StyleSheet.create({
     },
   
     itemBody: {
-      flex: 1,
+      
       paddingHorizontal: 5,
       justifyContent: "center",
     },
