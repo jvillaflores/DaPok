@@ -78,19 +78,6 @@ useEffect(() => {
     return <View style={{ height: 1, backgroundColor: "#E6E5E5" }} />;
   };
 
-  // const EmptyListMessage = ({item}) => {
-  //   return (
-  //     // Flat List Item
-  //     <SafeAreaView style={styles.container}>
-  //       <Text
-  //           style={{textAlign:"center", paddingVertical:150, fontSize:20}}
-  //           onPress={() => getItem(item)}>
-  //           Walang laman na data
-  //       </Text>
-  //     </SafeAreaView>
-      
-  //   );
-  // };
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
@@ -98,7 +85,6 @@ useEffect(() => {
         keyExtractor={(e, i) => i.toString()}
         renderItem={renderItem}
         ItemSeparatorComponent={separator}
-        // ListEmptyComponent={EmptyListMessage}
       />
     </SafeAreaView>
   );
@@ -110,7 +96,6 @@ export default connect(mapStateToProps, null)(TMansakaAnswer);
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      //paddingHorizontal:10,
       justifyContent: "center",
     },
     listTab: {
@@ -203,7 +188,6 @@ const styles = StyleSheet.create({
     },
     title: {
       top: 40,
-      //left: 110,
     },
     statusFont: {
       fontWeight: "bold",

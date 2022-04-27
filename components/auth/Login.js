@@ -53,23 +53,19 @@ export default class Login extends Component {
   
     return (
       <ScrollView style={styles.container}>
-         {/* LOGO */}
          <View style={{alignItems:'center'}}>
            <Image source={logo} style={{ width: 246, height: 66 }} />
         </View>
         <View style={{alignSelf:'center' }}>
                   <Text style={styles.regis}>Login</Text>
         </View>
-
-
         <View>
           <View style={[styles.placeholder]}>
             <TextInput 
               label="Email"
               keyboardType="email-address"
               activeUnderlineColor="#BABABA"
-              onChangeText={(email) => this.setState({ email })}
-            />
+              onChangeText={(email) => this.setState({ email })}/>
           </View>
           <View style={[styles.placeholder1,]}>
             {secureTextEntry == true ? (
@@ -131,7 +127,6 @@ export default class Login extends Component {
               <Text >
                     Don't have account yet? <Text style={styles.textSignUp}>Sign Up</Text>
                   </Text>
-    
           </TouchableOpacity>
         </View>
       </ScrollView>

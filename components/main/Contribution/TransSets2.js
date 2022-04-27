@@ -332,8 +332,6 @@ const styles = StyleSheet.create({
     top: 5,
   },
   userInfoSelection: {
-    // paddingHorizontal: 30,
-    // marginBottom: 25,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
@@ -401,9 +399,6 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     fontWeight: "bold",
-    //lineHeight: 21,
-    //letterSpacing: 0.55,
     color: "white",
-    //margin: 18,
   },
 });

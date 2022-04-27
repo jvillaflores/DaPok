@@ -37,7 +37,6 @@ function AddWord({ currentUser, route, navigation }) {
 
     return randomText;
   }
-
     const downloadAudio = async () => {
       let SoundObject = new Audio.Sound();
       try {
@@ -72,7 +71,6 @@ function AddWord({ currentUser, route, navigation }) {
           setDatalist(words);
         });
     })
-
     return unsubscribe;
   }, [navigation]);
    {
@@ -157,13 +155,10 @@ const styles = StyleSheet.create({
   }, 
   paddingLeft: {
     alignContent: "flex-start",
-    // padding:15,
-    // paddingRight:5,
     marginTop: 20,
     paddingLeft: 20,
   },
   title_text: {
-    //alignContent:"flex-start",
     fontWeight: "bold",
     fontSize: 17,
     marginTop: 10
@@ -175,7 +170,6 @@ const styles = StyleSheet.create({
   },
   audioButton: {
     alignItems: "center",
-    //justifyContent: "center",
     width: "95%",
     margin: 5,
     height: 60,

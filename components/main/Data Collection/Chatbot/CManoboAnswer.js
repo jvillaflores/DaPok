@@ -94,7 +94,6 @@ export default connect(mapStateToProps, null)(ChatbotAnswerDCScreen);
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      //paddingHorizontal:10,
       justifyContent: "center",
     },
     listTab: {
@@ -187,7 +186,6 @@ const styles = StyleSheet.create({
     },
     title: {
       top: 40,
-      //left: 110,
     },
     statusFont: {
       fontWeight: "bold",

@@ -16,20 +16,16 @@ from 'react-native'
 import firebase from "firebase/app";
 import "firebase/firestore";
 require("firebase/auth");
-
 import {Picker} from '@react-native-picker/picker';
 import { TextInput } from "react-native-paper";
-
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import ValidationComponent from "react-native-form-validator";
 var logo = require("../../assets/dapok.png");
 
 export default class Register extends ValidationComponent {
   
-    //constructor first function to be called whenever a component is created
     constructor(props) {
         super(props);
-        
         this.state = {
           name: "anonymous",
           email: "",
@@ -41,18 +37,15 @@ export default class Register extends ValidationComponent {
           secureTextEntry: true,
         };
         this.onSignUp = this.onSignUp.bind(this);
-      }
-    
+    }
       onSignUp() {
         const { email, password, name, address, username, language, setStatus } = this.state;
 
         this.validate({
           email: { email: true },
-          //name: { required: true },
           username: { required: true },
           password: { required: true },
         });
-
       firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -77,17 +70,12 @@ export default class Register extends ValidationComponent {
         console.log('hey there is an error and did not went through firebase')
       });
   }
-
-  
   render() {
 
     const { navigation } = this.props;
     const { secureTextEntry } = this.state;
     const { password } = this.state;
-
     const {classification} = this.state;
-
-    
 
     return (
       <SafeAreaView style={styles.container}>
@@ -98,9 +86,7 @@ export default class Register extends ValidationComponent {
             <View style={{alignSelf:'center' }}>
                   <Text style={styles.regis}>Register</Text>
             </View>
-
             <View>
-
                 <View style={{flex: 1, justifyContent: "center" }}>
                       <View>
                             {this.isFieldInError("name") &&
@@ -207,31 +193,7 @@ export default class Register extends ValidationComponent {
                           <Picker.Item label="Manobo" value="Manobo" />
                         </Picker>
                     </View>
-
-                    {/* <View style={styles.placeholder}>
-                        <Picker
-                          style={[styles.pickerStyle, {backgroundColor:'#e7e7e7', border: '0px'}]}
-                          onValueChange={(setStatus) => this.setState({ setStatus })}>
-                          <Picker.Item label="Choose a Set" />
-                          <Picker.Item label="Set A" value="1" />
-                          <Picker.Item label="Set B" value="2" />
-                          <Picker.Item label="Set C" value="3" />
-                          <Picker.Item label="Set D" value="4" />
-                          <Picker.Item label="Set E" value="5" />
-                          <Picker.Item label="Set F" value="6" />
-                          <Picker.Item label="Set G" value="7" />
-                          <Picker.Item label="Set H" value="8" />
-                          <Picker.Item label="Set I" value="9" />
-                          <Picker.Item label="Set J" value="10" />
-                        </Picker>
-                      </View> */}
-                    
-                    
-
-                </View>
-
-                {/* BUTTONS */}
-                
+                </View>              
                 <View>
                     <TouchableOpacity
                       style={[styles.button, { backgroundColor: "#1F465B" }]}
@@ -248,18 +210,12 @@ export default class Register extends ValidationComponent {
                         </Text>
                     </TouchableOpacity>
                 </View>
-                
-                
-            </View>
-                       
-          
-                      
+            </View>                  
       </ScrollView>
     </SafeAreaView>
     )
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -268,7 +224,6 @@ const styles = StyleSheet.create({
     alignContent: "center",
   },
   scrollView: {
-    //paddingTop:20,  
     marginHorizontal: 40,
     marginVertical: 20,
   },
@@ -330,5 +285,5 @@ const styles = StyleSheet.create({
     borderBottomWidth:2,
     borderLeftWidth:0,
     borderRightWidth:0,
-} 
+  } 
   });

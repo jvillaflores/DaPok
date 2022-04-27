@@ -34,7 +34,6 @@ export class Main extends Component {
       initialRouteName="Feed"
       screenOptions={{
         tabBarActiveTintColor: '#215A88', tabBarStyle:{ backgroundColor: "#f2f2f2" } }}>
-      {/* https://materialdesignicons.com/  LOOK FOR VECTOR ICONS HERE */}
             <Tab.Screen 
                 name="Feed" 
                 component={FeedScreen} 
@@ -47,14 +46,9 @@ export class Main extends Component {
                     <MaterialCommunityIcons name="home" color={color} size={26} />
                   ),
               }}/>
-              
-
-            {/* 5:50:14 Listener Navigation */}
             <Tab.Screen
                 name="Data Collected"
-                // listeners={({ navigation })}
                 component={ContributeScreen}
-                //navigation = {this.props.navigation}
                 options={{
                   headerTintColor: "#fff",
                   headerStyle: {
@@ -72,7 +66,6 @@ export class Main extends Component {
              <Tab.Screen
                 name="Profile"
                 component={ProfileScreen}
-                //navigation = {this.props.navigation}
                 options={{
                   headerTintColor: "#fff",
                   headerStyle: {
@@ -86,12 +79,7 @@ export class Main extends Component {
                         size={26}
                           />
                         ),
-                      }}
-              />
-
-              
-
-             
+                      }}/>
       </Tab.Navigator>
     )
   }
