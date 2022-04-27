@@ -70,7 +70,7 @@ useEffect(() => {
             <Text>{item?.language}</Text>
           </View>
         </View>
-          </TouchableOpacity>
+      </TouchableOpacity>
     );
   };
   const separator = () => {
