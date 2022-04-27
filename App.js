@@ -67,6 +67,7 @@ import DoneAnswers from "./components/main/ChatbotAnswers"
 import ChatbotAnswerDCScreen from "./components/main/Data Collection/Chatbot/CKaganAnswer";
 import CMansakaAnswerScreen from "./components/main/Data Collection/Chatbot/CMansakaAnswer";
 import CManoboAnswerScreen from "./components/main/Data Collection/Chatbot/CManoboAnswer";
+import TKaganAnswerScreen from "./components/main/Data Collection/Translate/TKaganAnswers"
 
 const Stack = createStackNavigator();
 
@@ -378,6 +379,21 @@ export class App extends Component {
               navigation={this.props.navigation}
               options={{
                 title: "Sets",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="TKaganAnswer"
+              component={TKaganAnswerScreen}
+              navigation={this.props.navigation}
+              options={{
+                title: "Answers",
                 headerShadowVisible: false,
                 headerTintColor: "#fff",
                 headerStyle: {

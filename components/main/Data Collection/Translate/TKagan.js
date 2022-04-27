@@ -34,8 +34,10 @@ function ChatTranslate({ words, navigation, props }) {
     const unsubscribe = navigation.addListener("focus", () => {
       firebase
         .firestore()
-        .collection("translate")
-        .where("callerID", "==", "id")
+        .collection("userAllTranslations")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("userTranslateAnswers")
+        //.where("callerID", "==", "id")
         .get()
         .then((snapshot) => {
           let words = snapshot.docs.map((doc) => {
@@ -55,8 +57,8 @@ function ChatTranslate({ words, navigation, props }) {
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() => navigation.navigate('DoneAnswers',{data:item})}>
-          {/* /////////////////ChatbotAnswers.js//////////////// */}
+        onPress={() => navigation.navigate('TranslateDone',{data:item})}>
+          {/* /////////////////TransDone.js//////////////// */}
         <View style={{ flexDirection: "column", flex: 1 }}>
           
           <View style={styles.itemBody}>

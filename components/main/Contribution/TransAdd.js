@@ -89,13 +89,18 @@ function makeid() {
         newLanguage: { required: true },
         
       });
+
       if(newLanguage == null){
         alert("Walay sulod ang sagutan.")
+        console.log(data?.id)
+
       }
+      
       else{
-        
-        SaveAllData();  
+        SaveAllData();
+        SavePostData();
       }
+
      
       
     };
@@ -108,10 +113,9 @@ function makeid() {
         .collection("userTranslateAnswers")
         .doc(wordID)
         .set({
-          wordId: wordID,
+          wordId: data?.id,
           email: currentUser.email,
           language:datalist.language,
-          
           bisaya: data?.bisaya,
           newLanguage,
           status: "0",
@@ -132,11 +136,12 @@ function makeid() {
         .collection("userAllTranslations")
         .doc(firebase.auth().currentUser.uid)
         .collection("userTranslateAnswers")
-        .doc(wordID)
+        .doc(data?.id) //bisaya word from translate collection ID
         .set({
-          wordId: wordID,
+          wordId: data?.id,
           bisaya: data?.bisaya,
           upload: "1",
+          creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(function () {
           //alert("Salamat sa imong kontribusyon");
@@ -164,17 +169,7 @@ function makeid() {
         });
     };
 
-    const onUpdate = () =>{
-      firebase
-          .firestore()
-          .collection("words")
-          .doc('status')
-          .update({
-            status:"0",
-          })
-          
-    }
-
+    
     const exit =() => {
       navigation.goBack();
     }
