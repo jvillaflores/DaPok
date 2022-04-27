@@ -51,7 +51,7 @@ function Chatbot() {
       </Tab.Navigator>
       {/* /////////////TKagan.js ///////////////*/}
        {/* /////////////TMansaka.js ///////////////*/}
-  {/* /////////////TManobo.js ///////////////*/}
+      {/* /////////////TManobo.js ///////////////*/}
       
     </SafeAreaView>
   );

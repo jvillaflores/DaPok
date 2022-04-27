@@ -60,7 +60,7 @@ function AddWord({ currentUser, route, navigation }) {
       
     }else {
       alert("Butangi ug tubag.");
-      
+      console.log(data?.id)
     }
   };
 
@@ -171,9 +171,13 @@ const uploadAudio = async () => {
       .firestore()
       .collection("wordsDone")
       .doc(firebase.auth().currentUser.uid)
+      .collection("usersWordsDone")
+      .doc(data?.id)
       .set({
         wordID:data?.id,
-        userID: firebase.auth().currentUser.uid
+        bisaya: data?.bisaya,
+        language:datalist.language,
+        creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
         setLoading(null);

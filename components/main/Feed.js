@@ -80,6 +80,7 @@ function Feed({ currentUser, navigation }) {
                  <TouchableOpacity
                    style={styles.buttonVocab}
                    onPress={() => navigation.navigate("Chatbot")}>
+                     {/* ///////////Chatbot.js //////////////*/}
                       <View style={styles.contextButton}>
                         <Image source={chat} style={[styles.chaticon,{width:45, height:45}]} />
                               <View style={styles.text_Context}>
