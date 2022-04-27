@@ -53,8 +53,8 @@ useEffect(() => {
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() => navigation.navigate('ChatbotDone',{data:item})}>
-          {/* ///////////////CDone////////////////// */}
+        onPress={() => navigation.navigate('TDone',{data:item})}>
+          {/* ///////////////TDone.js////////////////// */}
           <View style={{ flexDirection: "row", flex: 1 }}>
           
           <View style={{ flex:1, flexDirection: "column"}}>
