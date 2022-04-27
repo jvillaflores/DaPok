@@ -58,7 +58,7 @@ function close() {
         language: language,
       })
       .then(function () {
-        alert("Saved ");
+        alert("Napulihan na ang Spoken Language");
         setLoading(null);
       });
   };

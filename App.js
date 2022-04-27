@@ -68,6 +68,8 @@ import ChatbotAnswerDCScreen from "./components/main/Data Collection/Chatbot/CKa
 import CMansakaAnswerScreen from "./components/main/Data Collection/Chatbot/CMansakaAnswer";
 import CManoboAnswerScreen from "./components/main/Data Collection/Chatbot/CManoboAnswer";
 import TKaganAnswerScreen from "./components/main/Data Collection/Translate/TKaganAnswers"
+import TMansakaAnswerScreen from "./components/main/Data Collection/Translate/TMansakaAnswers"
+import TManoboAnswerScreen from "./components/main/Data Collection/Translate/TManoboAnswers"
 
 const Stack = createStackNavigator();
 
@@ -391,6 +393,36 @@ export class App extends Component {
             <Stack.Screen
               name="TKaganAnswer"
               component={TKaganAnswerScreen}
+              navigation={this.props.navigation}
+              options={{
+                title: "Answers",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="TMansakaAnswer"
+              component={TMansakaAnswerScreen}
+              navigation={this.props.navigation}
+              options={{
+                title: "Answers",
+                headerShadowVisible: false,
+                headerTintColor: "#fff",
+                headerStyle: {
+                  backgroundColor: "#215A88",
+                  elevation: 0,
+                  borderBottomWidth: 0,
+                },
+              }}
+            />
+            <Stack.Screen
+              name="TManoboAnswer"
+              component={TManoboAnswerScreen}
               navigation={this.props.navigation}
               options={{
                 title: "Answers",
