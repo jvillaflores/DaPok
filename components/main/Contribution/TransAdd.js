@@ -140,6 +140,7 @@ function makeid() {
         .set({
           wordId: data?.id,
           bisaya: data?.bisaya,
+          language:datalist.language,
           upload: "1",
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })

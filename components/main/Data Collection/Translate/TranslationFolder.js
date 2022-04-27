@@ -45,11 +45,13 @@ function Chatbot() {
           },
         })}
       >
-        <Tab.Screen name="Kagan" component={TKagan} />
-        <Tab.Screen name="Mansaka" component={TMansaka} />
+        <Tab.Screen name="Kagan" component={TKagan} />  
+        <Tab.Screen name="Mansaka" component={TMansaka} /> 
         <Tab.Screen name="Manobo" component={TManobo} />
       </Tab.Navigator>
-
+      {/* /////////////TKagan.js ///////////////*/}
+       {/* /////////////TMansaka.js ///////////////*/}
+  {/* /////////////TManobo.js ///////////////*/}
       
     </SafeAreaView>
   );

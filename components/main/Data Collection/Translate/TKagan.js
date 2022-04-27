@@ -35,6 +35,7 @@ function ChatTranslate({ words, navigation, props }) {
         .collection("userAllTranslations")
         .doc(firebase.auth().currentUser.uid)
         .collection("userTranslateAnswers")
+        .where("language","==","Kagan")
         .get()
         .then((snapshot) => {
           let words = snapshot.docs.map((doc) => {
@@ -55,7 +56,7 @@ function ChatTranslate({ words, navigation, props }) {
         key={index}
         style={styles.itemContainer}
         onPress={() => navigation.navigate('TKaganAnswer',{data:item})}>
-          {/* /////////////////TKaganAnswer.js//////////////// */}
+          {/* /////////////////TKaganAnswer.js///////////////// */}
         <View style={{ flexDirection: "column", flex: 1 }}>
           
           <View style={styles.itemBody}>
