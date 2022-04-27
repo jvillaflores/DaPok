@@ -136,28 +136,6 @@ function makeid() {
   
    {
     return (
-      // <SafeAreaView style={styles.container}>
-      //     <ScrollView>
-      //       <View>
-      //           <View style={styles.center}>
-      //               <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {data?.language}</Text>
-      //               <Text style={styles.text}>{data?.bisaya} </Text>
-      //           </View>
-      //           <View style={styles.horiz}>
-      //             <TextInput
-      //                 multiline={false}
-      //                 activeUnderlineColor="#215A88"
-      //                 placeholder={data?.newLanguage}
-      //                 onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
-      //             />
-      //             {/* <Text>{data?.newLanguage}</Text> */}
-      //             <Text>MAO NI</Text>
-                
-      //           </View>
-              
-      //       </View>
-      //     </ScrollView>
-      // </SafeAreaView>
       <SafeAreaView style={styles.container}>
           <ScrollView>
                 <View>
