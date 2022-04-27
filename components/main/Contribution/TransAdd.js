@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {
   View,
-  StatusBar,
-  RefreshControl,
   TouchableOpacity,
   Text,
   StyleSheet,
-  Pressable,
   ScrollView,
-  Alert,
 
 } from "react-native";
 
@@ -19,9 +15,7 @@ import { connect } from "react-redux";
 import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useValidation } from "react-native-form-validator";
-import * as FileSystem from "expo-file-system";
 
 
 
@@ -30,12 +24,9 @@ function TransAdd({ currentUser, route, navigation }) {
 
   const [loading, setLoading] = useState(false);
   const { data } = route?.params ?? {};
-
   const [bisaya, setBisaya] = useState("");
   const [ newLanguage, setNewLanguage ] = useState(null);
-  
   const [wordID, setWordID] = useState(makeid());
-
   const [datalist, setDatalist] = useState("");
 
   useEffect(() => {
@@ -145,30 +136,11 @@ function makeid() {
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(function () {
-          //alert("Salamat sa imong kontribusyon");
           setLoading(null);
-          //navigation.goBack();
         });
         
     };
-    const updateTranslation = () => {
-      firebase
-        .firestore()
-        .collection("userAllTranslations")
-        .doc(firebase.auth().currentUser.uid)
-        .collection("userTranslateAnswers")
-        .doc(wordID)
-        .update({
-          
-          bisaya: data?.bisaya,
-          upload: "1",
-        })
-        .then(function () {
-          //alert("Salamat sa imong kontribusyon");
-          setLoading(null);
-          //navigation.goBack();
-        });
-    };
+   
 
     
     const exit =() => {

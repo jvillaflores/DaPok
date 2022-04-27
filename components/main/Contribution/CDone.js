@@ -1,30 +1,20 @@
 import React, { useState, useEffect } from "react";
 import {
   View,
-  StatusBar,
-  Button,
   TouchableOpacity,
   Text,
   StyleSheet,
-  Pressable,
   ScrollView,
-  Alert,
   Image,
   SafeAreaView
 } from "react-native";
-
-import {
-  TextInput
-} from 'react-native-paper'
 import { Dimensions } from "react-native";
 import { connect } from "react-redux";
 import firebase from "firebase";
 require("firebase/firestore");
 require("firebase/firebase-storage");
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { useValidation } from "react-native-form-validator";
-import * as FileSystem from "expo-file-system";
-import { FlatList } from "react-native-gesture-handler";
+
 import { Audio } from "expo-av";
 
 function AddWord({ currentUser, route, navigation }) {
@@ -62,63 +52,8 @@ function AddWord({ currentUser, route, navigation }) {
       }
     };
   
-    const retryPlaySound = () => downloadAudio();
 
-    const SavePostData = () => {
-      firebase
-        .firestore()
-        .collection("userAllChatbotAnswers")
-        .doc(firebase.auth().currentUser.uid)
-        .collection("userChatbotAnswers")
-        .doc(wordID)
-        .set({
-          wordId: wordID,
-          email: currentUser.email,
-          language:currentUser.language,
-          bisaya: data?.bisaya,
-          newLanguage,
-          status: "0",
-          upload: "1",
-          creation: firebase.firestore.FieldValue.serverTimestamp(),
-        })
-        .then(function () {
-          alert("Salamat sa imohang Kontribusyon!!");
-          setLoading(null);
-          navigation.popToTop();
-        });
-        
-    };
-    const saveAllPostData = () => {
-      firebase
-        .firestore()
-        .collection("words")
-        .add({
-          uid: firebase.auth().currentUser.uid,
-          wordId: wordID,
-          email: currentUser.email,
-          username: currentUser.name,
-          language:currentUser.language,
-          bisaya:data?.bisaya,
-          newLanguage,
-          upload: "1",
-          creation: firebase.firestore.FieldValue.serverTimestamp(),
-        })
-        .then(function () {
-          // alert("Thanks for contribution!!");
-          setLoading(null);
-          navigation.popToTop();
-        });
-    };
-
-    const onUpdate = () =>{
-      firebase
-          .firestore()
-          .collection("words")
-          .doc('status')
-          .update({
-            status:"0",
-          })    
-    }
+   
     useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       firebase

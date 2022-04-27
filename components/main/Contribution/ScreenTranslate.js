@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
-  import { 
-    View,
-    Text,  
-    Button,   
+  import {   
     StyleSheet,
-    TouchableOpacity,
-    Image,
-    ScrollView,
     SafeAreaView,
   }
   from 'react-native'
@@ -14,11 +8,8 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-import DoneScreen from "./TransDone";
 import TranslateScreen from "./TransTrans";
 import TranslateSets2Screen from "./TransSets2";
-import { NavigationContainer } from '@react-navigation/native';
-import TransSets2 from './TransSets2';
 
 
 const Tab = createMaterialTopTabNavigator();
@@ -46,8 +37,8 @@ function ScreenTranslate() {
         <Tab.Screen name="1" component={TranslateScreen} />
         <Tab.Screen name="2" component={TranslateSets2Screen} />
       </Tab.Navigator>
-
-      
+        {/* ///////////////TransTrans.js /////////////////*/}
+        {/* ///////////////TransSets2.js /////////////////*/}
     </SafeAreaView>
   );
 }

@@ -45,7 +45,8 @@ function TranslateSets() {
         <Tab.Screen name="Translate" component={Set1Screen} />
         <Tab.Screen name="Done" component={DoneScreen} />
       </Tab.Navigator>
-
+        {/* ///////////////////Set1.js///////////// */}
+        {/* ////////////////TransDone.js ///////////*/}
       
     </SafeAreaView>
   );

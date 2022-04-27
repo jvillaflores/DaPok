@@ -3,14 +3,9 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
-  Pressable,
-  TextInput,
   FlatList,
-  RefreshControl,
   SafeAreaView,
 } from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { connect } from "react-redux";
 
 import { Dimensions } from "react-native";
@@ -20,12 +15,7 @@ require("firebase/firebase-storage");
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 function TransDone({ words, navigation, props }) {
-  const [status, setStatus] = useState("Translate");
   const [datalist, setDatalist] = useState("");
-
-  // useEffect(() => {
-  //   setDatalist(dictionaryAll);
-  // }, [dictionaryAll]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -34,7 +24,6 @@ function TransDone({ words, navigation, props }) {
         .collection("userAllTranslateAnswers")
         .doc(firebase.auth().currentUser.uid)
         .collection("userTranslateAnswers")
-
         .where("status", "==", "0")
         .get()
         .then((snapshot) => {
@@ -55,16 +44,12 @@ function TransDone({ words, navigation, props }) {
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() => navigation.navigate('TDone',{data:item})}
-      >
-        <View style={{ flexDirection: "column", flex: 1 }}>
-          <View style={styles.itemBody}>
-            <Text style={styles.itemsName}>{item?.bisaya}</Text>
-          </View>
-          
-        </View>
-
-        
+        onPress={() => navigation.navigate('TDone',{data:item})}>
+            <View style={{ flexDirection: "column", flex: 1 }}>
+                  <View style={styles.itemBody}>
+                    <Text style={styles.itemsName}>{item?.bisaya}</Text>
+                  </View>
+             </View>
       </TouchableOpacity>
     );
   };

@@ -54,85 +54,8 @@ function makeid() {
         newLanguage
       },
     });
-  const uploadLanguage = async () => {
-      validate({
-        bisaya: { required: true },
-        newLanguage: { required: true },
-        
-      });
-      const taskCompleted = () => {
-          SavePostData(snapshot);
-          saveAllPostData(snapshot);
-          setLoading(null);
-          console.log(snapshot);
-      };
   
-      const taskError = (snapshot) => {
-        setLoading(null);
-        alert(snapshot);
-        console.log(snapshot);
-      };
-  
-    };
 
-    const SavePostData = () => {
-      firebase
-        .firestore()
-        .collection("userAllChatbotAnswers")
-        .doc(firebase.auth().currentUser.uid)
-        .collection("userChatbotAnswers")
-        .doc(wordID)
-        .set({
-          wordId: wordID,
-          email: currentUser.email,
-          language:currentUser.language,
-          
-          bisaya: data?.bisaya,
-          newLanguage,
-          status: "0",
-          upload: "1",
-          creation: firebase.firestore.FieldValue.serverTimestamp(),
-        })
-        .then(function () {
-          alert("Thanks for contribution!!");
-          setLoading(null);
-          navigation.popToTop();
-        });
-        
-    };
-    const saveAllPostData = () => {
-      firebase
-        .firestore()
-        .collection("words")
-        .add({
-          uid: firebase.auth().currentUser.uid,
-          wordId: wordID,
-          email: currentUser.email,
-          username: currentUser.name,
-          language:currentUser.language,
-          bisaya:data?.bisaya,
-          newLanguage,
-          upload: "1",
-          creation: firebase.firestore.FieldValue.serverTimestamp(),
-        })
-        .then(function () {
-          alert("Thanks for contribution!!");
-          setLoading(null);
-          navigation.popToTop();
-        });
-    };
-
-    const onUpdate = () =>{
-      firebase
-          .firestore()
-          .collection("words")
-          .doc('status')
-          .update({
-            status:"0",
-          })
-          
-    }
-  
   
    {
     return (
