@@ -31,8 +31,9 @@ function ChatTranslate({ words, navigation, props }) {
     const unsubscribe = navigation.addListener("focus", () => {
       firebase
         .firestore()
-        .collection("words")
-        .where("status", "==", "1")
+        .collection("wordsDone")
+        .doc(firebase.auth().currentUser.uid)
+        .collection("usersWordsDone")
         .get()
         .then((snapshot) => {
           let words = snapshot.docs.map((doc) => {

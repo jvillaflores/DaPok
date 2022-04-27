@@ -35,7 +35,6 @@ function ChatTranslate({ words, navigation, props }) {
         .collection("userAllTranslations")
         .doc(firebase.auth().currentUser.uid)
         .collection("userTranslateAnswers")
-        .where("language","==","Kagan")
         .get()
         .then((snapshot) => {
           let words = snapshot.docs.map((doc) => {

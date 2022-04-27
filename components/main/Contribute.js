@@ -26,11 +26,13 @@ import React, { Component } from 'react'
         <List.Item 
           onPress={() => navigation.navigate("ChatbotFolder")}
           style = {{margin: -10, top: -5}} title="Chatbot" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
+          {/* /////////////////////////ChatbotFolder.js//////////////////////// */}
       </TouchableOpacity>
       <TouchableOpacity>
         <List.Item 
           onPress={() => navigation.navigate("TranslationFolder")}
           style = {{margin: -10, top: 5}} title="Translation" left={() => <List.Icon color="#215A88" icon="folder"/>}/>
+          {/* /////////////////////TranslationFolder.js////////////////////// */}
       </TouchableOpacity>
       </List.Section>
     </ScrollView>

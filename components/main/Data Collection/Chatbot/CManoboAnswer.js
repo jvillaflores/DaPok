@@ -54,20 +54,21 @@ useEffect(() => {
         style={styles.itemContainer}
         onPress={() => navigation.navigate('ChatbotDone',{data:item})}>
           {/* ///////////////CDone////////////////// */}
-        <View style={{ flexDirection: "row", flex: 1 }}>
-          <View style={styles.itemBody}>
-            <Text>{item?.language}</Text>
-          </View>
-          <View style={{ flexDirection: "column"}}>
-            <View style={styles.itemBody}>
+          <View style={{ flexDirection: "row", flex: 1 }}>
+          
+          <View style={{ flex:1, flexDirection: "column"}}>
+            
+            <View style={[styles.itemBody,]}>
               <Text style={styles.itemsName}>{item?.bisaya}</Text>
             </View>
-            <View style={styles.itemBody}>
+            <View style={[styles.itemBody,]}>
               <Text>{item?.newLanguage}</Text>
             </View> 
-
           </View>
           
+          <View style={[styles.itemBody]}>
+            <Text>{item?.language}</Text>
+          </View>
         </View>
           </TouchableOpacity>
     );
@@ -156,7 +157,7 @@ const styles = StyleSheet.create({
     },
   
     itemBody: {
-      flex: 1,
+     
       paddingHorizontal: 5,
       justifyContent: "center",
     },
