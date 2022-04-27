@@ -114,7 +114,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "bold",
     color: "#000000",
-    //lineHeight: 1,
   },
   brnTabActive: {
     backgroundColor: "#fff",
@@ -181,7 +180,6 @@ const styles = StyleSheet.create({
   },
   title: {
     top: 40,
-    //left: 110,
   },
   statusFont: {
     fontWeight: "bold",

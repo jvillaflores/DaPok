@@ -130,10 +130,7 @@ function makeid() {
           .update({
             status:"0",
           })
-          
     }
-  
-  
    {
     return (
       <SafeAreaView style={styles.container}>
@@ -164,9 +161,6 @@ const styles = StyleSheet.create({
   container: {
     flex:1,
     paddingVertical:70,
-    // justifyContent:'center',
-    // alignItems: 'center',
-    // alignContent: 'center',
   },
   center:{
     alignItems:"center",

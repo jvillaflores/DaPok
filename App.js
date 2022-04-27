@@ -59,7 +59,6 @@ import TDone from "./components/main/Contribution/TDone";
 import ScreenTranslation from "./components/main/Contribution/ScreenTranslate";
 import TransSet2Screen from "./components/main/Contribution/TransSets2";
 import Set1Screen from "./components/main/TranslationButtons/Set1";
-import reportGenerateScreen from "./components/main/Data Collection/reportGenerate";
 import TranslationFolderScreen from "./components/main/Data Collection/Translate/TranslationFolder";
 import ChatbotFolderScreen from "./components/main/Data Collection/Chatbot/ChatbotFolder";
 import AddImageScreen from "./components/main/AddImage"
@@ -72,22 +71,6 @@ import TMansakaAnswerScreen from "./components/main/Data Collection/Translate/TM
 import TManoboAnswerScreen from "./components/main/Data Collection/Translate/TManoboAnswers"
 
 const Stack = createStackNavigator();
-
-// firebase.firestore().enablePersistence()
-//   .catch(function(err) {
-//       if (err.code == 'failed-precondition') {
-// firebase.firestore().enablePersistence()
-//   .catch(function(err) {
-//       if (err.code == 'failed-precondition') {
-//         console.log("error occure while setup enlablePersistence")
-//       } else if (err.code == 'unimplemented') {
-//         console.log("error occure while setup enlablePersistence")
-//       }
-//     });
-//     } else if (err.code == 'unimplemented') {
-//       console.log("error occure while setup enlablePersistence")
-//     }
-//   });
 
 export class App extends Component {
   constructor(props) {
@@ -588,10 +571,6 @@ export class App extends Component {
                 },
               }}
             />
-            
-            
-            
-            
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>

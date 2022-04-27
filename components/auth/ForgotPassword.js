@@ -11,7 +11,6 @@ import {
 
 import { TextInput } from "react-native-paper";
 import Svg, { Path, G, Rect, Polygon, Title } from "react-native-svg";
-
 import firebase from "firebase/app";
 import "firebase/firestore";
 require("firebase/auth");
@@ -25,7 +24,6 @@ export default class ForgotPassword extends Component {
     };
     this.onReset = this.onReset.bind(this);
   }
-
   onReset() {
     const { email } = this.state;
     firebase
@@ -38,7 +36,6 @@ export default class ForgotPassword extends Component {
         console.log(e);
       });
   }
-
   render() {
     const { navigation } = this.props;
     return (
@@ -54,9 +51,7 @@ export default class ForgotPassword extends Component {
                   label="Email"
                   activeUnderlineColor="#1F465B"
                   keyboardType="email-address"
-                  onChangeText={(email) => this.setState({ email })}
-                 
-                />
+                  onChangeText={(email) => this.setState({ email })}/>
             </View>
             <View>
                 <Pressable style={styles.button} onPress={() => this.onReset()}>
@@ -71,24 +66,15 @@ export default class ForgotPassword extends Component {
                 </TouchableOpacity>
           </View>
       </View>
-     
     );
   }
 }
-
-// export function Landing({ navigation }) {
-//   return (
-
-//   );
-// }
-
 const styles = StyleSheet.create({
   container: {
     flex:1,
     paddingHorizontal:30,
     paddingVertical:150,
     alignContent:"center",
-    
   },
   Text:{
     fontSize:20,
@@ -115,7 +101,6 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#1F465B",
   },
-  
   text: {
     alignSelf: "center",
     fontSize: 18,

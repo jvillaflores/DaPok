@@ -73,10 +73,6 @@ function close() {
             color: "#215A88",
             onPress: () => setVisible(false),
           },
-          // {
-          //   label: 'Learn more',
-          //   onPress: () => setVisible(false),
-          // },
         ]}
       >
         Ang username lang ang pwede ma-ilis. Kung naa pud kay ma hatag nga mga impormasyon sa laing lengwahe, pwede mailis ang 'Spoken Language'.
@@ -93,7 +89,6 @@ function close() {
               placeholder={currentUser.name}
               editable={false}
               activeUnderlineColor="#215A88"
-              // onChangeText={(name) => this.setState({ name })}
             />
           </View>
           <View>
@@ -103,7 +98,6 @@ function close() {
               placeholder={currentUser.email}
               editable={false}
               activeUnderlineColor="#215A88"
-              // onChangeText={(email) => this.setState({ email })}
             />
           </View>
           <View style={styles.placeholder}>
@@ -121,18 +115,8 @@ function close() {
               editable={false}
               placeholder={currentUser.address}
               activeUnderlineColor="#215A88"
-              // onChangeText={(address) => this.setState({ address })}
             />
           </View>
-          {/* <View style={styles.placeholder}>
-            <Text>Spoken Language</Text>
-            <TextInput
-              editable={false}
-              placeholder={currentUser.language.language}
-              activeUnderlineColor="#215A88"
-              // onChangeText={(language) => this.setState({ language })}
-            />
-          </View> */}
           <View style={styles.placeholder}>
           <Text>Spoken Language</Text>
 
@@ -147,26 +131,13 @@ function close() {
             >
               <Picker.Item
                  label={currentUser.language}
-                 //value={currentUser.language}
               />
               <Picker.Item label="Kagan" value="Kagan" />
               <Picker.Item label="Mansaka" value="Mansaka" />
               <Picker.Item label="Manobo" value="Manobo" />
             </Picker>
           </View>
-
-
-          
-          
         </View>
-        {/* <View>
-        <TouchableOpacity onPress={() => navigation.navigate("Validate")}>
-            <View style={[styles.Bbuttonn, { backgroundColor: "#e7e7e7" }]}
-            onPress={() => onUpdate()}>
-            <Text style={[styles.text1]}>Report Generator</Text>
-            </View>
-          </TouchableOpacity>
-          </View>  */}
         <View>
           <TouchableOpacity
             style={[styles.Bbutton, { backgroundColor: "#1F465B" }]}
@@ -194,12 +165,7 @@ function close() {
             color: "#215A88",
             onPress: () => setVisible(false),
           },
-          // {
-          //   label: 'Learn more',
-          //   onPress: () => setVisible(false),
-          // },
-        ]}
-      >
+        ]}>
         Ang username lang ang pwede ma-ilis. Kung naa pud kay ma hatag nga mga impormasyon sa laing lengwahe, pwede mailis ang 'Spoken Language'.
       </Banner>
       <ScrollView
@@ -214,7 +180,6 @@ function close() {
               placeholder={currentUser.name}
               editable={false}
               activeUnderlineColor="#215A88"
-              // onChangeText={(name) => this.setState({ name })}
             />
           </View>
           <View>
@@ -224,7 +189,6 @@ function close() {
               placeholder={currentUser.email}
               editable={false}
               activeUnderlineColor="#215A88"
-              // onChangeText={(email) => this.setState({ email })}
             />
           </View>
           <View style={styles.placeholder}>
@@ -242,18 +206,8 @@ function close() {
               editable={false}
               placeholder={currentUser.address}
               activeUnderlineColor="#215A88"
-              // onChangeText={(address) => this.setState({ address })}
             />
           </View>
-          {/* <View style={styles.placeholder}>
-            <Text>Spoken Language</Text>
-            <TextInput
-              editable={false}
-              placeholder={currentUser.language.language}
-              activeUnderlineColor="#215A88"
-              // onChangeText={(language) => this.setState({ language })}
-            />
-          </View> */}
           <View style={styles.placeholder}>
           <Text>Spoken Language</Text>
 
@@ -268,7 +222,6 @@ function close() {
             >
               <Picker.Item
                  label={currentUser.language}
-                 //value={currentUser.language}
               />
               <Picker.Item label="Kagan" value="Kagan" />
               <Picker.Item label="Mansaka" value="Mansaka" />
@@ -277,14 +230,6 @@ function close() {
           </View>
           
         </View>
-        {/* <View>
-        <TouchableRipple onPress={() => navigation.navigate("Validate")}>
-            <View style={[styles.Bbuttonn, { backgroundColor: "#e7e7e7" }]}
-            onPress={() => onUpdate()}>
-            <Text style={[styles.text1]}>Report Generator</Text>
-            </View>
-          </TouchableRipple>
-          </View>  */}
         <View>
           <TouchableOpacity
             style={[styles.Bbutton, { backgroundColor: "#1F465B" }]}
@@ -312,12 +257,8 @@ export default connect(mapStateToProps, null)(Profile);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingTop: 30,
-    // paddingHorizontal: 40
   },
   userInfoSelection: {
-    // paddingHorizontal: 30,
-    // marginBottom: 25,
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",

@@ -93,7 +93,6 @@ export default connect(mapStateToProps, null)(AddWord);
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      //paddingHorizontal:10,
       justifyContent: "center",
     },
     listTab: {
@@ -117,7 +116,6 @@ const styles = StyleSheet.create({
       fontSize: 12,
       fontWeight: "bold",
       color: "#000000",
-      //lineHeight: 1,
     },
     brnTabActive: {
       backgroundColor: "#fff",
@@ -140,15 +138,10 @@ const styles = StyleSheet.create({
       width: 50,
       height: 50,
     },
-  
     itemBody: {
-     
-      
       paddingHorizontal: 3,
       justifyContent: "center",
-      
     },
-  
     itemsName: {
       fontWeight:'bold',
       fontSize: 16,
@@ -189,7 +182,6 @@ const styles = StyleSheet.create({
     },
     title: {
       top: 40,
-      //left: 110,
     },
     statusFont: {
       fontWeight: "bold",

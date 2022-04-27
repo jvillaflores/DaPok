@@ -93,18 +93,12 @@ function makeid() {
       if(newLanguage == null){
         alert("Walay sulod ang sagutan.")
         console.log(data?.id)
-
       }
-      
       else{
         SaveAllData();
         SavePostData();
       }
-
-     
-      
     };
-
     const SaveAllData = () => {
       firebase
         .firestore()
@@ -136,7 +130,7 @@ function makeid() {
         .collection("userAllTranslations")
         .doc(firebase.auth().currentUser.uid)
         .collection("userTranslateAnswers")
-        .doc(data?.id) //bisaya word from translate collection ID
+        .doc(data?.id)
         .set({
           wordId: data?.id,
           bisaya: data?.bisaya,
@@ -145,9 +139,7 @@ function makeid() {
           creation: firebase.firestore.FieldValue.serverTimestamp(),
         })
         .then(function () {
-          //alert("Salamat sa imong kontribusyon");
           setLoading(null);
-          //navigation.goBack();
         });
         
     };
@@ -164,18 +156,13 @@ function makeid() {
           upload: "1",
         })
         .then(function () {
-          //alert("Salamat sa imong kontribusyon");
           setLoading(null);
-          //navigation.goBack();
         });
     };
 
-    
     const exit =() => {
       navigation.goBack();
     }
-  
-  
    {
     return (
       <ScrollView style={styles.container}>
@@ -190,10 +177,6 @@ function makeid() {
                   activeUnderlineColor="#215A88"
                   onChangeText={(newLanguage) => setNewLanguage(newLanguage)}/>
           <View> 
-            {/* this is for audio */}
-
-            
-            
             </View>  
           </View>
           <View style={styles.horiz}>

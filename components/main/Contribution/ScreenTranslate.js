@@ -25,7 +25,6 @@ const Tab = createMaterialTopTabNavigator();
 
 function ScreenTranslate() {
   return (
-    //Check whether Navigation Container >> wont navigate
     <SafeAreaView style={styles.container}>
       
       <Tab.Navigator
@@ -41,13 +40,10 @@ function ScreenTranslate() {
             fontSize: 15,
             fontWeight: "bold",
           },
-        })}
-      >
+        })}>
         <Tab.Screen name="1" component={TranslateScreen} />
         <Tab.Screen name="2" component={TranslateSets2Screen} />
       </Tab.Navigator>
-
-      
     </SafeAreaView>
   );
 }
@@ -67,7 +63,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    //paddingHorizontal:10,
     justifyContent: "center",
   },
   innercontainer: {
@@ -75,7 +70,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "flex-start",
     margin: 50,
-    //backgroundColor: '#FFFFFF',
   },
   button: {
     position: "absolute",
@@ -93,7 +87,6 @@ const styles = StyleSheet.create({
     right: 30,
     elevation: 9,
   },
-
   textHead: {
     flexDirection: "row",
     fontSize: 21,
@@ -108,15 +101,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    //color: "white",
   },
   textreg: {
     flexDirection: "row",
     fontSize: 15,
-    // fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    //color: "white",
   },
   headLine: {
     flexDirection: "row",

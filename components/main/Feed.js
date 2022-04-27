@@ -125,12 +125,9 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       paddingTop: StatusBar.currentHeight,
-      //alignContent: "center",
-      //marginVertical:20,
     },
     headline_box: {
       backgroundColor: "#EBEBEB",
-      // alignItems: "center",
       borderRadius: 15,
       marginVertical:40,
       paddingVertical:30,
@@ -158,7 +155,6 @@ const styles = StyleSheet.create({
     },
     titleText: {
        fontSize: 20,
-      // fontWeight: "bold",
     },
     buttonVocab: {
       alignSelf: "center",

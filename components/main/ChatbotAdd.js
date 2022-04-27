@@ -64,10 +64,6 @@ function AddWord({ currentUser, route, navigation }) {
     }
   };
 
-  
-
-
-/////////////////////AUDIO/////////////////////////////////
 const chooseFile = async () => {
   let result = await DocumentPicker.getDocumentAsync({
     type: "audio/*",
@@ -78,7 +74,6 @@ const chooseFile = async () => {
 
   if (result.type === "success") {
       setAudio(result);
-      //alert("Audio File", result);
       console.log(result);
     }else {
         alert("something went wrong!!");
@@ -112,7 +107,6 @@ const uploadAudio = async () => {
   const taskCompleted = () => {
     task.snapshot.ref.getDownloadURL().then((snapshot) => {
       SavePostData(snapshot);
-      //saveTextPostData(snapshot);
       setLoading(null);
       console.log(snapshot);
     });
@@ -128,8 +122,6 @@ const uploadAudio = async () => {
   
 };
 
-
-////////////////////////////////////////////////////////////
   useEffect(() => {
     setDatalist(currentUser);
   }, [currentUser]);
@@ -184,10 +176,8 @@ const uploadAudio = async () => {
        
       })
       
-      
   };
 
-  //Save Text and Audio
   const SavePostData = (downloadURL) => {
     firebase
       .firestore()
@@ -208,15 +198,11 @@ const uploadAudio = async () => {
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
-        //alert("Daghang Salamat sa imohang kontribusyon!!");
         setLoading(null);
         navigation.navigate("AddImage",{wordID:wordID})
-        //navigation.goBack();
         
         console.log(audio?.name)
       })
-      
-      
   };
   const saveTextPostData = () => {
     firebase
@@ -236,9 +222,7 @@ const uploadAudio = async () => {
         creation: firebase.firestore.FieldValue.serverTimestamp(),
       })
       .then(function () {
-        // alert("Daghang Salamat sa imohang kontribusyon!!");
         setLoading(null);
-        // navigation.goBack();
         navigation.navigate("AddImage",{wordID:wordID})
       });
   };
@@ -264,13 +248,10 @@ const uploadAudio = async () => {
                     onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
                   />
               </View>
-              {/* /////////////////////////////////////////////////////////////////////////// */}
-              {/* //audio */}
               <View
                 style={{ flex: 1, justifyContent: "center" }}>
               
                 <Text style={styles.guidelines}>Pwede nimo butangan ug audio.</Text>
-                      {/* <Text>{audio?.downloadURL}</Text> */}
                   <TouchableOpacity
                         style={styles.imageButton}
                         onPress={() => chooseFile()}>
@@ -288,33 +269,6 @@ const uploadAudio = async () => {
                 </TouchableOpacity>
 
           </View>
-
-          {/* audio */}
-{/* ////////////////////////////////////////////////// SAVING  */}
-
-{/* ///////////////////////////IMAGE/////////////////////////////// */}
-{/* 
-              <View style={{ flex: 1, justifyContent:'center'}}>
-                  <Text style={styles.guidelines}>Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
-                  </Text>
-                  <TouchableOpacity
-                      style={styles.imageButton}
-                      onPress={pickImage}
-                      title="Pick an image from camera roll">
-                      <MaterialCommunityIcons
-                        style={styles.addImage}
-                        name="image"
-                        color={"#707070"}
-                        size={26}/>
-                    </TouchableOpacity>
-                  <View style={{alignItems:'center'}}>
-                    {image && (
-                    <Image
-                        source={{ uri: image }}
-                        style={{ width: 300, height: 200, marginTop: 20}}/>)}
-                    </View>
-                </View> */}
-
                 <View style={styles.horiz}>
                      <TouchableOpacity onPress={() => {onSubmit(); }}
                          style={[ styles.buttonVocab, { backgroundColor: "#215A88",},]}>
@@ -355,7 +309,6 @@ const uploadAudio = async () => {
     );
   }
 }
-
 const mapStateToProps = (store) => ({
   words: store.userState.words,
   currentUser: store.userState.currentUser,
@@ -387,7 +340,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   title_text: {
-    //alignContent:"flex-start",
     fontWeight: "bold",
     fontSize: 17,
   },
@@ -399,7 +351,6 @@ const styles = StyleSheet.create({
     elevation: 1,
     width: "90%",
     backgroundColor: "#8E2835",
-    //top: 130,
     marginTop: 20,
     marginBottom: 80,
   },
@@ -413,9 +364,6 @@ const styles = StyleSheet.create({
   },
   paddingLeft: {
     alignContent: "flex-start",
-    // padding:15,
-    // paddingRight:5,
-    //marginTop: 20,
     paddingLeft: 20,
     fontWeight: "bold", 
     fontSize: 17,

@@ -14,20 +14,15 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
-// import DoneScreen from "./ChatDone";
-// import TranslateScreen from "./ChatTranslate";
-// import { NavigationContainer } from '@react-navigation/native';
 import CKagan from './CKagan';
 import CMansaka from './CMansaka';
 import CManobo from './CManobo';
-// import CKagan from '..Chatbot/CKagan'
 
 
 const Tab = createMaterialTopTabNavigator();
 
 function Chatbot() {
   return (
-    //Check whether Navigation Container >> wont navigate
     <SafeAreaView style={styles.container}>
       
       <Tab.Navigator
@@ -70,7 +65,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    //paddingHorizontal:10,
     justifyContent: "center",
   },
   innercontainer: {
@@ -78,7 +72,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "flex-start",
     margin: 50,
-    //backgroundColor: '#FFFFFF',
   },
   button: {
     position: "absolute",
@@ -111,15 +104,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    //color: "white",
   },
   textreg: {
     flexDirection: "row",
     fontSize: 15,
-    // fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    //color: "white",
   },
   headLine: {
     flexDirection: "row",

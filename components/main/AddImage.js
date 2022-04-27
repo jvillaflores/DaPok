@@ -26,13 +26,10 @@ import * as ImagePicker from "expo-image-picker";
 
 function AddImage({ currentUser, route, navigation }) {
   const [loading, setLoading] = useState(null);
-  //const { data } = route?.params ?? {};
   const [bisaya, setBisaya] = useState("");
-  //const [newLanguage, setNewLanguage] =route?.params ?? {};
   const [datalist, setDatalist] = useState("");
   const [image, setImage] = useState(null);
   const [hasGalleryPermission, setHasGalleryPermission] = useState(null);
-  //const [wordId, setwordId] = useState(route.params.wordID)
   const {wordID} = route?.params ??{};
 
   useEffect(() => {
@@ -58,12 +55,10 @@ function AddImage({ currentUser, route, navigation }) {
   };
   const { validate, isFieldInError, getErrorsInField, getErrorMessages } =
     useValidation({
-      //state: { newLanguage },
     });
   const onSubmit = () => {
     validate({
       bisaya,
-     // newLanguage:  { required: true },
       image:{ required: true },
     });
     
@@ -75,7 +70,6 @@ function AddImage({ currentUser, route, navigation }) {
       }
     
   };
-
   
   ///////////////////////////////
   const uploadImage = async () => {
@@ -88,8 +82,6 @@ function AddImage({ currentUser, route, navigation }) {
     const blob = await response.blob();
 
     const task = firebase.storage().ref().child(childPath).put(blob);
-
-    
 
     const taskProgress = (snapshot) => {
       setLoading((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
@@ -112,13 +104,7 @@ function AddImage({ currentUser, route, navigation }) {
     task.on("state_changed", taskProgress, taskError, taskCompleted);
     
   };
- ///////////////////////////////////////////////// //image////////////////
 
-
-
-
-
-////////////////////////////////////////////////////////////
   useEffect(() => {
     setDatalist(currentUser);
   }, [currentUser]);
@@ -161,7 +147,6 @@ function AddImage({ currentUser, route, navigation }) {
       .collection("userAllChatbotAnswers")
       .doc(firebase.auth().currentUser.uid)
       .collection("userChatbotAnswers")
-      //.where("wordID", "==", "wordID")
       .doc(wordID)
       .update({
         
@@ -198,12 +183,6 @@ function AddImage({ currentUser, route, navigation }) {
       <SafeAreaView  style={styles.container}>
       <ScrollView>
           <View style = {{paddingHorizontal:40, paddingVertical:40}}>
-
-
-          {/* audio */}
-{/* ////////////////////////////////////////////////// SAVING  */}
-
-{/* ///////////////////////////IMAGE/////////////////////////////// */}
 
               <View style={{ flex: 1, justifyContent:'center'}}>
                   <Text style={styles.guidelines}>Pwede nimo butangan ug hulagway kung unsa ang iyahang nawong.
@@ -306,7 +285,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   title_text: {
-    //alignContent:"flex-start",
     fontWeight: "bold",
     fontSize: 17,
   },
@@ -318,7 +296,6 @@ const styles = StyleSheet.create({
     elevation: 1,
     width: "90%",
     backgroundColor: "#8E2835",
-    //top: 130,
     marginTop: 20,
     marginBottom: 80,
   },
@@ -332,9 +309,6 @@ const styles = StyleSheet.create({
   },
   paddingLeft: {
     alignContent: "flex-start",
-    // padding:15,
-    // paddingRight:5,
-    //marginTop: 20,
     paddingLeft: 20,
     fontWeight: "bold", 
     fontSize: 17,

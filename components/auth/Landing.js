@@ -21,7 +21,6 @@ export default function Landing({ navigation }) {
             onPress={() => navigation.navigate("Register")}>
             <Text style={styles.text}>Register</Text>
           </TouchableOpacity>
-    
           <TouchableOpacity
             style={[styles.button, { borderWidth: 3, borderColor: "#1F465B" }]}
             onPress={() => navigation.navigate("Login")}>
@@ -30,8 +29,6 @@ export default function Landing({ navigation }) {
         </View>
   )
 }
-
-
 const styles = StyleSheet.create({
   button: {
     alignSelf: "center",

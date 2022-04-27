@@ -23,9 +23,7 @@ const Tab = createMaterialTopTabNavigator();
 
 function Chatbot() {
   return (
-    //Check whether Navigation Container >> wont navigate
     <SafeAreaView style={styles.container}>
-      
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarContentContainerStyle: {
@@ -51,7 +49,6 @@ function Chatbot() {
     </SafeAreaView>
   );
 }
-
 const mapStateToProps = (store) => ({
   postsAll: store.userState.postsAll,
   users: store.userState.users,
@@ -67,7 +64,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    //paddingHorizontal:10,
     justifyContent: "center",
   },
   innercontainer: {
@@ -75,7 +71,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "flex-start",
     margin: 50,
-    //backgroundColor: '#FFFFFF',
   },
   button: {
     position: "absolute",
@@ -108,15 +103,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    //color: "white",
   },
   textreg: {
     flexDirection: "row",
     fontSize: 15,
-    // fontWeight: "bold",
     lineHeight: 21,
     letterSpacing: 0.25,
-    //color: "white",
   },
   headLine: {
     flexDirection: "row",

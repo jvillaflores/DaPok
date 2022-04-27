@@ -25,10 +25,6 @@ function ChatTranslate({ words, navigation, props }) {
   const [datalist, setDatalist] = useState("");
   const [image, setImage] = useState(false);
   const imageWidth = dimensions.width;
-  
-  // useEffect(() => {
-  //   setDatalist(dictionaryAll);
-  // }, [dictionaryAll]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -117,7 +113,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: "bold",
     color: "#000000",
-    //lineHeight: 1,
   },
   brnTabActive: {
     backgroundColor: "#fff",
@@ -184,7 +179,6 @@ const styles = StyleSheet.create({
   },
   title: {
     top: 40,
-    //left: 110,
   },
   statusFont: {
     fontWeight: "bold",

@@ -59,10 +59,6 @@ function AddWord({ currentUser, route, navigation }) {
     return unsubscribe;
   }, [navigation]);
 
-
-
-
-
 function makeid() {
     var randomText = "";
     var possible =
@@ -90,7 +86,6 @@ function makeid() {
         type: "audio/*",
         copyToCacheDirectory: false,
       });
-      // Alert.alert("Audio File", result.name);
   
       console.log(result);
       if (result.type === "success") {
@@ -190,8 +185,6 @@ function makeid() {
         });
     };
 
-            
-    
    {
     return (
       <ScrollView style={styles.container}>
@@ -241,18 +234,7 @@ function makeid() {
           </Text>
         </View>
 
-
           <View style={styles.horiz}>
-{/*           
-          <Pressable style={styles.buttonVocab} onPress={() => uploadAudio()}>
-            <Text style={{
-                     color:"#ffffff",
-                     alignSelf:'center',
-                     fontSize: 18}}>
-              {loading ? `Sharing...  ${parseInt(loading)}%` : "Itigom"}
-            </Text>
-          </Pressable> */}
-          
               <TouchableOpacity onPress={()=>{uploadAudio()}}
                   style={[styles.buttonVocab,{
                      backgroundColor: "#215A88",}]}>
@@ -311,7 +293,6 @@ const styles = StyleSheet.create({
     justifyContent:'center'
   }, 
   title_text: {
-    //alignContent:"flex-start",
     fontWeight: "bold",
     fontSize: 17,
   },
@@ -323,7 +304,6 @@ const styles = StyleSheet.create({
     elevation: 1,
     width: "90%",
     backgroundColor: "#8E2835",
-    //top: 130,
     marginTop: 20,
     marginBottom: 80,
   },
@@ -340,8 +320,6 @@ const styles = StyleSheet.create({
   },
   paddingLeft: {
     alignContent: "flex-start",
-    // padding:15,
-    // paddingRight:5,
     marginTop: 20,
     paddingLeft: 20,
     fontWeight: "bold",
