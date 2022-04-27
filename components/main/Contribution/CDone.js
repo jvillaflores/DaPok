@@ -56,13 +56,9 @@ function AddWord({ currentUser, route, navigation }) {
         setTimeout(() => {
           SoundObject.unloadAsync();
         }, status.playableDurationMillis + 1000);
-        console.log('played')
-        console.log(data.audio)
       } catch (error) {
         console.log(error);
-        await SoundObject.unloadAsync(); // Unload any sound loaded
-        SoundObject.setOnPlaybackStatusUpdate(null); // Unset all playback status loaded
-        retryPlaySound();
+        alert("Walay Audio")
       }
     };
   

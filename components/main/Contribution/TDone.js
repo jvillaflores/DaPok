@@ -9,6 +9,7 @@ import {
   Pressable,
   ScrollView,
   Alert,
+  SafeAreaView,
 
 } from "react-native";
 
@@ -135,25 +136,42 @@ function makeid() {
   
    {
     return (
-      <ScrollView style={styles.container}>
-        <View>
-          <View style={styles.center}>
-            <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {currentUser.language}</Text>
-            <Text style={styles.text}>{data?.bisaya} </Text>
-          </View>
-          <View style={styles.horiz}>
-              <TextInput
-                  multiline={false}
-                  activeUnderlineColor="#215A88"
-                  placeholder={data?.newLanguage}
-                  onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
-              />
-              {/* <Text>{data?.newLanguage}</Text> */}
-            
-          </View>
-          
-        </View>
-      </ScrollView>
+      // <SafeAreaView style={styles.container}>
+      //     <ScrollView>
+      //       <View>
+      //           <View style={styles.center}>
+      //               <Text style={{fontSize:15}}>Itubag kini nga panguatana sa {data?.language}</Text>
+      //               <Text style={styles.text}>{data?.bisaya} </Text>
+      //           </View>
+      //           <View style={styles.horiz}>
+      //             <TextInput
+      //                 multiline={false}
+      //                 activeUnderlineColor="#215A88"
+      //                 placeholder={data?.newLanguage}
+      //                 onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
+      //             />
+      //             {/* <Text>{data?.newLanguage}</Text> */}
+      //             <Text>MAO NI</Text>
+                
+      //           </View>
+              
+      //       </View>
+      //     </ScrollView>
+      // </SafeAreaView>
+      <SafeAreaView style={styles.container}>
+          <ScrollView>
+                <View>
+                    <View style = {styles.center}>
+                        <Text style={{fontSize:15}}>I-translate kini sa {data?.language}</Text>
+                        <Text style={[styles.text,{textAlign:'center'}]}>{data?.bisaya} </Text>
+                        <Text style={{fontSize:20,  fontWeight:'bold',textAlign:'center', marginTop:50}}>
+                        {data?.newLanguage}
+                    </Text>
+                    </View>
+                </View>
+          </ScrollView>
+      </SafeAreaView>
+      
     );
   } 
 }
@@ -192,8 +210,8 @@ const styles = StyleSheet.create({
   },
   text:{
     fontWeight:'bold',
-    fontSize:18,
-    textAlign:'center',
-    margin: -150
+    fontSize:15,
+    justifyContent:'center',
+    alignItems:'center'
   }, 
 });

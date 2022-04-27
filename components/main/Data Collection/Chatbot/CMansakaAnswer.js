@@ -96,7 +96,7 @@ useEffect(() => {
         keyExtractor={(e, i) => i.toString()}
         renderItem={renderItem}
         ItemSeparatorComponent={separator}
-        ListEmptyComponent={EmptyListMessage}
+        //ListEmptyComponent={EmptyListMessage}
       />
     </SafeAreaView>
   );
