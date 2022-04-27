@@ -26,9 +26,6 @@ function ChatTranslate({ words, navigation, props }) {
   const [image, setImage] = useState(false);
   const imageWidth = dimensions.width;
   
-  // useEffect(() => {
-  //   setDatalist(dictionaryAll);
-  // }, [dictionaryAll]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -56,7 +53,7 @@ function ChatTranslate({ words, navigation, props }) {
         key={index}
         style={styles.itemContainer}
         onPress={() => navigation.navigate('ChatbotDoneAnswer',{data:item})}>
-          {/* /////////////////ChatbotAnswers.js//////////////// */}
+          {/* /////////////////CKaganAnswer.js//////////////// */}
         <View style={{ flexDirection: "column", flex: 1 }}>
           
           <View style={styles.itemBody}>

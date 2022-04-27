@@ -26,9 +26,7 @@ function ChatTranslate({ words, navigation, props }) {
   const [image, setImage] = useState(false);
   const imageWidth = dimensions.width;
   
-  // useEffect(() => {
-  //   setDatalist(dictionaryAll);
-  // }, [dictionaryAll]);
+  
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
@@ -37,7 +35,6 @@ function ChatTranslate({ words, navigation, props }) {
         .collection("userAllTranslations")
         .doc(firebase.auth().currentUser.uid)
         .collection("userTranslateAnswers")
-        //.where("callerID", "==", "id")
         .get()
         .then((snapshot) => {
           let words = snapshot.docs.map((doc) => {
@@ -57,8 +54,8 @@ function ChatTranslate({ words, navigation, props }) {
       <TouchableOpacity
         key={index}
         style={styles.itemContainer}
-        onPress={() => navigation.navigate('TranslateDone',{data:item})}>
-          {/* /////////////////TransDone.js//////////////// */}
+        onPress={() => navigation.navigate('TKaganAnswer',{data:item})}>
+          {/* /////////////////TKaganAnswer.js//////////////// */}
         <View style={{ flexDirection: "column", flex: 1 }}>
           
           <View style={styles.itemBody}>
