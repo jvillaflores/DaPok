@@ -555,22 +555,6 @@ export class App extends Component {
                 },
               }}
             />
-
-            <Stack.Screen
-              name="Report Generate"
-              component={reportGenerateScreen}
-              navigation={this.props.navigation}
-              options={{
-                title: "Generating",
-                headerShadowVisible: false,
-                headerTintColor: "#fff",
-                headerStyle: {
-                  backgroundColor: "#215A88",
-                  elevation: 0,
-                  borderBottomWidth: 0,
-                },
-              }}
-            />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
