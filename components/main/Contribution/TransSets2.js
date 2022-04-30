@@ -308,11 +308,6 @@ function TransTrans({ currentUser, navigation }) {
                   style={styles.button1}>
                   <Text style={styles.text}>Cs</Text>
                 </TouchableOpacity>
-                <TouchableOpacity 
-                  onPress={() => navigation.navigate("Set1Screen", { dataset: "101" })}
-                  style={styles.button1}>
-                  <Text style={styles.text}>Ct</Text>
-                </TouchableOpacity>
             </View>
           </View>
           </ScrollView>
