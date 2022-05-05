@@ -9,9 +9,9 @@ import {
   ScrollView,
   SafeAreaView,
   StatusBar,
+  ActivityIndicator
 }
 from 'react-native'
-
 
 import firebase from "firebase/app";
 import "firebase/firestore";
@@ -79,6 +79,7 @@ export default class Register extends ValidationComponent {
 
     return (
       <SafeAreaView style={styles.container}>
+        
         <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
             <View style={{alignSelf:'center' }}>
                   <Image source={logo} style={{ width: 230, height: 65, }} />
@@ -86,6 +87,9 @@ export default class Register extends ValidationComponent {
             <View style={{alignSelf:'center' }}>
                   <Text style={styles.regis}>Register</Text>
             </View>
+
+          
+
             <View>
                 <View style={{flex: 1, justifyContent: "center" }}>
                       <View>
@@ -212,7 +216,9 @@ export default class Register extends ValidationComponent {
                 </View>
             </View>                  
       </ScrollView>
+     
     </SafeAreaView>
+   
     )
   }
 }
