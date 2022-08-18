@@ -243,9 +243,15 @@ const uploadAudio = async () => {
               </View>
               <View style={{marginTop:20}}>
                   <TextInput
-                    multiline={false}
-                    activeUnderlineColor="#215A88"
-                    onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
+                     multiline={true}
+                     style={[
+                       styles.addButton,
+                       { paddingHorizontal: 5, flexDirection: "row" },
+                     ]}
+                     activeUnderlineColor="#215A88"
+                     placeholder={newLanguage}
+                     onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
+                     value={newLanguage}
                   />
               </View>
               <View
@@ -384,4 +390,10 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop:15,
   },
+  addButton:{
+      borderColor: "#70707033",
+      borderWidth: 1.5,
+      marginVertical: 10,
+      borderRadius: 7,
+  }
 });

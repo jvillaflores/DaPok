@@ -195,9 +195,15 @@ function makeid() {
           </View>
           <View style={styles.horiz}>
               <TextInput
-                  multiline={false}
+                  multiline={true}
+                  style={[
+                    styles.addButton,
+                    { paddingHorizontal: 5, flexDirection: "row" },
+                  ]}
                   activeUnderlineColor="#215A88"
-                  onChangeText={(newLanguage) => setNewLanguage(newLanguage)}/>
+                  placeholder={newLanguage}
+                  onChangeText={(newLanguage) => setNewLanguage(newLanguage)}
+                  value={newLanguage} />
           </View>
           
           <View style={styles.paddingLeft}>
@@ -334,5 +340,11 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'absolute',
     marginTop: -15 
+  },
+  addButton:{
+    borderColor: "#70707033",
+      borderWidth: 1.5,
+      marginVertical: 10,
+      borderRadius: 7,
   }
 });
